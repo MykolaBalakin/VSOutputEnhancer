@@ -77,9 +77,9 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
             BuildResult buildResult;
             if (BuildResult.TryParse(span, out buildResult)) {
                 if (buildResult.Failed == 0) {
-                    yield return CreateClassificationSpan(span, classificationTypes["BuildSucceeded"]);
+                    yield return new ClassificationSpan(span, classificationTypes["BuildSucceeded"]);
                 } else {
-                    yield return CreateClassificationSpan(span, classificationTypes["BuildFailed"]);
+                    yield return new ClassificationSpan(span, classificationTypes["BuildFailed"]);
                 }
             }
         }
@@ -87,16 +87,24 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
         private IEnumerable<ClassificationSpan> EnumerateBuildFileRelatedMessageSpans(SnapshotSpan span) {
             BuildFileRelatedMessage message;
             if (BuildFileRelatedMessage.TryParse(span, out message)) {
-                if (message.MessageType == BuildMessageType.Error) {
-                    yield return CreateClassificationSpan(span, classificationTypes["BuildError"]);
-                }else if (message.MessageType == BuildMessageType.Warning) {
-                    yield return CreateClassificationSpan(span, classificationTypes["BuildWarning"]);
+                foreach (var classificationSpan in CreateSpansForBuildMessage(span, message)) {
+                    yield return classificationSpan;
                 }
             }
         }
 
-        private ClassificationSpan CreateClassificationSpan(SnapshotSpan span, IClassificationType classificationType) {
-            return new ClassificationSpan(span, classificationType);
+        private IEnumerable<ClassificationSpan> CreateSpansForBuildMessage(SnapshotSpan span, BuildMessage message) {
+            if (message.MessageType == BuildMessageType.Unknown) {
+                yield break;
+            }
+
+            var classificatedSpan = new SnapshotSpan(span.Snapshot, span.Start.Position + message.Span.Start, message.Span.Length);
+
+            if (message.MessageType == BuildMessageType.Error) {
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildError"]);
+            } else if (message.MessageType == BuildMessageType.Warning) {
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildWarning"]);
+            }
         }
     }
 }

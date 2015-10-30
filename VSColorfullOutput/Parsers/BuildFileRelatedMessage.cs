@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSColorfullOutput.Parsers {
-    internal class BuildFileRelatedMessage {
+    internal class BuildFileRelatedMessage : BuildMessage {
         public static Boolean TryParse(SnapshotSpan span, out BuildFileRelatedMessage result) {
             result = null;
             var text = span.GetText();
@@ -25,10 +25,15 @@ namespace Balakin.VSColorfullOutput.Parsers {
                 localResult.MessageType = BuildMessageType.Error;
             }
 
+            localResult.Message = match.Groups["Message"].Value;
+            localResult.Span = new Span(match.Groups["Type"].Index, match.Groups["Message"].Index + match.Groups["Message"].Length - match.Groups["Type"].Index);
+
             result = localResult;
             return true;
         }
 
-        public BuildMessageType MessageType { get; set; }
+        public String FilePath { get; private set; }
+
+        public String RelatedFilePath { get; private set; }
     }
 }

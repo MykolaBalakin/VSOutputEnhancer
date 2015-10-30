@@ -14,7 +14,7 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
     /// Classifier provider. It adds the classifier to the set of classifiers.
     /// </summary>
     [Export(typeof(IClassifierProvider))]
-    [ContentType("BuildOutput")] // This classifier applies to all text files.
+    [ContentType("BuildOutput")]
     internal class BuildOutputClassifierProvider : IClassifierProvider {
         // Disable "Field is never assigned to..." compiler's warning. Justification: the field is assigned by MEF.
 #pragma warning disable 649
