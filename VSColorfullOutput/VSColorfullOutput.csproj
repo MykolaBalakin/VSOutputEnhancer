@@ -51,6 +51,7 @@
     <Compile Include="BuildOutput\Formats\BuildFailedClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
+    <Compile Include="ColorManager.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
