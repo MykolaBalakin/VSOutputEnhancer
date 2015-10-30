@@ -11,7 +11,7 @@ namespace Balakin.VSColorfullOutput.Parsers {
         public static Boolean TryParse(SnapshotSpan span, out BuildFileRelatedMessage result) {
             result = null;
             var text = span.GetText();
-            var regex = "^\\d>(?<Path>.*): (?<Type>warning|error) (?<Code>\\w+): (?<Message>.*)\r\n$";
+            var regex = "^\\d+>(?<Path>.*): (?<Type>warning|error) (?<Code>\\w+): (?<Message>.*)\r\n$";
             var match = Regex.Match(text, regex);
             if (!match.Success) {
                 return false;
