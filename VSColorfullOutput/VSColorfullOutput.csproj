@@ -49,7 +49,7 @@
     <Compile Include="BuildOutput\Formats\BuildFailedClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
-    <Compile Include="Parsers\BuildResultParser.cs" />
+    <Compile Include="Parsers\BuildResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

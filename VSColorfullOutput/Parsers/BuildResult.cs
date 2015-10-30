@@ -19,7 +19,7 @@ namespace Balakin.VSColorfullOutput.Parsers {
                 return false;
             }
 
-            var regex = "^========== Build: (?<Succeeded>\\d) succeeded, (?<Failed>\\d) failed, (?<UpToDate>\\d) up-to-date, (?<Skipped>\\d) skipped ==========\r\n$";
+            var regex = "^========== Build: (?<Succeeded>\\d+) succeeded, (?<Failed>\\d+) failed, (?<UpToDate>\\d+) up-to-date, (?<Skipped>\\d+) skipped ==========\r\n$";
             var match = Regex.Match(text, regex);
             if (!match.Success) {
                 return false;
