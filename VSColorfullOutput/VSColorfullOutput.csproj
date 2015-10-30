@@ -46,9 +46,13 @@
   <ItemGroup>
     <Compile Include="BuildOutput\BuildOutputClassifier.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierClassificationDefinition.cs" />
+    <Compile Include="BuildOutput\Formats\BuildWarningClassifierFormat.cs" />
+    <Compile Include="BuildOutput\Formats\BuildErrorClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildFailedClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
+    <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

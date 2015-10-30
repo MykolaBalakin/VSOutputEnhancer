@@ -27,7 +27,9 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
             classificationTypes = new Dictionary<String, IClassificationType>
             {
                 { "BuildSucceeded", registry.GetClassificationType("BuildSucceeded") },
-                { "BuildFailed", registry.GetClassificationType("BuildFailed") }
+                { "BuildFailed", registry.GetClassificationType("BuildFailed") },
+                { "BuildError", registry.GetClassificationType("BuildError") },
+                { "BuildWarning", registry.GetClassificationType("BuildWarning") }
             };
         }
 
@@ -57,21 +59,44 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
         /// <param name="span">The span currently being classified.</param>
         /// <returns>A list of ClassificationSpans that represent spans identified to be of this classification.</returns>
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span) {
-            var resultClassificationTypes = GetClassificationTypes(span);
-            return resultClassificationTypes.Select(t => new ClassificationSpan(new SnapshotSpan(span.Snapshot, new Span(span.Start, span.Length)), t)).ToList();
+            return EnumerateClassificationSpans(span).ToList();
         }
 
         #endregion
 
-        private IEnumerable<IClassificationType> GetClassificationTypes(SnapshotSpan span) {
+        private IEnumerable<ClassificationSpan> EnumerateClassificationSpans(SnapshotSpan span) {
+            foreach (var classificationSpan in EnumerateBuildResultSpans(span)) {
+                yield return classificationSpan;
+            }
+            foreach (var classificationSpan in EnumerateBuildFileRelatedMessageSpans(span)) {
+                yield return classificationSpan;
+            }
+        }
+
+        private IEnumerable<ClassificationSpan> EnumerateBuildResultSpans(SnapshotSpan span) {
             BuildResult buildResult;
             if (BuildResult.TryParse(span, out buildResult)) {
                 if (buildResult.Failed == 0) {
-                    yield return classificationTypes["BuildSucceeded"];
+                    yield return CreateClassificationSpan(span, classificationTypes["BuildSucceeded"]);
                 } else {
-                    yield return classificationTypes["BuildFailed"];
+                    yield return CreateClassificationSpan(span, classificationTypes["BuildFailed"]);
                 }
             }
+        }
+
+        private IEnumerable<ClassificationSpan> EnumerateBuildFileRelatedMessageSpans(SnapshotSpan span) {
+            BuildFileRelatedMessage message;
+            if (BuildFileRelatedMessage.TryParse(span, out message)) {
+                if (message.MessageType == BuildMessageType.Error) {
+                    yield return CreateClassificationSpan(span, classificationTypes["BuildError"]);
+                }else if (message.MessageType == BuildMessageType.Warning) {
+                    yield return CreateClassificationSpan(span, classificationTypes["BuildWarning"]);
+                }
+            }
+        }
+
+        private ClassificationSpan CreateClassificationSpan(SnapshotSpan span, IClassificationType classificationType) {
+            return new ClassificationSpan(span, classificationType);
         }
     }
 }
