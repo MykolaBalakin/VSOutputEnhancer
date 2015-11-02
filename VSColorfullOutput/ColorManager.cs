@@ -11,7 +11,7 @@ namespace Balakin.VSColorfullOutput {
     internal class ColorManager {
         public ColorManager() {
             ErrorColor = Color.FromRgb(216, 80, 80);
-            WarningColor = Color.FromRgb(255, 219, 163);
+            WarningColor = Color.FromRgb(233, 213, 133);
             SuccessColor = Color.FromRgb(87, 166, 74);
         }
 
