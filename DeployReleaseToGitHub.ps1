@@ -9,11 +9,9 @@ param(
 	$Token = $(throw "-Token is required.")
 )
 
-$Repo = "testreleases"
 $uri = "https://api.github.com/repos/" + $Owner + "/" + $Repo + "/releases"
 
 $path = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
-$path = "C:\Sources\GitHub\VSOutputEnhancer\VSOutputEnhancer\bin\Debug"
 
 # Get version
 $manifestPath = [System.IO.Path]::Combine($path, "extension.vsixmanifest")
