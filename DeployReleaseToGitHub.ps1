@@ -10,13 +10,7 @@ param(
 )
 
 $uri = "https://api.github.com/repos/" + $Owner + "/" + $Repo + "/releases"
-
-Tree /f
-
 $path = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
-
-Write-Host $path
-Write-Host $(Build.SourcesDirectory)
 
 
 # Get version
