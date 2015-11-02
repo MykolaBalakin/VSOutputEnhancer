@@ -38,8 +38,9 @@ $release = ConvertFrom-Json $webResponse.Content
 
 # Upload file
 $vsixName = "Balakin.VSOutputEnhancer.vsix"
+$releaseVsixName = "VSOutputEnhancer.vsix"
 $vsixPath = [System.IO.Path]::Combine($path, $vsixName)
-$uploadAssetUri = $release.upload_url -Replace "\{\?name,label\}", ("?name=" + $vsixName)
+$uploadAssetUri = $release.upload_url -Replace "\{\?name,label\}", ("?name=" + $releaseVsixName)
 $webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType "application/zip" -Headers @{ "Authorization" = "token " + $Token } -Body $(Get-Content $vsixPath)
 
 
