@@ -29,7 +29,7 @@ $request.prerelease = $false
 
 $content = ConvertTo-Json $request
 
-$webResponse = Invoke-WebRequest -Uri $uri -Method POST -Headers @{ "Authorization" = "token " + $Token } -Body $content
+$webResponse = Invoke-WebRequest -Uri $uri -Method POST -Headers @{ "Authorization" = "token " + $Token } -Body $content -UseBasicParsing
 
 $release = ConvertFrom-Json $webResponse.Content
 
@@ -39,7 +39,7 @@ $vsixName = "Balakin.VSOutputEnhancer.vsix"
 $releaseVsixName = "VSOutputEnhancer.vsix"
 $vsixPath = [System.IO.Path]::Combine($path, $vsixName)
 $uploadAssetUri = $release.upload_url -Replace "\{\?name,label\}", ("?name=" + $releaseVsixName)
-$webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType "application/zip" -Headers @{ "Authorization" = "token " + $Token } -Body $(Get-Content $vsixPath)
+$webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType "application/zip" -Headers @{ "Authorization" = "token " + $Token } -Body $(Get-Content $vsixPath) -UseBasicParsing
 
 
 # Commit release
@@ -50,4 +50,4 @@ $webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType 
 # 
 # $content = ConvertTo-Json $request
 # $editReleaseUri = $uri + "/" + $release.id
-# $webResponse = Invoke-WebRequest -Uri $editReleaseUri -Method PATCH -Headers @{ "Authorization" = "token " + $Token } -Body $content
+# $webResponse = Invoke-WebRequest -Uri $editReleaseUri -Method PATCH -Headers @{ "Authorization" = "token " + $Token } -Body $content -UseBasicParsing
