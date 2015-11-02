@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSColorfullOutput.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers {
     internal class BuildResult {
         public static Boolean TryParse(SnapshotSpan span, out BuildResult result) {
             var text = span.GetText();
@@ -19,7 +17,7 @@ namespace Balakin.VSColorfullOutput.Parsers {
                 return false;
             }
 
-            var regex = "^========== Build: (?<Succeeded>\\d) succeeded, (?<Failed>\\d) failed, (?<UpToDate>\\d) up-to-date, (?<Skipped>\\d) skipped ==========\r\n$";
+            var regex = "^========== Build: (?<Succeeded>\\d+) succeeded, (?<Failed>\\d+) failed, (?<UpToDate>\\d+) up-to-date, (?<Skipped>\\d+) skipped ==========\r\n$";
             var match = Regex.Match(text, regex);
             if (!match.Success) {
                 return false;

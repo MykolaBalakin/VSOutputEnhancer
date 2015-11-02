@@ -8,7 +8,7 @@ using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSColorfullOutput.BuildOutput {
+namespace Balakin.VSOutputEnhancer.BuildOutput {
     /// <summary>
     /// Classification type definition export for BuildOutputClassifier
     /// </summary>
@@ -30,6 +30,20 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
         [Export(typeof(ClassificationTypeDefinition))]
         [Name("BuildFailed")]
         private static ClassificationTypeDefinition buildFailedDefinition;
+
+        /// <summary>
+        /// Defines the "BuildError" classification type.
+        /// </summary>
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name("BuildError")]
+        private static ClassificationTypeDefinition buildErrorDefinition;
+
+        /// <summary>
+        /// Defines the "BuildWarning" classification type.
+        /// </summary>
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name("BuildWarning")]
+        private static ClassificationTypeDefinition buildWarningDefinition;
 
         // ReSharper restore UnassignedField.Local
 #pragma warning restore 169

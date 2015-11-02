@@ -6,13 +6,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using Balakin.VSColorfullOutput.Parsers;
+using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSColorfullOutput.BuildOutput {
+namespace Balakin.VSOutputEnhancer.BuildOutput {
     /// <summary>
     /// Classifier that classifies all text as an instance of the "BuildOutputClassifier" classification type.
     /// </summary>
@@ -27,7 +26,9 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
             classificationTypes = new Dictionary<String, IClassificationType>
             {
                 { "BuildSucceeded", registry.GetClassificationType("BuildSucceeded") },
-                { "BuildFailed", registry.GetClassificationType("BuildFailed") }
+                { "BuildFailed", registry.GetClassificationType("BuildFailed") },
+                { "BuildError", registry.GetClassificationType("BuildError") },
+                { "BuildWarning", registry.GetClassificationType("BuildWarning") }
             };
         }
 
@@ -57,20 +58,51 @@ namespace Balakin.VSColorfullOutput.BuildOutput {
         /// <param name="span">The span currently being classified.</param>
         /// <returns>A list of ClassificationSpans that represent spans identified to be of this classification.</returns>
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span) {
-            var resultClassificationTypes = GetClassificationTypes(span);
-            return resultClassificationTypes.Select(t => new ClassificationSpan(new SnapshotSpan(span.Snapshot, new Span(span.Start, span.Length)), t)).ToList();
+            return EnumerateClassificationSpans(span).ToList();
         }
 
         #endregion
 
-        private IEnumerable<IClassificationType> GetClassificationTypes(SnapshotSpan span) {
+        private IEnumerable<ClassificationSpan> EnumerateClassificationSpans(SnapshotSpan span) {
+            foreach (var classificationSpan in EnumerateBuildResultSpans(span)) {
+                yield return classificationSpan;
+            }
+            foreach (var classificationSpan in EnumerateBuildFileRelatedMessageSpans(span)) {
+                yield return classificationSpan;
+            }
+        }
+
+        private IEnumerable<ClassificationSpan> EnumerateBuildResultSpans(SnapshotSpan span) {
             BuildResult buildResult;
             if (BuildResult.TryParse(span, out buildResult)) {
                 if (buildResult.Failed == 0) {
-                    yield return classificationTypes["BuildSucceeded"];
+                    yield return new ClassificationSpan(span, classificationTypes["BuildSucceeded"]);
                 } else {
-                    yield return classificationTypes["BuildFailed"];
+                    yield return new ClassificationSpan(span, classificationTypes["BuildFailed"]);
                 }
+            }
+        }
+
+        private IEnumerable<ClassificationSpan> EnumerateBuildFileRelatedMessageSpans(SnapshotSpan span) {
+            BuildFileRelatedMessage message;
+            if (BuildFileRelatedMessage.TryParse(span, out message)) {
+                foreach (var classificationSpan in CreateSpansForBuildMessage(span, message)) {
+                    yield return classificationSpan;
+                }
+            }
+        }
+
+        private IEnumerable<ClassificationSpan> CreateSpansForBuildMessage(SnapshotSpan span, BuildMessage message) {
+            if (message.MessageType == BuildMessageType.Unknown) {
+                yield break;
+            }
+
+            var classificatedSpan = new SnapshotSpan(span.Snapshot, span.Start.Position + message.Span.Start, message.Span.Length);
+
+            if (message.MessageType == BuildMessageType.Error) {
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildError"]);
+            } else if (message.MessageType == BuildMessageType.Warning) {
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildWarning"]);
             }
         }
     }
