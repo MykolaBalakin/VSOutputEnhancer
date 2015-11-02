@@ -1,4 +1,4 @@
-﻿namespace Balakin.VSColorfullOutput.Parsers {
+﻿namespace Balakin.VSOutputEnhancer.Parsers {
     enum BuildMessageType {
         Unknown,
         Warning,

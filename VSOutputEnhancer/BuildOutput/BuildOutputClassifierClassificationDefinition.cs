@@ -8,7 +8,7 @@ using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSColorfullOutput.BuildOutput {
+namespace Balakin.VSOutputEnhancer.BuildOutput {
     /// <summary>
     /// Classification type definition export for BuildOutputClassifier
     /// </summary>

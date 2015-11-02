@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSColorfullOutput.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers {
     internal abstract class BuildMessage {
         public String Message { get; protected set; }
 

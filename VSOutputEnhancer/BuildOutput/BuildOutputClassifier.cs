@@ -6,13 +6,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using Balakin.VSColorfullOutput.Parsers;
+using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSColorfullOutput.BuildOutput {
+namespace Balakin.VSOutputEnhancer.BuildOutput {
     /// <summary>
     /// Classifier that classifies all text as an instance of the "BuildOutputClassifier" classification type.
     /// </summary>

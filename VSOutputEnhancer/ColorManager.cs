@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace Balakin.VSColorfullOutput {
+namespace Balakin.VSOutputEnhancer {
     [Export]
     internal class ColorManager {
         public ColorManager() {

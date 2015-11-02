@@ -16,8 +16,8 @@
     <ProjectGuid>{C6ABB595-5996-4AED-8F98-878AF0BBCB56}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Balakin.VSColorfullOutput</RootNamespace>
-    <AssemblyName>Balakin.VSColorfullOutput</AssemblyName>
+    <RootNamespace>Balakin.VSOutputEnhancer</RootNamespace>
+    <AssemblyName>Balakin.VSOutputEnhancer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>

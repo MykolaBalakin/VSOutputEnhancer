@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Windows.Media;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSColorfullOutput.BuildOutput.Formats {
+namespace Balakin.VSOutputEnhancer.BuildOutput.Formats {
     [Export(typeof(EditorFormatDefinition))]
     [ClassificationType(ClassificationTypeNames = "BuildError")]
     [Name("BuildError")]
