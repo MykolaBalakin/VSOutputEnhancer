@@ -11,7 +11,7 @@ param(
 
 $uri = "https://api.github.com/repos/" + $Owner + "/" + $Repo + "/releases"
 $path = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
-
+$path = "C:\Sources\GitHub\VSOutputEnhancer-master\VSOutputEnhancer\bin\Release"
 
 # Get version
 $manifestPath = [System.IO.Path]::Combine($path, "extension.vsixmanifest")
@@ -39,7 +39,7 @@ Write-Host "API response code: $($webResponse.StatusCode)"
 
 $release = ConvertFrom-Json $webResponse.Content
 Write-Host "Release created:"
-$release | Format-Table
+$release | Format-List
 
 
 # Upload file
@@ -50,7 +50,7 @@ Write-Host "Uploading vsix package to GitHub..."
 Write-Host "Package path ""$($vsixPath)"""
 Write-Host "    size: $($(Get-Item $vsixPath).Length)"
 $uploadAssetUri = $release.upload_url -Replace "\{\?name,label\}", ("?name=" + $releaseVsixName)
-$webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType "application/zip" -Headers @{ "Authorization" = "token " + $Token } -Body $(Get-Content $vsixPath) -UseBasicParsing
+$webResponse = Invoke-WebRequest -Uri $uploadAssetUri -Method POST -ContentType "application/zip" -Headers @{ "Authorization" = "token " + $Token } -InFile $vsixPath -UseBasicParsing
 Write-Host "API response code: $($webResponse.StatusCode)"
 
 
