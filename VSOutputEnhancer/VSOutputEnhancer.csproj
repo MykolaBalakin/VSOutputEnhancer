@@ -45,21 +45,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildOutput\BuildOutputClassifier.cs" />
-    <Compile Include="BuildOutput\BuildOutputClassifierClassificationDefinition.cs" />
     <Compile Include="BuildOutput\Formats\BuildWarningClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildErrorClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildFailedClassifierFormat.cs" />
     <Compile Include="BuildOutput\Formats\BuildSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
-    <Compile Include="ColorManager.cs" />
+    <Compile Include="FormatDefinitionStyle.cs" />
+    <Compile Include="ClassificationType.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyledClassificationFormatDefinition.cs" />
+    <Compile Include="StyleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Resources\DarkTheme.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightTheme.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -85,6 +95,10 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.Wpf.14.0.23107\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />

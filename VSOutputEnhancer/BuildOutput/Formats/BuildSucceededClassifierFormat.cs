@@ -4,15 +4,15 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.BuildOutput.Formats {
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = "BuildSucceeded")]
-    [Name("BuildSucceeded")]
-    [UserVisible(true)]
+    [ClassificationType(ClassificationTypeNames = ClassificationType.BuildResultSucceeded)]
+    [Name(ClassificationType.BuildResultSucceeded)]
+    [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class BuildSucceededClassifierFormat : ClassificationFormatDefinition {
+    internal sealed class BuildResultSucceededClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildSucceededClassifierFormat(ColorManager colorManager) {
+        public BuildResultSucceededClassifierFormat(StyleManager styleManager) : base(styleManager) {
+            // TODO: Move to resources
             DisplayName = "Build succeeded";
-            ForegroundColor = colorManager.SuccessColor;
         }
     }
 }

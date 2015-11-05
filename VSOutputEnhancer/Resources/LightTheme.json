@@ -1,0 +1,15 @@
+{
+  "BuildMessageError": {
+    "ForegroundColor": "#FF0000"
+  },
+  "BuildMessageWarning": {
+    "ForegroundColor": "#FFFF00
+  },
+
+  "BuildResultFailed": {
+    "ForegroundColor": "#FF0000"
+  },
+  "BuildResultSucceeded": {
+    "ForegroundColor": "#00FF00"
+  }
+}
