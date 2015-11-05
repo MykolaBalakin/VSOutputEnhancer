@@ -11,7 +11,6 @@ param(
 
 $uri = "https://api.github.com/repos/" + $Owner + "/" + $Repo + "/releases"
 $path = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
-$path = "C:\Sources\GitHub\VSOutputEnhancer-master\VSOutputEnhancer\bin\Release"
 
 # Get version
 $manifestPath = [System.IO.Path]::Combine($path, "extension.vsixmanifest")
