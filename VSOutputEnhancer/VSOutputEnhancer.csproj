@@ -43,6 +43,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <CopyVsixExtensionFiles>True</CopyVsixExtensionFiles>
+    <CopyVsixExtensionLocation>$(OutputPath)</CopyVsixExtensionLocation>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildOutput\BuildOutputClassifier.cs" />
     <Compile Include="BuildOutput\Formats\BuildMessageWarningClassifierFormat.cs" />
