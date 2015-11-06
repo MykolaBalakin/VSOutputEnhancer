@@ -8,9 +8,8 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer {
     internal class StyledClassificationFormatDefinition : ClassificationFormatDefinition {
-
         private String GetClassificationTypeName() {
-            var type= GetType();
+            var type = GetType();
             var attribute = type.GetCustomAttribute<ClassificationTypeAttribute>();
             return attribute.ClassificationTypeNames;
         }

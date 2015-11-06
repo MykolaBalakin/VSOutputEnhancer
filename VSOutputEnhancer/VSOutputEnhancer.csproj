@@ -45,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildOutput\BuildOutputClassifier.cs" />
-    <Compile Include="BuildOutput\Formats\BuildWarningClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildErrorClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildFailedClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildSucceededClassifierFormat.cs" />
+    <Compile Include="BuildOutput\Formats\BuildMessageWarningClassifierFormat.cs" />
+    <Compile Include="BuildOutput\Formats\BuildMessageErrorClassifierFormat.cs" />
+    <Compile Include="BuildOutput\Formats\BuildResultFailedClassifierFormat.cs" />
+    <Compile Include="BuildOutput\Formats\BuildResultSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
