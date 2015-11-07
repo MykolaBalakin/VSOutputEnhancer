@@ -1,5 +1,5 @@
 # VSOutputEnhancer
-Extension for colorize Visual Studio output window
+Extension to add colors to Visual Studio output window
 
 ## Builds status
 Development:  
