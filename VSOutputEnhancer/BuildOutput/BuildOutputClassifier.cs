@@ -23,12 +23,11 @@ namespace Balakin.VSOutputEnhancer.BuildOutput {
         /// </summary>
         /// <param name="registry">Classification registry.</param>
         internal BuildOutputClassifier(IClassificationTypeRegistryService registry) {
-            classificationTypes = new Dictionary<String, IClassificationType>
-            {
-                { "BuildSucceeded", registry.GetClassificationType("BuildSucceeded") },
-                { "BuildFailed", registry.GetClassificationType("BuildFailed") },
-                { "BuildError", registry.GetClassificationType("BuildError") },
-                { "BuildWarning", registry.GetClassificationType("BuildWarning") }
+            classificationTypes = new Dictionary<String, IClassificationType> {
+                { ClassificationType.BuildResultSucceeded, registry.GetClassificationType(ClassificationType.BuildResultSucceeded) },
+                { ClassificationType.BuildResultFailed, registry.GetClassificationType(ClassificationType.BuildResultFailed) },
+                { ClassificationType.BuildMessageError, registry.GetClassificationType(ClassificationType.BuildMessageError) },
+                { ClassificationType.BuildMessageWarning, registry.GetClassificationType(ClassificationType.BuildMessageWarning) }
             };
         }
 
@@ -76,9 +75,9 @@ namespace Balakin.VSOutputEnhancer.BuildOutput {
             BuildResult buildResult;
             if (BuildResult.TryParse(span, out buildResult)) {
                 if (buildResult.Failed == 0) {
-                    yield return new ClassificationSpan(span, classificationTypes["BuildSucceeded"]);
+                    yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultSucceeded]);
                 } else {
-                    yield return new ClassificationSpan(span, classificationTypes["BuildFailed"]);
+                    yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultFailed]);
                 }
             }
         }
@@ -100,9 +99,9 @@ namespace Balakin.VSOutputEnhancer.BuildOutput {
             var classificatedSpan = new SnapshotSpan(span.Snapshot, span.Start.Position + message.Span.Start, message.Span.Length);
 
             if (message.MessageType == BuildMessageType.Error) {
-                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildError"]);
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes[ClassificationType.BuildMessageError]);
             } else if (message.MessageType == BuildMessageType.Warning) {
-                yield return new ClassificationSpan(classificatedSpan, classificationTypes["BuildWarning"]);
+                yield return new ClassificationSpan(classificatedSpan, classificationTypes[ClassificationType.BuildMessageWarning]);
             }
         }
     }
