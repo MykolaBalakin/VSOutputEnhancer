@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Build.Framework.XamlTypes;
@@ -28,7 +29,9 @@ namespace Balakin.VSOutputEnhancer {
         private IDictionary<String, FormatDefinitionStyle> GetColors() {
             return LoadColorsFromResources();
         }
+
         private Lazy<IDictionary<String, FormatDefinitionStyle>> colors;
+
         private IDictionary<String, FormatDefinitionStyle> Colors {
             get { return colors.Value; }
         }
@@ -42,15 +45,17 @@ namespace Balakin.VSOutputEnhancer {
 
         private IDictionary<String, FormatDefinitionStyle> LoadColorsFromResources() {
             var theme = GetCurrentTheme();
-            var file = $@"Resources\{theme}Theme.json";
+            var file = Path.Combine(Utils.GetExtensionRootPath(), "Resources", theme + "Theme.json");
             if (File.Exists(file)) {
                 var content = File.ReadAllText(file);
                 try {
                     return JsonConvert.DeserializeObject<Dictionary<String, FormatDefinitionStyle>>(content);
-                } catch (JsonSerializationException) { }
+                } catch (JsonSerializationException) {
+                }
             }
             return new Dictionary<String, FormatDefinitionStyle>();
         }
+
 
         private Theme GetCurrentTheme() {
             // I don't want to reference many of COM libraries to get current VS theme
