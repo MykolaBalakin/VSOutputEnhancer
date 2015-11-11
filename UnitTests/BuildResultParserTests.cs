@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -6,13 +7,13 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
-    public class BuildResultParser {
-        const String BuildResultMessage = "========== Build: 3 succeeded, 1 failed, 16 up-to-date, 5 skipped ==========\r\n";
-        const String RebuildResultMessage = "========== Rebuild All: 2 succeeded, 5 failed, 1 skipped ==========\r\n";
-
+    [ExcludeFromCodeCoverage]
+    public class BuildResultParserTests {
         [TestMethod]
         public void Build() {
-            var span = CreateSpan(BuildResultMessage);
+            const String buildCompleteMessage = "========== Build: 3 succeeded, 1 failed, 16 up-to-date, 5 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(buildCompleteMessage);
             BuildResult buildResult;
             var parsed = BuildResult.TryParse(span, out buildResult);
             Assert.IsTrue(parsed, "Not parsed");
@@ -25,7 +26,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
         [TestMethod]
         public void Rebuild() {
-            var span = CreateSpan(RebuildResultMessage);
+            const String rebuildCompleteMessage = "========== Rebuild All: 2 succeeded, 5 failed, 1 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(rebuildCompleteMessage);
             BuildResult buildResult;
             var parsed = BuildResult.TryParse(span, out buildResult);
             Assert.IsTrue(parsed, "Not parsed");
@@ -34,11 +37,6 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             Assert.AreEqual(5, buildResult.Failed, "Failed projects");
             Assert.AreEqual(0, buildResult.UpToDate, "Up-to-date projects");
             Assert.AreEqual(1, buildResult.Skipped, "Skipped projects");
-        }
-
-        private SnapshotSpan CreateSpan(String text) {
-            var snapshot = new TextSnapshotStub(text);
-            return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
         }
     }
 }
