@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Icon.png" />
+    <Content Include="Icon.png">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
