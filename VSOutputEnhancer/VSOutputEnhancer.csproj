@@ -67,9 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Icon.png" />
+    <Content Include="Icon.png" />
     <Content Include="Preview.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\DarkTheme.json">
