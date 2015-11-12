@@ -1,5 +1,11 @@
 # VSOutputEnhancer
-Extension to add colors to Visual Studio output window
+Output enhancer is extension that add styling to Visual Studio output window.
+
+For now it supports coloring of:  
+* Build/rebuild result message
+* Compiler errors and warnings
+
+And this list will grow in the nearest future.
 
 ## Builds status
 Development:  
