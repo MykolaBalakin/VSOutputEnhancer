@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+    [ExcludeFromCodeCoverage]
     internal class TextSnapshotStub : ITextSnapshot {
         public TextSnapshotStub(String text) {
             this.text = text;

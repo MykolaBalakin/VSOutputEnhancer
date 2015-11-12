@@ -25,6 +25,7 @@ namespace Balakin.VSOutputEnhancer {
         protected StyledClassificationFormatDefinition(StyleManager styleManager) : this() {
             var style = styleManager.GetStyleForClassificationType(ClassificationTypeName);
             ForegroundColor = style.ForegroundColor;
+            IsBold = style.Bold;
         }
     }
 }

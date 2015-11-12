@@ -7,9 +7,11 @@
   },
 
   "BuildResultFailed": {
-    "ForegroundColor": "#D85050"
+    "ForegroundColor": "#D85050",
+    "Bold": true
   },
   "BuildResultSucceeded": {
-    "ForegroundColor": "#57A64A"
+    "ForegroundColor": "#57A64A",
+    "Bold": true
   }
 }
