@@ -5,7 +5,7 @@
     <DisplayName>Output enhancer</DisplayName>
     <Description xml:space="preserve">Extension to add colors to Visual Studio output window.</Description>
     <Icon>Icon.png</Icon>
-    <PreviewImage>Icon.png</PreviewImage>
+    <PreviewImage>Preview.png</PreviewImage>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
