@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Balakin.VSOutputEnhancer.BuildOutput.Formats;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
@@ -23,21 +22,5 @@ namespace Balakin.VSOutputEnhancer {
 
         public const String BuildResultFailed = "BuildResultFailed";
         public const String BuildResultSucceeded = "BuildResultSucceeded";
-
-        [Export(typeof(ClassificationTypeDefinition))]
-        [Name(ClassificationType.BuildResultSucceeded)]
-        private static ClassificationTypeDefinition buildResultSucceededDefinition;
-
-        [Export(typeof(ClassificationTypeDefinition))]
-        [Name(ClassificationType.BuildResultFailed)]
-        private static ClassificationTypeDefinition buildResultFailedDefinition;
-
-        [Export(typeof(ClassificationTypeDefinition))]
-        [Name(ClassificationType.BuildMessageError)]
-        private static ClassificationTypeDefinition buildMessageErrorDefinition;
-
-        [Export(typeof(ClassificationTypeDefinition))]
-        [Name(ClassificationType.BuildMessageWarning)]
-        private static ClassificationTypeDefinition buildMessageWarningDefinition;
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.BuildOutput.Formats {
+namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Export(typeof(EditorFormatDefinition))]
     [ClassificationType(ClassificationTypeNames = ClassificationType.BuildResultSucceeded)]
     [Name(ClassificationType.BuildResultSucceeded)]

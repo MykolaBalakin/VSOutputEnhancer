@@ -48,12 +48,13 @@
     <CopyVsixExtensionLocation>$(OutputPath)</CopyVsixExtensionLocation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BuildOutput\BuildOutputClassifier.cs" />
-    <Compile Include="BuildOutput\Formats\BuildMessageWarningClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildMessageErrorClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildResultFailedClassifierFormat.cs" />
-    <Compile Include="BuildOutput\Formats\BuildResultSucceededClassifierFormat.cs" />
-    <Compile Include="BuildOutput\BuildOutputClassifierProvider.cs" />
+    <Compile Include="BuildOutputClassifier.cs" />
+    <Compile Include="Exports\Formats\BuildMessageWarningClassifierFormat.cs" />
+    <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
+    <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
+    <Compile Include="Exports\Formats\BuildResultSucceededClassifierFormat.cs" />
+    <Compile Include="BuildOutputClassifierProvider.cs" />
+    <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage.cs" />

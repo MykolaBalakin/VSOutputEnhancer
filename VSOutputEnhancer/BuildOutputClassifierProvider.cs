@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.BuildOutput {
+namespace Balakin.VSOutputEnhancer.Exports {
     /// <summary>
     /// Classifier provider. It adds the classifier to the set of classifiers.
     /// </summary>

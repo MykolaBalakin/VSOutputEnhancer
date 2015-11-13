@@ -11,7 +11,7 @@ using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.BuildOutput {
+namespace Balakin.VSOutputEnhancer {
     /// <summary>
     /// Classifier that classifies all text as an instance of the "BuildOutputClassifier" classification type.
     /// </summary>
