@@ -10,9 +10,6 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Order(Before = Priority.Default)]
     internal sealed class BuildResultSucceededClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildResultSucceededClassifierFormat(StyleManager styleManager) : base(styleManager) {
-            // TODO: Move to resources
-            DisplayName = "Build succeeded";
-        }
+        public BuildResultSucceededClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
     }
 }

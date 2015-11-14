@@ -61,38 +61,38 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Build error message.
         /// </summary>
-        internal static string FormatName_BuildMessageError {
+        internal static string FormatDisplayName_BuildMessageError {
             get {
-                return ResourceManager.GetString("FormatName_BuildMessageError", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildMessageError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Build warning message.
         /// </summary>
-        internal static string FormatName_BuildMessageWarning {
+        internal static string FormatDisplayName_BuildMessageWarning {
             get {
-                return ResourceManager.GetString("FormatName_BuildMessageWarning", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildMessageWarning", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Build failed.
         /// </summary>
-        internal static string FormatName_BuildResultFailed {
+        internal static string FormatDisplayName_BuildResultFailed {
             get {
-                return ResourceManager.GetString("FormatName_BuildResultFailed", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildResultFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Build succeeded.
         /// </summary>
-        internal static string FormatName_BuildResultSucceeded {
+        internal static string FormatDisplayName_BuildResultSucceeded {
             get {
-                return ResourceManager.GetString("FormatName_BuildResultSucceeded", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildResultSucceeded", resourceCulture);
             }
         }
     }

@@ -10,9 +10,6 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Order(Before = Priority.Default)]
     internal sealed class BuildMessageWarningClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildMessageWarningClassifierFormat(StyleManager styleManager) : base(styleManager) {
-            // TODO: Move to resources
-            DisplayName = "Build warning message";
-        }
+        public BuildMessageWarningClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
     }
 }

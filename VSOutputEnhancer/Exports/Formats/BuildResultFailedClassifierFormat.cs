@@ -11,9 +11,6 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Order(Before = Priority.Default)]
     internal sealed class BuildResultFailedClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildResultFailedClassifierFormat(StyleManager styleManager) : base(styleManager) {
-            // TODO: Move to resources
-            DisplayName = "Build failed";
-        }
+        public BuildResultFailedClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
     }
 }

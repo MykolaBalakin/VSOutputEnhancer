@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Balakin.VSOutputEnhancer {
     [Export]
-    internal class StyleManager {
+    internal class StyleManager : IStyleManager {
         private enum Theme {
             Light,
             Dark

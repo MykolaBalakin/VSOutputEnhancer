@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FormatName_BuildMessageError" xml:space="preserve">
-    <value />
+  <data name="FormatDisplayName_BuildMessageError" xml:space="preserve">
+    <value>Build error message</value>
   </data>
-  <data name="FormatName_BuildMessageWarning" xml:space="preserve">
-    <value />
+  <data name="FormatDisplayName_BuildMessageWarning" xml:space="preserve">
+    <value>Build warning message</value>
   </data>
-  <data name="FormatName_BuildResultFailed" xml:space="preserve">
-    <value />
+  <data name="FormatDisplayName_BuildResultFailed" xml:space="preserve">
+    <value>Build failed</value>
   </data>
-  <data name="FormatName_BuildResultSucceeded" xml:space="preserve">
-    <value />
+  <data name="FormatDisplayName_BuildResultSucceeded" xml:space="preserve">
+    <value>Build succeeded</value>
   </data>
 </root>

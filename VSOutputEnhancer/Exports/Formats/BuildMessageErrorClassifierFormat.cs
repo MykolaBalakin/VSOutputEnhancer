@@ -11,9 +11,6 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Order(Before = Priority.Default)]
     internal sealed class BuildMessageErrorClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildMessageErrorClassifierFormat(StyleManager styleManager) : base(styleManager) {
-            // TODO: Move to resources
-            DisplayName = "Build error message";
-        }
+        public BuildMessageErrorClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
     }
 }

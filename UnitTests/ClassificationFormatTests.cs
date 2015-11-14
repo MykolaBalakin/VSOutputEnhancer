@@ -6,12 +6,26 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Exports.Formats;
+using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
     public class ClassificationFormatTests {
+        [TestMethod]
+        public void AllFormatsHasDisplayName() {
+            var formatTypes = GetAllExportedFormats().ToList();
+
+            var styleManager = CreateStyleManager();
+
+            foreach (var formatType in formatTypes) {
+                var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
+                Assert.IsNotNull(format.DisplayName, format.GetType().Name);
+                Assert.IsFalse(String.IsNullOrEmpty(format.DisplayName), format.GetType().Name);
+            }
+        }
+
         [TestMethod]
         public void DisplayNames() {
             var formatTypes = GetAllExportedFormats().ToList();
@@ -20,12 +34,12 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
             foreach (var formatType in formatTypes) {
                 var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
-                Assert.AreEqual(GetCorrectName(formatType), format);
+                Assert.AreEqual(GetCorrectName(formatType), format.DisplayName);
             }
         }
 
-        private StyleManager CreateStyleManager() {
-            var styleManager = new Balakin.VSOutputEnhancer.Fakes.StubStyleManager();
+        private IStyleManager CreateStyleManager() {
+            var styleManager = new StyleManagerStub();
             return styleManager;
         }
 

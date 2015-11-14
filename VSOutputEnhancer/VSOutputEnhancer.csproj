@@ -57,6 +57,7 @@
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
+    <Compile Include="IStyleManager.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
