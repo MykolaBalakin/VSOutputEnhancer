@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text.Formatting;
 using Newtonsoft.Json;
 
 namespace Balakin.VSOutputEnhancer {
-    [Export]
+    [Export(typeof(IStyleManager))]
     internal class StyleManager : IStyleManager {
         private enum Theme {
             Light,
