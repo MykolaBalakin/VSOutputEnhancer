@@ -7,7 +7,7 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Export(typeof(EditorFormatDefinition))]
     [ClassificationType(ClassificationTypeNames = ClassificationType.BuildMessageError)]
     [Name(ClassificationType.BuildMessageError)]
-    [UserVisible(false)]
+    [UserVisible(true)]
     [Order(Before = Priority.Default)]
     internal sealed class BuildMessageErrorClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]

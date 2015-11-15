@@ -6,7 +6,7 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Export(typeof(EditorFormatDefinition))]
     [ClassificationType(ClassificationTypeNames = ClassificationType.BuildResultSucceeded)]
     [Name(ClassificationType.BuildResultSucceeded)]
-    [UserVisible(false)]
+    [UserVisible(true)]
     [Order(Before = Priority.Default)]
     internal sealed class BuildResultSucceededClassifierFormat : StyledClassificationFormatDefinition {
         [ImportingConstructor]

@@ -54,16 +54,16 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
         private String GetCorrectName(Type formatType) {
             if (formatType == typeof(BuildMessageErrorClassifierFormat)) {
-                return "Build error message";
+                return "Output enhancer: Build error message";
             }
             if (formatType == typeof(BuildMessageWarningClassifierFormat)) {
-                return "Build warning message";
+                return "Output enhancer: Build warning message";
             }
             if (formatType == typeof(BuildResultFailedClassifierFormat)) {
-                return "Build failed";
+                return "Output enhancer: Build failed";
             }
             if (formatType == typeof(BuildResultSucceededClassifierFormat)) {
-                return "Build succeeded";
+                return "Output enhancer: Build succeeded";
             }
 
             throw new ArgumentOutOfRangeException(nameof(formatType));

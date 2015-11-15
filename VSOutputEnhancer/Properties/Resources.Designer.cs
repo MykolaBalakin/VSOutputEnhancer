@@ -61,7 +61,7 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build error message.
+        ///   Looks up a localized string similar to Output enhancer: Build error message.
         /// </summary>
         internal static string FormatDisplayName_BuildMessageError {
             get {
@@ -70,7 +70,7 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build warning message.
+        ///   Looks up a localized string similar to Output enhancer: Build warning message.
         /// </summary>
         internal static string FormatDisplayName_BuildMessageWarning {
             get {
@@ -79,7 +79,7 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build failed.
+        ///   Looks up a localized string similar to Output enhancer: Build failed.
         /// </summary>
         internal static string FormatDisplayName_BuildResultFailed {
             get {
@@ -88,7 +88,7 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build succeeded.
+        ///   Looks up a localized string similar to Output enhancer: Build succeeded.
         /// </summary>
         internal static string FormatDisplayName_BuildResultSucceeded {
             get {
