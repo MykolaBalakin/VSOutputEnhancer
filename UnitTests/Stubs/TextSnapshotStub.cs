@@ -16,6 +16,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
         private readonly String text;
 
         #region ITextSnapshot
+
         public String GetText(Span span) {
             return GetText(span.Start, span.Length);
         }
@@ -81,21 +82,15 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
         }
 
         public ITextBuffer TextBuffer {
-            get {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public IContentType ContentType {
-            get {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public ITextVersion Version {
-            get {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public Int32 Length {
@@ -103,9 +98,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
         }
 
         public Int32 LineCount {
-            get {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public Char this[Int32 position] {
@@ -113,10 +106,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
         }
 
         public IEnumerable<ITextSnapshotLine> Lines {
-            get {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
+
         #endregion
     }
 }
