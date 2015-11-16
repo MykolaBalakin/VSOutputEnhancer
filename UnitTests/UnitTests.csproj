@@ -73,13 +73,14 @@
   <ItemGroup>
     <Compile Include="BuildOutputClassifierTests.cs" />
     <Compile Include="BuildResultParserTests.cs" />
-    <Compile Include="BuildFileRelatedMessageTests.cs" />
+    <Compile Include="BuildFileRelatedMessageParserTests.cs" />
     <Compile Include="ClassificationFormatTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
     <Compile Include="Stubs\StyleManagerStub.cs" />
     <Compile Include="Stubs\TextSnapshotStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestsTests.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

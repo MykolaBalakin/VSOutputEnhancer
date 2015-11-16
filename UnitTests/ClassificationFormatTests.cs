@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,6 +13,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ClassificationFormatTests {
         [TestMethod]
         public void AllFormatsHasDisplayName() {
