@@ -27,6 +27,36 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             Assert.AreEqual(ClassificationType.BuildResultFailed, classificationSpan.ClassificationType.Classification);
         }
 
+        [TestMethod]
+        public void PublishFailed() {
+            const String publishCompleteMessage = "========== Publish: 0 succeeded, 1 failed, 0 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(publishCompleteMessage);
+            var registry = CreateClassificationTypeRegistryService();
+            var classifier = new BuildOutputClassifier(registry);
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(span, classificationSpan.Span);
+            Assert.AreEqual(ClassificationType.PublishResultFailed, classificationSpan.ClassificationType.Classification);
+        }
+
+        [TestMethod]
+        public void PublishSucceeded() {
+            const String publishCompleteMessage = "========== Publish: 1 succeeded, 0 failed, 0 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(publishCompleteMessage);
+            var registry = CreateClassificationTypeRegistryService();
+            var classifier = new BuildOutputClassifier(registry);
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(span, classificationSpan.Span);
+            Assert.AreEqual(ClassificationType.PublishResultSucceeded, classificationSpan.ClassificationType.Classification);
+        }
+
         private IClassificationTypeRegistryService CreateClassificationTypeRegistryService() {
             return new ClassificationTypeRegistryServiceStub();
         }

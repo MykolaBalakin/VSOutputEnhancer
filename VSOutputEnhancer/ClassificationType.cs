@@ -22,5 +22,8 @@ namespace Balakin.VSOutputEnhancer {
 
         public const String BuildResultFailed = "BuildResultFailed";
         public const String BuildResultSucceeded = "BuildResultSucceeded";
+
+        public const String PublishResultFailed = "PublishResultFailed";
+        public const String PublishResultSucceeded = "PublishResultSucceeded";
     }
 }
