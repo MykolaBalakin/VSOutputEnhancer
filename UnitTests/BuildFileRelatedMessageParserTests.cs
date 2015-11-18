@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildFileRelatedMessageTests {
+    public class BuildFileRelatedMessageParserTests {
         [TestMethod]
         public void Warning1() {
             const String warningMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.buildResultSucceededDefinition' is never used\r\n";

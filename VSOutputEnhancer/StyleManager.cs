@@ -12,8 +12,8 @@ using Microsoft.VisualStudio.Text.Formatting;
 using Newtonsoft.Json;
 
 namespace Balakin.VSOutputEnhancer {
-    [Export]
-    internal class StyleManager {
+    [Export(typeof(IStyleManager))]
+    internal class StyleManager : IStyleManager {
         private enum Theme {
             Light,
             Dark

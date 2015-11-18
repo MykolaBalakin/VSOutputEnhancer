@@ -1,17 +1,26 @@
-{
+﻿{
   "BuildMessageError": {
-    "ForegroundColor": "#FF0000"
+    "ForegroundColor": "#BF0606"
   },
   "BuildMessageWarning": {
-    "ForegroundColor": "#FFFF00"
+    "ForegroundColor": "#D0A825"
   },
 
   "BuildResultFailed": {
-    "ForegroundColor": "#FF0000",
+    "ForegroundColor": "#FF3B3B",
     "Bold": true
   },
   "BuildResultSucceeded": {
-    "ForegroundColor": "#00FF00",
+    "ForegroundColor": "#409A3A",
+    "Bold": true
+  },
+
+  "PublishResultFailed": {
+    "ForegroundColor": "#FF3B3B",
+    "Bold": true
+  },
+  "PublishResultSucceeded": {
+    "ForegroundColor": "#409A3A",
     "Bold": true
   }
 }

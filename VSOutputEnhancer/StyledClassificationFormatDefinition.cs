@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using Balakin.VSOutputEnhancer.Properties;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer {
@@ -20,9 +22,12 @@ namespace Balakin.VSOutputEnhancer {
 
         private StyledClassificationFormatDefinition() {
             classificationTypeName = new Lazy<String>(GetClassificationTypeName);
+
+            var displayName = Resources.ResourceManager.GetString($"FormatDisplayName_{ClassificationTypeName}");
+            DisplayName = displayName;
         }
 
-        protected StyledClassificationFormatDefinition(StyleManager styleManager) : this() {
+        protected StyledClassificationFormatDefinition(IStyleManager styleManager) : this() {
             var style = styleManager.GetStyleForClassificationType(ClassificationTypeName);
             ForegroundColor = style.ForegroundColor;
             IsBold = style.Bold;
