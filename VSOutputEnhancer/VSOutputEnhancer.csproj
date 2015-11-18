@@ -55,6 +55,8 @@
     <Compile Include="Exports\Formats\BuildResultSucceededClassifierFormat.cs" />
     <Compile Include="BuildOutputClassifierProvider.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
+    <Compile Include="Exports\Formats\PublishResultFailedClassifierFormat.cs" />
+    <Compile Include="Exports\Formats\PublishResultSucceededClassifierFormat.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
     <Compile Include="IStyleManager.cs" />

@@ -67,6 +67,12 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             if (formatType == typeof(BuildResultSucceededClassifierFormat)) {
                 return "Output enhancer: Build succeeded";
             }
+            if (formatType == typeof(PublishResultSucceededClassifierFormat)) {
+                return "Output enhancer: Publish succeeded";
+            }
+            if (formatType == typeof(PublishResultFailedClassifierFormat)) {
+                return "Output enhancer: Publish failed";
+            }
 
             throw new ArgumentOutOfRangeException(nameof(formatType));
         }

@@ -129,4 +129,10 @@
   <data name="FormatDisplayName_BuildResultSucceeded" xml:space="preserve">
     <value>Output enhancer: Build succeeded</value>
   </data>
+  <data name="FormatDisplayName_PublishResultFailed" xml:space="preserve">
+    <value>Output enhancer: Publish failed</value>
+  </data>
+  <data name="FormatDisplayName_PublishResultSucceeded" xml:space="preserve">
+    <value>Output enhancer: Publish succeeded</value>
+  </data>
 </root>

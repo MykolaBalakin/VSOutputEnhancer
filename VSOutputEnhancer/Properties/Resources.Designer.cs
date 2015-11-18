@@ -95,5 +95,23 @@ namespace Balakin.VSOutputEnhancer.Properties {
                 return ResourceManager.GetString("FormatDisplayName_BuildResultSucceeded", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Publish failed.
+        /// </summary>
+        internal static string FormatDisplayName_PublishResultFailed {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_PublishResultFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Publish succeeded.
+        /// </summary>
+        internal static string FormatDisplayName_PublishResultSucceeded {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_PublishResultSucceeded", resourceCulture);
+            }
+        }
     }
 }
