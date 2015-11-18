@@ -14,7 +14,9 @@ namespace Balakin.VSOutputEnhancer {
             BuildMessageError,
             BuildMessageWarning,
             BuildResultFailed,
-            BuildResultSucceeded
+            BuildResultSucceeded,
+            PublishResultFailed,
+            PublishResultSucceeded
         };
 
         public const String BuildMessageError = "BuildMessageError";

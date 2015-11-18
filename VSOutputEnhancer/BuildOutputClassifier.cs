@@ -27,7 +27,9 @@ namespace Balakin.VSOutputEnhancer {
                 { ClassificationType.BuildResultSucceeded, registry.GetClassificationType(ClassificationType.BuildResultSucceeded) },
                 { ClassificationType.BuildResultFailed, registry.GetClassificationType(ClassificationType.BuildResultFailed) },
                 { ClassificationType.BuildMessageError, registry.GetClassificationType(ClassificationType.BuildMessageError) },
-                { ClassificationType.BuildMessageWarning, registry.GetClassificationType(ClassificationType.BuildMessageWarning) }
+                { ClassificationType.BuildMessageWarning, registry.GetClassificationType(ClassificationType.BuildMessageWarning) },
+                { ClassificationType.PublishResultFailed, registry.GetClassificationType(ClassificationType.PublishResultFailed) },
+                { ClassificationType.PublishResultSucceeded, registry.GetClassificationType(ClassificationType.PublishResultSucceeded) }
             };
         }
 
@@ -69,25 +71,42 @@ namespace Balakin.VSOutputEnhancer {
             foreach (var classificationSpan in EnumerateBuildFileRelatedMessageSpans(span)) {
                 yield return classificationSpan;
             }
+            foreach (var classificationSpan in EnumeratePublishResultSpans(span)) {
+                yield return classificationSpan;
+            }
         }
 
         private IEnumerable<ClassificationSpan> EnumerateBuildResultSpans(SnapshotSpan span) {
             BuildResult buildResult;
-            if (BuildResult.TryParse(span, out buildResult)) {
-                if (buildResult.Failed == 0) {
-                    yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultSucceeded]);
-                } else {
-                    yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultFailed]);
-                }
+            if (!BuildResult.TryParse(span, out buildResult)) {
+                yield break;
+            }
+            if (buildResult.Failed == 0) {
+                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultSucceeded]);
+            } else {
+                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultFailed]);
+            }
+        }
+
+        private IEnumerable<ClassificationSpan> EnumeratePublishResultSpans(SnapshotSpan span) {
+            PublishResultParser publishResult;
+            if (!PublishResultParser.TryParse(span, out publishResult)) {
+                yield break;
+            }
+            if (publishResult.Failed == 0) {
+                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.PublishResultSucceeded]);
+            } else {
+                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.PublishResultFailed]);
             }
         }
 
         private IEnumerable<ClassificationSpan> EnumerateBuildFileRelatedMessageSpans(SnapshotSpan span) {
             BuildFileRelatedMessage message;
-            if (BuildFileRelatedMessage.TryParse(span, out message)) {
-                foreach (var classificationSpan in CreateSpansForBuildMessage(span, message)) {
-                    yield return classificationSpan;
-                }
+            if (!BuildFileRelatedMessage.TryParse(span, out message)) {
+                yield break;
+            }
+            foreach (var classificationSpan in CreateSpansForBuildMessage(span, message)) {
+                yield return classificationSpan;
             }
         }
 

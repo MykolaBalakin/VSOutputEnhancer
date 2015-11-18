@@ -13,5 +13,14 @@
   "BuildResultSucceeded": {
     "ForegroundColor": "#409A3A",
     "Bold": true
+  },
+
+  "PublishResultFailed": {
+    "ForegroundColor": "#FF3B3B",
+    "Bold": true
+  },
+  "PublishResultSucceeded": {
+    "ForegroundColor": "#409A3A",
+    "Bold": true
   }
 }
