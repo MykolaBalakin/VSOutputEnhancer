@@ -1,3 +1,5 @@
+[Extension available in Visual Studio Marketplace](https://visualstudiogallery.msdn.microsoft.com/d2055300-5075-4059-a305-56422f4e29b5)
+
 # VSOutputEnhancer
 Output enhancer is extension that add styling to Visual Studio output window.
 
