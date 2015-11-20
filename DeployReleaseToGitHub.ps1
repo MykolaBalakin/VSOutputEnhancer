@@ -22,7 +22,7 @@ Write-Host "    $($version)"
 
 # Create release
 $request = @{}
-$request.tag_name = $version
+$request.tag_name = "v" + $version
 $request.target_commitish = "master"
 $request.name = "VSOutputEnhancer " + $request.tag_name
 $request.body = ""
