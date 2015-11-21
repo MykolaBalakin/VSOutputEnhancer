@@ -75,6 +75,7 @@
     <Compile Include="BuildResultParserTests.cs" />
     <Compile Include="BuildFileRelatedMessageParserTests.cs" />
     <Compile Include="ClassificationFormatTests.cs" />
+    <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
     <Compile Include="Stubs\StyleManagerStub.cs" />
