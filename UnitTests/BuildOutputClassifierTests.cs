@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildOutputClassifierTests {
+    public class BuildOutputClassifierTests : ClassifierTestsBase {
         [TestMethod]
         public void BuildFailed() {
             const String buildCompleteMessage = "========== Build: 5 succeeded, 1 failed, 3 up-to-date, 2 skipped ==========\r\n";
@@ -86,10 +86,6 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var classificationSpan = result.Single();
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, 90, 91), classificationSpan.Span);
             Assert.AreEqual(ClassificationType.BuildMessageWarning, classificationSpan.ClassificationType.Classification);
-        }
-
-        private IClassificationTypeRegistryService CreateClassificationTypeRegistryService() {
-            return new ClassificationTypeRegistryServiceStub();
         }
     }
 }

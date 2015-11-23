@@ -49,11 +49,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildOutputClassifier.cs" />
+    <Compile Include="DebugClassifier.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultSucceededClassifierFormat.cs" />
-    <Compile Include="BuildOutputClassifierProvider.cs" />
+    <Compile Include="ClassifierProvider.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="Exports\Formats\PublishResultFailedClassifierFormat.cs" />
     <Compile Include="Exports\Formats\PublishResultSucceededClassifierFormat.cs" />

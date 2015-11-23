@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers {
     internal class BuildFileRelatedMessage : BuildMessage {
         public static Boolean TryParse(SnapshotSpan span, out BuildFileRelatedMessage result) {
+            //throw new Exception();
             result = null;
             var text = span.GetText();
             var regex = "^\\d+>(?<Path>.*): (?<Type>warning|error) (?<Code>\\w+): (?<Message>.*)\r\n$";
