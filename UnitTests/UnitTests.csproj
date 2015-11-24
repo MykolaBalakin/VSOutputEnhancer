@@ -75,12 +75,15 @@
     <Compile Include="BuildResultParserTests.cs" />
     <Compile Include="BuildFileRelatedMessageParserTests.cs" />
     <Compile Include="ClassificationFormatTests.cs" />
+    <Compile Include="ClassifierProviderTests.cs" />
     <Compile Include="ClassifierTestsBase.cs" />
     <Compile Include="DebugClassifierTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
+    <Compile Include="Stubs\ContentTypeStub.cs" />
     <Compile Include="Stubs\StyleManagerStub.cs" />
+    <Compile Include="Stubs\TextBufferStub.cs" />
     <Compile Include="Stubs\TextSnapshotStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestsTests.cs" />

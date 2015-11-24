@@ -1,42 +1,21 @@
-﻿//------------------------------------------------------------------------------
-// <copyright file="BuildOutputClassifierProvider.cs" company="Company">
-//     Copyright (c) Company.  All rights reserved.
-// </copyright>
-//------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer {
-    /// <summary>
-    /// Classifier provider. It adds the classifier to the set of classifiers.
-    /// </summary>
     [Export(typeof(IClassifierProvider))]
     [ContentType("BuildOutput")]
     [ContentType("Debug")]
-    internal class ClassifierProvider : IClassifierProvider {
-        // Disable "Field is never assigned to..." compiler's warning. Justification: the field is assigned by MEF.
-#pragma warning disable 649
+    public class ClassifierProvider : IClassifierProvider {
+        private readonly IClassificationTypeRegistryService classificationRegistry;
 
-        /// <summary>
-        /// Classification registry to be used for getting a reference
-        /// to the custom classification type later.
-        /// </summary>
-        [Import]
-        private IClassificationTypeRegistryService classificationRegistry;
+        [ImportingConstructor]
+        public ClassifierProvider(IClassificationTypeRegistryService classificationRegistry) {
+            this.classificationRegistry = classificationRegistry;
+        }
 
-#pragma warning restore 649
-
-        #region IClassifierProvider
-
-        /// <summary>
-        /// Gets a classifier for the given text buffer.
-        /// </summary>
-        /// <param name="buffer">The <see cref="ITextBuffer"/> to classify.</param>
-        /// <returns>A classifier for the text buffer, or null if the provider cannot do so in its current state.</returns>
         public IClassifier GetClassifier(ITextBuffer buffer) {
             if (buffer.ContentType.TypeName.Equals("BuildOutput", StringComparison.OrdinalIgnoreCase)) {
                 return buffer.Properties.GetOrCreateSingletonProperty(creator: () => new BuildOutputClassifier(classificationRegistry));
@@ -45,7 +24,5 @@ namespace Balakin.VSOutputEnhancer {
             }
             return null;
         }
-
-        #endregion
     }
 }

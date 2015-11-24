@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [ExcludeFromCodeCoverage]
@@ -13,6 +14,14 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public static SnapshotSpan CreateSpan(String text) {
             var snapshot = new TextSnapshotStub(text);
             return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
+        }
+
+        public static ITextBuffer CreateTextBuffer(String contentType) {
+           return new TextBufferStub(contentType);
+        }
+
+        public static IClassificationTypeRegistryService CreateClassificationTypeRegistryService() {
+            return new ClassificationTypeRegistryServiceStub();
         }
     }
 }
