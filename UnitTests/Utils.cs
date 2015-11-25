@@ -23,5 +23,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public static IClassificationTypeRegistryService CreateClassificationTypeRegistryService() {
             return new ClassificationTypeRegistryServiceStub();
         }
+
+        public static ClassifierFactory CreateClassifierFactory() {
+            return new ClassifierFactory(CreateClassificationTypeRegistryService());
+        }
     }
 }

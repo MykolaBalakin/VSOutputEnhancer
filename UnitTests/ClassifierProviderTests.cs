@@ -29,8 +29,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         ClassifierProvider CreateClassifierProvider() {
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var provider = new ClassifierProvider(registry);
+            var factory = Utils.CreateClassifierFactory();
+            var provider = new ClassifierProvider(factory);
             return provider;
         }
     }

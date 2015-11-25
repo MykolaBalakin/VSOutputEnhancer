@@ -65,6 +65,7 @@
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
+    <Compile Include="ClassifierFactory.cs" />
     <Compile Include="Parsers\PublishResultParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

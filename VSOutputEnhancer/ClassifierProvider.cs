@@ -9,20 +9,15 @@ namespace Balakin.VSOutputEnhancer {
     [ContentType("BuildOutput")]
     [ContentType("Debug")]
     public class ClassifierProvider : IClassifierProvider {
-        private readonly IClassificationTypeRegistryService classificationRegistry;
+        private readonly ClassifierFactory classifierFactory;
 
         [ImportingConstructor]
-        public ClassifierProvider(IClassificationTypeRegistryService classificationRegistry) {
-            this.classificationRegistry = classificationRegistry;
+        public ClassifierProvider(ClassifierFactory classifierFactory) {
+            this.classifierFactory = classifierFactory;
         }
 
         public IClassifier GetClassifier(ITextBuffer buffer) {
-            if (buffer.ContentType.TypeName.Equals("BuildOutput", StringComparison.OrdinalIgnoreCase)) {
-                return buffer.Properties.GetOrCreateSingletonProperty(creator: () => new BuildOutputClassifier(classificationRegistry));
-            } else if (buffer.ContentType.TypeName.Equals("Debug", StringComparison.OrdinalIgnoreCase)) {
-                return buffer.Properties.GetOrCreateSingletonProperty(creator: () => new DebugClassifier(classificationRegistry));
-            }
-            return null;
+            return classifierFactory.GetClassifierForContentType(buffer.ContentType);
         }
     }
 }
