@@ -55,6 +55,7 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.Wpf.14.0.23205\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
@@ -77,6 +78,7 @@
     <Compile Include="ClassificationFormatTests.cs" />
     <Compile Include="ClassifierProviderTests.cs" />
     <Compile Include="ClassifierTestsBase.cs" />
+    <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
