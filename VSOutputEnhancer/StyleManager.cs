@@ -82,7 +82,7 @@ namespace Balakin.VSOutputEnhancer {
             if (!properties.BackgroundBrushEmpty) {
                 var solidColorBrush = properties.BackgroundBrush as SolidColorBrush;
                 if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetBrightness() < 0.5) {
+                    if (solidColorBrush.Color.GetLightness() < 0.5) {
                         return Theme.Dark;
                     }
                     return Theme.Light;
@@ -91,7 +91,7 @@ namespace Balakin.VSOutputEnhancer {
             if (!properties.ForegroundBrushEmpty) {
                 var solidColorBrush = properties.ForegroundBrush as SolidColorBrush;
                 if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetBrightness() < 0.5) {
+                    if (solidColorBrush.Color.GetLightness() < 0.5) {
                         return Theme.Light;
                     }
                     return Theme.Dark;

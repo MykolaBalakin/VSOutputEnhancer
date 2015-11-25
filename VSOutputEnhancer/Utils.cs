@@ -12,11 +12,11 @@ namespace Balakin.VSOutputEnhancer {
             return Path.GetDirectoryName(assemblyPath);
         }
 
-        public static Double GetBrightness(this Color c) {
-            return Math.Sqrt(
-                c.R * c.R * .241 +
-                c.G * c.G * .691 +
-                c.B * c.B * .068) / 255;
+        public static Double GetLightness(this Color c) {
+            var r = (Double)c.R / Byte.MaxValue;
+            var g = (Double)c.G / Byte.MaxValue;
+            var b = (Double)c.B / Byte.MaxValue;
+            return (Math.Max(Math.Max(r, g), b) + Math.Min(Math.Min(r, g), b)) / 2;
         }
     }
 }
