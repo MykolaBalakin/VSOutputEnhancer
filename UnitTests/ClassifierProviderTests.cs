@@ -28,7 +28,14 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var classifier = provider.GetClassifier(textBuffer);
             Assert.IsNotNull(classifier);
             Assert.Inconclusive("Should check parsers here");
-            
+        }
+
+        [TestMethod]
+        public void UnknownContentType() {
+            var provider = CreateClassifierProvider();
+            var textBuffer = Utils.CreateTextBuffer("UnknownContentType");
+            var classifier = provider.GetClassifier(textBuffer);
+            Assert.IsNull(classifier);
         }
 
         ClassifierProvider CreateClassifierProvider() {
