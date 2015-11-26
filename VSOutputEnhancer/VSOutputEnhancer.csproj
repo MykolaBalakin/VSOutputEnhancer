@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="StyledClassificationFormatDefinition.cs" />
     <Compile Include="StyleManager.cs" />
+    <Compile Include="Theme.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
