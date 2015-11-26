@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer.Classifiers {
     internal class ParserBasedClassifier<T> : IClassifier
         where T : ParsedData {
 

@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Balakin.VSOutputEnhancer.Fakes">
+      <HintPath>FakesAssemblies\Balakin.VSOutputEnhancer.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.CoreUtility.14.0.23205\lib\net45\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
       <Private>True</Private>
@@ -82,6 +88,7 @@
     <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
     <Compile Include="ExportsTests.cs" />
+    <Compile Include="ParserBasedClassifierTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
@@ -94,6 +101,7 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Fakes Include="Fakes\Balakin.VSOutputEnhancer.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

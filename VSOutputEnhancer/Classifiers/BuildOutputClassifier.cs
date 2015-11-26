@@ -11,10 +11,11 @@ using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer.Classifiers {
     /// <summary>
     /// Classifier that classifies all text as an instance of the "BuildOutputClassifier" classification type.
     /// </summary>
+    [Obsolete]
     internal class BuildOutputClassifier : IClassifier {
         private readonly IDictionary<String, IClassificationType> classificationTypes;
 

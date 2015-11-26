@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer.Classifiers {
+    [Obsolete]
     internal class DebugClassifier : IClassifier {
         internal DebugClassifier(IClassificationTypeRegistryService registry) {
         }

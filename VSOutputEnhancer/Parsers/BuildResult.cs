@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
+    [Obsolete]
     internal class BuildResult {
         public static Boolean TryParse(SnapshotSpan span, out BuildResult result) {
             var text = span.GetText();

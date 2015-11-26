@@ -48,8 +48,9 @@
     <CopyVsixExtensionLocation>$(OutputPath)</CopyVsixExtensionLocation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BuildOutputClassifier.cs" />
-    <Compile Include="DebugClassifier.cs" />
+    <Compile Include="Classifiers\BuildOutputClassifier.cs" />
+    <Compile Include="Classifiers\ClassifiersAggregator.cs" />
+    <Compile Include="Classifiers\DebugClassifier.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Exports\Formats\PublishResultSucceededClassifierFormat.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
-    <Compile Include="ParserBasedClassifier.cs" />
+    <Compile Include="Classifiers\ParserBasedClassifier.cs" />
     <Compile Include="Parsers\IParsedDataProcessor.cs" />
     <Compile Include="Parsers\IParser.cs" />
     <Compile Include="IStyleManager.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
-    <Compile Include="ClassifierFactory.cs" />
+    <Compile Include="Classifiers\ClassifierFactory.cs" />
     <Compile Include="Parsers\PublishResultParser.cs" />
     <Compile Include="Parsers\ProcessedParsedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

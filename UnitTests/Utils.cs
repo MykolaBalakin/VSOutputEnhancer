@@ -4,6 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Balakin.VSOutputEnhancer.Classifiers;
+using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -38,6 +40,11 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
             var classifier = new DebugClassifier(classificationTypeRegistryService);
             return classifier;
+        }
+
+        public static IClassifier CreateParserBasedClassifier<T>(IParser<T> parser, IParsedDataProcessor<T> processor)
+            where T : ParsedData {
+            return new ParserBasedClassifier<T>(parser, processor);
         }
     }
 }

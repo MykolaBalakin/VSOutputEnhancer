@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.Exports;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

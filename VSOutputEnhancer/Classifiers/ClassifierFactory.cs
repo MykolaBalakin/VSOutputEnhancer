@@ -2,13 +2,12 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Windows.Resources;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer.Classifiers {
     [Export]
-    public class ClassifierFactory {
+    internal class ClassifierFactory {
         private readonly IClassificationTypeRegistryService classificationTypeRegistryService;
         private readonly ConcurrentDictionary<String, IClassifier> classifiers;
 

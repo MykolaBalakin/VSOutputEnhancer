@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
+    [Obsolete]
     internal abstract class BuildMessage {
         public String Message { get; protected set; }
 
