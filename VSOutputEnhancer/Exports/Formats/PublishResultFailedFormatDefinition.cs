@@ -8,8 +8,8 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Name(ClassificationType.PublishResultFailed)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class PublishResultFailedClassifierFormat : StyledClassificationFormatDefinition {
+    internal sealed class PublishResultFailedFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public PublishResultFailedClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
+        public PublishResultFailedFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }

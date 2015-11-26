@@ -10,6 +10,7 @@ using Balakin.VSOutputEnhancer.Exports.Formats;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
@@ -19,7 +20,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public void AllFormatsHasDisplayName() {
             var formatTypes = GetAllExportedFormats().ToList();
 
-            var styleManager = CreateStyleManager();
+            var styleManager = Utils.CreateStyleManager();
 
             foreach (var formatType in formatTypes) {
                 var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
@@ -32,7 +33,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public void DisplayNames() {
             var formatTypes = GetAllExportedFormats().ToList();
 
-            var styleManager = CreateStyleManager();
+            var styleManager = Utils.CreateStyleManager();
 
             foreach (var formatType in formatTypes) {
                 var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
@@ -40,10 +41,26 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             }
         }
 
-        private IStyleManager CreateStyleManager() {
-            var styleManager = new StyleManagerStub();
-            return styleManager;
+        [TestMethod]
+        public void NameClassNameAndClassificationNameEquals() {
+            var formatTypes = GetAllExportedFormats().ToList();
+            var incorrectClassNames = formatTypes.Where(t => {
+                var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
+                return !t.Name.Equals(classificationType + "FormatDefinition", StringComparison.Ordinal);
+            }).Select(t => t.Name).ToList();
+            if (incorrectClassNames.Any()) {
+                Assert.Fail("Classification formats with invalid class name: " + String.Join(", ", incorrectClassNames));
+            }
+            var incorrectNames = formatTypes.Where(t => {
+                var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
+                var name = t.GetCustomAttribute<NameAttribute>().Name;
+                return !name.Equals(classificationType, StringComparison.Ordinal);
+            }).Select(t => t.Name).ToList();
+            if (incorrectNames.Any()) {
+                Assert.Fail("Classification formats with invalid NameAttribute value: " + String.Join(", ", incorrectNames));
+            }
         }
+
 
         private IEnumerable<Type> GetAllExportedFormats() {
             var formatBaseType = typeof(ClassificationFormatDefinition);
@@ -55,23 +72,32 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         private String GetCorrectName(Type formatType) {
-            if (formatType == typeof(BuildMessageErrorClassifierFormat)) {
+            if (formatType == typeof(BuildMessageErrorFormatDefinition)) {
                 return "Output enhancer: Build error message";
             }
-            if (formatType == typeof(BuildMessageWarningClassifierFormat)) {
+            if (formatType == typeof(BuildMessageWarningFormatDefinition)) {
                 return "Output enhancer: Build warning message";
             }
-            if (formatType == typeof(BuildResultFailedClassifierFormat)) {
+            if (formatType == typeof(BuildResultFailedFormatDefinition)) {
                 return "Output enhancer: Build failed";
             }
-            if (formatType == typeof(BuildResultSucceededClassifierFormat)) {
+            if (formatType == typeof(BuildResultSucceededFormatDefinition)) {
                 return "Output enhancer: Build succeeded";
             }
-            if (formatType == typeof(PublishResultSucceededClassifierFormat)) {
+            if (formatType == typeof(PublishResultSucceededFormatDefinition)) {
                 return "Output enhancer: Publish succeeded";
             }
-            if (formatType == typeof(PublishResultFailedClassifierFormat)) {
+            if (formatType == typeof(PublishResultFailedFormatDefinition)) {
                 return "Output enhancer: Publish failed";
+            }
+            if (formatType == typeof(DebugExceptionFormatDefinition)) {
+                return "Output enhancer: Debug exception message";
+            }
+            if (formatType == typeof(DebugTraceErrorFormatDefinition)) {
+                return "Output enhancer: Trace error message";
+            }
+            if (formatType == typeof(DebugTraceWarningFormatDefinition)) {
+                return "Output enhancer: Trace warning message";
             }
 
             throw new ArgumentOutOfRangeException(nameof(formatType));

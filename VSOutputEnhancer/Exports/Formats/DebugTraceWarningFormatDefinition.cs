@@ -8,8 +8,8 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Name(ClassificationType.DebugTraceWarning)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class DebugTraceWarning : StyledClassificationFormatDefinition {
+    internal sealed class DebugTraceWarningFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public DebugTraceWarning(IStyleManager styleManager) : base(styleManager) { }
+        public DebugTraceWarningFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }

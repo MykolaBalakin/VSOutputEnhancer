@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = ClassificationType.DebugException)]
-    [Name(ClassificationType.DebugException)]
+    [ClassificationType(ClassificationTypeNames = ClassificationType.DebugTraceError)]
+    [Name(ClassificationType.DebugTraceError)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class DebugException : StyledClassificationFormatDefinition {
+    internal sealed class DebugTraceErrorFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public DebugException(IStyleManager styleManager) : base(styleManager) { }
+        public DebugTraceErrorFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }
