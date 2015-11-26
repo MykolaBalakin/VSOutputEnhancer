@@ -54,19 +54,24 @@
     <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultSucceededClassifierFormat.cs" />
-    <Compile Include="ClassifierProvider.cs" />
+    <Compile Include="Exports\ClassifierProvider.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="Exports\Formats\PublishResultFailedClassifierFormat.cs" />
     <Compile Include="Exports\Formats\PublishResultSucceededClassifierFormat.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
+    <Compile Include="ParserBasedClassifier.cs" />
+    <Compile Include="Parsers\IParsedDataProcessor.cs" />
+    <Compile Include="Parsers\IParser.cs" />
     <Compile Include="IStyleManager.cs" />
+    <Compile Include="Parsers\ParsedData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
     <Compile Include="Parsers\BuildMessage.cs" />
     <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
     <Compile Include="ClassifierFactory.cs" />
     <Compile Include="Parsers\PublishResultParser.cs" />
+    <Compile Include="Parsers\ProcessedParsedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

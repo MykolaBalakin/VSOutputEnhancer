@@ -4,11 +4,11 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer.Exports {
     [Export(typeof(IClassifierProvider))]
     [ContentType("BuildOutput")]
     [ContentType("Debug")]
-    public class ClassifierProvider : IClassifierProvider {
+    internal class ClassifierProvider : IClassifierProvider {
         private readonly ClassifierFactory classifierFactory;
 
         [ImportingConstructor]
