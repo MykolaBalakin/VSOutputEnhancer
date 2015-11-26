@@ -3,12 +3,12 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
     internal class ProcessedParsedData {
-        public ProcessedParsedData(Span span, String classification) {
+        public ProcessedParsedData(Span span, String classificationName) {
             Span = span;
-            Classification = classification;
+            ClassificationName = classificationName;
         }
 
         public Span Span { get; }
-        public String Classification { get; }
+        public String ClassificationName { get; }
     }
 }

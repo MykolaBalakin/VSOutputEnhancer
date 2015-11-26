@@ -42,9 +42,15 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             return classifier;
         }
 
+        public static IClassificationTypeService CreateClassificationTypeService() {
+            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
+            return new ClassificationTypeService(classificationTypeRegistryService);
+        }
+
         public static IClassifier CreateParserBasedClassifier<T>(IParser<T> parser, IParsedDataProcessor<T> processor)
             where T : ParsedData {
-            return new ParserBasedClassifier<T>(parser, processor);
+            var classificationTypeSevice = Utils.CreateClassificationTypeService();
+            return new ParserBasedClassifier<T>(parser, processor, classificationTypeSevice);
         }
     }
 }

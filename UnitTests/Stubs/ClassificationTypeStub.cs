@@ -16,7 +16,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
         }
 
         public Boolean IsOfType(String type) {
-            throw new NotImplementedException();
+            return this.type.Equals(type, StringComparison.OrdinalIgnoreCase);
         }
 
         public String Classification => type;

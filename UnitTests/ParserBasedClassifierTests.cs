@@ -52,8 +52,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var span = Utils.CreateSpan("");
             var classificationSpans = classifier.GetClassificationSpans(span);
             Assert.AreEqual(2, classificationSpans.Count);
-            Assert.AreEqual(1, classificationSpans.Where(s => s.ClassificationType.IsOfType("TestClassification")));
-            Assert.AreEqual(1, classificationSpans.Where(s => s.ClassificationType.IsOfType("TestClassification2")));
+            Assert.AreEqual(1, classificationSpans.Count(s => s.ClassificationType.IsOfType("TestClassification")));
+            Assert.AreEqual(1, classificationSpans.Count(s => s.ClassificationType.IsOfType("TestClassification2")));
         }
     }
 }
