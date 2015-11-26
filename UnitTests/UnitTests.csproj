@@ -80,6 +80,7 @@
     <Compile Include="ClassifierTestsBase.cs" />
     <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
+    <Compile Include="ExportsTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
