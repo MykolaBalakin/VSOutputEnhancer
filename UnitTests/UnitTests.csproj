@@ -76,6 +76,7 @@
     <Compile Include="BuildResultParserTests.cs" />
     <Compile Include="BuildFileRelatedMessageParserTests.cs" />
     <Compile Include="ClassificationFormatTests.cs" />
+    <Compile Include="ClassificationTypeTests.cs" />
     <Compile Include="ClassifierProviderTests.cs" />
     <Compile Include="ClassifierTestsBase.cs" />
     <Compile Include="ColorExtensionsTests.cs" />
