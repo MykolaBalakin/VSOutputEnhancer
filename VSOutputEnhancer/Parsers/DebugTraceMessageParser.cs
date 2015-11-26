@@ -23,10 +23,10 @@ namespace Balakin.VSOutputEnhancer.Parsers {
             var type = match.Groups["Type"].Value;
             var id = match.Groups["Id"].Value;
             var message = match.Groups["Message"].Value;
-            var sourceSpan = new Span(match.Groups["Source"].Index, source.Length);
-            var typeSpan = new Span(match.Groups["Type"].Index, type.Length);
-            var idSpan = new Span(match.Groups["Id"].Index, id.Length);
-            var messageSpan = new Span(match.Groups["Message"].Index, message.Length);
+            var sourceSpan = new Span(span.Start.Position + match.Groups["Source"].Index, source.Length);
+            var typeSpan = new Span(span.Start.Position + match.Groups["Type"].Index, type.Length);
+            var idSpan = new Span(span.Start.Position + match.Groups["Id"].Index, id.Length);
+            var messageSpan = new Span(span.Start.Position + match.Groups["Message"].Index, message.Length);
 
             result = new DebugTraceMessageParsedData(
                 source,

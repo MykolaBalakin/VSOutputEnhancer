@@ -23,8 +23,8 @@ namespace Balakin.VSOutputEnhancer.Parsers {
 
             var exception = match.Groups["Type"].Value;
             var assembly = match.Groups["Assembly"].Value;
-            var exceptionSpan = new Span(match.Groups["Type"].Index, exception.Length);
-            var assemblySpan = new Span(match.Groups["Assembly"].Index, assembly.Length);
+            var exceptionSpan = new Span(span.Start.Position+ match.Groups["Type"].Index, exception.Length);
+            var assemblySpan = new Span(span.Start.Position + match.Groups["Assembly"].Index, assembly.Length);
 
             result = new DebugExceptionData(exception, assembly, exceptionSpan, assemblySpan);
             return true;
