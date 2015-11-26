@@ -20,7 +20,7 @@ namespace Balakin.VSOutputEnhancer {
         }
 
         public StyleManager() {
-            colors = new Lazy<IDictionary<String, FormatDefinitionStyle>>(GetColors);
+            styles = new Lazy<IDictionary<String, FormatDefinitionStyle>>(GetColors);
         }
 
         [Import]
@@ -30,15 +30,15 @@ namespace Balakin.VSOutputEnhancer {
             return LoadColorsFromResources();
         }
 
-        private Lazy<IDictionary<String, FormatDefinitionStyle>> colors;
+        private readonly Lazy<IDictionary<String, FormatDefinitionStyle>> styles;
 
-        private IDictionary<String, FormatDefinitionStyle> Colors {
-            get { return colors.Value; }
+        private IDictionary<String, FormatDefinitionStyle> Styles {
+            get { return styles.Value; }
         }
 
         public FormatDefinitionStyle GetStyleForClassificationType(String classificationType) {
-            if (Colors.ContainsKey(classificationType)) {
-                return Colors[classificationType];
+            if (Styles.ContainsKey(classificationType)) {
+                return Styles[classificationType];
             }
             return new FormatDefinitionStyle();
         }

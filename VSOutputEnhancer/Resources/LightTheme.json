@@ -28,9 +28,9 @@
     "ForegroundColor": "#FF3B3B"
   },
   "DebugTraceError": {
-    "DebugTraceError": "#FF3B3B"
+    "ForegroundColor": "#FF3B3B"
   },
   "DebugTraceWarning": {
-    "DebugTraceWarning": "#D0A825"
+    "ForegroundColor": "#D0A825"
   }
 }
