@@ -13,5 +13,24 @@
   "BuildResultSucceeded": {
     "ForegroundColor": "#57A64A",
     "Bold": true
+  },
+
+  "PublishResultFailed": {
+    "ForegroundColor": "#D85050",
+    "Bold": true
+  },
+  "PublishResultSucceeded": {
+    "ForegroundColor": "#57A64A",
+    "Bold": true
+  },
+
+  "DebugException": {
+    "ForegroundColor": "#D85050"
+  },
+  "DebugTraceError": {
+    "DebugTraceError": "#D85050"
+  },
+  "DebugTraceWarning": {
+    "DebugTraceWarning": "#E9D585"
   }
 }

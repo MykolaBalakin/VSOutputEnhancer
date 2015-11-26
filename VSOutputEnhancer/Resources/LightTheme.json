@@ -22,5 +22,15 @@
   "PublishResultSucceeded": {
     "ForegroundColor": "#409A3A",
     "Bold": true
+  },
+
+  "DebugException": {
+    "ForegroundColor": "#FF3B3B"
+  },
+  "DebugTraceError": {
+    "DebugTraceError": "#FF3B3B"
+  },
+  "DebugTraceWarning": {
+    "DebugTraceWarning": "#D0A825"
   }
 }

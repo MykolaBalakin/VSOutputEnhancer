@@ -52,6 +52,9 @@
     <Compile Include="Classifiers\BuildOutputClassifier.cs" />
     <Compile Include="Classifiers\ClassifiersAggregator.cs" />
     <Compile Include="ContentType.cs" />
+    <Compile Include="Exports\Formats\DebugException.cs" />
+    <Compile Include="Exports\Formats\DebugTraceWarning.cs" />
+    <Compile Include="Exports\Formats\DebugTraceError.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
