@@ -70,6 +70,9 @@
     <Compile Include="Parsers\DebugExceptionData.cs" />
     <Compile Include="Parsers\DebugExceptionDataProcessor.cs" />
     <Compile Include="Parsers\DebugExceptionParser.cs" />
+    <Compile Include="Parsers\DebugTraceMessageDataProcessor.cs" />
+    <Compile Include="Parsers\DebugTraceMessageParsedData.cs" />
+    <Compile Include="Parsers\DebugTraceMessageParser.cs" />
     <Compile Include="Parsers\IParsedDataProcessor.cs" />
     <Compile Include="Parsers\IParser.cs" />
     <Compile Include="IStyleManager.cs" />
