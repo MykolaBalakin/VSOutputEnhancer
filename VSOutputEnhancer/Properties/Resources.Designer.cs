@@ -97,6 +97,33 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Debug exception message.
+        /// </summary>
+        internal static string FormatDisplayName_DebugException {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_DebugException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Trace error message.
+        /// </summary>
+        internal static string FormatDisplayName_DebugTraceError {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_DebugTraceError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Trace warning message.
+        /// </summary>
+        internal static string FormatDisplayName_DebugTraceWarning {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_DebugTraceWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output enhancer: Publish failed.
         /// </summary>
         internal static string FormatDisplayName_PublishResultFailed {
