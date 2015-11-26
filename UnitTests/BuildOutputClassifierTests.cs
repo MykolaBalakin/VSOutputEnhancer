@@ -18,8 +18,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String buildCompleteMessage = "========== Build: 5 succeeded, 1 failed, 3 up-to-date, 2 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(buildCompleteMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new BuildOutputClassifier(registry);
+            var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -33,8 +32,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String buildCompleteMessage = "========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(buildCompleteMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new BuildOutputClassifier(registry);
+            var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -48,8 +46,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String publishCompleteMessage = "========== Publish: 0 succeeded, 1 failed, 0 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new BuildOutputClassifier(registry);
+            var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -63,8 +60,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String publishCompleteMessage = "========== Publish: 1 succeeded, 0 failed, 0 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new BuildOutputClassifier(registry);
+            var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -75,11 +71,10 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
         [TestMethod]
         public void CompilationWarning() {
-            const String publishCompleteMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.buildResultSucceededDefinition' is never used\r\n";
+            const String publishCompleteMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.BuildResultSucceededDefinition' is never used\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new BuildOutputClassifier(registry);
+            var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);

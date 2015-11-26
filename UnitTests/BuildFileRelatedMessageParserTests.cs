@@ -13,9 +13,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
     public class BuildFileRelatedMessageParserTests {
         [TestMethod]
         public void Warning1() {
-            const String warningMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.buildResultSucceededDefinition' is never used\r\n";
+            const String warningMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.BuildResultSucceededDefinition' is never used\r\n";
 
-            var expectedMessage = "The field 'ClassificationType.buildResultSucceededDefinition' is never used";
+            var expectedMessage = "The field 'ClassificationType.BuildResultSucceededDefinition' is never used";
             var expectedMessageType = BuildMessageType.Warning;
             var expectedMessageStart = 90;
             var expectedMessageLength = 91;

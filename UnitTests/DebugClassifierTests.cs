@@ -16,8 +16,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new DebugClassifier(registry);
+            var classifier = Utils.CreateDebugClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -31,8 +30,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Information: 0 : Trace information message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new DebugClassifier(registry);
+            var classifier = Utils.CreateDebugClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -46,8 +44,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Warning: 0 : Trace warning message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new DebugClassifier(registry);
+            var classifier = Utils.CreateDebugClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -61,8 +58,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var registry = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new DebugClassifier(registry);
+            var classifier = Utils.CreateDebugClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);

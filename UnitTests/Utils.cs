@@ -17,7 +17,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         public static ITextBuffer CreateTextBuffer(String contentType) {
-           return new TextBufferStub(contentType);
+            return new TextBufferStub(contentType);
         }
 
         public static IClassificationTypeRegistryService CreateClassificationTypeRegistryService() {
@@ -26,6 +26,18 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
         public static ClassifierFactory CreateClassifierFactory() {
             return new ClassifierFactory(CreateClassificationTypeRegistryService());
+        }
+
+        public static IClassifier CreateBuildOutputClassifier() {
+            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
+            var classifier = new BuildOutputClassifier(classificationTypeRegistryService);
+            return classifier;
+        }
+
+        public static IClassifier CreateDebugClassifier() {
+            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
+            var classifier = new DebugClassifier(classificationTypeRegistryService);
+            return classifier;
         }
     }
 }
