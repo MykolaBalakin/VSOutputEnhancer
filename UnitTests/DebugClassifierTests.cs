@@ -26,6 +26,24 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         [TestMethod]
+        public void TraceError2() {
+            const String fullText = "Some other text\r\nVSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
+            const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
+            const String highlightedMessage = "Error: 0 : Trace error message";
+
+            var span = Utils.CreateSpan(fullText);
+            span = new SnapshotSpan(span.Snapshot, fullText.Length - traceErrorMessage.Length, traceErrorMessage.Length);
+            Assert.AreEqual(span.GetText(), traceErrorMessage);
+            var classifier = Utils.CreateDebugClassifier();
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(highlightedMessage, classificationSpan.Span.GetText());
+            Assert.AreEqual(ClassificationType.DebugTraceError, classificationSpan.ClassificationType.Classification);
+        }
+
+        [TestMethod]
         public void TraceInformation() {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Information: 0 : Trace information message\r\n";
 
