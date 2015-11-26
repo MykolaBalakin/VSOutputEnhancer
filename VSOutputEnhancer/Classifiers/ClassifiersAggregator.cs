@@ -8,9 +8,13 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
     internal class ClassifiersAggregator : IClassifier {
         private readonly IList<IClassifier> classifiers;
 
-        public ClassifiersAggregator(IList<IClassifier> classifiers) {
-            this.classifiers = classifiers;
-            foreach (var classifier in classifiers) {
+        public ClassifiersAggregator(params IClassifier[] classifiers)
+            : this((IEnumerable<IClassifier>)classifiers) {
+        }
+
+        public ClassifiersAggregator(IEnumerable<IClassifier> classifiers) {
+            this.classifiers = classifiers.ToList();
+            foreach (var classifier in this.classifiers) {
                 classifier.ClassificationChanged += Classifier_ClassificationChanged;
             }
         }

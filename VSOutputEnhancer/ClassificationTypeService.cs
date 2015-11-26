@@ -11,6 +11,7 @@ namespace Balakin.VSOutputEnhancer {
     internal class ClassificationTypeService : IClassificationTypeService {
         private readonly IClassificationTypeRegistryService classificationTypeRegistryService;
 
+        [ImportingConstructor]
         public ClassificationTypeService(IClassificationTypeRegistryService classificationTypeRegistryService) {
             this.classificationTypeRegistryService = classificationTypeRegistryService;
         }

@@ -7,8 +7,8 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Exports {
     [Export(typeof(IClassifierProvider))]
-    [ContentType("BuildOutput")]
-    [ContentType("Debug")]
+    [ContentType(ContentType.BuildOutput)]
+    [ContentType(ContentType.DebugOutput)]
     internal class ClassifierProvider : IClassifierProvider {
         private readonly ClassifierFactory classifierFactory;
 

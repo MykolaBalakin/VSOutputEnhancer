@@ -27,7 +27,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         public static ClassifierFactory CreateClassifierFactory() {
-            return new ClassifierFactory(CreateClassificationTypeRegistryService());
+            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
+            var classificationTypeSevice = Utils.CreateClassificationTypeService();
+            return new ClassifierFactory(classificationTypeRegistryService, classificationTypeSevice);
         }
 
         public static IClassifier CreateBuildOutputClassifier() {
@@ -37,9 +39,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         public static IClassifier CreateDebugClassifier() {
-            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
-            var classifier = new DebugClassifier(classificationTypeRegistryService);
-            return classifier;
+            var factory = Utils.CreateClassifierFactory();
+            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.DebugOutput));
         }
 
         public static IClassificationTypeService CreateClassificationTypeService() {
