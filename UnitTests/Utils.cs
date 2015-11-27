@@ -102,7 +102,11 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
                 backgroundBrush = new SolidColorBrush(background.Value);
             }
 
-            var result = createTextFormattingRunProperties.Value(foregroundBrush, backgroundBrush);
+            return Utils.CreateTextFormattingRunProperties(foregroundBrush, backgroundBrush);
+        }
+
+        public static TextFormattingRunProperties CreateTextFormattingRunProperties(Brush foreground, Brush background) {
+            var result = createTextFormattingRunProperties.Value(foreground, background);
             return result;
         }
     }
