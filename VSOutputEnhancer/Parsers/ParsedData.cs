@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
     internal class ParsedData {
-        public static T Create<T>(Span originalSpan, Match match)
+        public static T Create<T>(Match match, Span originalSpan)
             where T : ParsedData, new() {
             var type = typeof(T);
             var valueType = typeof(ParsedValue<>);

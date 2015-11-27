@@ -15,7 +15,7 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 yield break;
             }
 
-            var resultSpan = new Span(parsedData.TypeSpan.Start, parsedData.MessageSpan.End - parsedData.TypeSpan.Start);
+            var resultSpan = parsedData.PrettyMessage.Span;
             var snapshotSpan = new SnapshotSpan(span.Snapshot, resultSpan);
             yield return new ProcessedParsedData(snapshotSpan, classificationType);
         }

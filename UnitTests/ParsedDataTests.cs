@@ -20,7 +20,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var span = Utils.CreateSpan("Text");
 
             var match = Regex.Match(span.GetText(), "(?<Message>.*)");
-            var parsedData = ParsedData.Create<ParsedDataStub>(span.Span, match);
+            var parsedData = ParsedData.Create<ParsedDataStub>(match, span.Span);
             Assert.IsNotNull(parsedData);
             Assert.IsInstanceOfType(parsedData, typeof(ParsedDataStub));
             Assert.IsTrue(parsedData.Message.HasValue);
@@ -31,7 +31,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             span = Utils.CreateSpan("Text Error");
 
             match = Regex.Match(span.GetText(), "(?<Message>.*) (?<Type>.*)");
-            parsedData = ParsedData.Create<ParsedDataStub>(span.Span, match);
+            parsedData = ParsedData.Create<ParsedDataStub>(match, span.Span);
             Assert.IsNotNull(parsedData);
             Assert.IsInstanceOfType(parsedData, typeof(ParsedDataStub));
             Assert.IsTrue(parsedData.Message.HasValue);
