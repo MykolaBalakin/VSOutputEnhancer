@@ -15,18 +15,13 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 return false;
             }
 
-            var regex = "^Exception thrown: '(?<Type>.*)' in (?<Assembly>.*)\r\n$";
+            var regex = "^Exception thrown: '(?<Exception>.*)' in (?<Assembly>.*)\r\n$";
             var match = Regex.Match(text, regex);
             if (!match.Success) {
                 return false;
             }
 
-            var exception = match.Groups["Type"].Value;
-            var assembly = match.Groups["Assembly"].Value;
-            var exceptionSpan = new Span(span.Start.Position+ match.Groups["Type"].Index, exception.Length);
-            var assemblySpan = new Span(span.Start.Position + match.Groups["Assembly"].Index, assembly.Length);
-
-            result = new DebugExceptionData(exception, assembly, exceptionSpan, assemblySpan);
+            result = ParsedData.Create<DebugExceptionData>(match, span.Span);
             return true;
         }
     }

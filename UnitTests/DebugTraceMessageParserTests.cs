@@ -19,10 +19,10 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
             var span = Utils.CreateSpan(messageString);
             var parser = new DebugTraceMessageParser();
-            DebugTraceMessageParsedData parsedData;
-            var parsed = parser.TryParse(span, out parsedData);
+            DebugTraceMessageData data;
+            var parsed = parser.TryParse(span, out data);
             Assert.IsFalse(parsed);
-            Assert.IsNull(parsedData);
+            Assert.IsNull(data);
         }
 
         [TestMethod]
@@ -31,22 +31,28 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
             var span = Utils.CreateSpan(messageString);
             var parser = new DebugTraceMessageParser();
-            DebugTraceMessageParsedData parsedData;
-            var parsed = parser.TryParse(span, out parsedData);
+            DebugTraceMessageData data;
+            var parsed = parser.TryParse(span, out data);
             Assert.IsTrue(parsed);
-            Assert.IsNotNull(parsedData);
+            Assert.IsNotNull(data);
 
-            Assert.AreEqual("VSOutputEnhancerDemo.vshost.exe", parsedData.Source);
-            Assert.AreEqual(TraceEventType.Information, parsedData.Type);
-            Assert.AreEqual(10, parsedData.Id);
-            Assert.AreEqual("Trace information message", parsedData.Message);
-            Assert.AreEqual("Information: 10 : Trace information message", parsedData.PrettyMessage);
+            Assert.IsTrue(data.Source.HasValue);
+            Assert.IsTrue(data.Type.HasValue);
+            Assert.IsTrue(data.Id.HasValue);
+            Assert.IsTrue(data.Message.HasValue);
+            Assert.IsTrue(data.PrettyMessage.HasValue);
 
-            Assert.AreEqual(new Span(0, 31), parsedData.Source.Span);
-            Assert.AreEqual(new Span(32, 11), parsedData.Type.Span);
-            Assert.AreEqual(new Span(45, 2), parsedData.Id.Span);
-            Assert.AreEqual(new Span(50, 25), parsedData.Message.Span);
-            Assert.AreEqual(new Span(32, 43), parsedData.PrettyMessage.Span);
+            Assert.AreEqual("VSOutputEnhancerDemo.vshost.exe", data.Source);
+            Assert.AreEqual(TraceEventType.Information, data.Type);
+            Assert.AreEqual(10, data.Id);
+            Assert.AreEqual("Trace information message", data.Message);
+            Assert.AreEqual("Information: 10 : Trace information message", data.PrettyMessage);
+
+            Assert.AreEqual(new Span(0, 31), data.Source.Span);
+            Assert.AreEqual(new Span(32, 11), data.Type.Span);
+            Assert.AreEqual(new Span(45, 2), data.Id.Span);
+            Assert.AreEqual(new Span(50, 25), data.Message.Span);
+            Assert.AreEqual(new Span(32, 43), data.PrettyMessage.Span);
         }
     }
 }

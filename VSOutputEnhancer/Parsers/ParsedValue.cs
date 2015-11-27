@@ -19,7 +19,7 @@ namespace Balakin.VSOutputEnhancer.Parsers {
 
         public static implicit operator T(ParsedValue<T> value) {
             if (!value.HasValue) {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Value unassigned");
             }
             return value.Value;
         }

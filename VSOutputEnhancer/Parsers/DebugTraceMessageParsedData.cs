@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class DebugTraceMessageParsedData : ParsedData {
+    internal class DebugTraceMessageData : ParsedData {
         // This properties filled by reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         public ParsedValue<String> Source { get; private set; }

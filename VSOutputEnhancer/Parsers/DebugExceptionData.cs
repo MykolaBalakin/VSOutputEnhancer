@@ -3,17 +3,10 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
     internal class DebugExceptionData : ParsedData {
-        public DebugExceptionData(String exception, String assembly, Span exceptionSpan, Span assemblySpan) {
-            Exception = exception;
-            Assembly = assembly;
-            ExceptionSpan = exceptionSpan;
-            AssemblySpan = assemblySpan;
-        }
-
-        public String Exception { get; }
-        public String Assembly { get; }
-
-        public Span ExceptionSpan { get; }
-        public Span AssemblySpan { get; }
+        // This properties filled by reflection
+        // ReSharper disable UnusedAutoPropertyAccessor.Local
+        public ParsedValue<String> Exception { get; private set; }
+        public ParsedValue<String> Assembly { get; private set; }
+        // ReSharper restore UnusedAutoPropertyAccessor.Local
     }
 }

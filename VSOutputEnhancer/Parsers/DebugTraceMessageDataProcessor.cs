@@ -4,18 +4,18 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageParsedData> {
-        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageParsedData parsedData) {
-            if (parsedData == null) {
+    internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageData> {
+        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageData data) {
+            if (data == null) {
                 yield break;
             }
 
-            var classificationType = GetClassificationType(parsedData.Type);
+            var classificationType = GetClassificationType(data.Type);
             if (String.IsNullOrEmpty(classificationType)) {
                 yield break;
             }
 
-            var resultSpan = parsedData.PrettyMessage.Span;
+            var resultSpan = data.PrettyMessage.Span;
             var snapshotSpan = new SnapshotSpan(span.Snapshot, resultSpan);
             yield return new ProcessedParsedData(snapshotSpan, classificationType);
         }

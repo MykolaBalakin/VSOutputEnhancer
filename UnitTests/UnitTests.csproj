@@ -88,6 +88,7 @@
     <Compile Include="ClassifierTestsBase.cs" />
     <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
+    <Compile Include="DebugExceptionParserTests.cs" />
     <Compile Include="DebugTraceMessageParserTests.cs" />
     <Compile Include="ExportsTests.cs" />
     <Compile Include="ParsedDataTests.cs" />

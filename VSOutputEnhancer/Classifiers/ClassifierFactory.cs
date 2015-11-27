@@ -34,7 +34,7 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
             }
             if (contentType.TypeName.Equals(ContentType.DebugOutput, StringComparison.OrdinalIgnoreCase)) {
                 var exceptionClassifier = new ParserBasedClassifier<DebugExceptionData>(new DebugExceptionParser(), new DebugExceptionDataProcessor(), classificationTypeService);
-                var traceMessageClassifier = new ParserBasedClassifier<DebugTraceMessageParsedData>(new DebugTraceMessageParser(), new DebugTraceMessageDataProcessor(), classificationTypeService);
+                var traceMessageClassifier = new ParserBasedClassifier<DebugTraceMessageData>(new DebugTraceMessageParser(), new DebugTraceMessageDataProcessor(), classificationTypeService);
 
                 var debugClassifier = new ClassifiersAggregator(exceptionClassifier, traceMessageClassifier);
                 return debugClassifier;

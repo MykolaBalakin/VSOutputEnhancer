@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class DebugTraceMessageParser : IParser<DebugTraceMessageParsedData> {
-        public Boolean TryParse(SnapshotSpan span, out DebugTraceMessageParsedData result) {
+    internal class DebugTraceMessageParser : IParser<DebugTraceMessageData> {
+        public Boolean TryParse(SnapshotSpan span, out DebugTraceMessageData result) {
             result = null;
             var text = span.GetText();
             var allTraceEventTypes = String.Join("|", Enum.GetNames(typeof(TraceEventType)));
@@ -19,7 +19,7 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 return false;
             }
 
-            result = ParsedData.Create<DebugTraceMessageParsedData>(match, span.Span);
+            result = ParsedData.Create<DebugTraceMessageData>(match, span.Span);
             return true;
         }
     }
