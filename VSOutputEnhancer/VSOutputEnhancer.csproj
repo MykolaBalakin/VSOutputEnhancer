@@ -82,6 +82,7 @@
     <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult.cs" />
     <Compile Include="Classifiers\ClassifierFactory.cs" />
+    <Compile Include="Parsers\ParsedValue.cs" />
     <Compile Include="Parsers\PublishResultParser.cs" />
     <Compile Include="Parsers\ProcessedParsedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

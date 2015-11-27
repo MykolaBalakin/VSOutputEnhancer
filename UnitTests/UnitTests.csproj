@@ -89,11 +89,13 @@
     <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
     <Compile Include="ExportsTests.cs" />
+    <Compile Include="ParsedDataTests.cs" />
     <Compile Include="ParserBasedClassifierTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
     <Compile Include="Stubs\ContentTypeStub.cs" />
+    <Compile Include="Stubs\ParsedDataStub.cs" />
     <Compile Include="Stubs\StyleManagerStub.cs" />
     <Compile Include="Stubs\TextBufferStub.cs" />
     <Compile Include="Stubs\TextSnapshotStub.cs" />
