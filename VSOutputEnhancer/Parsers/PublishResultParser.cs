@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class PublishResultParser {
-        public static Boolean TryParse(SnapshotSpan span, out PublishResultParser result) {
+    internal class PublishResultParser:IParser<PublishResultData> {
+        public Boolean TryParse(SnapshotSpan span, out PublishResultData result) {
             result = null;
 
             var text = span.GetText();
@@ -26,16 +26,8 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 return false;
             }
 
-            var localResult = new PublishResultParser();
-            localResult.Succeeded = Convert.ToInt32(match.Groups["Succeeded"].Value);
-            localResult.Failed = Convert.ToInt32(match.Groups["Failed"].Value);
-            localResult.Skipped = Convert.ToInt32(match.Groups["Skipped"].Value);
-            result = localResult;
+            result = ParsedData.Create<PublishResultData>(match, span.Span);
             return true;
         }
-
-        public Int32 Succeeded { get; private set; }
-        public Int32 Failed { get; private set; }
-        public Int32 Skipped { get; private set; }
     }
 }

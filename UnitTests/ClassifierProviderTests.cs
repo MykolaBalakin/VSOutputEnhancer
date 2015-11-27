@@ -18,7 +18,6 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var textBuffer = Utils.CreateTextBuffer(ContentType.BuildOutput);
             var classifier = provider.GetClassifier(textBuffer);
             Assert.IsNotNull(classifier);
-            Assert.IsInstanceOfType(classifier, typeof(BuildOutputClassifier));
         }
 
         [TestMethod]
@@ -27,7 +26,6 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var textBuffer = Utils.CreateTextBuffer(ContentType.DebugOutput);
             var classifier = provider.GetClassifier(textBuffer);
             Assert.IsNotNull(classifier);
-            Assert.Inconclusive("Should check parsers here");
         }
 
         [TestMethod]

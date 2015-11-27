@@ -30,7 +30,11 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
         // Should somewhow automaticaly find all needed parsers and processors for each content type
         private IClassifier CreateClassifierForContentType(IContentType contentType) {
             if (contentType.TypeName.Equals(ContentType.BuildOutput, StringComparison.OrdinalIgnoreCase)) {
-                return new BuildOutputClassifier(classificationTypeRegistryService);
+                var oldClassifier = new BuildOutputClassifier(classificationTypeRegistryService);
+                var publishResultClassifier = new ParserBasedClassifier<PublishResultData>(new PublishResultParser(), new PublishResultDataProcessor(), classificationTypeService);
+
+                var buildClassifier = new ClassifiersAggregator(oldClassifier, publishResultClassifier);
+                return buildClassifier;
             }
             if (contentType.TypeName.Equals(ContentType.DebugOutput, StringComparison.OrdinalIgnoreCase)) {
                 var exceptionClassifier = new ParserBasedClassifier<DebugExceptionData>(new DebugExceptionParser(), new DebugExceptionDataProcessor(), classificationTypeService);
