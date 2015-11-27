@@ -71,9 +71,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
 
         [TestMethod]
         public void CompilationWarning() {
-            const String publishCompleteMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.BuildResultSucceededDefinition' is never used\r\n";
+            const String compilationWarningMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.BuildResultSucceededDefinition' is never used\r\n";
 
-            var span = Utils.CreateSpan(publishCompleteMessage);
+            var span = Utils.CreateSpan(compilationWarningMessage);
             var classifier = Utils.CreateBuildOutputClassifier();
             var result = classifier.GetClassificationSpans(span);
 
@@ -81,6 +81,20 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var classificationSpan = result.Single();
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, 90, 91), classificationSpan.Span);
             Assert.AreEqual(ClassificationType.BuildMessageWarning, classificationSpan.ClassificationType.Classification);
+        }
+
+        [TestMethod]
+        public void CompilationError() {
+            const String compilationErrorMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\UnitTests\\BuildOutputClassifierTests.cs(91,64,91,65): error CS1026: ) expected\r\n";
+
+            var span = Utils.CreateSpan(compilationErrorMessage);
+            var classifier = Utils.CreateBuildOutputClassifier();
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 91, 24), classificationSpan.Span);
+            Assert.AreEqual(ClassificationType.BuildMessageError, classificationSpan.ClassificationType.Classification);
         }
     }
 }
