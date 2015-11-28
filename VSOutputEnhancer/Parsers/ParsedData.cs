@@ -37,12 +37,12 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 property.GetSetMethod(true).Invoke(result, new[] { parsedValue });
             }
 
-            result.Fill(match);
+            result.Fill(match, originalSpan);
 
             return result;
         }
 
-        protected virtual void Fill(Match match) {
+        protected virtual void Fill(Match match, Span originalSpan) {
         }
     }
 }

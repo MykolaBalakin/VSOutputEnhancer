@@ -66,23 +66,8 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
         #endregion
 
         private IEnumerable<ClassificationSpan> EnumerateClassificationSpans(SnapshotSpan span) {
-            foreach (var classificationSpan in EnumerateBuildResultSpans(span)) {
-                yield return classificationSpan;
-            }
             foreach (var classificationSpan in EnumerateBuildFileRelatedMessageSpans(span)) {
                 yield return classificationSpan;
-            }
-        }
-
-        private IEnumerable<ClassificationSpan> EnumerateBuildResultSpans(SnapshotSpan span) {
-            BuildResult buildResult;
-            if (!BuildResult.TryParse(span, out buildResult)) {
-                yield break;
-            }
-            if (buildResult.Failed == 0) {
-                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultSucceeded]);
-            } else {
-                yield return new ClassificationSpan(span, classificationTypes[ClassificationType.BuildResultFailed]);
             }
         }
 

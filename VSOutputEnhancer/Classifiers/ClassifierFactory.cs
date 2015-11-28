@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Balakin.VSOutputEnhancer.Parsers.PublishResult;
@@ -35,8 +36,9 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
             if (contentType.TypeName.Equals(ContentType.BuildOutput, StringComparison.OrdinalIgnoreCase)) {
                 var oldClassifier = new BuildOutputClassifier(classificationTypeRegistryService);
                 var publishResultClassifier = new ParserBasedClassifier<PublishResultData>(new PublishResultParser(), new PublishResultDataProcessor(), classificationTypeService);
+                var buildResultClassifier = new ParserBasedClassifier<BuildResultData>(new BuildResultParser(), new BuildResultDataProcessor(), classificationTypeService);
 
-                var buildClassifier = new ClassifiersAggregator(oldClassifier, publishResultClassifier);
+                var buildClassifier = new ClassifiersAggregator(buildResultClassifier, publishResultClassifier, oldClassifier);
                 return buildClassifier;
             }
             if (contentType.TypeName.Equals(ContentType.DebugOutput, StringComparison.OrdinalIgnoreCase)) {
