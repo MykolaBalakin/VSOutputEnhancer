@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 

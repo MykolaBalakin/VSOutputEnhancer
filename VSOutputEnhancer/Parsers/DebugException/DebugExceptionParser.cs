@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
     internal class DebugExceptionParser : IParser<DebugExceptionData> {
         public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result) {
             result = null;

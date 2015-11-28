@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
     internal class PublishResultDataProcessor : IParsedDataProcessor<PublishResultData> {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, PublishResultData parsedData) {
             if (parsedData.Failed == 0) {

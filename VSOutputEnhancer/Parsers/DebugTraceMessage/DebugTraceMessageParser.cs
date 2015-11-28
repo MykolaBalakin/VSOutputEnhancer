@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
     internal class DebugTraceMessageParser : IParser<DebugTraceMessageData> {
         public Boolean TryParse(SnapshotSpan span, out DebugTraceMessageData result) {
             result = null;

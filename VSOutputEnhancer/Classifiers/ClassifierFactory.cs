@@ -3,6 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Parsers.DebugException;
+using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
+using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 

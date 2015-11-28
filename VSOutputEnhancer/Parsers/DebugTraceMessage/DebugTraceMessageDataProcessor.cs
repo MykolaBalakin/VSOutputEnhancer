@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
     internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageData> {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageData data) {
             if (data == null) {

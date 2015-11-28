@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
     internal class PublishResultParser:IParser<PublishResultData> {
         public Boolean TryParse(SnapshotSpan span, out PublishResultData result) {
             result = null;

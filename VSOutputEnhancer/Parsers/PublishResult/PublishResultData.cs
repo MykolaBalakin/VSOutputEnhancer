@@ -1,6 +1,6 @@
 using System;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
     internal class PublishResultData : ParsedData {
         // This properties filled by reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local

@@ -1,7 +1,6 @@
 ﻿using System;
-using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
     internal class DebugExceptionData : ParsedData {
         // This properties filled by reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local
