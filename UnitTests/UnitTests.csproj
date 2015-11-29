@@ -53,6 +53,9 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Text.Logic.14.0.23205\lib\net45\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.Logic.14.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\Microsoft.VisualStudio.Text.Logic.14.0.0.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.Text.UI, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.Text.UI.14.0.23205\lib\net45\Microsoft.VisualStudio.Text.UI.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +88,7 @@
     <Compile Include="ClassificationFormatTests.cs" />
     <Compile Include="ClassificationTypeTests.cs" />
     <Compile Include="ClassifierProviderTests.cs" />
+    <Compile Include="ClassifiersAggregatorTests.cs" />
     <Compile Include="ClassifierTestsBase.cs" />
     <Compile Include="ColorExtensionsTests.cs" />
     <Compile Include="DebugClassifierTests.cs" />
@@ -110,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\Balakin.VSOutputEnhancer.fakes" />
+    <Fakes Include="Fakes\Microsoft.VisualStudio.Text.Logic.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
