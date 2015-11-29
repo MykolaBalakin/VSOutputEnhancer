@@ -49,7 +49,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClassificationTypeService.cs" />
-    <Compile Include="Classifiers\BuildOutputClassifier.cs" />
     <Compile Include="Classifiers\ClassifiersAggregator.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
@@ -67,6 +66,9 @@
     <Compile Include="ClassificationType.cs" />
     <Compile Include="Classifiers\ParserBasedClassifier.cs" />
     <Compile Include="IClassificationTypeService.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultData.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultDataProcessor.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultParser.cs" />
@@ -80,9 +82,7 @@
     <Compile Include="Parsers\IParser.cs" />
     <Compile Include="IStyleManager.cs" />
     <Compile Include="Parsers\ParsedData.cs" />
-    <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
-    <Compile Include="Parsers\BuildMessage.cs" />
-    <Compile Include="Parsers\BuildMessageType.cs" />
+    <Compile Include="Parsers\BuildMessage\BuildMessageType.cs" />
     <Compile Include="Classifiers\ClassifierFactory.cs" />
     <Compile Include="Parsers\ParsedValue.cs" />
     <Compile Include="Parsers\PublishResult\PublishResultData.cs" />

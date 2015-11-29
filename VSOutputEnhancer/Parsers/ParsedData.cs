@@ -26,7 +26,7 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 var parsedValueType = property.PropertyType.GetGenericArguments()[0];
                 Object value;
                 if (parsedValueType.IsEnum) {
-                    value = Enum.Parse(parsedValueType, matchGroup.Value);
+                    value = Enum.Parse(parsedValueType, matchGroup.Value, true);
                 } else {
                     value = Convert.ChangeType(matchGroup.Value, parsedValueType);
                 }

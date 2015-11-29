@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
@@ -34,11 +35,11 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
         // Should somewhow automaticaly find all needed parsers and processors for each content type
         private IClassifier CreateClassifierForContentType(IContentType contentType) {
             if (contentType.TypeName.Equals(ContentType.BuildOutput, StringComparison.OrdinalIgnoreCase)) {
-                var oldClassifier = new BuildOutputClassifier(classificationTypeRegistryService);
                 var publishResultClassifier = new ParserBasedClassifier<PublishResultData>(new PublishResultParser(), new PublishResultDataProcessor(), classificationTypeService);
                 var buildResultClassifier = new ParserBasedClassifier<BuildResultData>(new BuildResultParser(), new BuildResultDataProcessor(), classificationTypeService);
+                var buildFileRelatedClassifier = new ParserBasedClassifier<BuildFileRelatedMessageData>(new BuildFileRelatedMessageParser(), new BuildFileRelatedMessageDataProcessor(), classificationTypeService);
 
-                var buildClassifier = new ClassifiersAggregator(buildResultClassifier, publishResultClassifier, oldClassifier);
+                var buildClassifier = new ClassifiersAggregator(buildFileRelatedClassifier, buildResultClassifier, publishResultClassifier);
                 return buildClassifier;
             }
             if (contentType.TypeName.Equals(ContentType.DebugOutput, StringComparison.OrdinalIgnoreCase)) {
