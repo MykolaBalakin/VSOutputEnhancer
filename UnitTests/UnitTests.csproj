@@ -91,6 +91,7 @@
     <Compile Include="DebugExceptionParserTests.cs" />
     <Compile Include="DebugTraceMessageParserTests.cs" />
     <Compile Include="ExportsTests.cs" />
+    <Compile Include="ParsedDataProcessorTests.cs" />
     <Compile Include="ParsedDataTests.cs" />
     <Compile Include="ParserBasedClassifierTests.cs" />
     <Compile Include="PublishResultParserTests.cs" />

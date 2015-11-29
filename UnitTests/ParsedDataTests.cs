@@ -41,5 +41,19 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             Assert.AreEqual(TraceEventType.Error, parsedData.Type);
             Assert.AreEqual(new Span(5, 5), parsedData.Type.Span);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void EmptyValueExceptionValueType() {
+            var value = new ParsedValue<Int32>();
+            var i = (Int32)value;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void EmptyValueExceptionReferenceType() {
+            var value = new ParsedValue<String>();
+            var s = (String)value;
+        }
     }
 }

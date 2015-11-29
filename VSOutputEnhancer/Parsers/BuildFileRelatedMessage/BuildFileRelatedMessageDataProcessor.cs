@@ -11,6 +11,9 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
             }
 
             var classificationType = GetClassificationType(parsedData.Type);
+            if (String.IsNullOrEmpty(classificationType)) {
+                yield break;
+            }
             yield return new ProcessedParsedData(parsedData.FullMessage.Span, classificationType);
         }
 
