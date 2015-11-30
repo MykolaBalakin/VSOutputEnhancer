@@ -4,12 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Balakin.VSOutputEnhancer.UnitTests.Stubs;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
+    [TestClass]
     [ExcludeFromCodeCoverage]
-    public abstract class ClassifierTestsBase {
-        protected abstract IClassifier CreateClassifier();
+    public class BuildOrderOutputClassifierTests:BuildOutputClassifierTests {
+        protected override IClassifier CreateClassifier() {
+            return Utils.CreateBuildOrderOutputClassifier();
+        }
     }
 }

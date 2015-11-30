@@ -47,6 +47,11 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.DebugOutput));
         }
 
+        public static IClassifier CreateBuildOrderOutputClassifier() {
+            var factory = Utils.CreateClassifierFactory();
+            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.BuildOrderOutput));
+        }
+
         public static IClassificationTypeService CreateClassificationTypeService() {
             var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
             return new ClassificationTypeService(classificationTypeRegistryService);

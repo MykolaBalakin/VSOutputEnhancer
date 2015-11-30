@@ -3,7 +3,8 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
-    [UseForClassification(ContentType = ContentType.BuildOutput, DataProcessor = typeof(BuildFileRelatedMessageDataProcessor))]
+    [UseForClassification(ContentType.BuildOutput)]
+    [UseForClassification(ContentType.BuildOrderOutput)]
     internal class BuildFileRelatedMessageParser : IParser<BuildFileRelatedMessageData> {
         public Boolean TryParse(SnapshotSpan span, out BuildFileRelatedMessageData result) {
             result = null;

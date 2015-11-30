@@ -5,7 +5,8 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
-    [UseForClassification(ContentType = ContentType.BuildOutput, DataProcessor = typeof(PublishResultDataProcessor))]
+    [UseForClassification(ContentType.BuildOutput)]
+    [UseForClassification(ContentType.BuildOrderOutput)]
     internal class PublishResultParser : IParser<PublishResultData> {
         public Boolean TryParse(SnapshotSpan span, out PublishResultData result) {
             result = null;

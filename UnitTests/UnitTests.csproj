@@ -82,6 +82,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BuildOrderOutputClassifierTests.cs" />
     <Compile Include="BuildOutputClassifierTests.cs" />
     <Compile Include="BuildResultParserTests.cs" />
     <Compile Include="BuildFileRelatedMessageParserTests.cs" />

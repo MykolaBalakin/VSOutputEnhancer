@@ -9,6 +9,9 @@ namespace Balakin.VSOutputEnhancer.Exports {
     [Export(typeof(IClassifierProvider))]
     [ContentType(ContentType.BuildOutput)]
     [ContentType(ContentType.DebugOutput)]
+#if DEBUG
+    [ContentType(ContentType.Output)]
+#endif
     internal class ClassifierProvider : IClassifierProvider {
         private readonly ClassifierFactory classifierFactory;
 

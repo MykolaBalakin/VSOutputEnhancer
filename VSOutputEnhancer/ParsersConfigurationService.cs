@@ -36,33 +36,65 @@ namespace Balakin.VSOutputEnhancer {
             var assembly = Assembly.GetExecutingAssembly();
             var allParsers = assembly.GetTypes()
                 .Where(t => !t.IsAbstract)
-                .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface));
-            foreach (var parserType in allParsers) {
+                .Select(t => new {
+                    Parser = t,
+                    DataTypes = t.GetInterfaces()
+                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface)
+                        .Select(i => i.GetGenericArguments()[0]).ToList()
+                })
+                .Where(t => t.DataTypes.Any())
+                .ToDictionary(e => e.Parser, e => e.DataTypes);
+            var allDataProcessors = assembly.GetTypes()
+                .Where(t => !t.IsAbstract)
+                .Select(t => new {
+                    DataProcessor = t,
+                    DataTypes = t.GetInterfaces()
+                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface)
+                        .Select(i => i.GetGenericArguments()[0]).ToList()
+                })
+                .Where(t => t.DataTypes.Any())
+                .ToDictionary(e => e.DataProcessor, e => e.DataTypes);
+            foreach (var parserDefinition in allParsers) {
+                var parserType = parserDefinition.Key;
                 var attributes = parserType.GetCustomAttributes<UseForClassificationAttribute>();
                 foreach (var attribute in attributes) {
                     var dataProcessorType = attribute.DataProcessor;
-                    if (dataProcessorType == null) {
-                        throw new NotSupportedException("Auto mapping IParsedDataProcessor not supporting in this release");
+                    var dataType = attribute.Data;
+
+                    IList<Type> dataProcessorDataTypes = null;
+                    if (dataProcessorType == null && dataType == null) {
+                        var dataProcessorDefinitions = allDataProcessors
+                            .Where(dp => dp.Value.Any(dpt => parserDefinition.Value.Contains(dpt)))
+                            .ToList();
+                        if (dataProcessorDefinitions.Count == 0) {
+                            throw new InvalidOperationException($"Can not find eligible IParsedDataProcessor for parser {parserType.Name}");
+                        }
+                        if (dataProcessorDefinitions.Count > 1) {
+                            throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for parser {parserType.Name}");
+                        }
+                        dataProcessorType = dataProcessorDefinitions.Single().Key;
+                    } else if (dataProcessorType == null) {
+                        var dataProcessorDefinitions = allDataProcessors
+                            .Where(dp => dp.Value.Contains(dataType))
+                            .ToList();
+                        if (dataProcessorDefinitions.Count == 0) {
+                            throw new InvalidOperationException($"Can not find eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
+                        }
+                        if (dataProcessorDefinitions.Count > 1) {
+                            throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
+                        }
+                        dataProcessorType = dataProcessorDefinitions.Single().Key;
                     }
 
-                    var dataType = attribute.Data;
                     if (dataType == null) {
-                        var parserDataTypes = parserType.GetInterfaces()
-                            .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface)
-                            .Select(i => i.GetGenericArguments()[0])
-                            .ToList();
-                        var processorDataTypes = dataProcessorType.GetInterfaces()
-                            .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface)
-                            .Select(i => i.GetGenericArguments()[0])
-                            .ToList();
-                        var firstEligebleType = processorDataTypes.Intersect(parserDataTypes).ToList();
-                        if (firstEligebleType.Count==0) {
-                            throw new InvalidOperationException("Can not find eligeble ParsedData type");
+                        var eligebleTypes = allDataProcessors[dataProcessorType].Intersect(allParsers[parserType]).ToList();
+                        if (eligebleTypes.Count == 0) {
+                            throw new InvalidOperationException($"Can not find eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
                         }
-                        if (firstEligebleType.Count > 1) {
-                            throw new InvalidOperationException("Find more the one eligeble ParsedData type");
+                        if (eligebleTypes.Count > 1) {
+                            throw new InvalidOperationException($"Find more the one eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
                         }
-                        dataType = firstEligebleType.Single();
+                        dataType = eligebleTypes.Single();
                     }
 
                     var configurationEntry = new ParserConfiguration(parserType, dataType, dataProcessorType);

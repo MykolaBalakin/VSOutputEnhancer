@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
-    [UseForClassification(ContentType = ContentType.DebugOutput, DataProcessor = typeof(DebugTraceMessageDataProcessor))]
+    [UseForClassification(ContentType.DebugOutput)]
     internal class DebugTraceMessageParser : IParser<DebugTraceMessageData> {
         public Boolean TryParse(SnapshotSpan span, out DebugTraceMessageData result) {
             result = null;

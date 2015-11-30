@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
-    [UseForClassification(ContentType = ContentType.DebugOutput, DataProcessor = typeof(DebugExceptionDataProcessor))]
+    [UseForClassification(ContentType.DebugOutput)]
     internal class DebugExceptionParser : IParser<DebugExceptionData> {
         public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result) {
             result = null;

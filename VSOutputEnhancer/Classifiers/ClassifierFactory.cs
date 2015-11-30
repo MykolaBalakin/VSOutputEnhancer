@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
@@ -37,6 +38,7 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
         private IClassifier CreateClassifierForContentType(IContentType contentType) {
             var configuration = parsersConfigurationService.GetParsers(contentType).ToList();
             if (configuration.Count == 0) {
+                Trace.TraceWarning($"Can not create classifier for content type {contentType.TypeName} (base types: {String.Join(", ", contentType.BaseTypes.Select(t => t.TypeName))})");
                 return null;
             }
             if (configuration.Count == 1) {

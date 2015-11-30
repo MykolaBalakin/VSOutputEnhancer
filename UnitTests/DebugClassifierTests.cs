@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [TestClass]
@@ -16,7 +17,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = Utils.CreateDebugClassifier();
+            var classifier = CreateClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -34,7 +35,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             var span = Utils.CreateSpan(fullText);
             span = new SnapshotSpan(span.Snapshot, fullText.Length - traceErrorMessage.Length, traceErrorMessage.Length);
             Assert.AreEqual(span.GetText(), traceErrorMessage);
-            var classifier = Utils.CreateDebugClassifier();
+            var classifier = CreateClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -48,7 +49,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Information: 0 : Trace information message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = Utils.CreateDebugClassifier();
+            var classifier = CreateClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -62,7 +63,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Warning: 0 : Trace warning message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = Utils.CreateDebugClassifier();
+            var classifier = CreateClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
@@ -76,13 +77,17 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             const String traceErrorMessage = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = Utils.CreateDebugClassifier();
+            var classifier = CreateClassifier();
             var result = classifier.GetClassificationSpans(span);
 
             Assert.AreEqual(1, result.Count);
             var classificationSpan = result.Single();
             Assert.AreEqual(span, classificationSpan.Span);
             Assert.AreEqual(ClassificationType.DebugException, classificationSpan.ClassificationType.Classification);
+        }
+
+        protected override IClassifier CreateClassifier() {
+            return Utils.CreateDebugClassifier();
         }
     }
 }
