@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -10,15 +11,16 @@ namespace Balakin.VSOutputEnhancer {
     [Export(typeof(IClassificationTypeService))]
     internal class ClassificationTypeService : IClassificationTypeService {
         private readonly IClassificationTypeRegistryService classificationTypeRegistryService;
+        private readonly ConcurrentDictionary<String, IClassificationType> classificationTypes;
 
         [ImportingConstructor]
         public ClassificationTypeService(IClassificationTypeRegistryService classificationTypeRegistryService) {
             this.classificationTypeRegistryService = classificationTypeRegistryService;
+            classificationTypes=new ConcurrentDictionary<String, IClassificationType>();
         }
 
         public IClassificationType GetClassificationType(String name) {
-            // TODO: Add cache
-            return classificationTypeRegistryService.GetClassificationType(name);
+            return classificationTypes.GetOrAdd(name, classificationTypeRegistryService.GetClassificationType);
         }
     }
 }
