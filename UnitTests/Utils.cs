@@ -33,7 +33,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public static ClassifierFactory CreateClassifierFactory() {
             var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
             var classificationTypeSevice = Utils.CreateClassificationTypeService();
-            return new ClassifierFactory(classificationTypeRegistryService, classificationTypeSevice);
+            var parsersConfigurationService = Utils.CreateParsersConfigurationService();
+            return new ClassifierFactory(classificationTypeRegistryService, classificationTypeSevice, parsersConfigurationService);
         }
 
         public static IClassifier CreateBuildOutputClassifier() {
@@ -107,6 +108,10 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         public static TextFormattingRunProperties CreateTextFormattingRunProperties(Brush foreground, Brush background) {
             var result = createTextFormattingRunProperties.Value(foreground, background);
             return result;
+        }
+
+        public static IParsersConfigurationService CreateParsersConfigurationService() {
+            return new ParsersConfigurationService();
         }
     }
 }

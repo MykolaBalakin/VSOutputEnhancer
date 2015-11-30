@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {
-    internal class BuildResultParser:IParser<BuildResultData> {
+    [UseForClassification(ContentType = ContentType.BuildOutput, DataProcessor = typeof(BuildResultDataProcessor))]
+    internal class BuildResultParser : IParser<BuildResultData> {
         public Boolean TryParse(SnapshotSpan span, out BuildResultData result) {
             var text = span.GetText();
 

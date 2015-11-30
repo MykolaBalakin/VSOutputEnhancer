@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
@@ -16,12 +17,14 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
     internal class ClassifierFactory {
         private readonly IClassificationTypeRegistryService classificationTypeRegistryService;
         private readonly IClassificationTypeService classificationTypeService;
+        private readonly IParsersConfigurationService parsersConfigurationService;
         private readonly ConcurrentDictionary<String, IClassifier> classifiers;
 
         [ImportingConstructor]
-        public ClassifierFactory(IClassificationTypeRegistryService classificationTypeRegistryService, IClassificationTypeService classificationTypeService) {
+        public ClassifierFactory(IClassificationTypeRegistryService classificationTypeRegistryService, IClassificationTypeService classificationTypeService, IParsersConfigurationService parsersConfigurationService) {
             this.classificationTypeRegistryService = classificationTypeRegistryService;
             this.classificationTypeService = classificationTypeService;
+            this.parsersConfigurationService = parsersConfigurationService;
             classifiers = new ConcurrentDictionary<String, IClassifier>();
         }
 
@@ -31,25 +34,23 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
             return classifier;
         }
 
-        // TODO: Refactor this
-        // Should somewhow automaticaly find all needed parsers and processors for each content type
         private IClassifier CreateClassifierForContentType(IContentType contentType) {
-            if (contentType.TypeName.Equals(ContentType.BuildOutput, StringComparison.OrdinalIgnoreCase)) {
-                var publishResultClassifier = new ParserBasedClassifier<PublishResultData>(new PublishResultParser(), new PublishResultDataProcessor(), classificationTypeService);
-                var buildResultClassifier = new ParserBasedClassifier<BuildResultData>(new BuildResultParser(), new BuildResultDataProcessor(), classificationTypeService);
-                var buildFileRelatedClassifier = new ParserBasedClassifier<BuildFileRelatedMessageData>(new BuildFileRelatedMessageParser(), new BuildFileRelatedMessageDataProcessor(), classificationTypeService);
-
-                var buildClassifier = new ClassifiersAggregator(buildFileRelatedClassifier, buildResultClassifier, publishResultClassifier);
-                return buildClassifier;
+            var configuration = parsersConfigurationService.GetParsers(contentType).ToList();
+            if (configuration.Count == 0) {
+                return null;
             }
-            if (contentType.TypeName.Equals(ContentType.DebugOutput, StringComparison.OrdinalIgnoreCase)) {
-                var exceptionClassifier = new ParserBasedClassifier<DebugExceptionData>(new DebugExceptionParser(), new DebugExceptionDataProcessor(), classificationTypeService);
-                var traceMessageClassifier = new ParserBasedClassifier<DebugTraceMessageData>(new DebugTraceMessageParser(), new DebugTraceMessageDataProcessor(), classificationTypeService);
-
-                var debugClassifier = new ClassifiersAggregator(exceptionClassifier, traceMessageClassifier);
-                return debugClassifier;
+            if (configuration.Count == 1) {
+                return CreateClassifierFromConfiguration(configuration.Single());
             }
-            return null;
+            return new ClassifiersAggregator(configuration.Select(CreateClassifierFromConfiguration));
+        }
+
+        private IClassifier CreateClassifierFromConfiguration(ParserConfiguration configuration) {
+            var parser = Activator.CreateInstance(configuration.Parser);
+            var dataProcessor = Activator.CreateInstance(configuration.DataProcessor);
+
+            var classifierType = typeof(ParserBasedClassifier<>).MakeGenericType(configuration.Data);
+            return (IClassifier) Activator.CreateInstance(classifierType, parser, dataProcessor, classificationTypeService);
         }
 
         private String GetClassifierKey(IContentType contentType) {

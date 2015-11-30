@@ -66,6 +66,9 @@
     <Compile Include="ClassificationType.cs" />
     <Compile Include="Classifiers\ParserBasedClassifier.cs" />
     <Compile Include="IClassificationTypeService.cs" />
+    <Compile Include="IParsersConfigurationService.cs" />
+    <Compile Include="ParserConfiguration.cs" />
+    <Compile Include="ParsersConfigurationService.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="StyledClassificationFormatDefinition.cs" />
     <Compile Include="StyleManager.cs" />
     <Compile Include="Theme.cs" />
+    <Compile Include="UseForClassificationAttribute.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
