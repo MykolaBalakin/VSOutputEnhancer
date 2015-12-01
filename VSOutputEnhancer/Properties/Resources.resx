@@ -129,6 +129,15 @@
   <data name="FormatDisplayName_BuildResultSucceeded" xml:space="preserve">
     <value>Output enhancer: Build succeeded</value>
   </data>
+  <data name="FormatDisplayName_DebugException" xml:space="preserve">
+    <value>Output enhancer: Debug exception message</value>
+  </data>
+  <data name="FormatDisplayName_DebugTraceError" xml:space="preserve">
+    <value>Output enhancer: Trace error message</value>
+  </data>
+  <data name="FormatDisplayName_DebugTraceWarning" xml:space="preserve">
+    <value>Output enhancer: Trace warning message</value>
+  </data>
   <data name="FormatDisplayName_PublishResultFailed" xml:space="preserve">
     <value>Output enhancer: Publish failed</value>
   </data>

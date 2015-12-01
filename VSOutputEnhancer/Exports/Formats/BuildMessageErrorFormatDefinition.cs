@@ -8,8 +8,8 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Name(ClassificationType.BuildMessageError)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class BuildMessageErrorClassifierFormat : StyledClassificationFormatDefinition {
+    internal sealed class BuildMessageErrorFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildMessageErrorClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
+        public BuildMessageErrorFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }

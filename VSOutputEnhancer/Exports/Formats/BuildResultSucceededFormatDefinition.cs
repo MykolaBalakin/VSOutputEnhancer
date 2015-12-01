@@ -8,8 +8,8 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Name(ClassificationType.BuildResultSucceeded)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class BuildResultSucceededClassifierFormat : StyledClassificationFormatDefinition {
+    internal sealed class BuildResultSucceededFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildResultSucceededClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
+        public BuildResultSucceededFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }

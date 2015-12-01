@@ -14,13 +14,8 @@ using Newtonsoft.Json;
 namespace Balakin.VSOutputEnhancer {
     [Export(typeof(IStyleManager))]
     internal class StyleManager : IStyleManager {
-        private enum Theme {
-            Light,
-            Dark
-        }
-
         public StyleManager() {
-            colors = new Lazy<IDictionary<String, FormatDefinitionStyle>>(GetColors);
+            styles = new Lazy<IDictionary<String, FormatDefinitionStyle>>(GetColors);
         }
 
         [Import]
@@ -30,15 +25,15 @@ namespace Balakin.VSOutputEnhancer {
             return LoadColorsFromResources();
         }
 
-        private Lazy<IDictionary<String, FormatDefinitionStyle>> colors;
+        private readonly Lazy<IDictionary<String, FormatDefinitionStyle>> styles;
 
-        private IDictionary<String, FormatDefinitionStyle> Colors {
-            get { return colors.Value; }
+        private IDictionary<String, FormatDefinitionStyle> Styles {
+            get { return styles.Value; }
         }
 
         public FormatDefinitionStyle GetStyleForClassificationType(String classificationType) {
-            if (Colors.ContainsKey(classificationType)) {
-                return Colors[classificationType];
+            if (Styles.ContainsKey(classificationType)) {
+                return Styles[classificationType];
             }
             return new FormatDefinitionStyle();
         }
@@ -61,7 +56,7 @@ namespace Balakin.VSOutputEnhancer {
             // I don't want to reference many of COM libraries to get current VS theme
             // so I'm trying to get recognize it from current format settings
             var formatMap = classificationFormatMapService.GetClassificationFormatMap("output");
-            var theme = GetThemeFromTextProperties(formatMap.DefaultTextProperties);
+            var theme = Utils.GetThemeFromTextProperties(formatMap.DefaultTextProperties);
             if (theme != null) {
                 return theme.Value;
             }
@@ -76,28 +71,6 @@ namespace Balakin.VSOutputEnhancer {
             // }
 
             return Theme.Light;
-        }
-
-        private Theme? GetThemeFromTextProperties(TextFormattingRunProperties properties) {
-            if (!properties.BackgroundBrushEmpty) {
-                var solidColorBrush = properties.BackgroundBrush as SolidColorBrush;
-                if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetBrightness() < 0.5) {
-                        return Theme.Dark;
-                    }
-                    return Theme.Light;
-                }
-            }
-            if (!properties.ForegroundBrushEmpty) {
-                var solidColorBrush = properties.ForegroundBrush as SolidColorBrush;
-                if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetBrightness() < 0.5) {
-                        return Theme.Light;
-                    }
-                    return Theme.Dark;
-                }
-            }
-            return null;
         }
     }
 }

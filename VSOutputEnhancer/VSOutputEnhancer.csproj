@@ -48,23 +48,50 @@
     <CopyVsixExtensionLocation>$(OutputPath)</CopyVsixExtensionLocation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BuildOutputClassifier.cs" />
-    <Compile Include="Exports\Formats\BuildMessageWarningClassifierFormat.cs" />
-    <Compile Include="Exports\Formats\BuildMessageErrorClassifierFormat.cs" />
-    <Compile Include="Exports\Formats\BuildResultFailedClassifierFormat.cs" />
-    <Compile Include="Exports\Formats\BuildResultSucceededClassifierFormat.cs" />
-    <Compile Include="BuildOutputClassifierProvider.cs" />
+    <Compile Include="ClassificationTypeService.cs" />
+    <Compile Include="Classifiers\ClassifiersAggregator.cs" />
+    <Compile Include="ContentType.cs" />
+    <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\DebugTraceWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\DebugTraceErrorFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\BuildMessageWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\BuildResultFailedFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\BuildResultSucceededFormatDefinition.cs" />
+    <Compile Include="Exports\ClassifierProvider.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
-    <Compile Include="Exports\Formats\PublishResultFailedClassifierFormat.cs" />
-    <Compile Include="Exports\Formats\PublishResultSucceededClassifierFormat.cs" />
+    <Compile Include="Exports\Formats\PublishResultFailedFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\PublishResultSucceededFormatDefinition.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="ClassificationType.cs" />
+    <Compile Include="Classifiers\ParserBasedClassifier.cs" />
+    <Compile Include="IClassificationTypeService.cs" />
+    <Compile Include="IParsersConfigurationService.cs" />
+    <Compile Include="ParserConfiguration.cs" />
+    <Compile Include="ParsersConfigurationService.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
+    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
+    <Compile Include="Parsers\BuildResult\BuildResultData.cs" />
+    <Compile Include="Parsers\BuildResult\BuildResultDataProcessor.cs" />
+    <Compile Include="Parsers\BuildResult\BuildResultParser.cs" />
+    <Compile Include="Parsers\DebugException\DebugExceptionData.cs" />
+    <Compile Include="Parsers\DebugException\DebugExceptionDataProcessor.cs" />
+    <Compile Include="Parsers\DebugException\DebugExceptionParser.cs" />
+    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageDataProcessor.cs" />
+    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParsedData.cs" />
+    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParser.cs" />
+    <Compile Include="Parsers\IParsedDataProcessor.cs" />
+    <Compile Include="Parsers\IParser.cs" />
     <Compile Include="IStyleManager.cs" />
-    <Compile Include="Parsers\BuildFileRelatedMessage.cs" />
-    <Compile Include="Parsers\BuildMessage.cs" />
-    <Compile Include="Parsers\BuildMessageType.cs" />
-    <Compile Include="Parsers\BuildResult.cs" />
-    <Compile Include="Parsers\PublishResultParser.cs" />
+    <Compile Include="Parsers\ParsedData.cs" />
+    <Compile Include="Parsers\BuildMessage\BuildMessageType.cs" />
+    <Compile Include="Classifiers\ClassifierFactory.cs" />
+    <Compile Include="Parsers\ParsedValue.cs" />
+    <Compile Include="Parsers\PublishResult\PublishResultData.cs" />
+    <Compile Include="Parsers\PublishResult\PublishResultDataProcessor.cs" />
+    <Compile Include="Parsers\PublishResult\PublishResultParser.cs" />
+    <Compile Include="Parsers\ProcessedParsedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -73,6 +100,8 @@
     </Compile>
     <Compile Include="StyledClassificationFormatDefinition.cs" />
     <Compile Include="StyleManager.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="UseForClassificationAttribute.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

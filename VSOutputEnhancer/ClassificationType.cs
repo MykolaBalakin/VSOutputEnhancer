@@ -16,7 +16,11 @@ namespace Balakin.VSOutputEnhancer {
             BuildResultFailed,
             BuildResultSucceeded,
             PublishResultFailed,
-            PublishResultSucceeded
+            PublishResultSucceeded,
+            DebugTraceError,
+            DebugTraceWarning,
+            DebugTraceInformation,
+            DebugException
         };
 
         public const String BuildMessageError = "BuildMessageError";
@@ -27,5 +31,10 @@ namespace Balakin.VSOutputEnhancer {
 
         public const String PublishResultFailed = "PublishResultFailed";
         public const String PublishResultSucceeded = "PublishResultSucceeded";
+
+        public const String DebugTraceError = "DebugTraceError";
+        public const String DebugTraceWarning = "DebugTraceWarning";
+        public const String DebugTraceInformation = "DebugTraceInformation";
+        public const String DebugException = "DebugException";
     }
 }

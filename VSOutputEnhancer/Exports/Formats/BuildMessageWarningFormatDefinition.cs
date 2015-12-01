@@ -8,8 +8,8 @@ namespace Balakin.VSOutputEnhancer.Exports.Formats {
     [Name(ClassificationType.BuildMessageWarning)]
     [UserVisible(false)]
     [Order(Before = Priority.Default)]
-    internal sealed class BuildMessageWarningClassifierFormat : StyledClassificationFormatDefinition {
+    internal sealed class BuildMessageWarningFormatDefinition : StyledClassificationFormatDefinition {
         [ImportingConstructor]
-        public BuildMessageWarningClassifierFormat(IStyleManager styleManager) : base(styleManager) { }
+        public BuildMessageWarningFormatDefinition(IStyleManager styleManager) : base(styleManager) { }
     }
 }

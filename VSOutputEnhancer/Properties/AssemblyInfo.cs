@@ -28,3 +28,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("0.4")]
 
 [assembly: InternalsVisibleTo("Balakin.VSOutputEnhancer.UnitTests")]
+[assembly: InternalsVisibleTo("Balakin.VSOutputEnhancer.Fakes")]

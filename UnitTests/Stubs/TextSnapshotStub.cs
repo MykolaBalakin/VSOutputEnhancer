@@ -11,6 +11,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
     internal class TextSnapshotStub : ITextSnapshot {
         public TextSnapshotStub(String text) {
             this.text = text;
+            TextBuffer = new TextBufferStub(null);
+            Version = new TextVersionStub(TextBuffer);
         }
 
         private readonly String text;
@@ -81,17 +83,13 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
             throw new NotImplementedException();
         }
 
-        public ITextBuffer TextBuffer {
-            get { throw new NotImplementedException(); }
-        }
+        public ITextBuffer TextBuffer { get; }
 
         public IContentType ContentType {
             get { throw new NotImplementedException(); }
         }
 
-        public ITextVersion Version {
-            get { throw new NotImplementedException(); }
-        }
+        public ITextVersion Version { get; }
 
         public Int32 Length {
             get { return text.Length; }
