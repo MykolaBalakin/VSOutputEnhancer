@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer", "VSOutpu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsixPackage", "VsixPackage\VsixPackage.csproj", "{EF89C340-CD9E-4DE7-902A-7361936F5BCB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D2183F6C-418A-45D5-840D-5BFDC7A832E8}"
+	ProjectSection(SolutionItems) = preProject
+		Build\GlobalAssemblyInfo.cs = Build\GlobalAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

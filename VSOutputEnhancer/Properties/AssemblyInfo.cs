@@ -7,25 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Output enhancer")]
 [assembly: AssemblyDescription("Extension to add colors to Visual Studio output window.")]
-[assembly: AssemblyCompany("Nikolay Balakin")]
-[assembly: AssemblyProduct("Output enhancer")]
-[assembly: AssemblyCopyright("Copyright © Nikolay Balakin 2015. All rights reserved.")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-
-[assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0")]
 
 [assembly: InternalsVisibleTo("Balakin.VSOutputEnhancer.UnitTests")]
 [assembly: InternalsVisibleTo("Balakin.VSOutputEnhancer.Fakes")]

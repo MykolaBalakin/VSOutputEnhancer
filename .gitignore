@@ -193,3 +193,6 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 #artifacts/
+
+# Some files needed during building time
+!/Build
