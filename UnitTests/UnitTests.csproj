@@ -121,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VSOutputEnhancer\VSOutputEnhancer.csproj">
-      <Project>{c6abb595-5996-4aed-8f98-878af0bbcb56}</Project>
+      <Project>{aef34482-9ed6-4dc1-ace4-59773a0c0635}</Project>
       <Name>VSOutputEnhancer</Name>
     </ProjectReference>
   </ItemGroup>
