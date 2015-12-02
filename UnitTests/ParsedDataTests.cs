@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -46,6 +44,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         [ExpectedException(typeof(InvalidOperationException))]
         public void EmptyValueExceptionValueType() {
             var value = new ParsedValue<Int32>();
+            // Trying to cast to Int32
+            // ReSharper disable once UnusedVariable
             var i = (Int32)value;
         }
 
@@ -53,6 +53,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         [ExpectedException(typeof(InvalidOperationException))]
         public void EmptyValueExceptionReferenceType() {
             var value = new ParsedValue<String>();
+            // Trying to cast to String
+            // ReSharper disable once UnusedVariable
             var s = (String)value;
         }
     }

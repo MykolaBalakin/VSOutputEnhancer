@@ -4,8 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.Parsers;
@@ -31,10 +29,9 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
         }
 
         public static ClassifierFactory CreateClassifierFactory() {
-            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
             var classificationTypeSevice = Utils.CreateClassificationTypeService();
             var parsersConfigurationService = Utils.CreateParsersConfigurationService();
-            return new ClassifierFactory(classificationTypeRegistryService, classificationTypeSevice, parsersConfigurationService);
+            return new ClassifierFactory(classificationTypeSevice, parsersConfigurationService);
         }
 
         public static IClassifier CreateBuildOutputClassifier() {

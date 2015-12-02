@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

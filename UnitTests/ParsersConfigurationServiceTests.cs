@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;

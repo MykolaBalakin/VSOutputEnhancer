@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.Text.Formatting;
 
 namespace Balakin.VSOutputEnhancer.UnitTests {
     [ExcludeFromCodeCoverage]

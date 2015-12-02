@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.Fakes;
-using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 

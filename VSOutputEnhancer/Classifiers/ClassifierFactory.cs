@@ -4,26 +4,18 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
-using Balakin.VSOutputEnhancer.Parsers;
-using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
-using Balakin.VSOutputEnhancer.Parsers.BuildResult;
-using Balakin.VSOutputEnhancer.Parsers.DebugException;
-using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
-using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Classifiers {
     [Export]
     internal class ClassifierFactory {
-        private readonly IClassificationTypeRegistryService classificationTypeRegistryService;
         private readonly IClassificationTypeService classificationTypeService;
         private readonly IParsersConfigurationService parsersConfigurationService;
         private readonly ConcurrentDictionary<String, IClassifier> classifiers;
 
         [ImportingConstructor]
-        public ClassifierFactory(IClassificationTypeRegistryService classificationTypeRegistryService, IClassificationTypeService classificationTypeService, IParsersConfigurationService parsersConfigurationService) {
-            this.classificationTypeRegistryService = classificationTypeRegistryService;
+        public ClassifierFactory(IClassificationTypeService classificationTypeService, IParsersConfigurationService parsersConfigurationService) {
             this.classificationTypeService = classificationTypeService;
             this.parsersConfigurationService = parsersConfigurationService;
             classifiers = new ConcurrentDictionary<String, IClassifier>();

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
-using Balakin.VSOutputEnhancer.UnitTests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
