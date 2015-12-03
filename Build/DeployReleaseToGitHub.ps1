@@ -42,7 +42,7 @@ $release | Format-List
 
 
 # Upload file
-$vsixName = "Balakin.VSOutputEnhancer.vsix"
+$vsixName = "Balakin.VSOutputEnhancer.VsixPackage.vsix"
 $releaseVsixName = "VSOutputEnhancer.vsix"
 $vsixPath = [System.IO.Path]::Combine($path, $vsixName)
 Write-Host "Uploading vsix package to GitHub..."
