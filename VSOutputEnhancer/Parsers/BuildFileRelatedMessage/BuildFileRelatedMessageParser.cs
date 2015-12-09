@@ -10,6 +10,12 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
             result = null;
             var text = span.GetText();
 
+            var lowerText = text.ToLowerInvariant();
+            // TODO: Should load possible enum values by reflection
+            if (!lowerText.Contains(": warning ") && !lowerText.Contains(": error ")) {
+                return false;
+            }
+
             var locationVariants = new[] {
                 "\\(\\d+,\\d+,\\d+,\\d+\\)",
                 "\\(\\d+,\\d+\\)"
