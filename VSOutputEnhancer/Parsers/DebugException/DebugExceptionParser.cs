@@ -15,7 +15,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
             }
 
             var regex = "^Exception thrown: '(?<Exception>.*)' in (?<Assembly>.*)\r\n$";
-            var match = Regex.Match(text, regex);
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }
