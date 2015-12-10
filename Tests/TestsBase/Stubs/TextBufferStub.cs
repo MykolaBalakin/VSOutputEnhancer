@@ -5,9 +5,9 @@ using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class TextBufferStub : ITextBuffer {
+    public class TextBufferStub : ITextBuffer {
         public TextBufferStub(String contentType) {
             ContentType = new ContentTypeStub(contentType);
             Properties = new PropertyCollection();

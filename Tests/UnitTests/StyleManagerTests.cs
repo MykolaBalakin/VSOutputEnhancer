@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class StyleManagerTests {

@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class ClassificationTypeRegistryServiceStub : IClassificationTypeRegistryService {
+    public class ClassificationTypeRegistryServiceStub : IClassificationTypeRegistryService {
         public IClassificationType GetClassificationType(String type) {
             return new ClassificationTypeStub(type);
         }

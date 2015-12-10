@@ -74,6 +74,7 @@
     <Compile Include="ClassificationTypeService.cs" />
     <Compile Include="Classifiers\ClassifierFactory.cs" />
     <Compile Include="Classifiers\ClassifiersAggregator.cs" />
+    <Compile Include="Classifiers\IClassifierFactory.cs" />
     <Compile Include="Classifiers\ParserBasedClassifier.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />

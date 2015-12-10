@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Media;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class ColorExtensionsTests {

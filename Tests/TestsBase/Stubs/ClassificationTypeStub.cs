@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class ClassificationTypeStub : IClassificationType {
+    public class ClassificationTypeStub : IClassificationType {
         private readonly String type;
 
         public ClassificationTypeStub(String type) {
@@ -19,7 +19,8 @@ namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
 
         public String Classification => type;
 
-        public IEnumerable<IClassificationType> BaseTypes {
+        public IEnumerable<IClassificationType> BaseTypes
+        {
             get { throw new NotImplementedException(); }
         }
     }

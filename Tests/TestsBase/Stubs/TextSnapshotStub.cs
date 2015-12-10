@@ -6,9 +6,9 @@ using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class TextSnapshotStub : ITextSnapshot {
+    public class TextSnapshotStub : ITextSnapshot {
         public TextSnapshotStub(String text) {
             this.text = text;
             TextBuffer = new TextBufferStub(null);

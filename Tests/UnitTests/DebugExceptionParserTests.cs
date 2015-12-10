@@ -6,7 +6,7 @@ using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class DebugExceptionParserTests {

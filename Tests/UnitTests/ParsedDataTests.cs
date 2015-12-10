@@ -5,11 +5,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Balakin.VSOutputEnhancer.Parsers;
-using Balakin.VSOutputEnhancer.UnitTests.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsedDataTests {

@@ -13,10 +13,10 @@ namespace Balakin.VSOutputEnhancer.Exports {
     [ContentType(ContentType.Output)]
 #endif
     internal class ClassifierProvider : IClassifierProvider {
-        private readonly ClassifierFactory classifierFactory;
+        private readonly IClassifierFactory classifierFactory;
 
         [ImportingConstructor]
-        public ClassifierProvider(ClassifierFactory classifierFactory) {
+        public ClassifierProvider(IClassifierFactory classifierFactory) {
             this.classifierFactory = classifierFactory;
         }
 

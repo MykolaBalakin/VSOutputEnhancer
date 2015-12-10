@@ -5,7 +5,7 @@ using System.Linq;
 using Balakin.VSOutputEnhancer.Exports;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class ClassifierProviderTests {

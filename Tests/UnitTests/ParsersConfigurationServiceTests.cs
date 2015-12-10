@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
+using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Balakin.VSOutputEnhancer.Parsers.PublishResult;
-using Balakin.VSOutputEnhancer.UnitTests.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsersConfigurationServiceTests {

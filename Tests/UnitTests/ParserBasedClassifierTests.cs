@@ -7,7 +7,7 @@ using Balakin.VSOutputEnhancer.Parsers.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class ParserBasedClassifierTests {

@@ -8,7 +8,7 @@ using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsedDataProcessorTests {

@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class ContentTypeStub : IContentType {
+    public class ContentTypeStub : IContentType {
         public ContentTypeStub(String typeName) {
             TypeName = typeName;
             DisplayName = $"Display name: {typeName}";

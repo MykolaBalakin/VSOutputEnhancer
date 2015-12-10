@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.UnitTests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs {
     [ExcludeFromCodeCoverage]
-    internal class TextVersionStub : ITextVersion {
+    public class TextVersionStub : ITextVersion {
         public TextVersionStub(ITextBuffer textBuffer) {
             TextBuffer = textBuffer;
             VersionNumber = 0;

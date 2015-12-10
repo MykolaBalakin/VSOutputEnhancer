@@ -7,14 +7,14 @@ using System.Reflection;
 using System.Windows.Media;
 using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.Parsers;
-using Balakin.VSOutputEnhancer.UnitTests.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Formatting;
 
-namespace Balakin.VSOutputEnhancer.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests {
     [ExcludeFromCodeCoverage]
-    internal static class Utils {
+    public static class Utils {
         public static SnapshotSpan CreateSpan(String text) {
             var snapshot = new TextSnapshotStub(text);
             return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
@@ -28,7 +28,7 @@ namespace Balakin.VSOutputEnhancer.UnitTests {
             return new ClassificationTypeRegistryServiceStub();
         }
 
-        public static ClassifierFactory CreateClassifierFactory() {
+        public static IClassifierFactory CreateClassifierFactory() {
             var classificationTypeSevice = Utils.CreateClassificationTypeService();
             var parsersConfigurationService = Utils.CreateParsersConfigurationService();
             return new ClassifierFactory(classificationTypeSevice, parsersConfigurationService);

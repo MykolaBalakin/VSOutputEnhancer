@@ -8,8 +8,8 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Classifiers {
-    [Export]
-    internal class ClassifierFactory {
+    [Export(typeof(IClassifierFactory))]
+    internal class ClassifierFactory : IClassifierFactory {
         private readonly IClassificationTypeService classificationTypeService;
         private readonly IParsersConfigurationService parsersConfigurationService;
         private readonly ConcurrentDictionary<String, IClassifier> classifiers;
@@ -44,7 +44,7 @@ namespace Balakin.VSOutputEnhancer.Classifiers {
             var dataProcessor = Activator.CreateInstance(configuration.DataProcessor);
 
             var classifierType = typeof(ParserBasedClassifier<>).MakeGenericType(configuration.Data);
-            return (IClassifier) Activator.CreateInstance(classifierType, parser, dataProcessor, classificationTypeService);
+            return (IClassifier)Activator.CreateInstance(classifierType, parser, dataProcessor, classificationTypeService);
         }
 
         private String GetClassifierKey(IContentType contentType) {

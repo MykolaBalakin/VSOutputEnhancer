@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Balakin.VSOutputEnhancer {
-    internal class ContentType {
+    public static class ContentType {
         public const String Output = "Output";
 
         public const String BuildOutput = "BuildOutput";
