@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D39BE8AE-3604-4B3F-8DE6-D3A6218B4C68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\UnitTests\UnitTests.csproj", "{D39BE8AE-3604-4B3F-8DE6-D3A6218B4C68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer", "VSOutputEnhancer\VSOutputEnhancer.csproj", "{AEF34482-9ED6-4DC1-ACE4-59773A0C0635}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D2183F6C
 	ProjectSection(SolutionItems) = preProject
 		Build\GlobalAssemblyInfo.cs = Build\GlobalAssemblyInfo.cs
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{098FC160-EF72-40C1-933A-CAFF5D4B6EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,5 +37,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D39BE8AE-3604-4B3F-8DE6-D3A6218B4C68} = {098FC160-EF72-40C1-933A-CAFF5D4B6EAE}
 	EndGlobalSection
 EndGlobal

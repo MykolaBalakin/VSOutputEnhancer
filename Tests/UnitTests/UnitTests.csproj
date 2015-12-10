@@ -123,7 +123,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VSOutputEnhancer\VSOutputEnhancer.csproj">
+    <ProjectReference Include="..\..\VSOutputEnhancer\VSOutputEnhancer.csproj">
       <Project>{aef34482-9ed6-4dc1-ace4-59773a0c0635}</Project>
       <Name>VSOutputEnhancer</Name>
     </ProjectReference>
