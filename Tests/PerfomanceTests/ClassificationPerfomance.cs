@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ClassificationPerfomance {
         [TestMethod]
         public void EntityFramework() {

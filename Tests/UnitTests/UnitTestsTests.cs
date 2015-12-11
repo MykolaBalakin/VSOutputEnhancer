@@ -11,26 +11,6 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     public class UnitTestsTests {
         [TestMethod]
-        public void AllTestsCodeExcludedFromCoverage() {
-            var assembly = Assembly.GetExecutingAssembly();
-
-            var notExcluded = assembly.GetTypes().Where(t => !IsExcludedFromCodeCoverage(t)).ToList();
-            var notExcludedString = String.Join(", ", notExcluded.Select(t => t.Name));
-            Assert.AreEqual(0, notExcluded.Count, $"Those types are not excluded from code coverage analysis: {notExcludedString}");
-        }
-
-        private Boolean IsExcludedFromCodeCoverage(Type t) {
-            var attribute = t.GetCustomAttribute<ExcludeFromCodeCoverageAttribute>();
-            if (attribute != null) {
-                return true;
-            }
-            if (t.DeclaringType != null) {
-                return IsExcludedFromCodeCoverage(t.DeclaringType);
-            }
-            return false;
-        }
-
-        [TestMethod]
         public void CreateTextFormattingRunProperties() {
             TestCreateTextFormattingRunProperties(null, null);
             TestCreateTextFormattingRunProperties(Colors.White, null);

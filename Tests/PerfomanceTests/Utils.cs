@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
+    [ExcludeFromCodeCoverage]
     internal static class Utils {
         public static IEnumerable<String> ReadLogFile(String relativePath) {
             ExtractLogs();
