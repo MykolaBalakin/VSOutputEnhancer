@@ -28,7 +28,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
         }
 
         [TestMethod]
-        public void LotOfClassifiedMessage() {
+        public void LotOfClassifiedMessages() {
             // 100 000 warning/error messages
 
             var content = Utils.ReadLogFile("Resources\\RandomBuildOutput.log");
