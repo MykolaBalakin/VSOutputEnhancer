@@ -12,7 +12,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
     [ExcludeFromCodeCoverage]
     internal static class Utils {
         public static IEnumerable<String> ReadLogFile(String relativePath) {
-            ExtractLogs();
+            ExtractResources();
             var lines = File.ReadLines(GetAbsolutePath(relativePath));
             foreach (var line in lines) {
                 yield return line + "\r\n";
@@ -27,34 +27,37 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
         }
 
 
-        private static Boolean logsExtracted;
-        private static readonly Object extractLogsLock = new Object();
-        private static void ExtractLogs() {
-            if (logsExtracted) {
+        private static Boolean resourcesExtracted;
+        private static readonly Object extractResourcesLock = new Object();
+        private static void ExtractResources() {
+            if (resourcesExtracted) {
                 return;
             }
-            lock (extractLogsLock) {
-                if (logsExtracted) {
+            lock (extractResourcesLock) {
+                if (resourcesExtracted) {
                     return;
                 }
-                var logsArchivePath = GetAbsolutePath("Resources\\Logs.zip");
-                var destinationPath = GetAbsolutePath("Resources");
-                var archive = ZipFile.Open(logsArchivePath, ZipArchiveMode.Read);
-                foreach (var archiveEntry in archive.Entries) {
-                    var fullEntryPath = Path.Combine(destinationPath, archiveEntry.FullName);
-                    var fileInfo = new FileInfo(fullEntryPath);
-                    if (fileInfo.Exists) {
-                        if (fileInfo.Length != archiveEntry.Length) {
-                            fileInfo.Delete();
-                        } else if (fileInfo.LastWriteTimeUtc < archiveEntry.LastWriteTime.UtcDateTime) {
-                            fileInfo.Delete();
+                var resourcesPath = GetAbsolutePath("Resources");
+                var archives = Directory.EnumerateFiles(resourcesPath, "*.zip", SearchOption.AllDirectories);
+                foreach (var archivePath in archives) {
+                    var destinationPath = Path.GetDirectoryName(archivePath);
+                    var archive = ZipFile.Open(archivePath, ZipArchiveMode.Read);
+                    foreach (var archiveEntry in archive.Entries) {
+                        var fullEntryPath = Path.Combine(destinationPath, archiveEntry.FullName);
+                        var fileInfo = new FileInfo(fullEntryPath);
+                        if (fileInfo.Exists) {
+                            if (fileInfo.Length != archiveEntry.Length) {
+                                fileInfo.Delete();
+                            } else if (fileInfo.LastWriteTimeUtc < archiveEntry.LastWriteTime.UtcDateTime) {
+                                fileInfo.Delete();
+                            }
+                        }
+                        if (!fileInfo.Exists) {
+                            archiveEntry.ExtractToFile(fullEntryPath);
                         }
                     }
-                    if (!fileInfo.Exists) {
-                        archiveEntry.ExtractToFile(fullEntryPath);
-                    }
                 }
-                logsExtracted = true;
+                resourcesExtracted = true;
             }
         }
     }
