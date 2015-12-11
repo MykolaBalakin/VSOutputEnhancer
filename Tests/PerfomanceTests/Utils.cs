@@ -39,7 +39,21 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
                 }
                 var logsArchivePath = GetAbsolutePath("Resources\\Logs.zip");
                 var destinationPath = GetAbsolutePath("Resources");
-                ZipFile.ExtractToDirectory(logsArchivePath, destinationPath);
+                var archive = ZipFile.Open(logsArchivePath, ZipArchiveMode.Read);
+                foreach (var archiveEntry in archive.Entries) {
+                    var fullEntryPath = Path.Combine(destinationPath, archiveEntry.FullName);
+                    var fileInfo = new FileInfo(fullEntryPath);
+                    if (fileInfo.Exists) {
+                        if (fileInfo.Length != archiveEntry.Length) {
+                            fileInfo.Delete();
+                        } else if (fileInfo.LastWriteTimeUtc < archiveEntry.LastWriteTime.UtcDateTime) {
+                            fileInfo.Delete();
+                        }
+                    }
+                    if (!fileInfo.Exists) {
+                        archiveEntry.ExtractToFile(fullEntryPath);
+                    }
+                }
                 logsExtracted = true;
             }
         }
