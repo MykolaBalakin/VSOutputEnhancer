@@ -88,11 +88,11 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 }
                 ifThenBody.Add(Expression.Assign(valueVar, Expression.Convert(valueVarValue, propertyValueType)));
 
+                // newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
                 var newSpanStart = Expression.Add(Expression.Property(originalSpanParam, spanStart), Expression.Property(matchGroupVar, groupIndex));
                 var newSpanLength = Expression.Property(matchGroupVar, groupLength);
                 var newSpanVarValue = Expression.New(spanConstructor, newSpanStart, newSpanLength);
 
-                //var span = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
                 var constructor = property.PropertyType.GetConstructor(new Type[] { propertyValueType, typeof(Span) });
                 ifThenBody.Add(Expression.Assign(Expression.Property(resultVar, property), Expression.New(constructor, valueVar, newSpanVarValue)));
 
