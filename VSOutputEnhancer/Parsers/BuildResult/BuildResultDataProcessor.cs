@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {

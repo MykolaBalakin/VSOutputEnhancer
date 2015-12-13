@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Utilities;
 
@@ -61,7 +59,6 @@ namespace Balakin.VSOutputEnhancer {
                     var dataProcessorType = attribute.DataProcessor;
                     var dataType = attribute.Data;
 
-                    IList<Type> dataProcessorDataTypes = null;
                     if (dataProcessorType == null && dataType == null) {
                         var dataProcessorDefinitions = allDataProcessors
                             .Where(dp => dp.Value.Any(dpt => parserDefinition.Value.Contains(dpt)))

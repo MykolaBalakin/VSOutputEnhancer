@@ -1,5 +1,5 @@
 ﻿namespace Balakin.VSOutputEnhancer {
-    internal interface IStyleManager {
+    public interface IStyleManager {
         FormatDefinitionStyle GetStyleForClassificationType(System.String classificationType);
     }
 }

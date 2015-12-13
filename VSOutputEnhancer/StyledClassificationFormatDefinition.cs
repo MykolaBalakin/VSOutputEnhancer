@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Properties;
 using Microsoft.VisualStudio.Text.Classification;
 

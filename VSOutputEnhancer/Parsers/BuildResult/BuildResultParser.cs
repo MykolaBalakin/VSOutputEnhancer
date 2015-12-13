@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {
@@ -22,7 +20,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {
             }
 
             var regex = "^========== (?:Build|Rebuild All): (?<Succeeded>\\d+) succeeded, (?<Failed>\\d+) failed, (?:(?<UpToDate>\\d+) up-to-date, )?(?<Skipped>\\d+) skipped ==========\r\n$";
-            var match = Regex.Match(text, regex);
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }

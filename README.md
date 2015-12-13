@@ -3,14 +3,18 @@
 # VSOutputEnhancer
 Output enhancer is extension that add styling to Visual Studio output window.
 
-For now it supports coloring of:  
+For now it supports coloring of build/build order output:  
 * Build/rebuild result message
 * Publish result messages
 * Compiler errors and warnings
 
-And this list will grow in the nearest future.
+Debug output:
+* Trace error and warning messages
+* "Exception thown" message
 
-![Screenshot](https://cloud.githubusercontent.com/assets/3763386/11255138/409c87e2-8e4d-11e5-9adc-9f902de52c34.png)
+![Build output screenshot](https://cloud.githubusercontent.com/assets/3763386/11503856/4ab01b88-984b-11e5-8921-1ca7135235af.png)
+
+![Debug output screenshot](https://cloud.githubusercontent.com/assets/3763386/11503855/4aa71c54-984b-11e5-8fba-43412aba6348.png)
 
 ## Builds status
 Development:  

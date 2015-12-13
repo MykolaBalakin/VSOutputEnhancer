@@ -10,12 +10,18 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
             result = null;
             var text = span.GetText();
 
+            var lowerText = text.ToLowerInvariant();
+            // TODO: Should load possible enum values by reflection
+            if (!lowerText.Contains(": warning ") && !lowerText.Contains(": error ")) {
+                return false;
+            }
+
             var locationVariants = new[] {
                 "\\(\\d+,\\d+,\\d+,\\d+\\)",
                 "\\(\\d+,\\d+\\)"
             };
-            var regex = $"(?:(?<BuildTaskId>^\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>warning|error) (?<Code>\\w+): (?<Message>.*))\r\n$";
-            var match = Regex.Match(text, regex);
+            var regex = $"^(?:(?<BuildTaskId>\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>warning|error) (?<Code>\\w+): (?<Message>.*))\r\n$";
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }

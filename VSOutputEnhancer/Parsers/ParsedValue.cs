@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class ParsedValue<T> {
+    public class ParsedValue<T> {
         public ParsedValue() {
             HasValue = false;
         }

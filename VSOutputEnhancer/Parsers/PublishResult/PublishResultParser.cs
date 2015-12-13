@@ -21,7 +21,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
             }
 
             var regex = "^========== (?:Publish): (?<Succeeded>\\d+) succeeded, (?<Failed>\\d+) failed, (?<Skipped>\\d+) skipped ==========\r\n$";
-            var match = Regex.Match(text, regex);
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }

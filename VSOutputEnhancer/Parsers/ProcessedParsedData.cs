@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers {
-    internal class ProcessedParsedData {
+    public class ProcessedParsedData {
         public ProcessedParsedData(Span span, String classificationName) {
             Span = span;
             ClassificationName = classificationName;

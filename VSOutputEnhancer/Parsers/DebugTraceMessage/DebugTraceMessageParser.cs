@@ -13,7 +13,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
             var text = span.GetText();
             var allTraceEventTypes = String.Join("|", Enum.GetNames(typeof(TraceEventType)));
             var regex = $"^(?<Source>.*) (?<PrettyMessage>(?<Type>{allTraceEventTypes}): (?<Id>\\d+) : (?<Message>.*))\r\n$";
-            var match = Regex.Match(text, regex);
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }
