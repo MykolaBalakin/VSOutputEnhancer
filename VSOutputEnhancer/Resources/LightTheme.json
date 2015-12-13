@@ -7,7 +7,7 @@
   },
 
   "BuildResultFailed": {
-    "ForegroundColor": "#FF3B3B",
+    "ForegroundColor": "#BF0606",
     "Bold": true
   },
   "BuildResultSucceeded": {
@@ -16,7 +16,7 @@
   },
 
   "PublishResultFailed": {
-    "ForegroundColor": "#FF3B3B",
+    "ForegroundColor": "#BF0606",
     "Bold": true
   },
   "PublishResultSucceeded": {
@@ -25,10 +25,10 @@
   },
 
   "DebugException": {
-    "ForegroundColor": "#FF3B3B"
+    "ForegroundColor": "#BF0606"
   },
   "DebugTraceError": {
-    "ForegroundColor": "#FF3B3B"
+    "ForegroundColor": "#BF0606"
   },
   "DebugTraceWarning": {
     "ForegroundColor": "#D0A825"
