@@ -14,11 +14,18 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         [TestMethod]
         public void NotParsed() {
             const String messageString = "Some message\r\n";
+            const String messageString2 = "Some message: error \r\n";
 
             var span = Utils.CreateSpan(messageString);
             var parser = new BuildFileRelatedMessageParser();
             BuildFileRelatedMessageData data;
             var parsed = parser.TryParse(span, out data);
+            Assert.IsFalse(parsed);
+            Assert.IsNull(data);
+
+            span = Utils.CreateSpan(messageString2);
+            parser = new BuildFileRelatedMessageParser();
+            parsed = parser.TryParse(span, out data);
             Assert.IsFalse(parsed);
             Assert.IsNull(data);
         }
