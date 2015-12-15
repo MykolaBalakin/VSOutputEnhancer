@@ -9,12 +9,13 @@ using Newtonsoft.Json;
 namespace Balakin.VSOutputEnhancer {
     [Export(typeof(IStyleManager))]
     internal class StyleManager : IStyleManager {
-        public StyleManager() {
+        private readonly IClassificationFormatMapService classificationFormatMapService;
+
+        [ImportingConstructor]
+        public StyleManager(IClassificationFormatMapService classificationFormatMapService) {
+            this.classificationFormatMapService = classificationFormatMapService;
             styles = new Lazy<IDictionary<String, FormatDefinitionStyle>>(GetColors);
         }
-
-        [Import]
-        private IClassificationFormatMapService classificationFormatMapService = null;
 
         private IDictionary<String, FormatDefinitionStyle> GetColors() {
             return LoadColorsFromResources();
