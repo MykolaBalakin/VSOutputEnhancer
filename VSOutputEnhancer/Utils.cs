@@ -20,6 +20,7 @@ namespace Balakin.VSOutputEnhancer {
             return (Math.Max(Math.Max(r, g), b) + Math.Min(Math.Min(r, g), b)) / 2;
         }
 
+        // TODO: Move this code into EnvironmentService class
         public static Theme? GetThemeFromTextProperties(TextFormattingRunProperties properties) {
             if (!properties.BackgroundBrushEmpty) {
                 var solidColorBrush = properties.BackgroundBrush as SolidColorBrush;
