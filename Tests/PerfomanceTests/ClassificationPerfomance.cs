@@ -24,6 +24,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();
+            Trace.TraceInformation("Elapsed: " + sw.Elapsed);
             Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(5), "Elapsed: " + sw.Elapsed);
         }
 
@@ -40,6 +41,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();
+            Trace.TraceInformation("Elapsed: " + sw.Elapsed);
             Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(5), "Elapsed: " + sw.Elapsed);
         }
     }

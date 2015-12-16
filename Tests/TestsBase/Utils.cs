@@ -65,6 +65,11 @@ namespace Balakin.VSOutputEnhancer.Tests {
             return styleManager;
         }
 
+        public static IStyleManager CreateStyleManager(Theme theme) {
+            var environmentService = new EnvironmentServiceStub(theme);
+            var styleManager = new StyleManager(environmentService);
+            return styleManager;
+        }
 
         private static Func<Brush, Brush, TextFormattingRunProperties> GetCreateTextFormattingRunProperties() {
             var foregroundParameter = Expression.Parameter(typeof(Brush), "foreground");
