@@ -1,6 +1,6 @@
 {
   "BuildMessageError": {
-    "ForegroundColor": "#D85051"
+    "ForegroundColor": "#D85050"
   },
   "BuildMessageWarning": {
     "ForegroundColor": "#E9D585"
