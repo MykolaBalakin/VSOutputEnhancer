@@ -4,7 +4,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Microsoft.VisualStudio.Text.Classification;
+using Microsoft.VisualStudio.Text.Formatting;
 
 namespace Balakin.VSOutputEnhancer {
     [Export(typeof(IEnvironmentService))]
@@ -20,7 +22,7 @@ namespace Balakin.VSOutputEnhancer {
             // I don't want to reference many of COM libraries to get current VS theme
             // so I'm trying to get recognize it from current format settings
             var formatMap = classificationFormatMapService.GetClassificationFormatMap("output");
-            var theme = Utils.GetThemeFromTextProperties(formatMap.DefaultTextProperties);
+            var theme = GetThemeFromTextProperties(formatMap.DefaultTextProperties);
             if (theme != null) {
                 return theme.Value;
             }
@@ -35,6 +37,28 @@ namespace Balakin.VSOutputEnhancer {
             // }
 
             return Theme.Light;
+        }
+
+        private Theme? GetThemeFromTextProperties(TextFormattingRunProperties properties) {
+            if (!properties.BackgroundBrushEmpty) {
+                var solidColorBrush = properties.BackgroundBrush as SolidColorBrush;
+                if (solidColorBrush != null) {
+                    if (solidColorBrush.Color.GetLightness() < 0.5) {
+                        return Theme.Dark;
+                    }
+                    return Theme.Light;
+                }
+            }
+            if (!properties.ForegroundBrushEmpty) {
+                var solidColorBrush = properties.ForegroundBrush as SolidColorBrush;
+                if (solidColorBrush != null) {
+                    if (solidColorBrush.Color.GetLightness() < 0.5) {
+                        return Theme.Light;
+                    }
+                    return Theme.Dark;
+                }
+            }
+            return null;
         }
     }
 }

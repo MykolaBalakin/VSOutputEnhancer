@@ -71,6 +71,11 @@ namespace Balakin.VSOutputEnhancer.Tests {
             return styleManager;
         }
 
+        public static IEnvironmentService CreateEnvironmentService(IClassificationFormatMapService classificationFormatMapService) {
+            var environmentService = new EnvironmentService(classificationFormatMapService);
+            return environmentService;
+        }
+
         private static Func<Brush, Brush, TextFormattingRunProperties> GetCreateTextFormattingRunProperties() {
             var foregroundParameter = Expression.Parameter(typeof(Brush), "foreground");
             var backgroundParameter = Expression.Parameter(typeof(Brush), "background");

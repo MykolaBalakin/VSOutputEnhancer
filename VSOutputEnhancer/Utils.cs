@@ -19,28 +19,5 @@ namespace Balakin.VSOutputEnhancer {
             var b = (Double)c.B / Byte.MaxValue;
             return (Math.Max(Math.Max(r, g), b) + Math.Min(Math.Min(r, g), b)) / 2;
         }
-
-        // TODO: Move this code into EnvironmentService class
-        public static Theme? GetThemeFromTextProperties(TextFormattingRunProperties properties) {
-            if (!properties.BackgroundBrushEmpty) {
-                var solidColorBrush = properties.BackgroundBrush as SolidColorBrush;
-                if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetLightness() < 0.5) {
-                        return Theme.Dark;
-                    }
-                    return Theme.Light;
-                }
-            }
-            if (!properties.ForegroundBrushEmpty) {
-                var solidColorBrush = properties.ForegroundBrush as SolidColorBrush;
-                if (solidColorBrush != null) {
-                    if (solidColorBrush.Color.GetLightness() < 0.5) {
-                        return Theme.Light;
-                    }
-                    return Theme.Dark;
-                }
-            }
-            return null;
-        }
     }
 }
