@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.Utilities;
 namespace Balakin.VSOutputEnhancer.Exports {
     [Export(typeof(IClassifierProvider))]
     [ContentType(ContentType.BuildOutput)]
+    [ContentType(ContentType.BuildOrderOutput)]
     [ContentType(ContentType.DebugOutput)]
 #if DEBUG
     [ContentType(ContentType.Output)]
