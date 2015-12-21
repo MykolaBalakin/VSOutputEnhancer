@@ -86,6 +86,7 @@
     <Compile Include="Stubs\ClassificationTypeRegistryServiceStub.cs" />
     <Compile Include="Stubs\ClassificationTypeStub.cs" />
     <Compile Include="Stubs\ContentTypeStub.cs" />
+    <Compile Include="Stubs\EnvironmentServiceStub.cs" />
     <Compile Include="Stubs\ParsedDataStub.cs" />
     <Compile Include="Stubs\StyleManagerStub.cs" />
     <Compile Include="Stubs\TextBufferStub.cs" />

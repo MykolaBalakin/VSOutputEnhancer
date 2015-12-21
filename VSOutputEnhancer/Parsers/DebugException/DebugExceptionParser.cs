@@ -10,18 +10,28 @@ namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
         public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result) {
             result = null;
             var text = span.GetText();
-            if (!text.StartsWith("Exception thrown: '", StringComparison.Ordinal)) {
-                return false;
+            if (text.StartsWith("Exception thrown: '", StringComparison.Ordinal)) {
+                var regex = "^Exception thrown: '(?<Exception>.*)' in (?<Assembly>.*)\r\n$";
+                var match = Regex.Match(text, regex, RegexOptions.Compiled);
+                if (!match.Success) {
+                    return false;
+                }
+
+                result = ParsedData.Create<DebugExceptionData>(match, span.Span);
+                return true;
+            }
+            if (text.StartsWith("A first chance exception of type '", StringComparison.Ordinal)) {
+                var regex = "^A first chance exception of type '(?<Exception>.*)' occurred in (?<Assembly>.*)\r\n$";
+                var match = Regex.Match(text, regex, RegexOptions.Compiled);
+                if (!match.Success) {
+                    return false;
+                }
+
+                result = ParsedData.Create<DebugExceptionData>(match, span.Span);
+                return true;
             }
 
-            var regex = "^Exception thrown: '(?<Exception>.*)' in (?<Assembly>.*)\r\n$";
-            var match = Regex.Match(text, regex, RegexOptions.Compiled);
-            if (!match.Success) {
-                return false;
-            }
-
-            result = ParsedData.Create<DebugExceptionData>(match, span.Span);
-            return true;
+            return false;
         }
     }
 }

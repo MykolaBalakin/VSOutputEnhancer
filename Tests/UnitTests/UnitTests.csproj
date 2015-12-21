@@ -64,6 +64,9 @@
       <HintPath>..\..\packages\VSSDK.Text.11.0.4\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf.11.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\Microsoft.VisualStudio.Text.UI.Wpf.11.0.0.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -99,6 +102,7 @@
     <Compile Include="DebugClassifierTests.cs" />
     <Compile Include="DebugExceptionParserTests.cs" />
     <Compile Include="DebugTraceMessageParserTests.cs" />
+    <Compile Include="EnvironmentServiceTests.cs" />
     <Compile Include="ExcludeFromCodeCoverageTests.cs" />
     <Compile Include="ExportsTests.cs" />
     <Compile Include="ParsedDataProcessorTests.cs" />
@@ -111,7 +115,9 @@
     <Compile Include="UnitTestsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\Balakin.VSOutputEnhancer.fakes" />
+    <Fakes Include="Fakes\Balakin.VSOutputEnhancer.fakes">
+      <SubType>Designer</SubType>
+    </Fakes>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestsBase\TestsBase.csproj">
@@ -124,7 +130,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\Microsoft.VisualStudio.Text.Logic.fakes" />
+    <Fakes Include="Fakes\Microsoft.VisualStudio.Text.Logic.fakes">
+      <SubType>Designer</SubType>
+    </Fakes>
+    <Fakes Include="Fakes\Microsoft.VisualStudio.Text.UI.Wpf.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

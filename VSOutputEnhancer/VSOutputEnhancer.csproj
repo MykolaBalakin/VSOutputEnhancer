@@ -78,6 +78,7 @@
     <Compile Include="Classifiers\IClassifierFactory.cs" />
     <Compile Include="Classifiers\ParserBasedClassifier.cs" />
     <Compile Include="ContentType.cs" />
+    <Compile Include="EnvironmentService.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="Exports\ClassifierProvider.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Exports\Formats\PublishResultSucceededFormatDefinition.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
     <Compile Include="IClassificationTypeService.cs" />
+    <Compile Include="IEnvironmentService.cs" />
     <Compile Include="IParsersConfigurationService.cs" />
     <Compile Include="IStyleManager.cs" />
     <Compile Include="ParserConfiguration.cs" />
@@ -130,8 +132,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Resources\DarkTheme.json" />
-    <Content Include="Resources\LightTheme.json" />
+    <Content Include="Resources\DarkTheme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LightTheme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

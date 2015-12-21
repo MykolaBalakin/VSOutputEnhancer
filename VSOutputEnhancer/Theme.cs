@@ -1,5 +1,5 @@
 namespace Balakin.VSOutputEnhancer {
-    internal enum Theme {
+    public enum Theme {
         Light,
         Dark
     }

@@ -14,11 +14,18 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         [TestMethod]
         public void NotParsed() {
             const String messageString = "Some message\r\n";
+            const String messageString2 = "Some message: error \r\n";
 
             var span = Utils.CreateSpan(messageString);
             var parser = new BuildFileRelatedMessageParser();
             BuildFileRelatedMessageData data;
             var parsed = parser.TryParse(span, out data);
+            Assert.IsFalse(parsed);
+            Assert.IsNull(data);
+
+            span = Utils.CreateSpan(messageString2);
+            parser = new BuildFileRelatedMessageParser();
+            parsed = parser.TryParse(span, out data);
             Assert.IsFalse(parsed);
             Assert.IsNull(data);
         }
@@ -118,6 +125,37 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.AreEqual(new Span(70, 8), data.Code.Span);
             Assert.AreEqual(new Span(80, 268), data.Message.Span);
             Assert.AreEqual(new Span(62, 286), data.FullMessage.Span);
+        }
+
+        [TestMethod]
+        public void PostSharpNotReferenced() {
+            const String warningMessage = "1>C:\\Sources\\Some project\\SomeProject.csproj(163,5): error : This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.\r\n";
+
+            var span = Utils.CreateSpan(warningMessage);
+            var parser = new BuildFileRelatedMessageParser();
+            BuildFileRelatedMessageData data;
+            var parsed = parser.TryParse(span, out data);
+            Assert.IsTrue(parsed);
+            Assert.IsNotNull(data);
+
+            Assert.IsTrue(data.BuildTaskId.HasValue);
+            Assert.IsTrue(data.FilePath.HasValue);
+            Assert.IsTrue(data.Type.HasValue);
+            Assert.IsFalse(data.Code.HasValue);
+            Assert.IsTrue(data.Message.HasValue);
+            Assert.IsTrue(data.FullMessage.HasValue);
+
+            Assert.AreEqual(1, data.BuildTaskId);
+            Assert.AreEqual("C:\\Sources\\Some project\\SomeProject.csproj", data.FilePath);
+            Assert.AreEqual(BuildMessageType.Error, data.Type);
+            Assert.AreEqual("This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.", data.Message);
+            Assert.AreEqual("error : This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.", data.FullMessage);
+
+            Assert.AreEqual(new Span(0, 1), data.BuildTaskId.Span);
+            Assert.AreEqual(new Span(2, 42), data.FilePath.Span);
+            Assert.AreEqual(new Span(53, 5), data.Type.Span);
+            Assert.AreEqual(new Span(61, 195), data.Message.Span);
+            Assert.AreEqual(new Span(53, 203), data.FullMessage.Span);
         }
     }
 }
