@@ -32,7 +32,7 @@ namespace Balakin.VSOutputEnhancer {
         public const String DebugException = "DebugException";
 
         public const String NpmResultFailed = "NpmResultFailed";
-        public const String NpmResultSuccess = "NpmResultSuccess";
+        public const String NpmResultSuccessed = "NpmResultSuccessed";
 
         public const String NpmMessageWarning = "NpmMessageWarning";
         public const String NpmMessageError = "NpmMessageError";

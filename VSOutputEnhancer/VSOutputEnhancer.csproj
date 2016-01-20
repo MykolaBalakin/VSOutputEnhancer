@@ -100,6 +100,9 @@
     <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultData.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultDataProcessor.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultParser.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />

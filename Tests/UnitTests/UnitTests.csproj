@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="BowerOutputClassifierTests.cs" />
     <Compile Include="BowerMessageParserTests.cs" />
+    <Compile Include="NpmResultParserTests.cs" />
     <Compile Include="NpmMessageParserTests.cs" />
     <Compile Include="BuildOrderOutputClassifierTests.cs" />
     <Compile Include="BuildOutputClassifierTests.cs" />
