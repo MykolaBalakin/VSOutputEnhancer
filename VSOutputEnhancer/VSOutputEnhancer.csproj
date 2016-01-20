@@ -97,6 +97,9 @@
     <Compile Include="IStyleManager.cs" />
     <Compile Include="ParserConfiguration.cs" />
     <Compile Include="ParsersConfigurationService.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
