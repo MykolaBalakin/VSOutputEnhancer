@@ -47,5 +47,23 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             Assert.AreEqual(new Span(41, 4), data.ExitCode.Span);
         }
+
+        [TestMethod]
+        public void NegativeExitCode() {
+            const String messageString = "====npm command completed with exit code -8====\r\n";
+
+            var span = Utils.CreateSpan(messageString);
+            var parser = new NpmResultParser();
+            NpmResultData data;
+            var parsed = parser.TryParse(span, out data);
+            Assert.IsTrue(parsed);
+            Assert.IsNotNull(data);
+
+            Assert.IsTrue(data.ExitCode.HasValue);
+
+            Assert.AreEqual(-8, data.ExitCode);
+
+            Assert.AreEqual(new Span(41, 2), data.ExitCode.Span);
+        }
     }
 }
