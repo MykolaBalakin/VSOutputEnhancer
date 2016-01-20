@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Balakin.VSOutputEnhancer.Parsers.BuildMessage;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
@@ -17,11 +16,11 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
             yield return new ProcessedParsedData(parsedData.FullMessage.Span, classificationType);
         }
 
-        private String GetClassificationType(BuildMessageType messageType) {
+        private String GetClassificationType(MessageType messageType) {
             switch (messageType) {
-                case BuildMessageType.Warning:
+                case MessageType.Warning:
                     return ClassificationType.BuildMessageWarning;
-                case BuildMessageType.Error:
+                case MessageType.Error:
                     return ClassificationType.BuildMessageError;
                 default:
                     return null;
