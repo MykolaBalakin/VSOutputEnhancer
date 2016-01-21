@@ -104,7 +104,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             Assert.AreEqual(1,result.Count);
             var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 9, 43), classificationSpan.Span);
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 9, 41), classificationSpan.Span);
             Assert.AreEqual(ClassificationType.NpmMessageWarning, classificationSpan.ClassificationType.Classification);
         }
 
@@ -118,7 +118,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             Assert.AreEqual(1, result.Count);
             var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 9, 15), classificationSpan.Span);
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 9, 13), classificationSpan.Span);
             Assert.AreEqual(ClassificationType.NpmMessageError, classificationSpan.ClassificationType.Classification);
         }
 
