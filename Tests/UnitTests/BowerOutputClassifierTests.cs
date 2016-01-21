@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class BowerOutputClassifierTests:ClassifierTestsBase {
+    public class BowerOutputClassifierTests : ClassifierTestsBase {
         protected override IClassifier CreateClassifier() {
             return Utils.CreateBowerOutputClassifier();
         }
@@ -26,7 +26,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             Assert.AreEqual(1, result.Count);
             var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 29, 40), classificationSpan.Span);
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 39, 28), classificationSpan.Span);
             Assert.AreEqual(ClassificationType.BowerMessageError, classificationSpan.ClassificationType.Classification);
         }
     }

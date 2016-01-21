@@ -45,19 +45,19 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.IsTrue(data.PackageName.HasValue);
             Assert.IsTrue(data.PackageVersion.HasValue);
             Assert.IsTrue(data.Type.HasValue);
-            Assert.IsTrue(data.TypeCode.HasValue);
+            Assert.IsTrue(data.ErrorCode.HasValue);
             Assert.IsTrue(data.Message.HasValue);
 
             Assert.AreEqual("bootstrap1", data.PackageName);
             Assert.AreEqual("3.3.5", data.PackageVersion);
             Assert.AreEqual(MessageType.Error, data.Type);
-            Assert.AreEqual("ENOTFOUND", data.TypeCode);
+            Assert.AreEqual("ENOTFOUND", data.ErrorCode);
             Assert.AreEqual("Package bootstrap1 not found", data.Message);
 
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(6, 10)), data.PackageName.Span);
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(17, 5)), data.PackageVersion.Span);
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(29, 9)), data.Type.Span);
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(29, 9)), data.TypeCode.Span);
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(29, 9)), data.ErrorCode.Span);
             Assert.AreEqual(new SnapshotSpan(span.Snapshot, new Span(39, 28)), data.Message.Span);
         }
     }
