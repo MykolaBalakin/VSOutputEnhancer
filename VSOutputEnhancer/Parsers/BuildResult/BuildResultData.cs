@@ -11,13 +11,5 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {
         public ParsedValue<Int32> UpToDate { get; private set; }
         public ParsedValue<Int32> Skipped { get; private set; }
         // ReSharper restore UnusedAutoPropertyAccessor.Local
-
-        protected override void Fill(Match match, Span originalSpan) {
-            base.Fill(match, originalSpan);
-
-            if (!UpToDate.HasValue) {
-                UpToDate = new ParsedValue<Int32>(0, new Span(originalSpan.Start, 0));
-            }
-        }
     }
 }
