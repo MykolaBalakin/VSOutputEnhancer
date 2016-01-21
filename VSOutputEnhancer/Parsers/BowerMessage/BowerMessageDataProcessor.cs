@@ -5,6 +5,10 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.BowerMessage {
     internal class BowerMessageDataProcessor : IParsedDataProcessor<BowerMessageData> {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, BowerMessageData parsedData) {
+            if (parsedData == null) {
+                yield break;
+            }
+
             var classificationType = GetClassificationType(parsedData.Type);
             if (String.IsNullOrEmpty(classificationType)) {
                 yield break;

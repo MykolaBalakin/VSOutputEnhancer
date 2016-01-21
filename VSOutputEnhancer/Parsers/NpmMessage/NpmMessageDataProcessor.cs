@@ -5,6 +5,10 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.NpmMessage {
     internal class NpmMessageDataProcessor : IParsedDataProcessor<NpmMessageData> {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, NpmMessageData parsedData) {
+            if (parsedData == null) {
+                yield break;
+            }
+
             var classificationType = GetClassificationType(parsedData.Type);
             if (String.IsNullOrEmpty(classificationType)) {
                 yield break;
