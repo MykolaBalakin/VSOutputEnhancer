@@ -39,6 +39,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
+        public void BuildSucceededOrUpToDate() {
+            const String buildCompleteMessage = "========== Build: 3 succeeded or up-to-date, 0 failed, 0 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(buildCompleteMessage);
+            var classifier = CreateClassifier();
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(span, classificationSpan.Span);
+            Assert.AreEqual(ClassificationType.BuildResultSucceeded, classificationSpan.ClassificationType.Classification);
+        }
+
+        [TestMethod]
         public void PublishFailed() {
             const String publishCompleteMessage = "========== Publish: 0 succeeded, 1 failed, 0 skipped ==========\r\n";
 

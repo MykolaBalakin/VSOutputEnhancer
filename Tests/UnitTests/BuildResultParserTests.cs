@@ -58,6 +58,31 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
+        public void BuildDnx() {
+            const String publishCompleteMessage = "========== Build: 10 succeeded or up-to-date, 3 failed, 43 skipped ==========\r\n";
+
+            var span = Utils.CreateSpan(publishCompleteMessage);
+            BuildResultData data;
+            var parser = new BuildResultParser();
+            var parsed = parser.TryParse(span, out data);
+            Assert.IsTrue(parsed);
+            Assert.IsNotNull(data);
+
+            Assert.IsTrue(data.Succeeded.HasValue);
+            Assert.IsTrue(data.Failed.HasValue);
+            Assert.IsFalse(data.UpToDate.HasValue);
+            Assert.IsTrue(data.Skipped.HasValue);
+
+            Assert.AreEqual(10, data.Succeeded);
+            Assert.AreEqual(3, data.Failed);
+            Assert.AreEqual(43, data.Skipped);
+
+            Assert.AreEqual(new Span(18, 2), data.Succeeded.Span);
+            Assert.AreEqual(new Span(46, 1), data.Failed.Span);
+            Assert.AreEqual(new Span(56, 2), data.Skipped.Span);
+        }
+
+        [TestMethod]
         public void Rebuild() {
             const String publishCompleteMessage = "========== Rebuild All: 2 succeeded, 135 failed, 86 skipped ==========\r\n";
 
