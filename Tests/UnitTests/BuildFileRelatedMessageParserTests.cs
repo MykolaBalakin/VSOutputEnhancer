@@ -129,9 +129,9 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
         [TestMethod]
         public void PostSharpNotReferenced() {
-            const String warningMessage = "1>C:\\Sources\\Some project\\SomeProject.csproj(163,5): error : This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.\r\n";
+            const String message = "1>C:\\Sources\\Some project\\SomeProject.csproj(163,5): error : This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.\r\n";
 
-            var span = Utils.CreateSpan(warningMessage);
+            var span = Utils.CreateSpan(message);
             var parser = new BuildFileRelatedMessageParser();
             BuildFileRelatedMessageData data;
             var parsed = parser.TryParse(span, out data);
@@ -156,6 +156,35 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.AreEqual(new Span(53, 5), data.Type.Span);
             Assert.AreEqual(new Span(61, 195), data.Message.Span);
             Assert.AreEqual(new Span(53, 203), data.FullMessage.Span);
+        }
+
+        [TestMethod]
+        public void BowerError() {
+            const String message = "C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\Web\\Microsoft.DNX.Publishing.targets(152,5): Error : bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found\r\n";
+
+            var span = Utils.CreateSpan(message);
+            var parser = new BuildFileRelatedMessageParser();
+            BuildFileRelatedMessageData data;
+            var parsed = parser.TryParse(span, out data);
+            Assert.IsTrue(parsed);
+            Assert.IsNotNull(data);
+
+            Assert.IsFalse(data.BuildTaskId.HasValue);
+            Assert.IsTrue(data.FilePath.HasValue);
+            Assert.IsTrue(data.Type.HasValue);
+            Assert.IsFalse(data.Code.HasValue);
+            Assert.IsTrue(data.Message.HasValue);
+            Assert.IsTrue(data.FullMessage.HasValue);
+
+            Assert.AreEqual("C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\Web\\Microsoft.DNX.Publishing.targets", data.FilePath);
+            Assert.AreEqual(MessageType.Error, data.Type);
+            Assert.AreEqual("bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found", data.Message);
+            Assert.AreEqual("Error : bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found", data.FullMessage);
+
+            Assert.AreEqual(new Span(0, 96), data.FilePath.Span);
+            Assert.AreEqual(new Span(105, 5), data.Type.Span);
+            Assert.AreEqual(new Span(113, 67), data.Message.Span);
+            Assert.AreEqual(new Span(105, 75), data.FullMessage.Span);
         }
     }
 }

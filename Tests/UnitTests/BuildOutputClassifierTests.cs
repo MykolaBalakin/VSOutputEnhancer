@@ -109,6 +109,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
+        public void BowerError() {
+            const String errorMessage = "C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\Web\\Microsoft.DNX.Publishing.targets(152,5): Error : bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found\r\n";
+
+            var span = Utils.CreateSpan(errorMessage);
+            var classifier = CreateClassifier();
+            var result = classifier.GetClassificationSpans(span);
+
+            Assert.AreEqual(1, result.Count);
+            var classificationSpan = result.Single();
+            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 105, 75), classificationSpan.Span);
+            Assert.AreEqual(ClassificationType.BuildMessageError, classificationSpan.ClassificationType.Classification);
+        }
+
+        [TestMethod]
         public void NpmWarning() {
             const String npmWarnMessage = "npm WARN package.json ASP.NET@0.0.0 No description\r\n";
 
