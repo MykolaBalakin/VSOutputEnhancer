@@ -51,7 +51,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.AreEqual(1, result.Count);
             var classificationSpan = result.Single();
             Assert.AreEqual(span, classificationSpan.Span);
-            Assert.AreEqual(ClassificationType.NpmResultSuccessed, classificationSpan.ClassificationType.Classification);
+            Assert.AreEqual(ClassificationType.NpmResultSucceeded, classificationSpan.ClassificationType.Classification);
         }
 
         [TestMethod]

@@ -15,7 +15,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         [TestMethod]
         public void AllDefinitionsExported() {
             var exportAttribute = typeof(ExportAttribute);
-            var classificationTypeDefinition=typeof(ClassificationTypeDefinition);
+            var classificationTypeDefinition = typeof(ClassificationTypeDefinition);
             var assembly = typeof(ClassificationType).Assembly;
             var types = assembly.GetTypes();
             var exportedDefinitions = types

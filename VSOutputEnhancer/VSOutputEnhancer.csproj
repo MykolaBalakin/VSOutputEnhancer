@@ -81,6 +81,7 @@
     <Compile Include="EnvironmentService.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="Exports\ClassifierProvider.cs" />
+    <Compile Include="Exports\Formats\BowerMessageErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedFormatDefinition.cs" />
@@ -88,6 +89,10 @@
     <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugTraceErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugTraceWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmMessageErrorFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmMessageWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmResultFailedFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmResultSucceededFormatDefinition.cs" />
     <Compile Include="Exports\Formats\PublishResultFailedFormatDefinition.cs" />
     <Compile Include="Exports\Formats\PublishResultSucceededFormatDefinition.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />

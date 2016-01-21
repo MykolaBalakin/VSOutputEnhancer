@@ -10,7 +10,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.NpmResult {
             }
 
             if (parsedData.ExitCode == 0) {
-                yield return new ProcessedParsedData(span, ClassificationType.NpmResultSuccessed);
+                yield return new ProcessedParsedData(span, ClassificationType.NpmResultSucceeded);
             } else {
                 yield return new ProcessedParsedData(span, ClassificationType.NpmResultFailed);
             }
