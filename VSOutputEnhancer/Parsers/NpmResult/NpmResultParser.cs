@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.NpmResult {
+    [UseForClassification(ContentType.Output)]
     internal class NpmResultParser : IParser<NpmResultData> {
         public Boolean TryParse(SnapshotSpan span, out NpmResultData result) {
             result = null;
