@@ -20,8 +20,8 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
                 "\\(\\d+,\\d+,\\d+,\\d+\\)",
                 "\\(\\d+,\\d+\\)"
             };
-            var regex = $"^(?:(?<BuildTaskId>\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>warning|error) (?<Code>\\w+)?: (?<Message>.*))\r\n$";
-            var match = Regex.Match(text, regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var regex = $"^(?:(?<BuildTaskId>\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>warning|error|Warning|Error) (?<Code>\\w+)?: (?<Message>.*))\r\n$";
+            var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success) {
                 return false;
             }
