@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildOrderOutputClassifierTests:BuildOutputClassifierTests {
+    public class BuildOrderOutputClassifierTests : BuildOutputClassifierTests {
         protected override IClassifier CreateClassifier() {
             return Utils.CreateBuildOrderOutputClassifier();
         }

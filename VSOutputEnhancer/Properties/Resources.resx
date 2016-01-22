@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FormatDisplayName_BowerMessageError" xml:space="preserve">
+    <value>Output enhancer: Bower error message</value>
+  </data>
   <data name="FormatDisplayName_BuildMessageError" xml:space="preserve">
     <value>Output enhancer: Build error message</value>
   </data>
@@ -137,6 +140,18 @@
   </data>
   <data name="FormatDisplayName_DebugTraceWarning" xml:space="preserve">
     <value>Output enhancer: Trace warning message</value>
+  </data>
+  <data name="FormatDisplayName_NpmMessageError" xml:space="preserve">
+    <value>Output enhancer: npm error message</value>
+  </data>
+  <data name="FormatDisplayName_NpmMessageWarning" xml:space="preserve">
+    <value>Output enhancer: npm warning message</value>
+  </data>
+  <data name="FormatDisplayName_NpmResultFailed" xml:space="preserve">
+    <value>Output enhancer: npm execution failed</value>
+  </data>
+  <data name="FormatDisplayName_NpmResultSucceeded" xml:space="preserve">
+    <value>Output enhancer: npm execution succeeded</value>
   </data>
   <data name="FormatDisplayName_PublishResultFailed" xml:space="preserve">
     <value>Output enhancer: Publish failed</value>

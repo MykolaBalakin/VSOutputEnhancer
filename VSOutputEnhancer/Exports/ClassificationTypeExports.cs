@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Exports {
     internal static class ClassificationTypeExports {
-        [Export(typeof(ClassificationTypeDefinition))]  
+        [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.BuildResultSucceeded)]
         public static ClassificationTypeDefinition BuildResultSucceeded;
 
@@ -46,5 +46,25 @@ namespace Balakin.VSOutputEnhancer.Exports {
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.DebugException)]
         public static ClassificationTypeDefinition DebugException;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.NpmResultFailed)]
+        public static ClassificationTypeDefinition NpmResultFailed;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.NpmResultSucceeded)]
+        public static ClassificationTypeDefinition NpmResultSucceeded;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.NpmMessageWarning)]
+        public static ClassificationTypeDefinition NpmMessageWarning;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.NpmMessageError)]
+        public static ClassificationTypeDefinition NpmMessageError;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BowerMessageError)]
+        public static ClassificationTypeDefinition BowerMessageError;
     }
 }

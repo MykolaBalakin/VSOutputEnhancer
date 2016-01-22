@@ -97,7 +97,23 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
                 return "Output enhancer: Trace warning message";
             }
 
-            throw new ArgumentOutOfRangeException(nameof(formatType));
+            if (formatType == typeof(NpmResultSucceededFormatDefinition)) {
+                return "Output enhancer: npm execution succeeded";
+            }
+            if (formatType == typeof(NpmResultFailedFormatDefinition)) {
+                return "Output enhancer: npm execution failed";
+            }
+            if (formatType == typeof(NpmMessageErrorFormatDefinition)) {
+                return "Output enhancer: npm error message";
+            }
+            if (formatType == typeof(NpmMessageWarningFormatDefinition)) {
+                return "Output enhancer: npm warning message";
+            }
+            if (formatType == typeof(BowerMessageErrorFormatDefinition)) {
+                return "Output enhancer: Bower error message";
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(formatType), formatType, "Unknown format type");
         }
     }
 }

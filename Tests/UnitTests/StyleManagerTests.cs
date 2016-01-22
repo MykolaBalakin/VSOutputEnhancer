@@ -26,8 +26,12 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void SimilarClassificationTypesHasSimilarColors() {
+        public void SimilarClassificationTypesHasSimilarColorsLight() {
             TestSimilarColors(Theme.Light);
+        }
+
+        [TestMethod]
+        public void SimilarClassificationTypesHasSimilarColorsDark() {
             TestSimilarColors(Theme.Dark);
         }
 
@@ -39,15 +43,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
                 ClassificationType.BuildResultFailed,
                 ClassificationType.PublishResultFailed,
                 ClassificationType.DebugTraceError,
-                ClassificationType.DebugException
+                ClassificationType.DebugException,
+                ClassificationType.NpmResultFailed,
+                ClassificationType.NpmMessageError,
+                ClassificationType.BowerMessageError
             };
             var warning = new [] {
                 ClassificationType.BuildMessageWarning,
-                ClassificationType.DebugTraceWarning
+                ClassificationType.DebugTraceWarning,
+                ClassificationType.NpmMessageWarning
             };
             var success = new [] {
                 ClassificationType.BuildResultSucceeded,
-                ClassificationType.PublishResultSucceeded
+                ClassificationType.PublishResultSucceeded,
+                ClassificationType.NpmResultSucceeded
             };
             var skip = new[] {
                 ClassificationType.DebugTraceInformation
@@ -67,7 +76,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         private void TestSimilarColors(ICollection<FormatDefinitionStyle> styles, String groupName) {
-            var foregroundColors = styles.Where(c => c.ForegroundColor.HasValue).Select(s => s.ForegroundColor.Value).Distinct().ToList();
+            var foregroundColors = styles.Select(s => s.ForegroundColor).Distinct().ToList();
             Assert.IsTrue(foregroundColors.Count <= 1, $"Some {groupName} styles has different colors");
         }
 

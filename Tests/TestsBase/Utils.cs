@@ -125,5 +125,15 @@ namespace Balakin.VSOutputEnhancer.Tests {
         public static IParsersConfigurationService CreateParsersConfigurationService() {
             return new ParsersConfigurationService();
         }
+
+        public static IClassifier CreateNpmOutputClassifier() {
+            var factory = Utils.CreateClassifierFactory();
+            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.Output));
+        }
+
+        public static IClassifier CreateBowerOutputClassifier() {
+            var factory = Utils.CreateClassifierFactory();
+            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.Output));
+        }
     }
 }

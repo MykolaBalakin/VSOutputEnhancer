@@ -61,6 +61,15 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Bower error message.
+        /// </summary>
+        internal static string FormatDisplayName_BowerMessageError {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_BowerMessageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output enhancer: Build error message.
         /// </summary>
         internal static string FormatDisplayName_BuildMessageError {
@@ -120,6 +129,42 @@ namespace Balakin.VSOutputEnhancer.Properties {
         internal static string FormatDisplayName_DebugTraceWarning {
             get {
                 return ResourceManager.GetString("FormatDisplayName_DebugTraceWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: npm error message.
+        /// </summary>
+        internal static string FormatDisplayName_NpmMessageError {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_NpmMessageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: npm warning message.
+        /// </summary>
+        internal static string FormatDisplayName_NpmMessageWarning {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_NpmMessageWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: npm execution failed.
+        /// </summary>
+        internal static string FormatDisplayName_NpmResultFailed {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_NpmResultFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: npm execution succeeded.
+        /// </summary>
+        internal static string FormatDisplayName_NpmResultSucceeded {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_NpmResultSucceeded", resourceCulture);
             }
         }
         

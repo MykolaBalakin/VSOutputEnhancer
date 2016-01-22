@@ -10,8 +10,10 @@ namespace Balakin.VSOutputEnhancer.Exports {
     [ContentType(ContentType.BuildOutput)]
     [ContentType(ContentType.BuildOrderOutput)]
     [ContentType(ContentType.DebugOutput)]
-#if DEBUG
+    // For npm logs
     [ContentType(ContentType.Output)]
+#if DEBUG
+    [ContentType(ContentType.Text)]
 #endif
     internal class ClassifierProvider : IClassifierProvider {
         private readonly IClassifierFactory classifierFactory;

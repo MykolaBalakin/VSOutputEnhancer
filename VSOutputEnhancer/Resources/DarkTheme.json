@@ -32,5 +32,24 @@
   },
   "DebugTraceWarning": {
     "ForegroundColor": "#E9D585"
+  },
+
+  "NpmMessageError": {
+    "ForegroundColor": "#D85050"
+  },
+  "NpmMessageWarning": {
+    "ForegroundColor": "#E9D585"
+  },
+  "NpmResultFailed": {
+    "ForegroundColor": "#D85050",
+    "Bold": true
+  },
+  "NpmResultSucceeded": {
+    "ForegroundColor": "#57A64A",
+    "Bold": true
+  },
+
+  "BowerMessageError": {
+    "ForegroundColor": "#D85050"
   }
 }

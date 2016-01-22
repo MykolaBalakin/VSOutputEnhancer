@@ -14,7 +14,12 @@ namespace Balakin.VSOutputEnhancer {
             DebugTraceError,
             DebugTraceWarning,
             DebugTraceInformation,
-            DebugException
+            DebugException,
+            NpmResultFailed,
+            NpmResultSucceeded,
+            NpmMessageWarning,
+            NpmMessageError,
+            BowerMessageError
         };
 
         public const String BuildMessageError = "BuildMessageError";
@@ -30,5 +35,13 @@ namespace Balakin.VSOutputEnhancer {
         public const String DebugTraceWarning = "DebugTraceWarning";
         public const String DebugTraceInformation = "DebugTraceInformation";
         public const String DebugException = "DebugException";
+
+        public const String NpmResultFailed = "NpmResultFailed";
+        public const String NpmResultSucceeded = "NpmResultSucceeded";
+
+        public const String NpmMessageWarning = "NpmMessageWarning";
+        public const String NpmMessageError = "NpmMessageError";
+
+        public const String BowerMessageError = "BowerMessageError";
     }
 }

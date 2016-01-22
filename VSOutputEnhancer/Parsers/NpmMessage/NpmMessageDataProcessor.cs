@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
-    internal class BuildFileRelatedMessageDataProcessor : IParsedDataProcessor<BuildFileRelatedMessageData> {
-        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, BuildFileRelatedMessageData parsedData) {
+namespace Balakin.VSOutputEnhancer.Parsers.NpmMessage {
+    internal class NpmMessageDataProcessor : IParsedDataProcessor<NpmMessageData> {
+        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, NpmMessageData parsedData) {
             if (parsedData == null) {
                 yield break;
             }
@@ -13,15 +13,16 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
             if (String.IsNullOrEmpty(classificationType)) {
                 yield break;
             }
-            yield return new ProcessedParsedData(parsedData.FullMessage.Span, classificationType);
+
+            yield return new ProcessedParsedData(parsedData.Message.Span, classificationType);
         }
 
         private String GetClassificationType(MessageType messageType) {
             switch (messageType) {
                 case MessageType.Warning:
-                    return ClassificationType.BuildMessageWarning;
+                    return ClassificationType.NpmMessageWarning;
                 case MessageType.Error:
-                    return ClassificationType.BuildMessageError;
+                    return ClassificationType.NpmMessageError;
                 default:
                     return null;
             }

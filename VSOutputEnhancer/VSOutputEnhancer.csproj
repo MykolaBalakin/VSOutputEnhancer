@@ -81,6 +81,7 @@
     <Compile Include="EnvironmentService.cs" />
     <Compile Include="Exports\ClassificationTypeExports.cs" />
     <Compile Include="Exports\ClassifierProvider.cs" />
+    <Compile Include="Exports\Formats\BowerMessageErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedFormatDefinition.cs" />
@@ -88,6 +89,10 @@
     <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugTraceErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugTraceWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmMessageErrorFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmMessageWarningFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmResultFailedFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\NpmResultSucceededFormatDefinition.cs" />
     <Compile Include="Exports\Formats\PublishResultFailedFormatDefinition.cs" />
     <Compile Include="Exports\Formats\PublishResultSucceededFormatDefinition.cs" />
     <Compile Include="FormatDefinitionStyle.cs" />
@@ -97,10 +102,16 @@
     <Compile Include="IStyleManager.cs" />
     <Compile Include="ParserConfiguration.cs" />
     <Compile Include="ParsersConfigurationService.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
+    <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultData.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultDataProcessor.cs" />
+    <Compile Include="Parsers\NpmResult\NpmResultParser.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
-    <Compile Include="Parsers\BuildMessage\BuildMessageType.cs" />
+    <Compile Include="Parsers\BuildMessageType.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultData.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultDataProcessor.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultParser.cs" />
@@ -112,6 +123,9 @@
     <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParser.cs" />
     <Compile Include="Parsers\IParsedDataProcessor.cs" />
     <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\NpmMessage\NpmMessageData.cs" />
+    <Compile Include="Parsers\NpmMessage\NpmMessageDataProcessor.cs" />
+    <Compile Include="Parsers\NpmMessage\NpmMessageParser.cs" />
     <Compile Include="Parsers\ParsedData.cs" />
     <Compile Include="Parsers\ParsedValue.cs" />
     <Compile Include="Parsers\ProcessedParsedData.cs" />
