@@ -7,6 +7,7 @@ For now it supports coloring of build/build order output:
 * Build/rebuild result message
 * Publish result messages
 * Compiler errors and warnings
+* npm and bower errors and warnings
 
 Debug output:
 * Trace error and warning messages
