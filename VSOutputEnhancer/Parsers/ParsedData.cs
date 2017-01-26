@@ -30,6 +30,26 @@ namespace Balakin.VSOutputEnhancer.Parsers
 
         private static Func<Match, Span, ParsedData> CreateParsedDataCreator(Type parsedDataType)
         {
+            // This code generates method that fills ParsedData instance.
+            // Generated method looks like:
+
+            //  1| var result = new TargetParsedData();
+            //  2| var matchGroups = match.Groups;
+            //  3| Group matchGroup;
+            //  4| Span newSpan;
+
+            // For each ParsedData property following code will be generated:
+
+            //  5| matchGroup = matchGroups["{{Property name}}"];
+            //  6| if (matchGroup.Success) {
+            //  7|     var value = ConvertType(matchGroup.Value);
+            //  8|     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
+            //  9|     result.{{Property name}} = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
+            // 10| }
+            // 11| newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
+
+            // 12| return result;
+
             var groupSuccess = typeof(Group).GetProperty("Success");
             var enumParse = typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(String), typeof(Boolean) });
             var groupValue = typeof(Group).GetProperty("Value");
@@ -46,21 +66,21 @@ namespace Balakin.VSOutputEnhancer.Parsers
             var matchParam = Expression.Parameter(typeof(Match));
             var originalSpanParam = Expression.Parameter(typeof(Span));
 
-            // var result = new TargetParsedData();
+            //  1| var result = new TargetParsedData();
             var resultVar = Expression.Variable(parsedDataType);
             variables.Add(resultVar);
             body.Add(Expression.Assign(resultVar, Expression.New(parsedDataType)));
 
-            // var matchGroups = match.Groups;
+            //  2| var matchGroups = match.Groups;
             var matchGroupsVar = Expression.Variable(typeof(GroupCollection));
             body.Add(Expression.Assign(matchGroupsVar, Expression.Property(matchParam, typeof(Match).GetProperty("Groups"))));
             variables.Add(matchGroupsVar);
 
-            // Group matchGroup;
+            //  3| Group matchGroup;
             var matchGroupVar = Expression.Variable(typeof(Group));
             variables.Add(matchGroupVar);
 
-            // Span newSpan;
+            //  4| Span newSpan;
             var newSpanVar = Expression.Variable(typeof(Span));
             variables.Add(newSpanVar);
 
@@ -72,14 +92,14 @@ namespace Balakin.VSOutputEnhancer.Parsers
 
             foreach (var property in propertiesToFill)
             {
-                // matchGroup = matchGroups[property.Name];
+                //  5| matchGroup = matchGroups["{{Property name}}"];
                 body.Add(Expression.Assign(matchGroupVar, Expression.Property(matchGroupsVar, groupCollectionItem, Expression.Constant(property.Name))));
 
-                // if (matchGroup.Success) {
-                //     var value = ConvertType(matchGroup.Value);
-                //     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
-                //     result.Property = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
-                // }
+                //  6| if (matchGroup.Success) {
+                //  7|     var value = ConvertType(matchGroup.Value);
+                //  8|     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
+                //  9|     result.{{Property name}} = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
+                // 10| }
                 var ifThenBody = new List<Expression>();
                 var propertyValueType = property.PropertyType.GetGenericArguments()[0];
                 if (!localVariables.ContainsKey(propertyValueType))
@@ -98,7 +118,7 @@ namespace Balakin.VSOutputEnhancer.Parsers
                 }
                 ifThenBody.Add(Expression.Assign(valueVar, Expression.Convert(valueVarValue, propertyValueType)));
 
-                // newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
+                // 11| newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
                 var newSpanStart = Expression.Add(Expression.Property(originalSpanParam, spanStart), Expression.Property(matchGroupVar, groupIndex));
                 var newSpanLength = Expression.Property(matchGroupVar, groupLength);
                 var newSpanVarValue = Expression.New(spanConstructor, newSpanStart, newSpanLength);
@@ -112,7 +132,7 @@ namespace Balakin.VSOutputEnhancer.Parsers
                 body.Add(Expression.IfThenElse(Expression.Property(matchGroupVar, groupSuccess), Expression.Block(ifThenBody), ifElseBody));
             }
 
-            // return result;
+            // 12| return result;
             var returnLabel = Expression.Label(typeof(ParsedData));
             body.Add(Expression.Return(returnLabel, resultVar));
             body.Add(Expression.Label(returnLabel, Expression.Constant(null, typeof(ParsedData))));
