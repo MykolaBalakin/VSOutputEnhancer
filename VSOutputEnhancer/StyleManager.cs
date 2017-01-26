@@ -53,8 +53,14 @@ namespace Balakin.VSOutputEnhancer
                 }
                 catch (JsonSerializationException)
                 {
+                    return GetDefaultStyles();
                 }
             }
+            return GetDefaultStyles();
+        }
+
+        private IDictionary<String, FormatDefinitionStyle> GetDefaultStyles()
+        {
             return new Dictionary<String, FormatDefinitionStyle>();
         }
     }

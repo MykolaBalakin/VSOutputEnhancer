@@ -12,7 +12,6 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
         public ParsedValue<String> Code { get; private set; }
         public ParsedValue<MessageType> Type { get; private set; }
         public ParsedValue<String> FilePath { get; private set; }
-        //public ParsedValue<String> RelatedFilePath { get; private set; }
         // ReSharper restore UnusedAutoPropertyAccessor.Local
     }
 }
