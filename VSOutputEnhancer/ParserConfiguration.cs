@@ -1,8 +1,11 @@
 ﻿using System;
 
-namespace Balakin.VSOutputEnhancer {
-    public class ParserConfiguration {
-        public ParserConfiguration(Type parser, Type data, Type dataProcessor) {
+namespace Balakin.VSOutputEnhancer
+{
+    public class ParserConfiguration
+    {
+        public ParserConfiguration(Type parser, Type data, Type dataProcessor)
+        {
             Parser = parser;
             Data = data;
             DataProcessor = dataProcessor;

@@ -1,7 +1,9 @@
 ﻿using System;
 
-namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
-    internal class DebugExceptionData : ParsedData {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugException
+{
+    internal class DebugExceptionData : ParsedData
+    {
         // This properties filled using reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         public ParsedValue<String> Exception { get; private set; }

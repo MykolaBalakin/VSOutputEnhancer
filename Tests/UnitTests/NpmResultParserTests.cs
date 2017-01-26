@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers.NpmResult;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class NpmResultParserTests {
+    public class NpmResultParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
             const String messageString2 = "====npm command completed with exit code asdf====\r\n";
 
@@ -31,7 +33,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void ExitCode() {
+        public void ExitCode()
+        {
             const String messageString = "====npm command completed with exit code 1823====\r\n";
 
             var span = Utils.CreateSpan(messageString);
@@ -43,13 +46,14 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             Assert.IsTrue(data.ExitCode.HasValue);
 
-            Assert.AreEqual(1823,data.ExitCode);
+            Assert.AreEqual(1823, data.ExitCode);
 
             Assert.AreEqual(new Span(41, 4), data.ExitCode.Span);
         }
 
         [TestMethod]
-        public void NegativeExitCode() {
+        public void NegativeExitCode()
+        {
             const String messageString = "====npm command completed with exit code -8====\r\n";
 
             var span = Utils.CreateSpan(messageString);

@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer
+{
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    internal class UseForClassificationAttribute : Attribute {
-        public UseForClassificationAttribute() {
+    internal class UseForClassificationAttribute : Attribute
+    {
+        public UseForClassificationAttribute()
+        {
         }
 
-        public UseForClassificationAttribute(String contentType) {
+        public UseForClassificationAttribute(String contentType)
+        {
             ContentType = contentType;
         }
 

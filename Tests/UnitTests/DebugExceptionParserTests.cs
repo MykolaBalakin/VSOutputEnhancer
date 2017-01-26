@@ -6,12 +6,15 @@ using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class DebugExceptionParserTests {
+    public class DebugExceptionParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
             const String messageString2 = "Exception thrown: 'blablabla\r\n";
             const String messageString3 = "A first chance exception of type 'blablabla\r\n";
@@ -37,7 +40,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Exception() {
+        public void Exception()
+        {
             const String messageString = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
 
             var span = Utils.CreateSpan(messageString);
@@ -58,7 +62,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void ExceptionVS2013() {
+        public void ExceptionVS2013()
+        {
             const String messageString = "A first chance exception of type 'System.Exception' occurred in ConsoleDemo.exe\r\n";
 
             var span = Utils.CreateSpan(messageString);

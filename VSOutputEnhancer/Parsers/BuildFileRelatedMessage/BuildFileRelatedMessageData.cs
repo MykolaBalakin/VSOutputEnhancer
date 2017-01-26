@@ -1,7 +1,9 @@
 using System;
 
-namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage {
-    internal class BuildFileRelatedMessageData : ParsedData {
+namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
+{
+    internal class BuildFileRelatedMessageData : ParsedData
+    {
         // This properties filled using reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         public ParsedValue<Int32> BuildTaskId { get; private set; }

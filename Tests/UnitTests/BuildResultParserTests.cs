@@ -4,12 +4,15 @@ using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildResultParserTests {
+    public class BuildResultParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String randomMessage = "Message\r\n";
             const String publishCompleteMessage = "========== Publish: 10 succeeded, 3 failed, 122 skipped ==========\r\n";
             const String almostBuildMessage = "========== Build: bla bla\r\n";
@@ -21,7 +24,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             TestNotParsed(almostBuildMessage2);
         }
 
-        private void TestNotParsed(String message) {
+        private void TestNotParsed(String message)
+        {
             var span = Utils.CreateSpan(message);
             var parser = new BuildResultParser();
             BuildResultData data;
@@ -31,7 +35,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Build() {
+        public void Build()
+        {
             const String publishCompleteMessage = "========== Build: 302 succeeded, 41 failed, 16 up-to-date, 5 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);
@@ -58,7 +63,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void BuildDnx() {
+        public void BuildDnx()
+        {
             const String publishCompleteMessage = "========== Build: 10 succeeded or up-to-date, 3 failed, 43 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);
@@ -83,7 +89,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Rebuild() {
+        public void Rebuild()
+        {
             const String publishCompleteMessage = "========== Rebuild All: 2 succeeded, 135 failed, 86 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);

@@ -7,12 +7,15 @@ using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class DebugTraceMessageParserTests {
+    public class DebugTraceMessageParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
 
             var span = Utils.CreateSpan(messageString);
@@ -24,7 +27,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Error() {
+        public void Error()
+        {
             const String messageString = "VSOutputEnhancerDemo.vshost.exe Information: 10 : Trace information message\r\n";
 
             var span = Utils.CreateSpan(messageString);

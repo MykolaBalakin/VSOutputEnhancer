@@ -4,16 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BowerMessage;
-using Balakin.VSOutputEnhancer.Parsers.NpmMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BowerMessageParserTests {
+    public class BowerMessageParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
             const String messageString2 = "bower \r\n";
 
@@ -32,7 +34,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void NotFound() {
+        public void NotFound()
+        {
             const String notFoundError = "bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found\r\n";
 
             var span = Utils.CreateSpan(notFoundError);

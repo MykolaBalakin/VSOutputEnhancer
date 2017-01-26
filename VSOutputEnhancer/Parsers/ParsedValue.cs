@@ -1,13 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
-    public class ParsedValue<T> {
-        public ParsedValue() {
+namespace Balakin.VSOutputEnhancer.Parsers
+{
+    public class ParsedValue<T>
+    {
+        public ParsedValue()
+        {
             HasValue = false;
         }
 
-        public ParsedValue(T value, Span span) {
+        public ParsedValue(T value, Span span)
+        {
             Value = value;
             Span = span;
             HasValue = true;
@@ -17,8 +21,10 @@ namespace Balakin.VSOutputEnhancer.Parsers {
         public Span Span { get; }
         public Boolean HasValue { get; }
 
-        public static implicit operator T(ParsedValue<T> value) {
-            if (!value.HasValue) {
+        public static implicit operator T(ParsedValue<T> value)
+        {
+            if (!value.HasValue)
+            {
                 throw new InvalidOperationException("Value unassigned");
             }
             return value.Value;

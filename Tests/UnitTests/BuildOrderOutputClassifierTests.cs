@@ -5,11 +5,14 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildOrderOutputClassifierTests : BuildOutputClassifierTests {
-        protected override IClassifier CreateClassifier() {
+    public class BuildOrderOutputClassifierTests : BuildOutputClassifierTests
+    {
+        protected override IClassifier CreateClassifier()
+        {
             return Utils.CreateBuildOrderOutputClassifier();
         }
     }

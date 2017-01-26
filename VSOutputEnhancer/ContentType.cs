@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Balakin.VSOutputEnhancer {
-    public static class ContentType {
+namespace Balakin.VSOutputEnhancer
+{
+    public static class ContentType
+    {
         public const String Output = "Output";
         public const String Text = "Text";
 

@@ -6,12 +6,15 @@ using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class PublishResultParserTests {
+    public class PublishResultParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String randomMessage = "Message\r\n";
             const String buildCompleteMessage = "========== Build: 5 succeeded, 1 failed, 3 up-to-date, 2 skipped ==========\r\n";
             const String almostPublishMessage = "========== Publish: bla bla\r\n";
@@ -23,7 +26,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             TestNotParsed(almostPublishMessage2);
         }
 
-        private void TestNotParsed(String message) {
+        private void TestNotParsed(String message)
+        {
             var span = Utils.CreateSpan(message);
             var parser = new PublishResultParser();
             PublishResultData data;
@@ -33,7 +37,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Publish() {
+        public void Publish()
+        {
             const String publishCompleteMessage = "========== Publish: 10 succeeded, 3 failed, 122 skipped ==========\r\n";
 
             var span = Utils.CreateSpan(publishCompleteMessage);

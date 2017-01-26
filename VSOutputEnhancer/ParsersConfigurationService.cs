@@ -7,11 +7,15 @@ using System.Threading;
 using Balakin.VSOutputEnhancer.Parsers;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer {
+namespace Balakin.VSOutputEnhancer
+{
     [Export(typeof(IParsersConfigurationService))]
-    internal class ParsersConfigurationService : IParsersConfigurationService {
-        private class InternalParserConfigurationEntry {
-            public InternalParserConfigurationEntry(String contentType, ParserConfiguration configuration) {
+    internal class ParsersConfigurationService : IParsersConfigurationService
+    {
+        private class InternalParserConfigurationEntry
+        {
+            public InternalParserConfigurationEntry(String contentType, ParserConfiguration configuration)
+            {
                 ContentType = contentType;
                 Configuration = configuration;
             }
@@ -20,12 +24,15 @@ namespace Balakin.VSOutputEnhancer {
             public ParserConfiguration Configuration { get; }
         }
 
-        static ParsersConfigurationService() {
+        static ParsersConfigurationService()
+        {
             configuration = new Lazy<IList<InternalParserConfigurationEntry>>(LoadConfiguration, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
         private static readonly Lazy<IList<InternalParserConfigurationEntry>> configuration;
-        private static IList<InternalParserConfigurationEntry> LoadConfiguration() {
+
+        private static IList<InternalParserConfigurationEntry> LoadConfiguration()
+        {
             var result = new List<InternalParserConfigurationEntry>();
 
             var parserInterface = typeof(IParser<>);
@@ -34,7 +41,8 @@ namespace Balakin.VSOutputEnhancer {
             var assembly = Assembly.GetExecutingAssembly();
             var allParsers = assembly.GetTypes()
                 .Where(t => !t.IsAbstract)
-                .Select(t => new {
+                .Select(t => new
+                {
                     Parser = t,
                     DataTypes = t.GetInterfaces()
                         .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface)
@@ -44,7 +52,8 @@ namespace Balakin.VSOutputEnhancer {
                 .ToDictionary(e => e.Parser, e => e.DataTypes);
             var allDataProcessors = assembly.GetTypes()
                 .Where(t => !t.IsAbstract)
-                .Select(t => new {
+                .Select(t => new
+                {
                     DataProcessor = t,
                     DataTypes = t.GetInterfaces()
                         .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface)
@@ -52,43 +61,55 @@ namespace Balakin.VSOutputEnhancer {
                 })
                 .Where(t => t.DataTypes.Any())
                 .ToDictionary(e => e.DataProcessor, e => e.DataTypes);
-            foreach (var parserDefinition in allParsers) {
+            foreach (var parserDefinition in allParsers)
+            {
                 var parserType = parserDefinition.Key;
                 var attributes = parserType.GetCustomAttributes<UseForClassificationAttribute>();
-                foreach (var attribute in attributes) {
+                foreach (var attribute in attributes)
+                {
                     var dataProcessorType = attribute.DataProcessor;
                     var dataType = attribute.Data;
 
-                    if (dataProcessorType == null && dataType == null) {
+                    if (dataProcessorType == null && dataType == null)
+                    {
                         var dataProcessorDefinitions = allDataProcessors
                             .Where(dp => dp.Value.Any(dpt => parserDefinition.Value.Contains(dpt)))
                             .ToList();
-                        if (dataProcessorDefinitions.Count == 0) {
+                        if (dataProcessorDefinitions.Count == 0)
+                        {
                             throw new InvalidOperationException($"Can not find eligible IParsedDataProcessor for parser {parserType.Name}");
                         }
-                        if (dataProcessorDefinitions.Count > 1) {
+                        if (dataProcessorDefinitions.Count > 1)
+                        {
                             throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for parser {parserType.Name}");
                         }
                         dataProcessorType = dataProcessorDefinitions.Single().Key;
-                    } else if (dataProcessorType == null) {
+                    }
+                    else if (dataProcessorType == null)
+                    {
                         var dataProcessorDefinitions = allDataProcessors
                             .Where(dp => dp.Value.Contains(dataType))
                             .ToList();
-                        if (dataProcessorDefinitions.Count == 0) {
+                        if (dataProcessorDefinitions.Count == 0)
+                        {
                             throw new InvalidOperationException($"Can not find eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
                         }
-                        if (dataProcessorDefinitions.Count > 1) {
+                        if (dataProcessorDefinitions.Count > 1)
+                        {
                             throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
                         }
                         dataProcessorType = dataProcessorDefinitions.Single().Key;
                     }
 
-                    if (dataType == null) {
+                    if (dataType == null)
+                    {
                         var eligebleTypes = allDataProcessors[dataProcessorType].Intersect(allParsers[parserType]).ToList();
-                        if (eligebleTypes.Count == 0) {
+                        if (eligebleTypes.Count == 0)
+                        {
                             throw new InvalidOperationException($"Can not find eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
                         }
-                        if (eligebleTypes.Count > 1) {
+                        if (eligebleTypes.Count > 1)
+                        {
                             throw new InvalidOperationException($"Find more the one eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
                         }
                         dataType = eligebleTypes.Single();
@@ -100,11 +121,15 @@ namespace Balakin.VSOutputEnhancer {
             }
             return result.AsReadOnly();
         }
+
         private static IList<InternalParserConfigurationEntry> Configuration => configuration.Value;
 
-        public IEnumerable<ParserConfiguration> GetParsers(IContentType contentType) {
-            foreach (var entry in Configuration) {
-                if (entry.ContentType.Equals(contentType.TypeName, StringComparison.OrdinalIgnoreCase)) {
+        public IEnumerable<ParserConfiguration> GetParsers(IContentType contentType)
+        {
+            foreach (var entry in Configuration)
+            {
+                if (entry.ContentType.Equals(contentType.TypeName, StringComparison.OrdinalIgnoreCase))
+                {
                     yield return entry.Configuration;
                 }
             }

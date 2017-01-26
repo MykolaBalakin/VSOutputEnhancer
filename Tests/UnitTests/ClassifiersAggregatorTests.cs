@@ -9,24 +9,29 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Classification.Fakes;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ClassifiersAggregatorTests {
+    public class ClassifiersAggregatorTests
+    {
         [TestMethod]
-        public void GetClassificationSpans() {
+        public void GetClassificationSpans()
+        {
             var fullSpan = Utils.CreateSpan("Some text");
             var span1 = new SnapshotSpan(fullSpan.Snapshot, new Span(0, 4));
             var span2 = new SnapshotSpan(fullSpan.Snapshot, new Span(5, 4));
 
             var classifier1 = new StubIClassifier();
-            classifier1.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan> {
+            classifier1.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan>
+            {
                 new ClassificationSpan(
                     new SnapshotSpan(s.Snapshot, new Span(0, 4)),
                     new ClassificationTypeStub("ClassificationType1"))
             };
             var classifier2 = new StubIClassifier();
-            classifier2.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan> {
+            classifier2.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan>
+            {
                 new ClassificationSpan(
                     new SnapshotSpan(s.Snapshot, new Span(5, 4)),
                     new ClassificationTypeStub("ClassificationType2"))
@@ -45,7 +50,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void ClassificationChanged() {
+        public void ClassificationChanged()
+        {
             var fullSpan = Utils.CreateSpan("Some text");
             var span1 = new SnapshotSpan(fullSpan.Snapshot, new Span(0, 4));
             var span2 = new SnapshotSpan(fullSpan.Snapshot, new Span(5, 4));

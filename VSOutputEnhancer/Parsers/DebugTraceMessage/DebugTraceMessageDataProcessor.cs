@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
-    internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageData> {
-        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageData data) {
-            if (data == null) {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
+{
+    internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageData>
+    {
+        public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageData data)
+        {
+            if (data == null)
+            {
                 yield break;
             }
 
             var classificationType = GetClassificationType(data.Type);
-            if (String.IsNullOrEmpty(classificationType)) {
+            if (String.IsNullOrEmpty(classificationType))
+            {
                 yield break;
             }
 
@@ -20,8 +25,10 @@ namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
             yield return new ProcessedParsedData(snapshotSpan, classificationType);
         }
 
-        private String GetClassificationType(TraceEventType eventType) {
-            switch (eventType) {
+        private String GetClassificationType(TraceEventType eventType)
+        {
+            switch (eventType)
+            {
                 case TraceEventType.Critical:
                 case TraceEventType.Error:
                     return ClassificationType.DebugTraceError;

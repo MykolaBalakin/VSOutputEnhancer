@@ -8,12 +8,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class ExportsTests {
+    public class ExportsTests
+    {
         [TestMethod]
-        public void AllDefinitionsExported() {
+        public void AllDefinitionsExported()
+        {
             var exportAttribute = typeof(ExportAttribute);
             var classificationTypeDefinition = typeof(ClassificationTypeDefinition);
             var assembly = typeof(ClassificationType).Assembly;
@@ -28,7 +31,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
             var allDefinitions = ClassificationType.All;
             var notExportedDefinitions = allDefinitions.Except(exportedDefinitions).ToList();
-            if (notExportedDefinitions.Any()) {
+            if (notExportedDefinitions.Any())
+            {
                 Assert.Fail("Not exported classification definitions: " + String.Join(", ", notExportedDefinitions));
             }
         }

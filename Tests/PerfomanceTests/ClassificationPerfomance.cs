@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
+namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ClassificationPerfomance {
+    public class ClassificationPerfomance
+    {
         [TestMethod]
-        public void EntityFramework() {
+        public void EntityFramework()
+        {
             // ~ 570 000 lines of log
             // Small count of classified text
 
@@ -20,7 +22,8 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
             var classifier = Tests.Utils.CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
-            foreach (var span in spans) {
+            foreach (var span in spans)
+            {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();
@@ -29,7 +32,8 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
         }
 
         [TestMethod]
-        public void LotOfClassifiedMessages() {
+        public void LotOfClassifiedMessages()
+        {
             // 100 000 warning/error messages
 
             var content = Utils.ReadLogFile("Resources\\RandomBuildOutput.log");
@@ -37,7 +41,8 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests {
             var classifier = Tests.Utils.CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
-            foreach (var span in spans) {
+            foreach (var span in spans)
+            {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();

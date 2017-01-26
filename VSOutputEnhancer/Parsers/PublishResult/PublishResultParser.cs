@@ -4,25 +4,31 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers.PublishResult {
+namespace Balakin.VSOutputEnhancer.Parsers.PublishResult
+{
     [UseForClassification(ContentType.BuildOutput)]
     [UseForClassification(ContentType.BuildOrderOutput)]
-    internal class PublishResultParser : IParser<PublishResultData> {
-        public Boolean TryParse(SnapshotSpan span, out PublishResultData result) {
+    internal class PublishResultParser : IParser<PublishResultData>
+    {
+        public Boolean TryParse(SnapshotSpan span, out PublishResultData result)
+        {
             result = null;
 
             var text = span.GetText();
 
-            if (!text.StartsWith("========== Publish: ", StringComparison.Ordinal)) {
+            if (!text.StartsWith("========== Publish: ", StringComparison.Ordinal))
+            {
                 return false;
             }
-            if (!text.EndsWith(" ==========\r\n", StringComparison.Ordinal)) {
+            if (!text.EndsWith(" ==========\r\n", StringComparison.Ordinal))
+            {
                 return false;
             }
 
             var regex = "^========== (?:Publish): (?<Succeeded>\\d+) succeeded, (?<Failed>\\d+) failed, (?<Skipped>\\d+) skipped ==========\r\n$";
             var match = Regex.Match(text, regex, RegexOptions.Compiled);
-            if (!match.Success) {
+            if (!match.Success)
+            {
                 return false;
             }
 

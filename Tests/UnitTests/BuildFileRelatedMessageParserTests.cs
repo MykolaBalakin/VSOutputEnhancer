@@ -7,12 +7,15 @@ using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildFileRelatedMessageParserTests {
+    public class BuildFileRelatedMessageParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
             const String messageString2 = "Some message: error \r\n";
 
@@ -31,7 +34,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Warning1() {
+        public void Warning1()
+        {
             const String warningMessage = "1>C:\\Sources\\GitHub\\VSOutputEnhancer\\VSOutputEnhancer\\ClassificationType.cs(29,53,29,83): warning CS0169: The field 'ClassificationType.BuildResultSucceededDefinition' is never used\r\n";
 
             var span = Utils.CreateSpan(warningMessage);
@@ -64,7 +68,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Warning2() {
+        public void Warning2()
+        {
             const String warningMessage = "9>C:\\Sources\\Some project path\\AppPoolDlg.wxs(9,0): warning CNDL1000: The Binary/@Id attribute's value, 'GetUserCredentialsCA', is 20 characters long.  It will be too long if modularized.  The identifier shouldn't be longer than 18 characters long to allow for modularization (appending a guid for merge modules).\r\n";
 
             var span = Utils.CreateSpan(warningMessage);
@@ -97,7 +102,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void SingleBuildTask() {
+        public void SingleBuildTask()
+        {
             const String warningMessage = "C:\\Sources\\Local\\AppConfigWix\\AppConfigWix\\Product.wxs(83,0): warning CNDL1138: The RegistryKey/@Action attribute has been deprecated.  In most cases, you can simply omit @Action.  If you need to force Windows Installer to create an empty key or recursively delete the key, use the ForceCreateOnInstall or ForceDeleteOnUninstall attributes instead.\r\n";
 
             var span = Utils.CreateSpan(warningMessage);
@@ -128,7 +134,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void PostSharpNotReferenced() {
+        public void PostSharpNotReferenced()
+        {
             const String message = "1>C:\\Sources\\Some project\\SomeProject.csproj(163,5): error : This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore.\r\n";
 
             var span = Utils.CreateSpan(message);
@@ -159,7 +166,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void BowerError() {
+        public void BowerError()
+        {
             const String message = "C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\Web\\Microsoft.DNX.Publishing.targets(152,5): Error : bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found\r\n";
 
             var span = Utils.CreateSpan(message);

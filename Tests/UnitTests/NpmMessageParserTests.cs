@@ -7,12 +7,15 @@ using Balakin.VSOutputEnhancer.Parsers.NpmMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class NpmMessageParserTests {
+    public class NpmMessageParserTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             const String messageString = "Some message\r\n";
             const String messageString2 = "npm \r\n";
 
@@ -31,7 +34,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Warning() {
+        public void Warning()
+        {
             const String warningMessage = "npm WARN package.json ASP.NET@0.0.0 No README data\r\n";
 
             var span = Utils.CreateSpan(warningMessage);
@@ -52,7 +56,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Error() {
+        public void Error()
+        {
             const String errorMessage = "npm ERR! code E404\r\n";
 
             var span = Utils.CreateSpan(errorMessage);

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage {
-    internal class DebugTraceMessageData : ParsedData {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
+{
+    internal class DebugTraceMessageData : ParsedData
+    {
         // This properties filled using reflection
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         public ParsedValue<String> Source { get; private set; }

@@ -7,22 +7,27 @@ using Balakin.VSOutputEnhancer.Parsers.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class ParserBasedClassifierTests {
+    public class ParserBasedClassifierTests
+    {
         [TestMethod]
-        public void NotParsed() {
+        public void NotParsed()
+        {
             var parser = new StubIParser<ParsedData>();
-            parser.TryParseSnapshotSpanT0Out = delegate(SnapshotSpan s, out ParsedData r) {
+            parser.TryParseSnapshotSpanT0Out = delegate(SnapshotSpan s, out ParsedData r)
+            {
                 r = new ParsedData();
                 return false;
             };
             var processor = new StubIParsedDataProcessor<ParsedData>();
-            processor.ProcessDataSnapshotSpanT0 = (s, d) => new List<ProcessedParsedData> {
+            processor.ProcessDataSnapshotSpanT0 = (s, d) => new List<ProcessedParsedData>
+            {
                 new ProcessedParsedData(s, "TestClassification")
             };
-            
+
             var classifier = Utils.CreateParserBasedClassifier(parser, processor);
 
             var span = Utils.CreateSpan("");
@@ -31,14 +36,17 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Parsed() {
+        public void Parsed()
+        {
             var parser = new StubIParser<ParsedData>();
-            parser.TryParseSnapshotSpanT0Out = delegate (SnapshotSpan s, out ParsedData r) {
+            parser.TryParseSnapshotSpanT0Out = delegate(SnapshotSpan s, out ParsedData r)
+            {
                 r = new ParsedData();
                 return true;
             };
             var processor = new StubIParsedDataProcessor<ParsedData>();
-            processor.ProcessDataSnapshotSpanT0 = (s, d) => new List<ProcessedParsedData> {
+            processor.ProcessDataSnapshotSpanT0 = (s, d) => new List<ProcessedParsedData>
+            {
                 new ProcessedParsedData(s, "TestClassification"),
                 new ProcessedParsedData(s, "TestClassification2"),
             };

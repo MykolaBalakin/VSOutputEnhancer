@@ -13,21 +13,26 @@ using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ParsersConfigurationServiceTests {
+    public class ParsersConfigurationServiceTests
+    {
         [TestMethod]
-        public void BuildOutput() {
-           TestBuildOutput(ContentType.BuildOutput);
+        public void BuildOutput()
+        {
+            TestBuildOutput(ContentType.BuildOutput);
         }
 
         [TestMethod]
-        public void BuildOrderOutput() {
+        public void BuildOrderOutput()
+        {
             TestBuildOutput(ContentType.BuildOrderOutput);
         }
 
-        private void TestBuildOutput(String contentType) {
+        private void TestBuildOutput(String contentType)
+        {
             var service = Utils.CreateParsersConfigurationService();
             var parsers = service.GetParsers(new ContentTypeStub(contentType)).ToList();
             Assert.AreEqual(4, parsers.Count);
@@ -38,7 +43,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void DebugOutput() {
+        public void DebugOutput()
+        {
             var service = Utils.CreateParsersConfigurationService();
             var contentType = new ContentTypeStub(ContentType.DebugOutput);
             var parsers = service.GetParsers(contentType).ToList();
@@ -48,7 +54,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void GeneralOutput() {
+        public void GeneralOutput()
+        {
             var service = Utils.CreateParsersConfigurationService();
             var contentType = new ContentTypeStub(ContentType.Output);
             var parsers = service.GetParsers(contentType).ToList();

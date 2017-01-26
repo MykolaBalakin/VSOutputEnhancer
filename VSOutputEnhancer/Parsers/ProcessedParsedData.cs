@@ -1,9 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
-    public class ProcessedParsedData {
-        public ProcessedParsedData(Span span, String classificationName) {
+namespace Balakin.VSOutputEnhancer.Parsers
+{
+    public class ProcessedParsedData
+    {
+        public ProcessedParsedData(Span span, String classificationName)
+        {
             Span = span;
             ClassificationName = classificationName;
         }

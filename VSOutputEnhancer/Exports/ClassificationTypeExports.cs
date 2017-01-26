@@ -5,8 +5,10 @@ using System.Linq;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.Exports {
-    internal static class ClassificationTypeExports {
+namespace Balakin.VSOutputEnhancer.Exports
+{
+    internal static class ClassificationTypeExports
+    {
         [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.BuildResultSucceeded)]
         public static ClassificationTypeDefinition BuildResultSucceeded;

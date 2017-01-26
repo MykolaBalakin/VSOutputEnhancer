@@ -1,5 +1,7 @@
-﻿namespace Balakin.VSOutputEnhancer {
-    public interface IEnvironmentService {
+﻿namespace Balakin.VSOutputEnhancer
+{
+    public interface IEnvironmentService
+    {
         Theme GetTheme();
     }
 }

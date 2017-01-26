@@ -4,26 +4,33 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers.DebugException {
+namespace Balakin.VSOutputEnhancer.Parsers.DebugException
+{
     [UseForClassification(ContentType.DebugOutput)]
-    internal class DebugExceptionParser : IParser<DebugExceptionData> {
-        public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result) {
+    internal class DebugExceptionParser : IParser<DebugExceptionData>
+    {
+        public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result)
+        {
             result = null;
             var text = span.GetText();
-            if (text.StartsWith("Exception thrown: '", StringComparison.Ordinal)) {
+            if (text.StartsWith("Exception thrown: '", StringComparison.Ordinal))
+            {
                 var regex = "^Exception thrown: '(?<Exception>.*)' in (?<Assembly>.*)\r\n$";
                 var match = Regex.Match(text, regex, RegexOptions.Compiled);
-                if (!match.Success) {
+                if (!match.Success)
+                {
                     return false;
                 }
 
                 result = ParsedData.Create<DebugExceptionData>(match, span.Span);
                 return true;
             }
-            if (text.StartsWith("A first chance exception of type '", StringComparison.Ordinal)) {
+            if (text.StartsWith("A first chance exception of type '", StringComparison.Ordinal))
+            {
                 var regex = "^A first chance exception of type '(?<Exception>.*)' occurred in (?<Assembly>.*)\r\n$";
                 var match = Regex.Match(text, regex, RegexOptions.Compiled);
-                if (!match.Success) {
+                if (!match.Success)
+                {
                     return false;
                 }
 

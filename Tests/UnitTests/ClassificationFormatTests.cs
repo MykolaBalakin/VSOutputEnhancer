@@ -9,57 +9,69 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ClassificationFormatTests {
+    public class ClassificationFormatTests
+    {
         [TestMethod]
-        public void AllFormatsHasDisplayName() {
+        public void AllFormatsHasDisplayName()
+        {
             var formatTypes = GetAllExportedFormats().ToList();
 
             var styleManager = Utils.CreateStyleManager();
 
-            foreach (var formatType in formatTypes) {
-                var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
+            foreach (var formatType in formatTypes)
+            {
+                var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
                 Assert.IsNotNull(format.DisplayName, format.GetType().Name);
                 Assert.IsFalse(String.IsNullOrEmpty(format.DisplayName), format.GetType().Name);
             }
         }
 
         [TestMethod]
-        public void DisplayNames() {
+        public void DisplayNames()
+        {
             var formatTypes = GetAllExportedFormats().ToList();
 
             var styleManager = Utils.CreateStyleManager();
 
-            foreach (var formatType in formatTypes) {
-                var format = (ClassificationFormatDefinition)Activator.CreateInstance(formatType, styleManager);
+            foreach (var formatType in formatTypes)
+            {
+                var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
                 Assert.AreEqual(GetCorrectName(formatType), format.DisplayName);
             }
         }
 
         [TestMethod]
-        public void NameClassNameAndClassificationNameEquals() {
+        public void NameClassNameAndClassificationNameEquals()
+        {
             var formatTypes = GetAllExportedFormats().ToList();
-            var incorrectClassNames = formatTypes.Where(t => {
+            var incorrectClassNames = formatTypes.Where(t =>
+            {
                 var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
                 return !t.Name.Equals(classificationType + "FormatDefinition", StringComparison.Ordinal);
             }).Select(t => t.Name).ToList();
-            if (incorrectClassNames.Any()) {
+            if (incorrectClassNames.Any())
+            {
                 Assert.Fail("Classification formats with invalid class name: " + String.Join(", ", incorrectClassNames));
             }
-            var incorrectNames = formatTypes.Where(t => {
+            var incorrectNames = formatTypes.Where(t =>
+            {
                 var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
                 var name = t.GetCustomAttribute<NameAttribute>().Name;
                 return !name.Equals(classificationType, StringComparison.Ordinal);
             }).Select(t => t.Name).ToList();
-            if (incorrectNames.Any()) {
+            if (incorrectNames.Any())
+            {
                 Assert.Fail("Classification formats with invalid NameAttribute value: " + String.Join(", ", incorrectNames));
             }
         }
 
 
-        private IEnumerable<Type> GetAllExportedFormats() {
+        private IEnumerable<Type> GetAllExportedFormats()
+        {
             var formatBaseType = typeof(ClassificationFormatDefinition);
 
             var assembly = typeof(StyleManager).Assembly;
@@ -68,48 +80,63 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             return formatTypes;
         }
 
-        private String GetCorrectName(Type formatType) {
-            if (formatType == typeof(BuildMessageErrorFormatDefinition)) {
+        private String GetCorrectName(Type formatType)
+        {
+            if (formatType == typeof(BuildMessageErrorFormatDefinition))
+            {
                 return "Output enhancer: Build error message";
             }
-            if (formatType == typeof(BuildMessageWarningFormatDefinition)) {
+            if (formatType == typeof(BuildMessageWarningFormatDefinition))
+            {
                 return "Output enhancer: Build warning message";
             }
-            if (formatType == typeof(BuildResultFailedFormatDefinition)) {
+            if (formatType == typeof(BuildResultFailedFormatDefinition))
+            {
                 return "Output enhancer: Build failed";
             }
-            if (formatType == typeof(BuildResultSucceededFormatDefinition)) {
+            if (formatType == typeof(BuildResultSucceededFormatDefinition))
+            {
                 return "Output enhancer: Build succeeded";
             }
-            if (formatType == typeof(PublishResultSucceededFormatDefinition)) {
+            if (formatType == typeof(PublishResultSucceededFormatDefinition))
+            {
                 return "Output enhancer: Publish succeeded";
             }
-            if (formatType == typeof(PublishResultFailedFormatDefinition)) {
+            if (formatType == typeof(PublishResultFailedFormatDefinition))
+            {
                 return "Output enhancer: Publish failed";
             }
-            if (formatType == typeof(DebugExceptionFormatDefinition)) {
+            if (formatType == typeof(DebugExceptionFormatDefinition))
+            {
                 return "Output enhancer: Debug exception message";
             }
-            if (formatType == typeof(DebugTraceErrorFormatDefinition)) {
+            if (formatType == typeof(DebugTraceErrorFormatDefinition))
+            {
                 return "Output enhancer: Trace error message";
             }
-            if (formatType == typeof(DebugTraceWarningFormatDefinition)) {
+            if (formatType == typeof(DebugTraceWarningFormatDefinition))
+            {
                 return "Output enhancer: Trace warning message";
             }
 
-            if (formatType == typeof(NpmResultSucceededFormatDefinition)) {
+            if (formatType == typeof(NpmResultSucceededFormatDefinition))
+            {
                 return "Output enhancer: npm execution succeeded";
             }
-            if (formatType == typeof(NpmResultFailedFormatDefinition)) {
+            if (formatType == typeof(NpmResultFailedFormatDefinition))
+            {
                 return "Output enhancer: npm execution failed";
             }
-            if (formatType == typeof(NpmMessageErrorFormatDefinition)) {
+            if (formatType == typeof(NpmMessageErrorFormatDefinition))
+            {
                 return "Output enhancer: npm error message";
             }
-            if (formatType == typeof(NpmMessageWarningFormatDefinition)) {
+            if (formatType == typeof(NpmMessageWarningFormatDefinition))
+            {
                 return "Output enhancer: npm warning message";
             }
-            if (formatType == typeof(BowerMessageErrorFormatDefinition)) {
+            if (formatType == typeof(BowerMessageErrorFormatDefinition))
+            {
                 return "Output enhancer: Bower error message";
             }
 

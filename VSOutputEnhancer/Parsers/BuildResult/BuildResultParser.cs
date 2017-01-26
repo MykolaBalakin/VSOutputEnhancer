@@ -4,24 +4,30 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers.BuildResult {
+namespace Balakin.VSOutputEnhancer.Parsers.BuildResult
+{
     [UseForClassification(ContentType.BuildOutput)]
     [UseForClassification(ContentType.BuildOrderOutput)]
-    internal class BuildResultParser : IParser<BuildResultData> {
-        public Boolean TryParse(SnapshotSpan span, out BuildResultData result) {
+    internal class BuildResultParser : IParser<BuildResultData>
+    {
+        public Boolean TryParse(SnapshotSpan span, out BuildResultData result)
+        {
             var text = span.GetText();
 
             result = null;
-            if (!text.StartsWith("========== ", StringComparison.Ordinal)) {
+            if (!text.StartsWith("========== ", StringComparison.Ordinal))
+            {
                 return false;
             }
-            if (!text.EndsWith(" ==========\r\n", StringComparison.Ordinal)) {
+            if (!text.EndsWith(" ==========\r\n", StringComparison.Ordinal))
+            {
                 return false;
             }
 
             var regex = "^========== (?:Build|Rebuild All): (?<Succeeded>\\d+) succeeded(?: or up-to-date)?, (?<Failed>\\d+) failed, (?:(?<UpToDate>\\d+) up-to-date, )?(?<Skipped>\\d+) skipped ==========\r\n$";
             var match = Regex.Match(text, regex, RegexOptions.Compiled);
-            if (!match.Success) {
+            if (!match.Success)
+            {
                 return false;
             }
 

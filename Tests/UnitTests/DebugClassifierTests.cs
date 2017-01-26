@@ -6,12 +6,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class DebugClassifierTests : ClassifierTestsBase {
+    public class DebugClassifierTests : ClassifierTestsBase
+    {
         [TestMethod]
-        public void TraceError() {
+        public void TraceError()
+        {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
@@ -25,7 +28,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void TraceError2() {
+        public void TraceError2()
+        {
             const String fullText = "Some other text\r\nVSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
             const String highlightedMessage = "Error: 0 : Trace error message";
@@ -43,7 +47,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void TraceInformation() {
+        public void TraceInformation()
+        {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Information: 0 : Trace information message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
@@ -57,7 +62,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void TraceWarning() {
+        public void TraceWarning()
+        {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Warning: 0 : Trace warning message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
@@ -71,7 +77,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void TraceException() {
+        public void TraceException()
+        {
             const String traceErrorMessage = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
@@ -84,7 +91,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.AreEqual(ClassificationType.DebugException, classificationSpan.ClassificationType.Classification);
         }
 
-        protected override IClassifier CreateClassifier() {
+        protected override IClassifier CreateClassifier()
+        {
             return Utils.CreateDebugClassifier();
         }
     }

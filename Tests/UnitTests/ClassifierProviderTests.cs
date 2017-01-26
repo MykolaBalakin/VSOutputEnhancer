@@ -5,12 +5,15 @@ using System.Linq;
 using Balakin.VSOutputEnhancer.Exports;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class ClassifierProviderTests {
+    public class ClassifierProviderTests
+    {
         [TestMethod]
-        public void BuildOutput() {
+        public void BuildOutput()
+        {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer(ContentType.BuildOutput);
             var classifier = provider.GetClassifier(textBuffer);
@@ -18,7 +21,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void Debug() {
+        public void Debug()
+        {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer(ContentType.DebugOutput);
             var classifier = provider.GetClassifier(textBuffer);
@@ -26,14 +30,16 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void UnknownContentType() {
+        public void UnknownContentType()
+        {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer("UnknownContentType");
             var classifier = provider.GetClassifier(textBuffer);
             Assert.IsNull(classifier);
         }
 
-        ClassifierProvider CreateClassifierProvider() {
+        ClassifierProvider CreateClassifierProvider()
+        {
             var factory = Utils.CreateClassifierFactory();
             var provider = new ClassifierProvider(factory);
             return provider;

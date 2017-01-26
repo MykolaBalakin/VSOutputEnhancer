@@ -3,16 +3,18 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Parsers {
-    public class ParsedData {
+namespace Balakin.VSOutputEnhancer.Parsers
+{
+    public class ParsedData
+    {
         public static T Create<T>(Match match, Span originalSpan)
-            where T : ParsedData, new() {
+            where T : ParsedData, new()
+        {
             var creator = GetParsedDataCreator(typeof(T));
-            var result = (T)creator(match, originalSpan);
+            var result = (T) creator(match, originalSpan);
 
             result.Fill(match, originalSpan);
 
@@ -20,11 +22,14 @@ namespace Balakin.VSOutputEnhancer.Parsers {
         }
 
         private static readonly ConcurrentDictionary<Type, Func<Match, Span, ParsedData>> ParsedDataCreators = new ConcurrentDictionary<Type, Func<Match, Span, ParsedData>>();
-        private static Func<Match, Span, ParsedData> GetParsedDataCreator(Type parsedDataType) {
+
+        private static Func<Match, Span, ParsedData> GetParsedDataCreator(Type parsedDataType)
+        {
             return ParsedDataCreators.GetOrAdd(parsedDataType, CreateParsedDataCreator);
         }
 
-        private static Func<Match, Span, ParsedData> CreateParsedDataCreator(Type parsedDataType) {
+        private static Func<Match, Span, ParsedData> CreateParsedDataCreator(Type parsedDataType)
+        {
             var groupSuccess = typeof(Group).GetProperty("Success");
             var enumParse = typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(String), typeof(Boolean) });
             var groupValue = typeof(Group).GetProperty("Value");
@@ -61,11 +66,12 @@ namespace Balakin.VSOutputEnhancer.Parsers {
 
             var valueType = typeof(ParsedValue<>);
             var propertiesToFill = parsedDataType.GetProperties()
-                    .Where(p => p.PropertyType.IsGenericType)
-                    .Where(p => p.PropertyType.GetGenericTypeDefinition() == valueType)
-                    .ToList();
+                .Where(p => p.PropertyType.IsGenericType)
+                .Where(p => p.PropertyType.GetGenericTypeDefinition() == valueType)
+                .ToList();
 
-            foreach (var property in propertiesToFill) {
+            foreach (var property in propertiesToFill)
+            {
                 // matchGroup = matchGroups[property.Name];
                 body.Add(Expression.Assign(matchGroupVar, Expression.Property(matchGroupsVar, groupCollectionItem, Expression.Constant(property.Name))));
 
@@ -76,14 +82,18 @@ namespace Balakin.VSOutputEnhancer.Parsers {
                 // }
                 var ifThenBody = new List<Expression>();
                 var propertyValueType = property.PropertyType.GetGenericArguments()[0];
-                if (!localVariables.ContainsKey(propertyValueType)) {
+                if (!localVariables.ContainsKey(propertyValueType))
+                {
                     localVariables.Add(propertyValueType, Expression.Variable(propertyValueType));
                 }
                 var valueVar = localVariables[propertyValueType];
                 Expression valueVarValue;
-                if (propertyValueType.IsEnum) {
+                if (propertyValueType.IsEnum)
+                {
                     valueVarValue = Expression.Call(enumParse, Expression.Constant(propertyValueType), Expression.Property(matchGroupVar, groupValue), Expression.Constant(true));
-                } else {
+                }
+                else
+                {
                     valueVarValue = Expression.Call(convertChangeType, Expression.Property(matchGroupVar, groupValue), Expression.Constant(propertyValueType));
                 }
                 ifThenBody.Add(Expression.Assign(valueVar, Expression.Convert(valueVarValue, propertyValueType)));
@@ -114,7 +124,8 @@ namespace Balakin.VSOutputEnhancer.Parsers {
         }
 
 
-        protected virtual void Fill(Match match, Span originalSpan) {
+        protected virtual void Fill(Match match, Span originalSpan)
+        {
         }
     }
 }

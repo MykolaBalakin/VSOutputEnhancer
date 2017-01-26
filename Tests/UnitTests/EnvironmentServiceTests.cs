@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text.Classification.Fakes;
 using Microsoft.VisualStudio.Text.Formatting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class EnvironmentServiceTests {
+    public class EnvironmentServiceTests
+    {
         [TestMethod]
-        public void GetTheme() {
+        public void GetTheme()
+        {
             var defaultTheme = Theme.Light;
-            TestTheme((Color?)null, null, defaultTheme);
+            TestTheme((Color?) null, null, defaultTheme);
 
             TestTheme(Colors.Black, null, Theme.Light);
             TestTheme(null, Colors.White, Theme.Light);
@@ -37,20 +38,25 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             TestTheme(new RadialGradientBrush(), new SolidColorBrush(Colors.Black), Theme.Dark);
         }
 
-        private void TestTheme(Brush foreground, Brush background, Theme? expectedTheme) {
+        private void TestTheme(Brush foreground, Brush background, Theme? expectedTheme)
+        {
             var textProperties = Utils.CreateTextFormattingRunProperties(foreground, background);
             TestTheme(textProperties, expectedTheme);
         }
 
-        private void TestTheme(Color? foreground, Color? background, Theme? expectedTheme) {
+        private void TestTheme(Color? foreground, Color? background, Theme? expectedTheme)
+        {
             var textProperties = Utils.CreateTextFormattingRunProperties(foreground, background);
             TestTheme(textProperties, expectedTheme);
         }
 
-        private void TestTheme(TextFormattingRunProperties textProperties, Theme? expectedTheme) {
-            var classificationFormatMapService=new StubIClassificationFormatMapService();
-            classificationFormatMapService.GetClassificationFormatMapString = category => {
-                return new StubIClassificationFormatMap {
+        private void TestTheme(TextFormattingRunProperties textProperties, Theme? expectedTheme)
+        {
+            var classificationFormatMapService = new StubIClassificationFormatMapService();
+            classificationFormatMapService.GetClassificationFormatMapString = category =>
+            {
+                return new StubIClassificationFormatMap
+                {
                     DefaultTextPropertiesGet = () => textProperties
                 };
             };

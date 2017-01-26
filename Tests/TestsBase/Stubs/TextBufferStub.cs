@@ -5,79 +5,98 @@ using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.Tests.Stubs {
+namespace Balakin.VSOutputEnhancer.Tests.Stubs
+{
     [ExcludeFromCodeCoverage]
-    public class TextBufferStub : ITextBuffer {
-        public TextBufferStub(String contentType) {
+    public class TextBufferStub : ITextBuffer
+    {
+        public TextBufferStub(String contentType)
+        {
             ContentType = new ContentTypeStub(contentType);
             Properties = new PropertyCollection();
         }
 
         public PropertyCollection Properties { get; }
 
-        public ITextEdit CreateEdit(EditOptions options, Int32? reiteratedVersionNumber, Object editTag) {
+        public ITextEdit CreateEdit(EditOptions options, Int32? reiteratedVersionNumber, Object editTag)
+        {
             throw new NotImplementedException();
         }
 
-        public ITextEdit CreateEdit() {
+        public ITextEdit CreateEdit()
+        {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyRegionEdit CreateReadOnlyRegionEdit() {
+        public IReadOnlyRegionEdit CreateReadOnlyRegionEdit()
+        {
             throw new NotImplementedException();
         }
 
-        public void TakeThreadOwnership() {
+        public void TakeThreadOwnership()
+        {
             throw new NotImplementedException();
         }
 
-        public Boolean CheckEditAccess() {
+        public Boolean CheckEditAccess()
+        {
             throw new NotImplementedException();
         }
 
-        public void ChangeContentType(IContentType newContentType, Object editTag) {
+        public void ChangeContentType(IContentType newContentType, Object editTag)
+        {
             throw new NotImplementedException();
         }
 
-        public ITextSnapshot Insert(Int32 position, String text) {
+        public ITextSnapshot Insert(Int32 position, String text)
+        {
             throw new NotImplementedException();
         }
 
-        public ITextSnapshot Delete(Span deleteSpan) {
+        public ITextSnapshot Delete(Span deleteSpan)
+        {
             throw new NotImplementedException();
         }
 
-        public ITextSnapshot Replace(Span replaceSpan, String replaceWith) {
+        public ITextSnapshot Replace(Span replaceSpan, String replaceWith)
+        {
             throw new NotImplementedException();
         }
 
-        public Boolean IsReadOnly(Int32 position) {
+        public Boolean IsReadOnly(Int32 position)
+        {
             throw new NotImplementedException();
         }
 
-        public Boolean IsReadOnly(Int32 position, Boolean isEdit) {
+        public Boolean IsReadOnly(Int32 position, Boolean isEdit)
+        {
             throw new NotImplementedException();
         }
 
-        public Boolean IsReadOnly(Span span) {
+        public Boolean IsReadOnly(Span span)
+        {
             throw new NotImplementedException();
         }
 
-        public Boolean IsReadOnly(Span span, Boolean isEdit) {
+        public Boolean IsReadOnly(Span span, Boolean isEdit)
+        {
             throw new NotImplementedException();
         }
 
-        public NormalizedSpanCollection GetReadOnlyExtents(Span span) {
+        public NormalizedSpanCollection GetReadOnlyExtents(Span span)
+        {
             throw new NotImplementedException();
         }
 
         public IContentType ContentType { get; }
 
-        public ITextSnapshot CurrentSnapshot {
+        public ITextSnapshot CurrentSnapshot
+        {
             get { throw new NotImplementedException(); }
         }
 
-        public Boolean EditInProgress {
+        public Boolean EditInProgress
+        {
             get { throw new NotImplementedException(); }
         }
 

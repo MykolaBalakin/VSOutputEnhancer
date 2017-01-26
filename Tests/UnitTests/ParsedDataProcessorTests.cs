@@ -8,12 +8,15 @@ using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ParsedDataProcessorTests {
+    public class ParsedDataProcessorTests
+    {
         [TestMethod]
-        public void EmptyEnumerableOnNullData() {
+        public void EmptyEnumerableOnNullData()
+        {
             var emptySpan = Utils.CreateSpan("");
 
             var dataProcessorInterface = typeof(IParsedDataProcessor<>);
@@ -22,16 +25,18 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
                 .Where(t => !t.IsAbstract)
                 .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface))
                 .ToList();
-            foreach (var dataProcessorType in dataProcessors) {
+            foreach (var dataProcessorType in dataProcessors)
+            {
                 var dataProcessor = Activator.CreateInstance(dataProcessorType);
                 var processDataMethod = dataProcessorType.GetMethod("ProcessData");
-                var result = (IEnumerable<ProcessedParsedData>)processDataMethod.Invoke(dataProcessor, new Object[] { emptySpan, null });
+                var result = (IEnumerable<ProcessedParsedData>) processDataMethod.Invoke(dataProcessor, new Object[] { emptySpan, null });
                 Assert.IsFalse(result.Any(), dataProcessorType.Name);
             }
         }
 
         [TestMethod]
-        public void NotClassifiedTraceEventType() {
+        public void NotClassifiedTraceEventType()
+        {
             var span = Utils.CreateSpan("-1");
             var match = Regex.Match(span.GetText(), "(?<Type>.*)");
 
@@ -43,7 +48,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
         }
 
         [TestMethod]
-        public void NotClassifiedBuildMessageType() {
+        public void NotClassifiedBuildMessageType()
+        {
             var span = Utils.CreateSpan("-1");
             var match = Regex.Match(span.GetText(), "(?<Type>.*)");
 

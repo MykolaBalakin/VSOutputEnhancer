@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class BowerOutputClassifierTests : ClassifierTestsBase {
-        protected override IClassifier CreateClassifier() {
+    public class BowerOutputClassifierTests : ClassifierTestsBase
+    {
+        protected override IClassifier CreateClassifier()
+        {
             return Utils.CreateBowerOutputClassifier();
         }
 
         [TestMethod]
-        public void PackageNotFound() {
+        public void PackageNotFound()
+        {
             const String notFoundError = "bower bootstrap1#3.3.5       ENOTFOUND Package bootstrap1 not found\r\n";
 
             var span = Utils.CreateSpan(notFoundError);

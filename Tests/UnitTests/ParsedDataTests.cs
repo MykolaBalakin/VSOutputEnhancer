@@ -9,12 +9,15 @@ using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ParsedDataTests {
+    public class ParsedDataTests
+    {
         [TestMethod]
-        public void Create() {
+        public void Create()
+        {
             var span = Utils.CreateSpan("Text");
 
             var match = Regex.Match(span.GetText(), "(?<Message>.*)");
@@ -42,20 +45,22 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void EmptyValueExceptionValueType() {
+        public void EmptyValueExceptionValueType()
+        {
             var value = new ParsedValue<Int32>();
             // Trying to cast to Int32
             // ReSharper disable once UnusedVariable
-            var i = (Int32)value;
+            var i = (Int32) value;
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void EmptyValueExceptionReferenceType() {
+        public void EmptyValueExceptionReferenceType()
+        {
             var value = new ParsedValue<String>();
             // Trying to cast to String
             // ReSharper disable once UnusedVariable
-            var s = (String)value;
+            var s = (String) value;
         }
     }
 }

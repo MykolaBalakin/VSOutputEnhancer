@@ -1,44 +1,50 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class StyleManagerTests {
+    public class StyleManagerTests
+    {
         [TestMethod]
-        public void SuccessfullyLoadedFromJson() {
+        public void SuccessfullyLoadedFromJson()
+        {
             TestLoadedFromJson(Theme.Light);
             TestLoadedFromJson(Theme.Dark);
         }
 
-        private void TestLoadedFromJson(Theme theme) {
+        private void TestLoadedFromJson(Theme theme)
+        {
             var styleManager = Utils.CreateStyleManager(theme);
 
             var stylesProperty = styleManager.GetType().GetProperty("Styles", BindingFlags.Instance | BindingFlags.NonPublic);
-            var styles = (IDictionary<String, FormatDefinitionStyle>)stylesProperty.GetGetMethod(true).Invoke(styleManager, new Object[0]);
+            var styles = (IDictionary<String, FormatDefinitionStyle>) stylesProperty.GetGetMethod(true).Invoke(styleManager, new Object[0]);
             Assert.IsTrue(styles.Count > 0, $"Styles for {theme} theme not loaded");
         }
 
         [TestMethod]
-        public void SimilarClassificationTypesHasSimilarColorsLight() {
+        public void SimilarClassificationTypesHasSimilarColorsLight()
+        {
             TestSimilarColors(Theme.Light);
         }
 
         [TestMethod]
-        public void SimilarClassificationTypesHasSimilarColorsDark() {
+        public void SimilarClassificationTypesHasSimilarColorsDark()
+        {
             TestSimilarColors(Theme.Dark);
         }
 
-        private void TestSimilarColors(Theme theme) {
+        private void TestSimilarColors(Theme theme)
+        {
             var styleManager = Utils.CreateStyleManager(theme);
 
-            var error = new[] {
+            var error = new[]
+            {
                 ClassificationType.BuildMessageError,
                 ClassificationType.BuildResultFailed,
                 ClassificationType.PublishResultFailed,
@@ -48,17 +54,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
                 ClassificationType.NpmMessageError,
                 ClassificationType.BowerMessageError
             };
-            var warning = new [] {
+            var warning = new[]
+            {
                 ClassificationType.BuildMessageWarning,
                 ClassificationType.DebugTraceWarning,
                 ClassificationType.NpmMessageWarning
             };
-            var success = new [] {
+            var success = new[]
+            {
                 ClassificationType.BuildResultSucceeded,
                 ClassificationType.PublishResultSucceeded,
                 ClassificationType.NpmResultSucceeded
             };
-            var skip = new[] {
+            var skip = new[]
+            {
                 ClassificationType.DebugTraceInformation
             };
 
@@ -75,13 +84,15 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             Assert.AreEqual(0, notChecked.Count, "This classification types did not checked: " + String.Join(", ", notChecked));
         }
 
-        private void TestSimilarColors(ICollection<FormatDefinitionStyle> styles, String groupName) {
+        private void TestSimilarColors(ICollection<FormatDefinitionStyle> styles, String groupName)
+        {
             var foregroundColors = styles.Select(s => s.ForegroundColor).Distinct().ToList();
             Assert.IsTrue(foregroundColors.Count <= 1, $"Some {groupName} styles has different colors");
         }
 
         [TestMethod]
-        public void UnknownClassificationStyle() {
+        public void UnknownClassificationStyle()
+        {
             var styleManager = Utils.CreateStyleManager(Theme.Light);
             var style = styleManager.GetStyleForClassificationType("UnknownClassification");
             Assert.IsNotNull(style);

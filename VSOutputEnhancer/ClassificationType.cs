@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Balakin.VSOutputEnhancer {
-    internal static class ClassificationType {
-        public static readonly String[] All = new[] {
+namespace Balakin.VSOutputEnhancer
+{
+    internal static class ClassificationType
+    {
+        public static readonly String[] All = new[]
+        {
             BuildMessageError,
             BuildMessageWarning,
             BuildResultFailed,

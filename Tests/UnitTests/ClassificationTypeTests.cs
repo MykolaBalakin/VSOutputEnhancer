@@ -5,12 +5,15 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class ClassificationTypeTests {
+    public class ClassificationTypeTests
+    {
         [TestMethod]
-        public void All() {
+        public void All()
+        {
             var classificationType = typeof(ClassificationType);
             var allTypes = classificationType.GetFields(BindingFlags.Static | BindingFlags.Public)
                 .Where(f => (f.Attributes & FieldAttributes.Literal) == FieldAttributes.Literal)
@@ -18,7 +21,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
                 .Select(f => f.GetValue(null))
                 .ToList();
             var typesThatAllNotContains = allTypes.Except(ClassificationType.All).ToList();
-            if (typesThatAllNotContains.Any()) {
+            if (typesThatAllNotContains.Any())
+            {
                 Assert.Fail("ClassificationType.All not contains types: " + String.Join(", ", typesThatAllNotContains));
             }
         }

@@ -5,12 +5,15 @@ using System.Linq;
 using System.Windows.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+{
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ColorExtensionsTests {
+    public class ColorExtensionsTests
+    {
         [TestMethod]
-        public void GetLightness() {
+        public void GetLightness()
+        {
             TestLightness(0x990060, 0.3);
             TestLightness(0xEF3DB3, 0.588);
             TestLightness(0x66AB97, 0.535);
@@ -23,8 +26,9 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests {
             TestLightness(0x5787AE, 0.512);
         }
 
-        private void TestLightness(Int32 color, Double expectedLightness) {
-            var wpfColor = Color.FromRgb((Byte)(color >> 16 & 0xFF), (Byte)(color >> 8 & 0xFF), (Byte)(color & 0xFF));
+        private void TestLightness(Int32 color, Double expectedLightness)
+        {
+            var wpfColor = Color.FromRgb((Byte) (color >> 16 & 0xFF), (Byte) (color >> 8 & 0xFF), (Byte) (color & 0xFF));
             var lightness = wpfColor.GetLightness();
             Assert.AreEqual(expectedLightness, lightness, 0.001, "Color: " + wpfColor);
         }
