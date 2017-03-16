@@ -6,6 +6,6 @@ namespace Balakin.VSOutputEnhancer
 {
     public interface IParsersConfigurationService
     {
-        IEnumerable<ParserConfiguration> GetParsers(IContentType contentType);
+        IReadOnlyCollection<ParserConfiguration> GetParsers(IContentType contentType);
     }
 }

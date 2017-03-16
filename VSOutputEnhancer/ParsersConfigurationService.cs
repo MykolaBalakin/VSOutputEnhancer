@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
@@ -26,44 +27,23 @@ namespace Balakin.VSOutputEnhancer
 
         static ParsersConfigurationService()
         {
-            configuration = new Lazy<IList<InternalParserConfigurationEntry>>(LoadConfiguration, LazyThreadSafetyMode.ExecutionAndPublication);
+            configuration = new Lazy<IReadOnlyCollection<InternalParserConfigurationEntry>>(LoadConfiguration, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
-        private static readonly Lazy<IList<InternalParserConfigurationEntry>> configuration;
+        private static readonly Lazy<IReadOnlyCollection<InternalParserConfigurationEntry>> configuration;
 
-        private static IList<InternalParserConfigurationEntry> LoadConfiguration()
+        private static IReadOnlyCollection<InternalParserConfigurationEntry> LoadConfiguration()
         {
             var result = new List<InternalParserConfigurationEntry>();
 
-            var parserInterface = typeof(IParser<>);
-            var dataProcessorInterface = typeof(IParsedDataProcessor<>);
+            var allParsers = GetAllParsers();
+            var allDataProcessors = GetAllDataProcessors();
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var allParsers = assembly.GetTypes()
-                .Where(t => !t.IsAbstract)
-                .Select(t => new
-                {
-                    Parser = t,
-                    DataTypes = t.GetInterfaces()
-                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface)
-                        .Select(i => i.GetGenericArguments()[0]).ToList()
-                })
-                .Where(t => t.DataTypes.Any())
-                .ToDictionary(e => e.Parser, e => e.DataTypes);
-            var allDataProcessors = assembly.GetTypes()
-                .Where(t => !t.IsAbstract)
-                .Select(t => new
-                {
-                    DataProcessor = t,
-                    DataTypes = t.GetInterfaces()
-                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface)
-                        .Select(i => i.GetGenericArguments()[0]).ToList()
-                })
-                .Where(t => t.DataTypes.Any())
-                .ToDictionary(e => e.DataProcessor, e => e.DataTypes);
             foreach (var parserDefinition in allParsers)
             {
                 var parserType = parserDefinition.Key;
+                var parserDataTypes = parserDefinition.Value;
+
                 var attributes = parserType.GetCustomAttributes<UseForClassificationAttribute>();
                 foreach (var attribute in attributes)
                 {
@@ -73,7 +53,7 @@ namespace Balakin.VSOutputEnhancer
                     if (dataProcessorType == null && dataType == null)
                     {
                         var dataProcessorDefinitions = allDataProcessors
-                            .Where(dp => dp.Value.Any(dpt => parserDefinition.Value.Contains(dpt)))
+                            .Where(dp => dp.Value.Any(dpt => parserDataTypes.Contains(dpt)))
                             .ToList();
                         if (dataProcessorDefinitions.Count == 0)
                         {
@@ -81,7 +61,7 @@ namespace Balakin.VSOutputEnhancer
                         }
                         if (dataProcessorDefinitions.Count > 1)
                         {
-                            throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for parser {parserType.Name}");
+                            throw new InvalidOperationException($"Have found more the one eligible IParsedDataProcessor for parser {parserType.Name}");
                         }
                         dataProcessorType = dataProcessorDefinitions.Single().Key;
                     }
@@ -96,7 +76,7 @@ namespace Balakin.VSOutputEnhancer
                         }
                         if (dataProcessorDefinitions.Count > 1)
                         {
-                            throw new InvalidOperationException($"Find more the one eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
+                            throw new InvalidOperationException($"Have found more the one eligible IParsedDataProcessor for ParsedData type {dataType.Name}");
                         }
                         dataProcessorType = dataProcessorDefinitions.Single().Key;
                     }
@@ -110,7 +90,7 @@ namespace Balakin.VSOutputEnhancer
                         }
                         if (eligebleTypes.Count > 1)
                         {
-                            throw new InvalidOperationException($"Find more the one eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
+                            throw new InvalidOperationException($"Have found more the one eligible ParsedData type for parser {parserType.Name} and processor {dataProcessorType.Namespace}");
                         }
                         dataType = eligebleTypes.Single();
                     }
@@ -122,17 +102,59 @@ namespace Balakin.VSOutputEnhancer
             return result.AsReadOnly();
         }
 
-        private static IList<InternalParserConfigurationEntry> Configuration => configuration.Value;
-
-        public IEnumerable<ParserConfiguration> GetParsers(IContentType contentType)
+        private static IReadOnlyDictionary<Type, IReadOnlyCollection<Type>> GetAllParsers()
         {
-            foreach (var entry in Configuration)
-            {
-                if (entry.ContentType.Equals(contentType.TypeName, StringComparison.OrdinalIgnoreCase))
+            var assembly = Assembly.GetExecutingAssembly();
+            var parserInterface = typeof(IParser<>);
+
+            var result = assembly.GetTypes()
+                .Where(t => !t.IsAbstract)
+                .Select(t => new
                 {
-                    yield return entry.Configuration;
-                }
-            }
+                    Parser = t,
+                    DataTypes = t.GetInterfaces()
+                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == parserInterface)
+                        .Select(i => i.GetGenericArguments()[0])
+                        .ToList()
+                        .AsReadOnly()
+                })
+                .Where(t => t.DataTypes.Any())
+                .ToDictionary(e => e.Parser, e => e.DataTypes as IReadOnlyCollection<Type>);
+
+            return new ReadOnlyDictionary<Type, IReadOnlyCollection<Type>>(result);
+        }
+
+        private static IReadOnlyDictionary<Type, IReadOnlyCollection<Type>> GetAllDataProcessors()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var dataProcessorInterface = typeof(IParsedDataProcessor<>);
+
+            var result = assembly.GetTypes()
+                .Where(t => !t.IsAbstract)
+                .Select(t => new
+                {
+                    DataProcessor = t,
+                    DataTypes = t.GetInterfaces()
+                        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == dataProcessorInterface)
+                        .Select(i => i.GetGenericArguments()[0])
+                        .ToList()
+                        .AsReadOnly()
+                })
+                .Where(t => t.DataTypes.Any())
+                .ToDictionary(e => e.DataProcessor, e => e.DataTypes as IReadOnlyCollection<Type>);
+
+            return new ReadOnlyDictionary<Type, IReadOnlyCollection<Type>>(result);
+        }
+
+        private static IReadOnlyCollection<InternalParserConfigurationEntry> Configuration => configuration.Value;
+
+        public IReadOnlyCollection<ParserConfiguration> GetParsers(IContentType contentType)
+        {
+            return Configuration
+                .Where(c => c.ContentType.Equals(contentType.TypeName, StringComparison.OrdinalIgnoreCase))
+                .Select(c => c.Configuration)
+                .ToList()
+                .AsReadOnly();
         }
     }
 }

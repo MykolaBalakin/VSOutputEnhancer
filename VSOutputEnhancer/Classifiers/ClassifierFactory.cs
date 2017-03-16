@@ -33,7 +33,7 @@ namespace Balakin.VSOutputEnhancer.Classifiers
 
         private IClassifier CreateClassifierForContentType(IContentType contentType)
         {
-            var configuration = parsersConfigurationService.GetParsers(contentType).ToList();
+            var configuration = parsersConfigurationService.GetParsers(contentType);
             if (configuration.Count == 0)
             {
                 Trace.TraceWarning($"Can not create classifier for content type {contentType.TypeName} (base types: {String.Join(", ", contentType.BaseTypes.Select(t => t.TypeName))})");
