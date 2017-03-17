@@ -1,48 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows.Media;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class UnitTestsTests
     {
-        [TestMethod]
-        public void CreateTextFormattingRunProperties()
-        {
-            TestCreateTextFormattingRunProperties(null, null);
-            TestCreateTextFormattingRunProperties(Colors.White, null);
-            TestCreateTextFormattingRunProperties(null, Colors.White);
-            TestCreateTextFormattingRunProperties(Colors.White, Colors.Black);
-            TestCreateTextFormattingRunProperties(Colors.Black, Colors.White);
-        }
-
-        private void TestCreateTextFormattingRunProperties(Color? foreground, Color? background)
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void CreateTextFormattingRunProperties(Color? foreground, Color? background)
         {
             var textProperties = Utils.CreateTextFormattingRunProperties(foreground, background);
-            Assert.AreEqual(!background.HasValue, textProperties.BackgroundBrushEmpty, $"Foreground: {foreground}, Background: {background}");
-            Assert.AreEqual(!foreground.HasValue, textProperties.ForegroundBrushEmpty, $"Foreground: {foreground}, Background: {background}");
+            textProperties.BackgroundBrushEmpty.Should().Be(!background.HasValue, $"Foreground: {foreground}, Background: {background}");
+            textProperties.ForegroundBrushEmpty.Should().Be(!foreground.HasValue, $"Foreground: {foreground}, Background: {background}");
             TestSolidColorBrush(textProperties.BackgroundBrush, background);
             TestSolidColorBrush(textProperties.ForegroundBrush, foreground);
+        }
+
+        public static IEnumerable<object[]> CreateTestData()
+        {
+            yield return new Object[] { null, null };
+            yield return new Object[] { Colors.White, null };
+            yield return new Object[] { null, Colors.White };
+            yield return new Object[] { Colors.White, Colors.Black };
+            yield return new Object[] { Colors.Black, Colors.White };
         }
 
         private void TestSolidColorBrush(Brush brush, Color? expectedColor)
         {
             if (expectedColor.HasValue)
             {
-                Assert.IsInstanceOfType(brush, typeof(SolidColorBrush));
+                brush.Should().BeOfType<SolidColorBrush>();
                 var solidColorBrush = (SolidColorBrush) brush;
-                Assert.AreEqual(expectedColor.Value, solidColorBrush.Color);
+                solidColorBrush.Color.Should().Be(expectedColor.Value);
             }
             else
             {
                 if (brush != null)
                 {
-                    Assert.AreEqual(Brushes.Transparent, brush);
+                    brush.Should().Be(Brushes.Transparent);
                 }
             }
         }

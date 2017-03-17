@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ClassificationPerfomance
     {
-        [TestMethod]
+        [Fact]
         public void EntityFramework()
         {
             // ~ 570 000 lines of log
@@ -28,10 +28,10 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             }
             sw.Stop();
             Trace.TraceInformation("Elapsed: " + sw.Elapsed);
-            Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(5), "Elapsed: " + sw.Elapsed);
+            sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
         }
 
-        [TestMethod]
+        [Fact]
         public void LotOfClassifiedMessages()
         {
             // 100 000 warning/error messages
@@ -47,7 +47,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             }
             sw.Stop();
             Trace.TraceInformation("Elapsed: " + sw.Elapsed);
-            Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(5), "Elapsed: " + sw.Elapsed);
+            sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
         }
     }
 }

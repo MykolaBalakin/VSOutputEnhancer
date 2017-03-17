@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics.CodeAnalysis;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class ExcludeFromCodeCoverageTests : ExcludeFromCodeCoverageTestsBase
     {
-        [TestMethod]
+        [Fact]
         public void AllTestsCodeExcludedFromCoverage()
         {
             CheckAllTestsCodeExcludedFromCoverage();

@@ -1,14 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ExcludeFromCodeCoverageTests : ExcludeFromCodeCoverageTestsBase
     {
-        [TestMethod]
+        [Fact]
         public void AllTestsCodeExcludedFromCoverage()
         {
             CheckAllTestsCodeExcludedFromCoverage();

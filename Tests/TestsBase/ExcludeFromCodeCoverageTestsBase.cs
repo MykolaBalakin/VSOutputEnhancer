@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 
 namespace Balakin.VSOutputEnhancer.Tests
 {
@@ -15,7 +15,7 @@ namespace Balakin.VSOutputEnhancer.Tests
 
             var notExcluded = assembly.GetTypes().Where(t => !IsExcludedFromCodeCoverage(t)).ToList();
             var notExcludedString = String.Join(", ", notExcluded.Select(t => t.Name));
-            Assert.AreEqual(0, notExcluded.Count, $"Those types are not excluded from code coverage analysis: {notExcludedString}");
+            notExcluded.Should().BeEmpty($"Those types are not excluded from code coverage analysis: {notExcludedString}");
         }
 
         protected virtual Assembly GetAssembly()
