@@ -6,15 +6,15 @@ using System.Text.RegularExpressions;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsedDataProcessorTests
     {
-        [TestMethod]
+        [Fact]
         public void EmptyEnumerableOnNullData()
         {
             var emptySpan = Utils.CreateSpan("");
@@ -30,11 +30,11 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 var dataProcessor = Activator.CreateInstance(dataProcessorType);
                 var processDataMethod = dataProcessorType.GetMethod("ProcessData");
                 var result = (IEnumerable<ProcessedParsedData>) processDataMethod.Invoke(dataProcessor, new Object[] { emptySpan, null });
-                Assert.IsFalse(result.Any(), dataProcessorType.Name);
+                result.Should().BeEmpty();
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void NotClassifiedTraceEventType()
         {
             var span = Utils.CreateSpan("-1");
@@ -44,10 +44,10 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             var dataProcessor = new DebugTraceMessageDataProcessor();
             var result = dataProcessor.ProcessData(span, data);
 
-            Assert.IsFalse(result.Any());
+            result.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Fact]
         public void NotClassifiedBuildMessageType()
         {
             var span = Utils.CreateSpan("-1");
@@ -57,7 +57,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             var dataProcessor = new BuildFileRelatedMessageDataProcessor();
             var result = dataProcessor.ProcessData(span, data);
 
-            Assert.IsFalse(result.Any());
+            result.Should().BeEmpty();
         }
     }
 }

@@ -1,117 +1,90 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class BuildResultParserTests
     {
-        [TestMethod]
-        public void NotParsed()
-        {
-            const String randomMessage = "Message\r\n";
-            const String publishCompleteMessage = "========== Publish: 10 succeeded, 3 failed, 122 skipped ==========\r\n";
-            const String almostBuildMessage = "========== Build: bla bla\r\n";
-            const String almostBuildMessage2 = "========== Build: bla bla ==========\r\n";
-
-            TestNotParsed(randomMessage);
-            TestNotParsed(publishCompleteMessage);
-            TestNotParsed(almostBuildMessage);
-            TestNotParsed(almostBuildMessage2);
-        }
-
-        private void TestNotParsed(String message)
+        [Theory]
+        [InlineData("Message\r\n")]
+        [InlineData("========== Publish: 10 succeeded, 3 failed, 122 skipped ==========\r\n")]
+        [InlineData("========== Build: bla bla\r\n")]
+        [InlineData("========== Build: bla bla ==========\r\n")]
+        public void NotParsed(String message)
         {
             var span = Utils.CreateSpan(message);
             var parser = new BuildResultParser();
-            BuildResultData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(data);
+            BuildResultData parsedData;
+            var parsed = parser.TryParse(span, out parsedData);
+
+            parsed.Should().BeFalse();
+            parsedData.Should().BeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void Build()
         {
             const String publishCompleteMessage = "========== Build: 302 succeeded, 41 failed, 16 up-to-date, 5 skipped ==========\r\n";
+            var expectedResult = new BuildResultData(
+                new ParsedValue<Int32>(302, new Span(18, 3)),
+                new ParsedValue<Int32>(41, new Span(33, 2)),
+                new ParsedValue<Int32>(16, new Span(44, 2)),
+                new ParsedValue<Int32>(5, new Span(59, 1))
+            );
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            BuildResultData data;
+            BuildResultData parsedData;
             var parser = new BuildResultParser();
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
+            var parsed = parser.TryParse(span, out parsedData);
 
-            Assert.IsTrue(data.Succeeded.HasValue);
-            Assert.IsTrue(data.Failed.HasValue);
-            Assert.IsTrue(data.UpToDate.HasValue);
-            Assert.IsTrue(data.Skipped.HasValue);
-
-            Assert.AreEqual(302, data.Succeeded);
-            Assert.AreEqual(41, data.Failed);
-            Assert.AreEqual(16, data.UpToDate);
-            Assert.AreEqual(5, data.Skipped);
-
-            Assert.AreEqual(new Span(18, 3), data.Succeeded.Span);
-            Assert.AreEqual(new Span(33, 2), data.Failed.Span);
-            Assert.AreEqual(new Span(44, 2), data.UpToDate.Span);
-            Assert.AreEqual(new Span(59, 1), data.Skipped.Span);
+            parsed.Should().BeTrue();
+            parsedData.ShouldBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void BuildDnx()
         {
             const String publishCompleteMessage = "========== Build: 10 succeeded or up-to-date, 3 failed, 43 skipped ==========\r\n";
+            var expectedResult = new BuildResultData(
+                new ParsedValue<Int32>(10, new Span(18, 2)),
+                new ParsedValue<Int32>(3, new Span(46, 1)),
+                new ParsedValue<Int32>(),
+                new ParsedValue<Int32>(43, new Span(56, 2))
+            );
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            BuildResultData data;
+            BuildResultData parsedData;
             var parser = new BuildResultParser();
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
+            var parsed = parser.TryParse(span, out parsedData);
 
-            Assert.IsTrue(data.Succeeded.HasValue);
-            Assert.IsTrue(data.Failed.HasValue);
-            Assert.IsFalse(data.UpToDate.HasValue);
-            Assert.IsTrue(data.Skipped.HasValue);
-
-            Assert.AreEqual(10, data.Succeeded);
-            Assert.AreEqual(3, data.Failed);
-            Assert.AreEqual(43, data.Skipped);
-
-            Assert.AreEqual(new Span(18, 2), data.Succeeded.Span);
-            Assert.AreEqual(new Span(46, 1), data.Failed.Span);
-            Assert.AreEqual(new Span(56, 2), data.Skipped.Span);
+            parsed.Should().BeTrue();
+            parsedData.ShouldBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void Rebuild()
         {
             const String publishCompleteMessage = "========== Rebuild All: 2 succeeded, 135 failed, 86 skipped ==========\r\n";
+            var expectedResult = new BuildResultData(
+                new ParsedValue<Int32>(2, new Span(24, 1)),
+                new ParsedValue<Int32>(135, new Span(37, 3)),
+                new ParsedValue<Int32>(),
+                new ParsedValue<Int32>(86, new Span(49, 2))
+            );
 
             var span = Utils.CreateSpan(publishCompleteMessage);
-            BuildResultData data;
+            BuildResultData parsedData;
             var parser = new BuildResultParser();
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
+            var parsed = parser.TryParse(span, out parsedData);
 
-            Assert.IsTrue(data.Succeeded.HasValue);
-            Assert.IsTrue(data.Failed.HasValue);
-            Assert.IsFalse(data.UpToDate.HasValue);
-            Assert.IsTrue(data.Skipped.HasValue);
-
-            Assert.AreEqual(2, data.Succeeded);
-            Assert.AreEqual(135, data.Failed);
-            Assert.AreEqual(86, data.Skipped);
-
-            Assert.AreEqual(new Span(24, 1), data.Succeeded.Span);
-            Assert.AreEqual(new Span(37, 3), data.Failed.Span);
-            Assert.AreEqual(new Span(49, 2), data.Skipped.Span);
+            parsed.Should().BeTrue();
+            parsedData.ShouldBeEquivalentTo(expectedResult);
         }
     }
 }

@@ -5,72 +5,57 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Balakin.VSOutputEnhancer.Exports.Formats;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ClassificationFormatTests
     {
-        [TestMethod]
-        public void AllFormatsHasDisplayName()
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void DisplayName(Type formatType)
         {
-            var formatTypes = GetAllExportedFormats().ToList();
-
             var styleManager = Utils.CreateStyleManager();
+            var expectedDisplayName = GetCorrectName(formatType);
 
-            foreach (var formatType in formatTypes)
-            {
-                var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
-                Assert.IsNotNull(format.DisplayName, format.GetType().Name);
-                Assert.IsFalse(String.IsNullOrEmpty(format.DisplayName), format.GetType().Name);
-            }
+            var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
+            format.DisplayName.Should().NotBeNullOrEmpty();
+            format.DisplayName.Should().Be(expectedDisplayName);
         }
 
-        [TestMethod]
-        public void DisplayNames()
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void TypeName(Type formatType)
         {
-            var formatTypes = GetAllExportedFormats().ToList();
+            var classificationType = formatType.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
 
-            var styleManager = Utils.CreateStyleManager();
+            var expectedTypeName = classificationType + "FormatDefinition";
 
-            foreach (var formatType in formatTypes)
-            {
-                var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
-                Assert.AreEqual(GetCorrectName(formatType), format.DisplayName);
-            }
+            formatType.Name.Should().Be(expectedTypeName);
         }
 
-        [TestMethod]
-        public void NameClassNameAndClassificationNameEquals()
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void NameAttribute(Type formatType)
         {
-            var formatTypes = GetAllExportedFormats().ToList();
-            var incorrectClassNames = formatTypes.Where(t =>
-            {
-                var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
-                return !t.Name.Equals(classificationType + "FormatDefinition", StringComparison.Ordinal);
-            }).Select(t => t.Name).ToList();
-            if (incorrectClassNames.Any())
-            {
-                Assert.Fail("Classification formats with invalid class name: " + String.Join(", ", incorrectClassNames));
-            }
-            var incorrectNames = formatTypes.Where(t =>
-            {
-                var classificationType = t.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
-                var name = t.GetCustomAttribute<NameAttribute>().Name;
-                return !name.Equals(classificationType, StringComparison.Ordinal);
-            }).Select(t => t.Name).ToList();
-            if (incorrectNames.Any())
-            {
-                Assert.Fail("Classification formats with invalid NameAttribute value: " + String.Join(", ", incorrectNames));
-            }
+            var classificationType = formatType.GetCustomAttribute<ClassificationTypeAttribute>().ClassificationTypeNames;
+
+            var expectedName = classificationType;
+
+            var name = formatType.GetCustomAttribute<NameAttribute>().Name;
+            name.Should().Be(expectedName);
         }
 
+        public static IEnumerable<object[]> CreateTestData()
+        {
+            return GetAllExportedFormats().Select(t => new Object[] { t });
+        }
 
-        private IEnumerable<Type> GetAllExportedFormats()
+        private static IEnumerable<Type> GetAllExportedFormats()
         {
             var formatBaseType = typeof(ClassificationFormatDefinition);
 

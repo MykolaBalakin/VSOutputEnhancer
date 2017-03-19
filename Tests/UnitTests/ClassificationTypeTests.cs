@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class ClassificationTypeTests
     {
-        [TestMethod]
+        [Fact]
         public void All()
         {
             var classificationType = typeof(ClassificationType);
@@ -21,10 +20,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 .Select(f => f.GetValue(null))
                 .ToList();
             var typesThatAllNotContains = allTypes.Except(ClassificationType.All).ToList();
-            if (typesThatAllNotContains.Any())
-            {
-                Assert.Fail("ClassificationType.All not contains types: " + String.Join(", ", typesThatAllNotContains));
-            }
+            typesThatAllNotContains.Should().BeEmpty("ClassificationType.All not contains types: " + String.Join(", ", typesThatAllNotContains));
         }
     }
 }

@@ -4,17 +4,17 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class ExportsTests
     {
-        [TestMethod]
+        [Fact]
         public void AllDefinitionsExported()
         {
             var exportAttribute = typeof(ExportAttribute);
@@ -31,10 +31,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
             var allDefinitions = ClassificationType.All;
             var notExportedDefinitions = allDefinitions.Except(exportedDefinitions).ToList();
-            if (notExportedDefinitions.Any())
-            {
-                Assert.Fail("Not exported classification definitions: " + String.Join(", ", notExportedDefinitions));
-            }
+            notExportedDefinitions.Should().BeEmpty("Not exported classification definitions: " + String.Join(", ", notExportedDefinitions));
         }
     }
 }

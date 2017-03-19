@@ -1,41 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Exports;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class ClassifierProviderTests
     {
-        [TestMethod]
+        [Fact]
         public void BuildOutput()
         {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer(ContentType.BuildOutput);
             var classifier = provider.GetClassifier(textBuffer);
-            Assert.IsNotNull(classifier);
+            classifier.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void Debug()
         {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer(ContentType.DebugOutput);
             var classifier = provider.GetClassifier(textBuffer);
-            Assert.IsNotNull(classifier);
+            classifier.Should().NotBeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void UnknownContentType()
         {
             var provider = CreateClassifierProvider();
             var textBuffer = Utils.CreateTextBuffer("UnknownContentType");
             var classifier = provider.GetClassifier(textBuffer);
-            Assert.IsNull(classifier);
+            classifier.Should().BeNull();
         }
 
         ClassifierProvider CreateClassifierProvider()

@@ -3,43 +3,30 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class StyleManagerTests
     {
-        [TestMethod]
-        public void SuccessfullyLoadedFromJson()
-        {
-            TestLoadedFromJson(Theme.Light);
-            TestLoadedFromJson(Theme.Dark);
-        }
-
-        private void TestLoadedFromJson(Theme theme)
+        [Theory]
+        [InlineData(Theme.Light)]
+        [InlineData(Theme.Dark)]
+        public void SuccessfullyLoadedFromJson(Theme theme)
         {
             var styleManager = Utils.CreateStyleManager(theme);
 
             var stylesProperty = styleManager.GetType().GetProperty("Styles", BindingFlags.Instance | BindingFlags.NonPublic);
             var styles = (IDictionary<String, FormatDefinitionStyle>) stylesProperty.GetGetMethod(true).Invoke(styleManager, new Object[0]);
-            Assert.IsTrue(styles.Count > 0, $"Styles for {theme} theme not loaded");
+            styles.Should().NotBeEmpty();
         }
 
-        [TestMethod]
-        public void SimilarClassificationTypesHasSimilarColorsLight()
-        {
-            TestSimilarColors(Theme.Light);
-        }
-
-        [TestMethod]
-        public void SimilarClassificationTypesHasSimilarColorsDark()
-        {
-            TestSimilarColors(Theme.Dark);
-        }
-
-        private void TestSimilarColors(Theme theme)
+        [Theory]
+        [InlineData(Theme.Light)]
+        [InlineData(Theme.Dark)]
+        public void SimilarClassificationTypesHasSimilarColors(Theme theme)
         {
             var styleManager = Utils.CreateStyleManager(theme);
 
@@ -81,23 +68,27 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 .Except(success)
                 .Except(skip)
                 .ToList();
-            Assert.AreEqual(0, notChecked.Count, "This classification types did not checked: " + String.Join(", ", notChecked));
+            notChecked.Should().BeEmpty("Classification types did not checked: " + String.Join(", ", notChecked));
         }
 
         private void TestSimilarColors(ICollection<FormatDefinitionStyle> styles, String groupName)
         {
             var foregroundColors = styles.Select(s => s.ForegroundColor).Distinct().ToList();
-            Assert.IsTrue(foregroundColors.Count <= 1, $"Some {groupName} styles has different colors");
+            foregroundColors.Should().HaveCount(1, $"Some {groupName} styles has different colors");
         }
 
-        [TestMethod]
+        [Fact]
         public void UnknownClassificationStyle()
         {
+            var expectedResult = new FormatDefinitionStyle
+            {
+                Bold = null,
+                ForegroundColor = null
+            };
+
             var styleManager = Utils.CreateStyleManager(Theme.Light);
             var style = styleManager.GetStyleForClassificationType("UnknownClassification");
-            Assert.IsNotNull(style);
-            Assert.IsNull(style.Bold);
-            Assert.IsNull(style.ForegroundColor);
+            style.ShouldBeEquivalentTo(expectedResult);
         }
     }
 }
