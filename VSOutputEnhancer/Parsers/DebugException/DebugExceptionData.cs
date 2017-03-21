@@ -2,12 +2,21 @@
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugException
 {
-    internal class DebugExceptionData : ParsedData
+    // TODO: Review accessibility level
+    public class DebugExceptionData : ParsedData
     {
-        // This properties filled using reflection
-        // ReSharper disable UnusedAutoPropertyAccessor.Local
+        // TODO: Refactor ParsedData builder to get rid of this constructor
+        public DebugExceptionData()
+        {
+        }
+
+        public DebugExceptionData(ParsedValue<String> exception, ParsedValue<String> assembly)
+        {
+            Exception = exception;
+            Assembly = assembly;
+        }
+
         public ParsedValue<String> Exception { get; private set; }
         public ParsedValue<String> Assembly { get; private set; }
-        // ReSharper restore UnusedAutoPropertyAccessor.Local
     }
 }

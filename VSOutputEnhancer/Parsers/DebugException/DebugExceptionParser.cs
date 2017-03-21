@@ -25,6 +25,8 @@ namespace Balakin.VSOutputEnhancer.Parsers.DebugException
                 result = ParsedData.Create<DebugExceptionData>(match, span.Span);
                 return true;
             }
+
+            // VS 2013 message
             if (text.StartsWith("A first chance exception of type '", StringComparison.Ordinal))
             {
                 var regex = "^A first chance exception of type '(?<Exception>.*)' occurred in (?<Assembly>.*)\r\n$";

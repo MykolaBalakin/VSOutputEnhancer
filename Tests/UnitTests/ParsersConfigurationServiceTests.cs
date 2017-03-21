@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers.BowerMessage;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
@@ -11,21 +9,21 @@ using Balakin.VSOutputEnhancer.Parsers.NpmMessage;
 using Balakin.VSOutputEnhancer.Parsers.NpmResult;
 using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsersConfigurationServiceTests
     {
-        [TestMethod]
+        [Fact]
         public void BuildOutput()
         {
             TestBuildOutput(ContentType.BuildOutput);
         }
 
-        [TestMethod]
+        [Fact]
         public void BuildOrderOutput()
         {
             TestBuildOutput(ContentType.BuildOrderOutput);
@@ -33,36 +31,51 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
         private void TestBuildOutput(String contentType)
         {
+            var expectedResult = new[]
+            {
+                new ParserConfiguration(typeof(BuildResultParser), typeof(BuildResultData), typeof(BuildResultDataProcessor)),
+                new ParserConfiguration(typeof(BuildFileRelatedMessageParser), typeof(BuildFileRelatedMessageData), typeof(BuildFileRelatedMessageDataProcessor)),
+                new ParserConfiguration(typeof(PublishResultParser), typeof(PublishResultData), typeof(PublishResultDataProcessor)),
+                new ParserConfiguration(typeof(NpmMessageParser), typeof(NpmMessageData), typeof(NpmMessageDataProcessor))
+            };
+
             var service = Utils.CreateParsersConfigurationService();
             var parsers = service.GetParsers(new ContentTypeStub(contentType));
-            Assert.AreEqual(4, parsers.Count);
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(BuildResultParser) && p.DataProcessor == typeof(BuildResultDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(NpmMessageParser) && p.DataProcessor == typeof(NpmMessageDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(BuildFileRelatedMessageParser) && p.DataProcessor == typeof(BuildFileRelatedMessageDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(PublishResultParser) && p.DataProcessor == typeof(PublishResultDataProcessor)));
+
+            parsers.ShouldAllBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void DebugOutput()
         {
+            var expectedResult = new[]
+            {
+                new ParserConfiguration(typeof(DebugExceptionParser), typeof(DebugExceptionData), typeof(DebugExceptionDataProcessor)),
+                new ParserConfiguration(typeof(DebugTraceMessageParser), typeof(DebugTraceMessageData), typeof(DebugTraceMessageDataProcessor))
+            };
+
             var service = Utils.CreateParsersConfigurationService();
             var contentType = new ContentTypeStub(ContentType.DebugOutput);
             var parsers = service.GetParsers(contentType);
-            Assert.AreEqual(2, parsers.Count);
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(DebugExceptionParser) && p.DataProcessor == typeof(DebugExceptionDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(DebugTraceMessageParser) && p.DataProcessor == typeof(DebugTraceMessageDataProcessor)));
+
+            parsers.ShouldAllBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void GeneralOutput()
         {
+            var expectedResult = new[]
+            {
+                new ParserConfiguration(typeof(NpmMessageParser), typeof(NpmMessageData), typeof(NpmMessageDataProcessor)),
+                new ParserConfiguration(typeof(NpmResultParser), typeof(NpmResultData), typeof(NpmResultDataProcessor)),
+                new ParserConfiguration(typeof(BowerMessageParser), typeof(BowerMessageData), typeof(BowerMessageDataProcessor))
+            };
+
             var service = Utils.CreateParsersConfigurationService();
             var contentType = new ContentTypeStub(ContentType.Output);
             var parsers = service.GetParsers(contentType);
-            Assert.AreEqual(3, parsers.Count);
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(NpmMessageParser) && p.DataProcessor == typeof(NpmMessageDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(NpmResultParser) && p.DataProcessor == typeof(NpmResultDataProcessor)));
-            Assert.AreEqual(1, parsers.Count(p => p.Parser == typeof(BowerMessageParser) && p.DataProcessor == typeof(BowerMessageDataProcessor)));
+
+            parsers.ShouldAllBeEquivalentTo(expectedResult);
         }
     }
 }

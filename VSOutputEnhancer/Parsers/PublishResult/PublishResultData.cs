@@ -4,11 +4,20 @@ namespace Balakin.VSOutputEnhancer.Parsers.PublishResult
 {
     internal class PublishResultData : ParsedData
     {
-        // This properties filled using reflection
-        // ReSharper disable UnusedAutoPropertyAccessor.Local
+        // TODO: Refactor ParsedData builder to get rid of this constructor
+        public PublishResultData()
+        {
+        }
+
+        public PublishResultData(ParsedValue<Int32> succeeded, ParsedValue<Int32> failed, ParsedValue<Int32> skipped)
+        {
+            Succeeded = succeeded;
+            Failed = failed;
+            Skipped = skipped;
+        }
+
         public ParsedValue<Int32> Succeeded { get; private set; }
         public ParsedValue<Int32> Failed { get; private set; }
         public ParsedValue<Int32> Skipped { get; private set; }
-        // ReSharper restore UnusedAutoPropertyAccessor.Local
     }
 }

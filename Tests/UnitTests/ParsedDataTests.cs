@@ -2,65 +2,74 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ParsedDataTests
     {
-        [TestMethod]
-        public void Create()
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void Create(String message, String regex, ParsedDataStub expectedResult)
         {
-            var span = Utils.CreateSpan("Text");
+            var span = Utils.CreateSpan(message);
 
-            var match = Regex.Match(span.GetText(), "(?<Message>.*)");
-            var parsedData = ParsedData.Create<ParsedDataStub>(match, span.Span);
-            Assert.IsNotNull(parsedData);
-            Assert.IsInstanceOfType(parsedData, typeof(ParsedDataStub));
-            Assert.IsTrue(parsedData.Message.HasValue);
-            Assert.AreEqual("Text", parsedData.Message);
-            Assert.AreEqual(span.Span, parsedData.Message.Span);
-            Assert.IsFalse(parsedData.Type.HasValue);
-
-            span = Utils.CreateSpan("Text Error");
-
-            match = Regex.Match(span.GetText(), "(?<Message>.*) (?<Type>.*)");
-            parsedData = ParsedData.Create<ParsedDataStub>(match, span.Span);
-            Assert.IsNotNull(parsedData);
-            Assert.IsInstanceOfType(parsedData, typeof(ParsedDataStub));
-            Assert.IsTrue(parsedData.Message.HasValue);
-            Assert.AreEqual("Text", parsedData.Message);
-            Assert.AreEqual(new Span(0, 4), parsedData.Message.Span);
-            Assert.IsTrue(parsedData.Type.HasValue);
-            Assert.AreEqual(TraceEventType.Error, parsedData.Type);
-            Assert.AreEqual(new Span(5, 5), parsedData.Type.Span);
+            var match = Regex.Match(span.GetText(), regex);
+            var actualResult = ParsedData.Create<ParsedDataStub>(match, span.Span);
+            actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        public static IEnumerable<Object[]> CreateTestData()
+        {
+            yield return new Object[]
+            {
+                "Text",
+                "(?<Message>.*)",
+                new ParsedDataStub(
+                    new ParsedValue<String>("Text", new Span(0, 4)),
+                    new ParsedValue<TraceEventType>()
+                )
+            };
+
+            yield return new Object[]
+            {
+                "Text Error",
+                "(?<Message>.*) (?<Type>.*)",
+                new ParsedDataStub(
+                    new ParsedValue<String>("Text", new Span(0, 4)),
+                    new ParsedValue<TraceEventType>(TraceEventType.Error, new Span(5, 5))
+                )
+            };
+        }
+
+        [Fact]
         public void EmptyValueExceptionValueType()
         {
             var value = new ParsedValue<Int32>();
-            // Trying to cast to Int32
-            // ReSharper disable once UnusedVariable
-            var i = (Int32) value;
+            Action action = () =>
+            {
+                // ReSharper disable once UnusedVariable
+                var i = (Int32) value;
+            };
+            action.ShouldThrow<InvalidOperationException>();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Fact]
         public void EmptyValueExceptionReferenceType()
         {
             var value = new ParsedValue<String>();
-            // Trying to cast to String
-            // ReSharper disable once UnusedVariable
-            var s = (String) value;
+            Action action = () =>
+            {
+                // ReSharper disable once UnusedVariable
+                var s = (String) value;
+            };
+            action.ShouldThrow<InvalidOperationException>();
         }
     }
 }

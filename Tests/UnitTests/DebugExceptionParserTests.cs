@@ -1,86 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class DebugExceptionParserTests
     {
-        [TestMethod]
-        public void NotParsed()
+        [Theory]
+        [InlineData("Some message\r\n")]
+        [InlineData("Exception thrown: 'blablabla\r\n")]
+        [InlineData("A first chance exception of type 'blablabla\r\n")]
+        public void NotParsed(string message)
         {
-            const String messageString = "Some message\r\n";
-            const String messageString2 = "Exception thrown: 'blablabla\r\n";
-            const String messageString3 = "A first chance exception of type 'blablabla\r\n";
-
-            var span = Utils.CreateSpan(messageString);
+            var span = Utils.CreateSpan(message);
             var parser = new DebugExceptionParser();
-            DebugExceptionData parsedData;
-            var parsed = parser.TryParse(span, out parsedData);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(parsedData);
 
-            span = Utils.CreateSpan(messageString2);
-            parser = new DebugExceptionParser();
-            parsed = parser.TryParse(span, out parsedData);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(parsedData);
+            DebugExceptionData actualResult;
+            var parsed = parser.TryParse(span, out actualResult);
 
-            span = Utils.CreateSpan(messageString3);
-            parser = new DebugExceptionParser();
-            parsed = parser.TryParse(span, out parsedData);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(parsedData);
+            parsed.Should().BeFalse();
+            actualResult.Should().BeNull();
         }
 
-        [TestMethod]
-        public void Exception()
+        [Theory]
+        [MemberData(nameof(CreateTestData))]
+        public void Exception(String message, DebugExceptionData expectedResult)
         {
-            const String messageString = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
-
-            var span = Utils.CreateSpan(messageString);
+            var span = Utils.CreateSpan(message);
             var parser = new DebugExceptionParser();
-            DebugExceptionData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
 
-            Assert.IsTrue(data.Exception.HasValue);
-            Assert.IsTrue(data.Assembly.HasValue);
+            DebugExceptionData actualResult;
+            var parsed = parser.TryParse(span, out actualResult);
 
-            Assert.AreEqual("System.Exception", data.Exception);
-            Assert.AreEqual("VSOutputEnhancerDemo.exe", data.Assembly);
-
-            Assert.AreEqual(new Span(19, 16), data.Exception.Span);
-            Assert.AreEqual(new Span(40, 24), data.Assembly.Span);
+            parsed.Should().BeTrue();
+            actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
-        public void ExceptionVS2013()
+        public static IEnumerable<object[]> CreateTestData()
         {
-            const String messageString = "A first chance exception of type 'System.Exception' occurred in ConsoleDemo.exe\r\n";
+            yield return new Object[]
+            {
+                "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n",
+                new DebugExceptionData(
+                    new ParsedValue<String>("System.Exception", new Span(19, 16)),
+                    new ParsedValue<String>("VSOutputEnhancerDemo.exe", new Span(40, 24))
+                )
+            };
 
-            var span = Utils.CreateSpan(messageString);
-            var parser = new DebugExceptionParser();
-            DebugExceptionData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
-
-            Assert.IsTrue(data.Exception.HasValue);
-            Assert.IsTrue(data.Assembly.HasValue);
-
-            Assert.AreEqual("System.Exception", data.Exception);
-            Assert.AreEqual("ConsoleDemo.exe", data.Assembly);
-
-            Assert.AreEqual(new Span(34, 16), data.Exception.Span);
-            Assert.AreEqual(new Span(64, 15), data.Assembly.Span);
+            yield return new Object[]
+            {
+                "A first chance exception of type 'System.Exception' occurred in ConsoleDemo.exe\r\n",
+                new DebugExceptionData(
+                    new ParsedValue<String>("System.Exception", new Span(34, 16)),
+                    new ParsedValue<String>("ConsoleDemo.exe", new Span(64, 15))
+                )
+            };
         }
     }
 }
