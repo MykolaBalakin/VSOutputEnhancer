@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Classification.Fakes;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

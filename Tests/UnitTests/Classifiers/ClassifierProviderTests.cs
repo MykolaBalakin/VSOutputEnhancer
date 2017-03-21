@@ -3,7 +3,7 @@ using Balakin.VSOutputEnhancer.Exports;
 using FluentAssertions;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
     [ExcludeFromCodeCoverage]
     public class ClassifierProviderTests

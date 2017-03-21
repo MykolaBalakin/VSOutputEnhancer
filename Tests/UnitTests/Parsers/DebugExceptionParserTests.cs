@@ -7,7 +7,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
 {
     [ExcludeFromCodeCoverage]
     public class DebugExceptionParserTests

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
     [ExcludeFromCodeCoverage]
     public class BowerOutputClassifierTests : ClassifierTestsBase

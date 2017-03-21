@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
     [ExcludeFromCodeCoverage]
     public abstract class ClassifierTestsBase

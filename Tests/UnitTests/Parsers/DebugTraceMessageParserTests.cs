@@ -7,7 +7,7 @@ using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

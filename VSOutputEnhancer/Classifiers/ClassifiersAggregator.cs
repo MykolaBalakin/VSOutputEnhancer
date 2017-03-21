@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.Classifiers
 {
+    // TODO: Should be named ClassifierAggregator
     internal class ClassifiersAggregator : IClassifier
     {
         private readonly IList<IClassifier> classifiers;
