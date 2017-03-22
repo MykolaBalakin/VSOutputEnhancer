@@ -119,7 +119,7 @@
     <Compile Include="Parsers\DebugException\DebugExceptionDataProcessor.cs" />
     <Compile Include="Parsers\DebugException\DebugExceptionParser.cs" />
     <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageDataProcessor.cs" />
-    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParsedData.cs" />
+    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageData.cs" />
     <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParser.cs" />
     <Compile Include="Parsers\IParsedDataProcessor.cs" />
     <Compile Include="Parsers\IParser.cs" />

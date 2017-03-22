@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
@@ -8,8 +6,19 @@ namespace Balakin.VSOutputEnhancer.Parsers.NpmMessage
 {
     internal class NpmMessageData : ParsedData
     {
-        public ParsedValue<String> Message { get; set; }
+        // TODO: Refactor ParsedData builder to get rid of this constructor
+        public NpmMessageData()
+        {
+        }
+
+        public NpmMessageData(ParsedValue<MessageType> type, ParsedValue<String> message)
+        {
+            Type = type;
+            Message = message;
+        }
+
         public ParsedValue<MessageType> Type { get; set; }
+        public ParsedValue<String> Message { get; set; }
 
         protected override void Fill(Match match, Span originalSpan)
         {

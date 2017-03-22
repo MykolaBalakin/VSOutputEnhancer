@@ -1,73 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.NpmResult;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class NpmResultParserTests
     {
-        [TestMethod]
-        public void NotParsed()
+        [Theory]
+        [InlineData("Some message\r\n")]
+        [InlineData("====npm command completed with exit code asdf====\r\n")]
+        public void NotParsed(String message)
         {
-            const String messageString = "Some message\r\n";
-            const String messageString2 = "====npm command completed with exit code asdf====\r\n";
-
-            var span = Utils.CreateSpan(messageString);
+            var span = Utils.CreateSpan(message);
             var parser = new NpmResultParser();
-            NpmResultData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(data);
 
-            span = Utils.CreateSpan(messageString2);
-            parser = new NpmResultParser();
-            parsed = parser.TryParse(span, out data);
-            Assert.IsFalse(parsed);
-            Assert.IsNull(data);
+            NpmResultData actualResult;
+            var parsed = parser.TryParse(span, out actualResult);
+
+            parsed.Should().BeFalse();
+            actualResult.Should().BeNull();
         }
 
-        [TestMethod]
-        public void ExitCode()
+        [Theory]
+        [MemberData(nameof(CreateExitCodeTestData))]
+        public void ExitCode(String message, NpmResultData expectedResult)
         {
-            const String messageString = "====npm command completed with exit code 1823====\r\n";
-
-            var span = Utils.CreateSpan(messageString);
+            var span = Utils.CreateSpan(message);
             var parser = new NpmResultParser();
-            NpmResultData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
 
-            Assert.IsTrue(data.ExitCode.HasValue);
+            NpmResultData actualResult;
+            var parsed = parser.TryParse(span, out actualResult);
 
-            Assert.AreEqual(1823, data.ExitCode);
-
-            Assert.AreEqual(new Span(41, 4), data.ExitCode.Span);
+            parsed.Should().BeTrue();
+            actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
-        public void NegativeExitCode()
+        public static IEnumerable<Object[]> CreateExitCodeTestData()
         {
-            const String messageString = "====npm command completed with exit code -8====\r\n";
-
-            var span = Utils.CreateSpan(messageString);
-            var parser = new NpmResultParser();
-            NpmResultData data;
-            var parsed = parser.TryParse(span, out data);
-            Assert.IsTrue(parsed);
-            Assert.IsNotNull(data);
-
-            Assert.IsTrue(data.ExitCode.HasValue);
-
-            Assert.AreEqual(-8, data.ExitCode);
-
-            Assert.AreEqual(new Span(41, 2), data.ExitCode.Span);
+            yield return new Object[]
+            {
+                "====npm command completed with exit code 1823====\r\n",
+                new NpmResultData(new ParsedValue<Int32>(1823, new Span(41, 4)))
+            };
+            yield return new Object[]
+            {
+                "====npm command completed with exit code -8====\r\n",
+                new NpmResultData(new ParsedValue<Int32>(-8, new Span(41, 2)))
+            };
         }
     }
 }
