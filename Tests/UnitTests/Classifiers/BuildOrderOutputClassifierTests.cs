@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BuildOrderOutputClassifierTests : BuildOutputClassifierTests
+    public class BuildOrderOutputClassifierTests : BuildOutputClassifierTestsBase
     {
         protected override IClassifier CreateClassifier()
         {

@@ -24,7 +24,7 @@ namespace Balakin.VSOutputEnhancer.Tests.Stubs
 
         public IEnumerable<IClassificationType> BaseTypes
         {
-            get { throw new NotImplementedException(); }
+            get { yield break; }
         }
     }
 }

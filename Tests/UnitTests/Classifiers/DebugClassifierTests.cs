@@ -1,33 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class DebugClassifierTests : ClassifierTestsBase
     {
-        [TestMethod]
+        [Fact]
         public void TraceError()
         {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = CreateClassifier();
-            var result = classifier.GetClassificationSpans(span);
 
-            Assert.AreEqual(1, result.Count);
-            var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 32, 30), classificationSpan.Span);
-            Assert.AreEqual(ClassificationType.DebugTraceError, classificationSpan.ClassificationType.Classification);
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(new SnapshotSpan(span.Snapshot, 32, 30), new ClassificationTypeStub(ClassificationType.DebugTraceError))
+            };
+
+            Test(span, expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void TraceError2()
         {
             const String fullText = "Some other text\r\nVSOutputEnhancerDemo.vshost.exe Error: 0 : Trace error message\r\n";
@@ -36,59 +35,61 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 
             var span = Utils.CreateSpan(fullText);
             span = new SnapshotSpan(span.Snapshot, fullText.Length - traceErrorMessage.Length, traceErrorMessage.Length);
-            Assert.AreEqual(span.GetText(), traceErrorMessage);
-            var classifier = CreateClassifier();
-            var result = classifier.GetClassificationSpans(span);
 
-            Assert.AreEqual(1, result.Count);
-            var classificationSpan = result.Single();
-            Assert.AreEqual(highlightedMessage, classificationSpan.Span.GetText());
-            Assert.AreEqual(ClassificationType.DebugTraceError, classificationSpan.ClassificationType.Classification);
+            var expectedSnapshot = new SnapshotSpan(span.Snapshot, 49, 30);
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(expectedSnapshot, new ClassificationTypeStub(ClassificationType.DebugTraceError))
+            };
+
+            expectedSnapshot.GetText().Should().Be(highlightedMessage);
+
+            Test(span, expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void TraceInformation()
         {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Information: 0 : Trace information message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = CreateClassifier();
-            var result = classifier.GetClassificationSpans(span);
 
-            Assert.AreEqual(1, result.Count);
-            var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 32, 42), classificationSpan.Span);
-            Assert.AreEqual(ClassificationType.DebugTraceInformation, classificationSpan.ClassificationType.Classification);
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(new SnapshotSpan(span.Snapshot, 32, 42), new ClassificationTypeStub(ClassificationType.DebugTraceInformation))
+            };
+
+            Test(span, expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void TraceWarning()
         {
             const String traceErrorMessage = "VSOutputEnhancerDemo.vshost.exe Warning: 0 : Trace warning message\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = CreateClassifier();
-            var result = classifier.GetClassificationSpans(span);
 
-            Assert.AreEqual(1, result.Count);
-            var classificationSpan = result.Single();
-            Assert.AreEqual(new SnapshotSpan(span.Snapshot, 32, 34), classificationSpan.Span);
-            Assert.AreEqual(ClassificationType.DebugTraceWarning, classificationSpan.ClassificationType.Classification);
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(new SnapshotSpan(span.Snapshot, 32, 34), new ClassificationTypeStub(ClassificationType.DebugTraceWarning))
+            };
+
+            Test(span, expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void TraceException()
         {
             const String traceErrorMessage = "Exception thrown: 'System.Exception' in VSOutputEnhancerDemo.exe\r\n";
 
             var span = Utils.CreateSpan(traceErrorMessage);
-            var classifier = CreateClassifier();
-            var result = classifier.GetClassificationSpans(span);
 
-            Assert.AreEqual(1, result.Count);
-            var classificationSpan = result.Single();
-            Assert.AreEqual(span, classificationSpan.Span);
-            Assert.AreEqual(ClassificationType.DebugException, classificationSpan.ClassificationType.Classification);
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(span, new ClassificationTypeStub(ClassificationType.DebugException))
+            };
+
+            Test(span, expectedResult);
         }
 
         protected override IClassifier CreateClassifier()
