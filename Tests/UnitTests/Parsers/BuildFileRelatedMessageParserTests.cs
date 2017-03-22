@@ -67,7 +67,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
-        public static IEnumerable<object[]> CreateWarningTestData()
+        public static IEnumerable<Object[]> CreateWarningTestData()
         {
             yield return new Object[]
             {
@@ -96,7 +96,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             };
         }
 
-        public static IEnumerable<object[]> CreateSingleBuildTaskTestData()
+        public static IEnumerable<Object[]> CreateSingleBuildTaskTestData()
         {
             yield return new Object[]
             {
@@ -112,7 +112,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             };
         }
 
-        public static IEnumerable<object[]> CreatePostSharpNotReferencedTestData()
+        public static IEnumerable<Object[]> CreatePostSharpNotReferencedTestData()
         {
             yield return new Object[]
             {
@@ -128,7 +128,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             };
         }
 
-        public static IEnumerable<object[]> CreateBowerErrorTestData()
+        public static IEnumerable<Object[]> CreateBowerErrorTestData()
         {
             yield return new Object[]
             {

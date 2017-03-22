@@ -16,7 +16,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
         [InlineData("Some message\r\n")]
         [InlineData("Exception thrown: 'blablabla\r\n")]
         [InlineData("A first chance exception of type 'blablabla\r\n")]
-        public void NotParsed(string message)
+        public void NotParsed(String message)
         {
             var span = Utils.CreateSpan(message);
             var parser = new DebugExceptionParser();
@@ -42,7 +42,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
-        public static IEnumerable<object[]> CreateTestData()
+        public static IEnumerable<Object[]> CreateTestData()
         {
             yield return new Object[]
             {

@@ -21,7 +21,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             TestSolidColorBrush(textProperties.ForegroundBrush, foreground);
         }
 
-        public static IEnumerable<object[]> CreateTestData()
+        public static IEnumerable<Object[]> CreateTestData()
         {
             yield return new Object[] { null, null };
             yield return new Object[] { Colors.White, null };

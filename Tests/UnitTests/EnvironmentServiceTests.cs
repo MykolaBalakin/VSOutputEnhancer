@@ -28,7 +28,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             TestTheme(textProperties, expectedTheme);
         }
 
-        public static IEnumerable<object[]> CreateColorsTestData()
+        public static IEnumerable<Object[]> CreateColorsTestData()
         {
             var defaultTheme = Theme.Light;
 
@@ -43,7 +43,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             yield return new Object[] { Colors.White, Colors.Black, Theme.Dark };
         }
 
-        public static IEnumerable<object[]> CreateBrushesTestData()
+        public static IEnumerable<Object[]> CreateBrushesTestData()
         {
             var defaultTheme = Theme.Light;
 

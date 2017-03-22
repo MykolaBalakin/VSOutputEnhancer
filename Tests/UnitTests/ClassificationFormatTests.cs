@@ -50,7 +50,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             name.Should().Be(expectedName);
         }
 
-        public static IEnumerable<object[]> CreateTestData()
+        public static IEnumerable<Object[]> CreateTestData()
         {
             return GetAllExportedFormats().Select(t => new Object[] { t });
         }

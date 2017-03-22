@@ -21,7 +21,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             actualLightness.Should().BeApproximately(expectedLightness, precision);
         }
 
-        public static IEnumerable<object[]> CreateTestData()
+        public static IEnumerable<Object[]> CreateTestData()
         {
             yield return new Object[] { 0x990060, 0.3 };
             yield return new Object[] { 0xEF3DB3, 0.588 };
