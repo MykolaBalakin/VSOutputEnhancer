@@ -4,23 +4,29 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Classifiers;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Classification.Fakes;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
-    [TestClass]
     [ExcludeFromCodeCoverage]
     public class ClassifiersAggregatorTests
     {
-        [TestMethod]
+        [Fact]
         public void GetClassificationSpans()
         {
             var fullSpan = Utils.CreateSpan("Some text");
             var span1 = new SnapshotSpan(fullSpan.Snapshot, new Span(0, 4));
             var span2 = new SnapshotSpan(fullSpan.Snapshot, new Span(5, 4));
+
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(span1, new ClassificationTypeStub("ClassificationType1")),
+                new ClassificationSpan(span2, new ClassificationTypeStub("ClassificationType2"))
+            };
 
             var classifier1 = new StubIClassifier();
             classifier1.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan>
@@ -38,18 +44,12 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             };
 
             var aggregator = new ClassifiersAggregator(classifier1, classifier2);
-            var result = aggregator.GetClassificationSpans(fullSpan);
-            Assert.AreEqual(2, result.Count);
+            var actualResult = aggregator.GetClassificationSpans(fullSpan);
 
-            var classificationSpan1 = result.SingleOrDefault(s => s.ClassificationType.Classification == "ClassificationType1");
-            var classificationSpan2 = result.SingleOrDefault(s => s.ClassificationType.Classification == "ClassificationType2");
-            Assert.IsNotNull(classificationSpan1);
-            Assert.AreEqual(span1, classificationSpan1.Span);
-            Assert.IsNotNull(classificationSpan2);
-            Assert.AreEqual(span2, classificationSpan2.Span);
+            actualResult.ShouldAllBeEquivalentTo(expectedResult);
         }
 
-        [TestMethod]
+        [Fact]
         public void ClassificationChanged()
         {
             var fullSpan = Utils.CreateSpan("Some text");
@@ -62,21 +62,22 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             var invokes = new List<Tuple<Object, ClassificationChangedEventArgs>>();
             var aggregator = new ClassifiersAggregator(classifier1, classifier2);
 
-            // Check for no exception
-            classifier1.ClassificationChangedEvent?.Invoke(classifier1, new ClassificationChangedEventArgs(span1));
-
             aggregator.ClassificationChanged += (sender, e) => invokes.Add(Tuple.Create(sender, e));
 
-            classifier1.ClassificationChangedEvent?.Invoke(classifier1, new ClassificationChangedEventArgs(span1));
-            Assert.AreEqual(1, invokes.Count);
-            Assert.AreEqual(classifier1, invokes[0].Item1);
-            Assert.AreEqual(span1, invokes[0].Item2.ChangeSpan);
+            classifier1.ClassificationChangedEvent.Invoke(classifier1, new ClassificationChangedEventArgs(span1));
+
+            // TODO: Refactor this code to use ShouldAllBeEquivalent
+            invokes.Should().HaveCount(1);
+            invokes.Single().Item1.Should().Be(classifier1);
+            invokes.Single().Item2.ChangeSpan.Should().Be(span1);
 
             invokes.Clear();
-            classifier2.ClassificationChangedEvent?.Invoke(classifier2, new ClassificationChangedEventArgs(span2));
-            Assert.AreEqual(1, invokes.Count);
-            Assert.AreEqual(classifier2, invokes[0].Item1);
-            Assert.AreEqual(span2, invokes[0].Item2.ChangeSpan);
+            classifier2.ClassificationChangedEvent.Invoke(classifier2, new ClassificationChangedEventArgs(span2));
+
+            // TODO: Refactor this code to use ShouldAllBeEquivalent
+            invokes.Should().HaveCount(1);
+            invokes.Single().Item1.Should().Be(classifier2);
+            invokes.Single().Item2.ChangeSpan.Should().Be(span2);
         }
     }
 }

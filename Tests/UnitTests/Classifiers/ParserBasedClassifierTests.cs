@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Balakin.VSOutputEnhancer.Parsers;
 using Balakin.VSOutputEnhancer.Parsers.Fakes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
+using FluentAssertions;
 using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Classification;
+using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 {
     [ExcludeFromCodeCoverage]
-    [TestClass]
     public class ParserBasedClassifierTests
     {
-        [TestMethod]
+        [Fact]
         public void NotParsed()
         {
             var parser = new StubIParser<ParsedData>();
@@ -31,13 +31,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             var classifier = Utils.CreateParserBasedClassifier(parser, processor);
 
             var span = Utils.CreateSpan("");
-            var classificationSpans = classifier.GetClassificationSpans(span);
-            Assert.AreEqual(0, classificationSpans.Count);
+            var actualResult = classifier.GetClassificationSpans(span);
+            actualResult.Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Fact]
         public void Parsed()
         {
+            var span = Utils.CreateSpan("");
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(span, new ClassificationTypeStub("TestClassification")),
+                new ClassificationSpan(span, new ClassificationTypeStub("TestClassification2"))
+            };
+
             var parser = new StubIParser<ParsedData>();
             parser.TryParseSnapshotSpanT0Out = delegate(SnapshotSpan s, out ParsedData r)
             {
@@ -53,11 +60,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 
             var classifier = Utils.CreateParserBasedClassifier(parser, processor);
 
-            var span = Utils.CreateSpan("");
-            var classificationSpans = classifier.GetClassificationSpans(span);
-            Assert.AreEqual(2, classificationSpans.Count);
-            Assert.AreEqual(1, classificationSpans.Count(s => s.ClassificationType.IsOfType("TestClassification")));
-            Assert.AreEqual(1, classificationSpans.Count(s => s.ClassificationType.IsOfType("TestClassification2")));
+            var actualResult = classifier.GetClassificationSpans(span);
+            actualResult.ShouldAllBeEquivalentTo(expectedResult);
         }
     }
 }
