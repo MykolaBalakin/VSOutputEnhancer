@@ -7,7 +7,7 @@ using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
-using Microsoft.VisualStudio.Text.Classification.Fakes;
+using NSubstitute;
 using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
@@ -28,20 +28,23 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
                 new ClassificationSpan(span2, new ClassificationTypeStub("ClassificationType2"))
             };
 
-            var classifier1 = new StubIClassifier();
-            classifier1.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan>
-            {
-                new ClassificationSpan(
-                    new SnapshotSpan(s.Snapshot, new Span(0, 4)),
-                    new ClassificationTypeStub("ClassificationType1"))
-            };
-            var classifier2 = new StubIClassifier();
-            classifier2.GetClassificationSpansSnapshotSpan = s => new List<ClassificationSpan>
-            {
-                new ClassificationSpan(
-                    new SnapshotSpan(s.Snapshot, new Span(5, 4)),
-                    new ClassificationTypeStub("ClassificationType2"))
-            };
+            var classifier1 = Substitute.For<IClassifier>();
+            classifier1.GetClassificationSpans(fullSpan)
+                .Returns(new List<ClassificationSpan>
+                {
+                    new ClassificationSpan(
+                        new SnapshotSpan(fullSpan.Snapshot, new Span(0, 4)),
+                        new ClassificationTypeStub("ClassificationType1"))
+                });
+
+            var classifier2 = Substitute.For<IClassifier>();
+            classifier2.GetClassificationSpans(fullSpan)
+                .Returns(new List<ClassificationSpan>
+                {
+                    new ClassificationSpan(
+                        new SnapshotSpan(fullSpan.Snapshot, new Span(5, 4)),
+                        new ClassificationTypeStub("ClassificationType2"))
+                });
 
             var aggregator = new ClassifiersAggregator(classifier1, classifier2);
             var actualResult = aggregator.GetClassificationSpans(fullSpan);
@@ -56,15 +59,15 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             var span1 = new SnapshotSpan(fullSpan.Snapshot, new Span(0, 4));
             var span2 = new SnapshotSpan(fullSpan.Snapshot, new Span(5, 4));
 
-            var classifier1 = new StubIClassifier();
-            var classifier2 = new StubIClassifier();
+            var classifier1 = new ClassifierStub();
+            var classifier2 = new ClassifierStub();
 
             var invokes = new List<Tuple<Object, ClassificationChangedEventArgs>>();
             var aggregator = new ClassifiersAggregator(classifier1, classifier2);
 
             aggregator.ClassificationChanged += (sender, e) => invokes.Add(Tuple.Create(sender, e));
 
-            classifier1.ClassificationChangedEvent.Invoke(classifier1, new ClassificationChangedEventArgs(span1));
+            classifier1.InvokeClassificationChanged(new ClassificationChangedEventArgs(span1));
 
             // TODO: Refactor this code to use ShouldAllBeEquivalent
             invokes.Should().HaveCount(1);
@@ -72,7 +75,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             invokes.Single().Item2.ChangeSpan.Should().Be(span1);
 
             invokes.Clear();
-            classifier2.ClassificationChangedEvent.Invoke(classifier2, new ClassificationChangedEventArgs(span2));
+            classifier2.InvokeClassificationChanged(new ClassificationChangedEventArgs(span2));
 
             // TODO: Refactor this code to use ShouldAllBeEquivalent
             invokes.Should().HaveCount(1);

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Media;
 using FluentAssertions;
-using Microsoft.VisualStudio.Text.Classification.Fakes;
+using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Formatting;
+using NSubstitute;
 using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests
@@ -60,14 +61,13 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
         private void TestTheme(TextFormattingRunProperties textProperties, Theme? expectedTheme)
         {
-            var classificationFormatMapService = new StubIClassificationFormatMapService();
-            classificationFormatMapService.GetClassificationFormatMapString = category =>
-            {
-                return new StubIClassificationFormatMap
-                {
-                    DefaultTextPropertiesGet = () => textProperties
-                };
-            };
+            var classificationFormatMap = Substitute.For<IClassificationFormatMap>();
+            classificationFormatMap.DefaultTextProperties
+                .Returns(textProperties);
+
+            var classificationFormatMapService = Substitute.For<IClassificationFormatMapService>();
+            classificationFormatMapService.GetClassificationFormatMap(Arg.Any<string>())
+                .Returns(classificationFormatMap);
 
             var environmentService = Utils.CreateEnvironmentService(classificationFormatMapService);
             var actualTheme = environmentService.GetTheme();
