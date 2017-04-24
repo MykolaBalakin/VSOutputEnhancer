@@ -35,6 +35,13 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
         }
 
         [Theory]
+        [MemberData(nameof(CreateErrorTestData))]
+        public void Error(String message, BuildFileRelatedMessageData expectedResult)
+        {
+            Test(message, expectedResult);
+        }
+
+        [Theory]
         [MemberData(nameof(CreateSingleBuildTaskTestData))]
         public void SingleBuildTask(String message, BuildFileRelatedMessageData expectedResult)
         {
@@ -92,6 +99,35 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
                     new ParsedValue<String>("The Binary/@Id attribute's value, 'GetUserCredentialsCA', is 20 characters long.  It will be too long if modularized.  The identifier shouldn't be longer than 18 characters long to allow for modularization (appending a guid for merge modules).", new Span(70, 243)),
                     new ParsedValue<String>("warning CNDL1000: The Binary/@Id attribute's value, 'GetUserCredentialsCA', is 20 characters long.  It will be too long if modularized.  The identifier shouldn't be longer than 18 characters long to allow for modularization (appending a guid for merge modules).", new Span(52, 261)),
                     new ParsedValue<String>("C:\\Sources\\Some project path\\AppPoolDlg.wxs", new Span(2, 43))
+                )
+            };
+        }
+
+        public static IEnumerable<Object[]> CreateErrorTestData()
+        {
+            yield return new Object[]
+            {
+                "Parsers\\BuildFileRelatedMessageParserTests.cs(95,50): error CS1003: Syntax error, ',' expected [UnitTests.csproj]\r\n",
+                new BuildFileRelatedMessageData(
+                    new ParsedValue<Int32>(),
+                    new ParsedValue<MessageType>(MessageType.Error, new Span(54, 5)),
+                    new ParsedValue<String>("CS1003", new Span(60, 6)),
+                    new ParsedValue<String>("Syntax error, ',' expected [UnitTests.csproj]", new Span(68, 45)),
+                    new ParsedValue<String>("error CS1003: Syntax error, ',' expected [UnitTests.csproj]", new Span(54, 59)),
+                    new ParsedValue<String>("Parsers\\BuildFileRelatedMessageParserTests.cs", new Span(0, 45))
+                )
+            };
+
+            yield return new Object[]
+            {
+                "1>c:\\users\\pazer\\onedrive\\documents\\digipen\\cs230\\project 7\\source\\Animation.h(15): fatal error C1083: Cannot open include file: 'IDynamicComponent.h': No such file or directory (compiling source file Source\\BehaviorBullet.c)\r\n",
+                new BuildFileRelatedMessageData(
+                    new ParsedValue<Int32>(1, new Span(0, 1)),
+                    new ParsedValue<MessageType>(MessageType.Error, new Span(84, 11)),
+                    new ParsedValue<String>("C1083", new Span(96, 5)),
+                    new ParsedValue<String>("Cannot open include file: 'IDynamicComponent.h': No such file or directory (compiling source file Source\\BehaviorBullet.c)", new Span(103, 122)),
+                    new ParsedValue<String>("fatal error C1083: Cannot open include file: 'IDynamicComponent.h': No such file or directory (compiling source file Source\\BehaviorBullet.c)", new Span(84, 141)),
+                    new ParsedValue<String>("c:\\users\\pazer\\onedrive\\documents\\digipen\\cs230\\project 7\\source\\Animation.h", new Span(2, 76))
                 )
             };
         }

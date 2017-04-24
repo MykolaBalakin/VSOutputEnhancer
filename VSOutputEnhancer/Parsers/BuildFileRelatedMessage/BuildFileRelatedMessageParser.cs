@@ -15,7 +15,9 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
 
             var lowerText = text.ToLowerInvariant();
             // TODO: Should load possible enum values by reflection
-            if (!lowerText.Contains(": warning ") && !lowerText.Contains(": error "))
+            if (!lowerText.Contains(": warning ")
+                && !lowerText.Contains(": error ")
+                && !lowerText.Contains(": fatal error "))
             {
                 return false;
             }
@@ -23,9 +25,10 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
             var locationVariants = new[]
             {
                 "\\(\\d+,\\d+,\\d+,\\d+\\)",
-                "\\(\\d+,\\d+\\)"
+                "\\(\\d+,\\d+\\)",
+                "\\(\\d+\\)"
             };
-            var regex = $"^(?:(?<BuildTaskId>\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>warning|error|Warning|Error) (?<Code>\\w+)?: (?<Message>.*))\r\n$";
+            var regex = $"^(?:(?<BuildTaskId>\\d+)>)?(?<FilePath>.*?)(?<Location>{String.Join("|", locationVariants)})?: (?<FullMessage>(?<Type>(fatal |Fatal )?(warning|error|Warning|Error)) (?<Code>\\w+)?: (?<Message>.*))\r\n$";
             var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success)
             {

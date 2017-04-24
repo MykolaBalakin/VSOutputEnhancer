@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
@@ -41,7 +42,7 @@ namespace Balakin.VSOutputEnhancer.Parsers
             // For each ParsedData property following code will be generated:
 
             //  5| matchGroup = matchGroups["{{Property name}}"];
-            //  6| if (matchGroup.Success) {
+            //  6| {
             //  7|     var value = ConvertType(matchGroup.Value);
             //  8|     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
             //  9|     result.{{Property name}} = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
@@ -52,6 +53,7 @@ namespace Balakin.VSOutputEnhancer.Parsers
 
             var groupSuccess = typeof(Group).GetProperty("Success");
             var enumParse = typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(String), typeof(Boolean) });
+            var stringEquals = typeof(String).GetMethod("Equals", new[] { typeof(String), typeof(String), typeof(StringComparison) });
             var groupValue = typeof(Group).GetProperty("Value");
             var groupIndex = typeof(Group).GetProperty("Index");
             var groupLength = typeof(Group).GetProperty("Length");
@@ -95,28 +97,47 @@ namespace Balakin.VSOutputEnhancer.Parsers
                 //  5| matchGroup = matchGroups["{{Property name}}"];
                 body.Add(Expression.Assign(matchGroupVar, Expression.Property(matchGroupsVar, groupCollectionItem, Expression.Constant(property.Name))));
 
-                //  6| if (matchGroup.Success) {
-                //  7|     var value = ConvertType(matchGroup.Value);
-                //  8|     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
-                //  9|     result.{{Property name}} = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
-                // 10| }
+                //  6| if (matchGroup.Success)
+                //  7| {
+                //  8|     var value = ConvertType(matchGroup.Value);
+                //  9|     newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
+                // 10|     result.{{Property name}} = new ParsedValue(ConvertType(matchGroup.Value), originalSpan)
+                // 11| }
                 var ifThenBody = new List<Expression>();
                 var propertyValueType = property.PropertyType.GetGenericArguments()[0];
                 if (!localVariables.ContainsKey(propertyValueType))
                 {
                     localVariables.Add(propertyValueType, Expression.Variable(propertyValueType));
                 }
+
                 var valueVar = localVariables[propertyValueType];
-                Expression valueVarValue;
+                var matchGroupValue = Expression.Property(matchGroupVar, groupValue);
+                Expression valueVarAssign;
                 if (propertyValueType.IsEnum)
                 {
-                    valueVarValue = Expression.Call(enumParse, Expression.Constant(propertyValueType), Expression.Property(matchGroupVar, groupValue), Expression.Constant(true));
+                    var enumParseExpression = Expression.Call(enumParse, Expression.Constant(propertyValueType), Expression.Property(matchGroupVar, groupValue), Expression.Constant(true));
+                    valueVarAssign = Expression.Assign(valueVar, Expression.Convert(enumParseExpression, propertyValueType));
+
+                    valueVarAssign = propertyValueType
+                        .GetFields()
+                        .SelectMany(f => f.GetCustomAttributes<EnumValueAttribute>().Select(a => new { Field = f, Value = a.Value }))
+                        .Aggregate(
+                            valueVarAssign,
+                            (current, value) =>
+                            {
+                                var condition = Expression.Call(stringEquals, matchGroupValue, Expression.Constant(value.Value), Expression.Constant(StringComparison.OrdinalIgnoreCase));
+                                var enumValue = Expression.Field(null, value.Field);
+                                var trueBody = Expression.Assign(valueVar, enumValue);
+                                return Expression.IfThenElse(condition, trueBody, current);
+                            }
+                        );
                 }
                 else
                 {
-                    valueVarValue = Expression.Call(convertChangeType, Expression.Property(matchGroupVar, groupValue), Expression.Constant(propertyValueType));
+                    var valueVarValue = Expression.Call(convertChangeType, matchGroupValue, Expression.Constant(propertyValueType));
+                    valueVarAssign = Expression.Assign(valueVar, Expression.Convert(valueVarValue, propertyValueType));
                 }
-                ifThenBody.Add(Expression.Assign(valueVar, Expression.Convert(valueVarValue, propertyValueType)));
+                ifThenBody.Add(valueVarAssign);
 
                 // 11| newSpan = new Span(originalSpan.Start + matchGroup.Index, matchGroup.Length);
                 var newSpanStart = Expression.Add(Expression.Property(originalSpanParam, spanStart), Expression.Property(matchGroupVar, groupIndex));

@@ -105,13 +105,14 @@
     <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
+    <Compile Include="Parsers\EnumValueAttribute.cs" />
     <Compile Include="Parsers\NpmResult\NpmResultData.cs" />
     <Compile Include="Parsers\NpmResult\NpmResultDataProcessor.cs" />
     <Compile Include="Parsers\NpmResult\NpmResultParser.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
     <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
-    <Compile Include="Parsers\BuildMessageType.cs" />
+    <Compile Include="Parsers\MessageType.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultData.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultDataProcessor.cs" />
     <Compile Include="Parsers\BuildResult\BuildResultParser.cs" />
