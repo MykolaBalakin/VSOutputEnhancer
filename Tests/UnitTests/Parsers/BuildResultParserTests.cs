@@ -86,5 +86,25 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             parsed.Should().BeTrue();
             parsedData.ShouldBeEquivalentTo(expectedResult);
         }
+
+        [Fact]
+        public void Clean()
+        {
+            const String cleanCompleteMessage = "========== Clean: 15 succeeded, 13 failed, 1 skipped ==========\r\n";
+            var expectedResult = new BuildResultData(
+                new ParsedValue<Int32>(15, new Span(18, 2)),
+                new ParsedValue<Int32>(13, new Span(32, 2)),
+                new ParsedValue<Int32>(),
+                new ParsedValue<Int32>(1, new Span(43, 1))
+            );
+
+            var span = Utils.CreateSpan(cleanCompleteMessage);
+            BuildResultData parsedData;
+            var parser = new BuildResultParser();
+            var parsed = parser.TryParse(span, out parsedData);
+
+            parsed.Should().BeTrue();
+            parsedData.ShouldBeEquivalentTo(expectedResult);
+        }
     }
 }

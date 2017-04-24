@@ -24,7 +24,7 @@ namespace Balakin.VSOutputEnhancer.Parsers.BuildResult
                 return false;
             }
 
-            var regex = "^========== (?:Build|Rebuild All): (?<Succeeded>\\d+) succeeded(?: or up-to-date)?, (?<Failed>\\d+) failed, (?:(?<UpToDate>\\d+) up-to-date, )?(?<Skipped>\\d+) skipped ==========\r\n$";
+            var regex = "^========== (?:Build|Rebuild All|Clean): (?<Succeeded>\\d+) succeeded(?: or up-to-date)?, (?<Failed>\\d+) failed, (?:(?<UpToDate>\\d+) up-to-date, )?(?<Skipped>\\d+) skipped ==========\r\n$";
             var match = Regex.Match(text, regex, RegexOptions.Compiled);
             if (!match.Success)
             {
