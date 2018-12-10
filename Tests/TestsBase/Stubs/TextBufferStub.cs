@@ -100,6 +100,7 @@ namespace Balakin.VSOutputEnhancer.Tests.Stubs
             get { throw new NotImplementedException(); }
         }
 
+#pragma warning disable CS0067
         public event EventHandler<SnapshotSpanEventArgs> ReadOnlyRegionsChanged;
         public event EventHandler<TextContentChangedEventArgs> Changed;
         public event EventHandler<TextContentChangedEventArgs> ChangedLowPriority;
@@ -107,5 +108,6 @@ namespace Balakin.VSOutputEnhancer.Tests.Stubs
         public event EventHandler<TextContentChangingEventArgs> Changing;
         public event EventHandler PostChanged;
         public event EventHandler<ContentTypeChangedEventArgs> ContentTypeChanged;
+#pragma warning restore CS0067
     }
 }
