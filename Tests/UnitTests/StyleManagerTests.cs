@@ -57,6 +57,10 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             {
                 ClassificationType.DebugTraceInformation
             };
+            var info = new[]
+            {
+                ClassificationType.BuildProjectHeader
+            };
 
             TestSimilarColors(error.Select(styleManager.GetStyleForClassificationType).ToList(), "error");
             TestSimilarColors(warning.Select(styleManager.GetStyleForClassificationType).ToList(), "warning");
@@ -67,6 +71,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 .Except(warning)
                 .Except(success)
                 .Except(skip)
+                .Except(info)
                 .ToList();
             notChecked.Should().BeEmpty("Classification types did not checked: " + String.Join(", ", notChecked));
         }

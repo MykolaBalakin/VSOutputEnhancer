@@ -1,4 +1,7 @@
 ﻿{
+  "BuildProjectHeader": {
+    "ForegroundColor": "#00FFFF"
+  },
   "BuildMessageError": {
     "ForegroundColor": "#BF0606"
   },

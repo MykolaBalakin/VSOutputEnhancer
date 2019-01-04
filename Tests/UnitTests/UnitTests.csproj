@@ -87,6 +87,7 @@
     <Compile Include="Classifiers\BowerOutputClassifierTests.cs" />
     <Compile Include="Classifiers\BuildOutputClassifierTestsBase.cs" />
     <Compile Include="Parsers\BowerMessageParserTests.cs" />
+    <Compile Include="Parsers\BuildProjectHeaderParserTests.cs" />
     <Compile Include="Parsers\NpmResultParserTests.cs" />
     <Compile Include="Parsers\NpmMessageParserTests.cs" />
     <Compile Include="Classifiers\BuildOrderOutputClassifierTests.cs" />

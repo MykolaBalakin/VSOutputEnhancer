@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Parsers.BowerMessage;
 using Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage;
+using Balakin.VSOutputEnhancer.Parsers.BuildProjectHeader;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
 using Balakin.VSOutputEnhancer.Parsers.DebugException;
 using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
@@ -33,6 +34,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
         {
             var expectedResult = new[]
             {
+                new ParserConfiguration(typeof(BuildProjectHeaderParser), typeof(BuildProjectHeaderData), typeof(BuildProjectHeaderProcessor)),
                 new ParserConfiguration(typeof(BuildResultParser), typeof(BuildResultData), typeof(BuildResultDataProcessor)),
                 new ParserConfiguration(typeof(BuildFileRelatedMessageParser), typeof(BuildFileRelatedMessageData), typeof(BuildFileRelatedMessageDataProcessor)),
                 new ParserConfiguration(typeof(PublishResultParser), typeof(PublishResultData), typeof(PublishResultDataProcessor)),

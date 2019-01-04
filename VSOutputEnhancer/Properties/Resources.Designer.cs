@@ -88,6 +88,15 @@ namespace Balakin.VSOutputEnhancer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output enhancer: Build project header.
+        /// </summary>
+        internal static string FormatDisplayName_BuildProjectHeader {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_BuildProjectHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output enhancer: Build failed.
         /// </summary>
         internal static string FormatDisplayName_BuildResultFailed {
