@@ -1,0 +1,32 @@
+trigger:
+  - master
+pr:
+  - master
+
+pool:
+  vmImage: VS2017-Win2016
+
+variables:
+  buildConfiguration: Release
+
+steps:
+  - task: NuGetCommand@2
+    displayName: Restore NuGet packages
+
+  - task: MSBuild@1
+    displayName: Build
+    inputs:
+      solution: VSOutputEnhancer.sln
+      configuration: $(buildConfiguration)
+      msbuildArguments: /p:OutputPath=$(Build.ArtifactStagingDirectory)
+
+  - task: VSTest@2
+    displayName: Test
+    inputs:
+      testSelector: testAssemblies
+      testAssemblyVer2: $(Build.ArtifactStagingDirectory)\Balakin.*test*.dll
+      pathtoCustomTestAdapters: $(Build.ArtifactStagingDirectory)
+      codeCoverageEnabled: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish artifacts
