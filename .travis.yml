@@ -1,0 +1,7 @@
+language: csharp
+solution: VSOutputEnhancer.sln
+script:
+  - nuget restore VSOutputEnhancer.sln
+  - mv packages/Microsoft.VSSDK.BuildTools.15.0.26109-RC3/tools/vssdk/* packages/Microsoft.VSSDK.BuildTools.15.0.26109-RC3/tools/VSSDK/
+  - ls -R /home/travis/build/nbalakin/VSOutputEnhancer/packages/Microsoft.VSSDK.BuildTools.15.0.26109-RC3
+  - msbuild /p:Configuration=Release VSOutputEnhancer.sln
