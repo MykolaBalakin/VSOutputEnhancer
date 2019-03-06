@@ -10,6 +10,10 @@ namespace Balakin.VSOutputEnhancer.Exports
     internal static class ClassificationTypeExports
     {
         [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BuildProjectHeader)]
+        public static ClassificationTypeDefinition BuildProjectHeader;
+
+        [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.BuildResultSucceeded)]
         public static ClassificationTypeDefinition BuildResultSucceeded;
 

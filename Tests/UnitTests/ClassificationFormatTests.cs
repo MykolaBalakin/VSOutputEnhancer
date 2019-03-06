@@ -67,6 +67,10 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
         private String GetCorrectName(Type formatType)
         {
+            if (formatType == typeof(BuildProjectHeaderFormatDefinition))
+            {
+                return "Output enhancer: Build project header";
+            }
             if (formatType == typeof(BuildMessageErrorFormatDefinition))
             {
                 return "Output enhancer: Build error message";

@@ -85,6 +85,7 @@
     <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildMessageWarningFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildResultFailedFormatDefinition.cs" />
+    <Compile Include="Exports\Formats\BuildProjectHeaderFormatDefinition.cs" />
     <Compile Include="Exports\Formats\BuildResultSucceededFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
     <Compile Include="Exports\Formats\DebugTraceErrorFormatDefinition.cs" />
@@ -105,6 +106,9 @@
     <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
     <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
+    <Compile Include="Parsers\BuildProjectHeader\BuildProjectHeaderData.cs" />
+    <Compile Include="Parsers\BuildProjectHeader\BuildProjectHeaderParser.cs" />
+    <Compile Include="Parsers\BuildProjectHeader\BuildProjectHeaderProcessor.cs" />
     <Compile Include="Parsers\EnumValueAttribute.cs" />
     <Compile Include="Parsers\NpmResult\NpmResultData.cs" />
     <Compile Include="Parsers\NpmResult\NpmResultDataProcessor.cs" />

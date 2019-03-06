@@ -12,6 +12,20 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
     public abstract class BuildOutputClassifierTestsBase : ClassifierTestsBase
     {
         [Fact]
+        public void BuildProjectHeader()
+        {
+            const String buildCompleteMessage = "1>------ Build started: Project: UnitTests, Configuration: Debug Any CPU ------\r\n";
+            var span = Utils.CreateSpan(buildCompleteMessage);
+
+            var expectedResult = new[]
+            {
+                new ClassificationSpan(span, new ClassificationTypeStub(ClassificationType.BuildProjectHeader))
+            };
+
+            Test(span, expectedResult);
+        }
+
+        [Fact]
         public void BuildFailed()
         {
             const String buildCompleteMessage = "========== Build: 5 succeeded, 1 failed, 3 up-to-date, 2 skipped ==========\r\n";

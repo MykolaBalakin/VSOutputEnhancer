@@ -10,6 +10,7 @@ namespace Balakin.VSOutputEnhancer
         {
             BuildMessageError,
             BuildMessageWarning,
+            BuildProjectHeader,
             BuildResultFailed,
             BuildResultSucceeded,
             PublishResultFailed,
@@ -24,6 +25,8 @@ namespace Balakin.VSOutputEnhancer
             NpmMessageError,
             BowerMessageError
         };
+
+        public const String BuildProjectHeader = "BuildProjectHeader";
 
         public const String BuildMessageError = "BuildMessageError";
         public const String BuildMessageWarning = "BuildMessageWarning";

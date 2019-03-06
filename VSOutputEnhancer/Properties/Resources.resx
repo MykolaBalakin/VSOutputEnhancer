@@ -129,6 +129,9 @@
   <data name="FormatDisplayName_BuildResultFailed" xml:space="preserve">
     <value>Output enhancer: Build failed</value>
   </data>
+  <data name="FormatDisplayName_BuildProjectHeader" xml:space="preserve">
+    <value>Output enhancer: Build project header</value>
+  </data>
   <data name="FormatDisplayName_BuildResultSucceeded" xml:space="preserve">
     <value>Output enhancer: Build succeeded</value>
   </data>
