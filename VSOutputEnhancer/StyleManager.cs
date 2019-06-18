@@ -43,7 +43,7 @@ namespace Balakin.VSOutputEnhancer
         private IDictionary<String, FormatDefinitionStyle> LoadColorsFromResources()
         {
             var theme = environmentService.GetTheme();
-            var file = Path.Combine(Utils.GetExtensionRootPath(), "Resources", theme + "Theme.json");
+            var file = Path.Combine(Utils.GetExtensionRootPath(), "Themes", theme + "Theme.json");
             if (File.Exists(file))
             {
                 var content = File.ReadAllText(file);
