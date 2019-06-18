@@ -1,171 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AEF34482-9ED6-4DC1-ACE4-59773A0C0635}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <Title>Output enhancer</Title>
+    <Description>Extension to add colors to Visual Studio output window.</Description>
+  </PropertyGroup>
+  <PropertyGroup>
     <RootNamespace>Balakin.VSOutputEnhancer</RootNamespace>
     <AssemblyName>Balakin.VSOutputEnhancer</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\VSSDK.CoreUtility.11.0.4\lib\net45\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\VSSDK.Text.11.0.4\lib\net45\Microsoft.VisualStudio.Text.Data.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\VSSDK.Text.11.0.4\lib\net45\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.UI, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\VSSDK.Text.11.0.4\lib\net45\Microsoft.VisualStudio.Text.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\VSSDK.Text.11.0.4\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Balakin.VSOutputEnhancer.Tests.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Balakin.VSOutputEnhancer.TestsBase</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Balakin.VSOutputEnhancer.Fakes</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Build\GlobalAssemblyInfo.cs">
-      <Link>Properties\GlobalAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="ClassificationType.cs" />
-    <Compile Include="ClassificationTypeService.cs" />
-    <Compile Include="Classifiers\ClassifierFactory.cs" />
-    <Compile Include="Classifiers\ClassifiersAggregator.cs" />
-    <Compile Include="Classifiers\IClassifierFactory.cs" />
-    <Compile Include="Classifiers\ParserBasedClassifier.cs" />
-    <Compile Include="ContentType.cs" />
-    <Compile Include="EnvironmentService.cs" />
-    <Compile Include="Exports\ClassificationTypeExports.cs" />
-    <Compile Include="Exports\ClassifierProvider.cs" />
-    <Compile Include="Exports\Formats\BowerMessageErrorFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\BuildMessageErrorFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\BuildMessageWarningFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\BuildResultFailedFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\BuildResultSucceededFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\DebugExceptionFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\DebugTraceErrorFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\DebugTraceWarningFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\NpmMessageErrorFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\NpmMessageWarningFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\NpmResultFailedFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\NpmResultSucceededFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\PublishResultFailedFormatDefinition.cs" />
-    <Compile Include="Exports\Formats\PublishResultSucceededFormatDefinition.cs" />
-    <Compile Include="FormatDefinitionStyle.cs" />
-    <Compile Include="IClassificationTypeService.cs" />
-    <Compile Include="IEnvironmentService.cs" />
-    <Compile Include="IParsersConfigurationService.cs" />
-    <Compile Include="IStyleManager.cs" />
-    <Compile Include="ParserConfiguration.cs" />
-    <Compile Include="ParsersConfigurationService.cs" />
-    <Compile Include="Parsers\BowerMessage\BowerMessageData.cs" />
-    <Compile Include="Parsers\BowerMessage\BowerMessageDataProcessor.cs" />
-    <Compile Include="Parsers\BowerMessage\BowerMessageParser.cs" />
-    <Compile Include="Parsers\EnumValueAttribute.cs" />
-    <Compile Include="Parsers\NpmResult\NpmResultData.cs" />
-    <Compile Include="Parsers\NpmResult\NpmResultDataProcessor.cs" />
-    <Compile Include="Parsers\NpmResult\NpmResultParser.cs" />
-    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageData.cs" />
-    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageDataProcessor.cs" />
-    <Compile Include="Parsers\BuildFileRelatedMessage\BuildFileRelatedMessageParser.cs" />
-    <Compile Include="Parsers\MessageType.cs" />
-    <Compile Include="Parsers\BuildResult\BuildResultData.cs" />
-    <Compile Include="Parsers\BuildResult\BuildResultDataProcessor.cs" />
-    <Compile Include="Parsers\BuildResult\BuildResultParser.cs" />
-    <Compile Include="Parsers\DebugException\DebugExceptionData.cs" />
-    <Compile Include="Parsers\DebugException\DebugExceptionDataProcessor.cs" />
-    <Compile Include="Parsers\DebugException\DebugExceptionParser.cs" />
-    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageDataProcessor.cs" />
-    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageData.cs" />
-    <Compile Include="Parsers\DebugTraceMessage\DebugTraceMessageParser.cs" />
-    <Compile Include="Parsers\IParsedDataProcessor.cs" />
-    <Compile Include="Parsers\IParser.cs" />
-    <Compile Include="Parsers\NpmMessage\NpmMessageData.cs" />
-    <Compile Include="Parsers\NpmMessage\NpmMessageDataProcessor.cs" />
-    <Compile Include="Parsers\NpmMessage\NpmMessageParser.cs" />
-    <Compile Include="Parsers\ParsedData.cs" />
-    <Compile Include="Parsers\ParsedValue.cs" />
-    <Compile Include="Parsers\ProcessedParsedData.cs" />
-    <Compile Include="Parsers\PublishResult\PublishResultData.cs" />
-    <Compile Include="Parsers\PublishResult\PublishResultDataProcessor.cs" />
-    <Compile Include="Parsers\PublishResult\PublishResultParser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="StyledClassificationFormatDefinition.cs" />
-    <Compile Include="StyleManager.cs" />
-    <Compile Include="Theme.cs" />
-    <Compile Include="UseForClassificationAttribute.cs" />
-    <Compile Include="Utils.cs" />
+    <PackageReference Include="Newtonsoft.Json" Version="7.0.1" />
+    <PackageReference Include="VSSDK.Text" Version="11.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <Content Include="Resources\DarkTheme.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\LightTheme.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Themes/*.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
