@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Balakin.VSOutputEnhancer
 {
-    internal static class ClassificationType
+    public static class ClassificationType
     {
         public static readonly String[] All = new[]
         {
