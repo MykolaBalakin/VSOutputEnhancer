@@ -13,9 +13,11 @@ namespace Balakin.VSOutputEnhancer.Tests
         {
             var assembly = GetAssembly();
 
-            var notExcluded = assembly.GetTypes().Where(t => !IsExcludedFromCodeCoverage(t)).ToList();
-            var notExcludedString = String.Join(", ", notExcluded.Select(t => t.Name));
-            notExcluded.Should().BeEmpty($"Those types are not excluded from code coverage analysis: {notExcludedString}");
+            var notExcluded = assembly.GetTypes()
+                .Where(t => !t.IsInterface)
+                .Where(t => !IsExcludedFromCodeCoverage(t))
+                .ToList();
+            notExcluded.Should().BeEmpty("All test code should be excluded from code coverage");
         }
 
         protected virtual Assembly GetAssembly()
@@ -30,10 +32,12 @@ namespace Balakin.VSOutputEnhancer.Tests
             {
                 return true;
             }
+
             if (t.DeclaringType != null)
             {
                 return IsExcludedFromCodeCoverage(t.DeclaringType);
             }
+
             return false;
         }
     }
