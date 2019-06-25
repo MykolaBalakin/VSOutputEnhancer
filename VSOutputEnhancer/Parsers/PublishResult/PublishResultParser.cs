@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.PublishResult
 {
+    [Export(typeof(IParser<PublishResultData>))]
     [UseForClassification(ContentType.BuildOutput)]
     [UseForClassification(ContentType.BuildOrderOutput)]
     internal class PublishResultParser : IParser<PublishResultData>

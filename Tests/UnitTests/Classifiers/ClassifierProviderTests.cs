@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Exports;
 using FluentAssertions;
+using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
@@ -35,10 +36,10 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             classifier.Should().BeNull();
         }
 
-        ClassifierProvider CreateClassifierProvider()
+        IClassifierProvider CreateClassifierProvider()
         {
             var factory = Utils.CreateClassifierFactory();
-            var provider = new ClassifierProvider(factory);
+            var provider = new OldClassifierProvider(factory);
             return provider;
         }
     }

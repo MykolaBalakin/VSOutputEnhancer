@@ -2,7 +2,7 @@ using System;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult
 {
-    internal class BuildResultData : ParsedData
+    public class BuildResultData : ParsedData
     {
         // TODO: Refactor ParsedData builder to get rid of this constructor
         public BuildResultData()

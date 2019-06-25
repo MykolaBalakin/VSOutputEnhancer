@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
 {
+    [Export(typeof(IParser<BuildFileRelatedMessageData>))]
     [UseForClassification(ContentType.BuildOutput)]
     [UseForClassification(ContentType.BuildOrderOutput)]
     internal class BuildFileRelatedMessageParser : IParser<BuildFileRelatedMessageData>
