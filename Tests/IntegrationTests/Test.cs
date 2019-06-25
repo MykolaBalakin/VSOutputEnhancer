@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
-using Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
@@ -16,7 +16,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
     public class Test
     {
         [Theory]
-        [InlineData(typeof(Smoke))]
+        [MemberData(nameof(EnumerateTestCases))]
         public void ClassificationReturnsExpectedResult(Type testCaseType)
         {
             var testCase = (ITestCase)Activator.CreateInstance(testCaseType);
@@ -37,6 +37,14 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
             }
 
             actualResult.ShouldAllBeEquivalentTo(testCase.ExpectedResult);
+        }
+
+        public static IEnumerable<object[]> EnumerateTestCases()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var testCaseInterface = typeof(ITestCase);
+            var testCases = assembly.GetTypes().Where(t => !t.IsInterface && testCaseInterface.IsAssignableFrom(t));
+            return testCases.Select(t => new[] { t });
         }
 
         private IClassifierProvider CreateClassifierProvider()
