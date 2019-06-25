@@ -7,7 +7,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
     [ExcludeFromCodeCoverage]
     public class Smoke : ITestCase
     {
-        public String ContentType { get; } = "BuildOrderOutput";
+        public String ContentType { get; } = VSOutputEnhancer.ContentType.BuildOrderOutput;
 
         public IReadOnlyList<String> SourceText { get; } = new[]
         {
