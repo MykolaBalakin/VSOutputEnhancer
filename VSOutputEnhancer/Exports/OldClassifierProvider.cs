@@ -1,27 +1,17 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Balakin.VSOutputEnhancer.Classifiers;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
-using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer.Exports
 {
-    [Export(typeof(IClassifierProvider))]
-    [ContentType(ContentType.BuildOutput)]
-    [ContentType(ContentType.BuildOrderOutput)]
-    [ContentType(ContentType.DebugOutput)]
-    // For npm logs
-    [ContentType(ContentType.Output)]
-#if DEBUG
-    [ContentType(ContentType.Text)]
-#endif
-    internal class ClassifierProvider : IClassifierProvider
+    [Export(typeof(OldClassifierProvider))]
+    public class OldClassifierProvider : IClassifierProvider
     {
         private readonly IClassifierFactory classifierFactory;
 
         [ImportingConstructor]
-        public ClassifierProvider(IClassifierFactory classifierFactory)
+        public OldClassifierProvider(IClassifierFactory classifierFactory)
         {
             this.classifierFactory = classifierFactory;
         }

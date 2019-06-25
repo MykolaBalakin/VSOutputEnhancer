@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult
 {
+    [Export(typeof(IParser<BuildResultData>))]
     [UseForClassification(ContentType.BuildOutput)]
     [UseForClassification(ContentType.BuildOrderOutput)]
     internal class BuildResultParser : IParser<BuildResultData>
