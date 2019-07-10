@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugException
 {
+    [Export(typeof(IParser<DebugExceptionData>))]
     [UseForClassification(ContentType.DebugOutput)]
     internal class DebugExceptionParser : IParser<DebugExceptionData>
     {
