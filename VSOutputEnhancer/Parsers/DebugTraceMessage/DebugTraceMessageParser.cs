@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -7,6 +8,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
 {
+    [Export(typeof(IParser<DebugTraceMessageData>))]
     [UseForClassification(ContentType.DebugOutput)]
     internal class DebugTraceMessageParser : IParser<DebugTraceMessageData>
     {

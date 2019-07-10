@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
 {
-    internal class DebugTraceMessageData : ParsedData
+    public class DebugTraceMessageData : ParsedData
     {
         // TODO: Refactor ParsedData builder to get rid of this constructor
         public DebugTraceMessageData()
