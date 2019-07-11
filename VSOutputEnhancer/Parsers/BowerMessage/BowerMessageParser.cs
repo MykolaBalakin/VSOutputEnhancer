@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.BowerMessage
 {
     [Export(typeof(IParser<BowerMessageData>))]
-    [UseForClassification(ContentType.Output)]
     internal class BowerMessageParser : IParser<BowerMessageData>
     {
         public Boolean TryParse(SnapshotSpan span, out BowerMessageData result)

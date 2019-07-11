@@ -8,7 +8,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.DebugException
 {
     [Export(typeof(IParser<DebugExceptionData>))]
-    [UseForClassification(ContentType.DebugOutput)]
     internal class DebugExceptionParser : IParser<DebugExceptionData>
     {
         public Boolean TryParse(SnapshotSpan span, out DebugExceptionData result)

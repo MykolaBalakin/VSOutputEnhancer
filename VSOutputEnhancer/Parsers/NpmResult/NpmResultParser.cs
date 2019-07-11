@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.NpmResult
 {
     [Export(typeof(IParser<NpmResultData>))]
-    [UseForClassification(ContentType.Output)]
     internal class NpmResultParser : IParser<NpmResultData>
     {
         public Boolean TryParse(SnapshotSpan span, out NpmResultData result)
