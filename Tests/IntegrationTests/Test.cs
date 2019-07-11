@@ -43,7 +43,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
         {
             var assembly = Assembly.GetExecutingAssembly();
             var testCaseInterface = typeof(ITestCase);
-            var testCases = assembly.GetTypes().Where(t => !t.IsInterface && testCaseInterface.IsAssignableFrom(t));
+            var testCases = assembly.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract && testCaseInterface.IsAssignableFrom(t));
             return testCases.Select(t => new[] { t });
         }
 
