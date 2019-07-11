@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
 {
+    [Obsolete]
     internal class DebugTraceMessageDataProcessor : IParsedDataProcessor<DebugTraceMessageData>
     {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugTraceMessageData data)

@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BuildFileRelatedMessage
 {
+    [Obsolete]
     internal class BuildFileRelatedMessageDataProcessor : IParsedDataProcessor<BuildFileRelatedMessageData>
     {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, BuildFileRelatedMessageData parsedData)

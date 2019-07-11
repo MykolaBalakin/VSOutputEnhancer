@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BowerMessage
 {
+    [Obsolete]
     internal class BowerMessageDataProcessor : IParsedDataProcessor<BowerMessageData>
     {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, BowerMessageData parsedData)
