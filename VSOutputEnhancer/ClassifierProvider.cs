@@ -39,6 +39,11 @@ namespace Balakin.VSOutputEnhancer
             var contentType = textBuffer.ContentType;
 
             var classifiers = GetSpanClassifiers(contentType);
+            if (!classifiers.Any())
+            {
+                return null;
+            }
+
             var dispatcher = CreateDispatcher(contentType);
             var classifier = new Classifier(dispatcher, classifiers, classificationTypeService);
             return classifier;
