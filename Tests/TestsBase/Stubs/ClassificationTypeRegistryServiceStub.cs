@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.Tests.Stubs
 {
+    [Export(typeof(IClassificationTypeRegistryService))]
     [ExcludeFromCodeCoverage]
     public class ClassificationTypeRegistryServiceStub : IClassificationTypeRegistryService
     {
