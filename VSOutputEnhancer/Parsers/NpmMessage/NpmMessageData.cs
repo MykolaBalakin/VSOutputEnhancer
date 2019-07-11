@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.NpmMessage
 {
-    internal class NpmMessageData : ParsedData
+    public class NpmMessageData : ParsedData
     {
         // TODO: Refactor ParsedData builder to get rid of this constructor
         public NpmMessageData()
