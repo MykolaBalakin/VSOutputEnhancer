@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BowerMessage
 {
-    internal class BowerMessageData : ParsedData
+    public class BowerMessageData : ParsedData
     {
         public ParsedValue<String> PackageName { get; set; }
         public ParsedValue<String> PackageVersion { get; set; }

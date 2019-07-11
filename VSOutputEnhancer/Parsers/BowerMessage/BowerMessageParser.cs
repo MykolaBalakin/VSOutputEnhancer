@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.BowerMessage
 {
+    [Export(typeof(IParser<BowerMessageData>))]
     [UseForClassification(ContentType.Output)]
     internal class BowerMessageParser : IParser<BowerMessageData>
     {
