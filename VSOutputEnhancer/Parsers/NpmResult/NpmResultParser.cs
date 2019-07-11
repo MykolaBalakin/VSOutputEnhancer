@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.NpmResult
 {
+    [Export(typeof(IParser<NpmResultData>))]
     [UseForClassification(ContentType.Output)]
     internal class NpmResultParser : IParser<NpmResultData>
     {
