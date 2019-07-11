@@ -5,12 +5,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 {
     [ExcludeFromCodeCoverage]
     public class ClassificationPerfomance
     {
+        private readonly ITestOutputHelper testOutputHelper;
+
+        public ClassificationPerfomance(ITestOutputHelper testOutputHelper)
+        {
+            this.testOutputHelper = testOutputHelper;
+        }
+
         [Fact]
         public void EntityFramework()
         {
@@ -27,7 +35,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();
-            Trace.TraceInformation("Elapsed: " + sw.Elapsed);
+            WriteMessage("Elapsed: " + sw.Elapsed);
             sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
         }
 
@@ -46,8 +54,14 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
             sw.Stop();
-            Trace.TraceInformation("Elapsed: " + sw.Elapsed);
+            WriteMessage("Elapsed: " + sw.Elapsed);
             sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
+        }
+
+        private void WriteMessage(String message)
+        {
+            Console.WriteLine(message);
+            testOutputHelper.WriteLine(message);
         }
     }
 }
