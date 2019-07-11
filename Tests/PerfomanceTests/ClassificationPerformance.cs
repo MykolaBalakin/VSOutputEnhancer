@@ -10,11 +10,11 @@ using Xunit.Abstractions;
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 {
     [ExcludeFromCodeCoverage]
-    public class ClassificationPerfomance
+    public class ClassificationPerformance
     {
         private readonly ITestOutputHelper testOutputHelper;
 
-        public ClassificationPerfomance(ITestOutputHelper testOutputHelper)
+        public ClassificationPerformance(ITestOutputHelper testOutputHelper)
         {
             this.testOutputHelper = testOutputHelper;
         }
