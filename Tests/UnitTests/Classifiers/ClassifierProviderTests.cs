@@ -38,9 +38,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
 
         IClassifierProvider CreateClassifierProvider()
         {
-            var factory = Utils.CreateClassifierFactory();
-            var provider = new OldClassifierProvider(factory);
-            return provider;
+            var exportProvider = ExportProviderFactory.Create();
+            return exportProvider.GetExport<IClassifierProvider>().Value;
         }
     }
 }
