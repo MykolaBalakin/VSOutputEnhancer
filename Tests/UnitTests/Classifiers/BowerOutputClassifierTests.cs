@@ -12,10 +12,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
     [ExcludeFromCodeCoverage]
     public class BowerOutputClassifierTests : ClassifierTestsBase
     {
-        protected override IClassifier CreateClassifier()
-        {
-            return Utils.CreateBowerOutputClassifier();
-        }
+        protected override String GetContentType() => ContentType.Output;
 
         [Fact]
         public void PackageNotFound()
