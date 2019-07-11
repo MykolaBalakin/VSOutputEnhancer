@@ -6,8 +6,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.BuildResult
 {
     [Export(typeof(IParser<BuildResultData>))]
-    [UseForClassification(ContentType.BuildOutput)]
-    [UseForClassification(ContentType.BuildOrderOutput)]
     internal class BuildResultParser : IParser<BuildResultData>
     {
         public Boolean TryParse(SnapshotSpan span, out BuildResultData result)

@@ -8,8 +8,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.PublishResult
 {
     [Export(typeof(IParser<PublishResultData>))]
-    [UseForClassification(ContentType.BuildOutput)]
-    [UseForClassification(ContentType.BuildOrderOutput)]
     internal class PublishResultParser : IParser<PublishResultData>
     {
         public Boolean TryParse(SnapshotSpan span, out PublishResultData result)

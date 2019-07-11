@@ -6,9 +6,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.NpmMessage
 {
     [Export(typeof(IParser<NpmMessageData>))]
-    [UseForClassification(ContentType.Output)]
-    [UseForClassification(ContentType.BuildOutput)]
-    [UseForClassification(ContentType.BuildOrderOutput)]
     internal class NpmMessageParser : IParser<NpmMessageData>
     {
         public Boolean TryParse(SnapshotSpan span, out NpmMessageData result)

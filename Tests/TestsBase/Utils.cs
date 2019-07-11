@@ -33,31 +33,6 @@ namespace Balakin.VSOutputEnhancer.Tests
             return new ClassificationTypeRegistryServiceStub();
         }
 
-        public static IClassifierFactory CreateClassifierFactory()
-        {
-            var classificationTypeSevice = Utils.CreateClassificationTypeService();
-            var parsersConfigurationService = Utils.CreateParsersConfigurationService();
-            return new ClassifierFactory(classificationTypeSevice, parsersConfigurationService);
-        }
-
-        public static IClassifier CreateBuildOutputClassifier()
-        {
-            var factory = Utils.CreateClassifierFactory();
-            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.BuildOutput));
-        }
-
-        public static IClassifier CreateDebugClassifier()
-        {
-            var factory = Utils.CreateClassifierFactory();
-            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.DebugOutput));
-        }
-
-        public static IClassifier CreateBuildOrderOutputClassifier()
-        {
-            var factory = Utils.CreateClassifierFactory();
-            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.BuildOrderOutput));
-        }
-
         public static IClassificationTypeService CreateClassificationTypeService()
         {
             var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
@@ -140,23 +115,6 @@ namespace Balakin.VSOutputEnhancer.Tests
         {
             var result = createTextFormattingRunProperties.Value(foreground, background);
             return result;
-        }
-
-        public static IParsersConfigurationService CreateParsersConfigurationService()
-        {
-            return new ParsersConfigurationService();
-        }
-
-        public static IClassifier CreateNpmOutputClassifier()
-        {
-            var factory = Utils.CreateClassifierFactory();
-            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.Output));
-        }
-
-        public static IClassifier CreateBowerOutputClassifier()
-        {
-            var factory = Utils.CreateClassifierFactory();
-            return factory.GetClassifierForContentType(new ContentTypeStub(ContentType.Output));
         }
     }
 }

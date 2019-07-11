@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.Text;
 namespace Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage
 {
     [Export(typeof(IParser<DebugTraceMessageData>))]
-    [UseForClassification(ContentType.DebugOutput)]
     internal class DebugTraceMessageParser : IParser<DebugTraceMessageData>
     {
         public Boolean TryParse(SnapshotSpan span, out DebugTraceMessageData result)
