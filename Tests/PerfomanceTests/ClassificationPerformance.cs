@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
+using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -27,7 +29,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 
             var content = Utils.ReadLogFile("Resources\\EntityFrameworkBuild.log");
             var spans = content.Select(Tests.Utils.CreateSpan).ToList();
-            var classifier = Tests.Utils.CreateBuildOutputClassifier();
+            var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
             foreach (var span in spans)
@@ -46,7 +48,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 
             var content = Utils.ReadLogFile("Resources\\RandomBuildOutput.log");
             var spans = content.Select(Tests.Utils.CreateSpan).ToList();
-            var classifier = Tests.Utils.CreateBuildOutputClassifier();
+            var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
             foreach (var span in spans)
@@ -56,6 +58,14 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             sw.Stop();
             WriteMessage("Elapsed: " + sw.Elapsed);
             sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
+        }
+
+        private IClassifier CreateBuildOutputClassifier()
+        {
+            var provider = ExportProviderFactory.Create();
+            var classifierProvider = provider.GetExport<IClassifierProvider>().Value;
+            var classifier = classifierProvider.GetClassifier(new TextBufferStub(ContentType.BuildOutput));
+            return classifier;
         }
 
         private void WriteMessage(String message)

@@ -66,9 +66,6 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Classifiers
             Test(span, expectedResult);
         }
 
-        protected override IClassifier CreateClassifier()
-        {
-            return Utils.CreateNpmOutputClassifier();
-        }
+        protected override String GetContentType() => ContentType.Output;
     }
 }
