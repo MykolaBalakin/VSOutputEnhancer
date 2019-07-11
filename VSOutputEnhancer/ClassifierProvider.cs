@@ -27,8 +27,6 @@ namespace Balakin.VSOutputEnhancer
         private readonly OldClassifierProvider oldClassifierProvider;
         private readonly HashSet<String> oldContentTypes = new HashSet<String>
         {
-            ContentType.Output,
-            ContentType.Text
         };
 
         [ImportingConstructor]
