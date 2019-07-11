@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.NpmResult
 {
+    [Obsolete]
     internal class NpmResultDataProcessor : IParsedDataProcessor<NpmResultData>
     {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, NpmResultData parsedData)

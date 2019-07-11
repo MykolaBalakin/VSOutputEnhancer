@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Balakin.VSOutputEnhancer.Parsers.DebugException
 {
+    [Obsolete]
     internal class DebugExceptionDataProcessor : IParsedDataProcessor<DebugExceptionData>
     {
         public IEnumerable<ProcessedParsedData> ProcessData(SnapshotSpan span, DebugExceptionData parsedData)

@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Balakin.VSOutputEnhancer
 {
+    [Obsolete]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     internal class UseForClassificationAttribute : Attribute
     {

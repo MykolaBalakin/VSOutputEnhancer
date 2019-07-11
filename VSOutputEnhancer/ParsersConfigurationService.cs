@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Balakin.VSOutputEnhancer
 {
+    [Obsolete]
     [Export(typeof(IParsersConfigurationService))]
     internal class ParsersConfigurationService : IParsersConfigurationService
     {
