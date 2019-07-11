@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using Balakin.VSOutputEnhancer.Exports;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
@@ -24,31 +23,20 @@ namespace Balakin.VSOutputEnhancer
         private readonly IEnumerable<ISpanClassifier> spanClassifiers;
         private readonly IEnumerable<IEventHandler> eventHandlers;
 
-        private readonly OldClassifierProvider oldClassifierProvider;
-        private readonly HashSet<String> oldContentTypes = new HashSet<String>
-        {
-        };
-
         [ImportingConstructor]
         public ClassifierProvider(
             IClassificationTypeService classificationTypeService,
             [ImportMany] IEnumerable<ISpanClassifier> spanClassifiers,
-            [ImportMany] IEnumerable<IEventHandler> eventHandlers,
-            OldClassifierProvider oldClassifierProvider)
+            [ImportMany] IEnumerable<IEventHandler> eventHandlers)
         {
             this.spanClassifiers = spanClassifiers;
             this.eventHandlers = eventHandlers;
-            this.oldClassifierProvider = oldClassifierProvider;
             this.classificationTypeService = classificationTypeService;
         }
 
         public IClassifier GetClassifier(ITextBuffer textBuffer)
         {
             var contentType = textBuffer.ContentType;
-            if (oldContentTypes.Contains(contentType.TypeName))
-            {
-                return oldClassifierProvider.GetClassifier(textBuffer);
-            }
 
             var classifiers = GetSpanClassifiers(contentType);
             var dispatcher = CreateDispatcher(contentType);
