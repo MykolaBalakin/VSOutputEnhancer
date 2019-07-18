@@ -39,13 +39,6 @@ namespace Balakin.VSOutputEnhancer.Tests
             return new ClassificationTypeService(classificationTypeRegistryService);
         }
 
-        public static IClassifier CreateParserBasedClassifier<T>(IParser<T> parser, IParsedDataProcessor<T> processor)
-            where T : ParsedData
-        {
-            var classificationTypeSevice = Utils.CreateClassificationTypeService();
-            return new ParserBasedClassifier<T>(parser, processor, classificationTypeSevice);
-        }
-
         public static IStyleManager CreateStyleManager()
         {
             var styleManager = new StyleManagerStub();
