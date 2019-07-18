@@ -16,7 +16,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
             "2>------ Build started: Project: WebDemo, Configuration: Debug Any CPU ------\r\n",
             "1>C:\\test\\ConsoleDemo\\Program.cs: warning CS0168: The variable 'ex' is declared but never used\r\n",
             "1>C:\\test\\ConsoleDemo\\Program.cs(1,14,1,15): error CS1022: Type or namespace definition, or end-of-file expected\r\n",
-            "2>  WebDemo -> C:\\test\\WebDemo\bin\\WebDemo.dll\r\n",
+            "2>  WebDemo -> C:\\test\\WebDemo\\bin\\WebDemo.dll\r\n",
             "========== Build: 1 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========\r\n"
         };
 
