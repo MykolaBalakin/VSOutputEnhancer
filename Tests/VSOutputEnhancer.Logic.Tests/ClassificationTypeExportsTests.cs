@@ -20,8 +20,8 @@ namespace Balakin.VSOutputEnhancer.Logic.Tests
             var exportedDefinitions = EnumerateClassificationTypes();
 
             var allDefinitions = ClassificationType.All;
-            var notExportedDefinitions = allDefinitions.Except(exportedDefinitions).ToList();
-            notExportedDefinitions.Should().BeEmpty("Not exported classification definitions: " + String.Join(", ", notExportedDefinitions));
+            var notExportedDefinitions = allDefinitions.Except(exportedDefinitions);
+            notExportedDefinitions.Should().BeEmpty("All classification types should be exported");
         }
 
         [Theory]
