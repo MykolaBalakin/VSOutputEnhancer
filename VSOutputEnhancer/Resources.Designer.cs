@@ -76,6 +76,24 @@ namespace Balakin.VSOutputEnhancer {
             }
         }
         
+        public static string FormatDisplayName_BuildStartedSuccess {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_BuildStartedSuccess", resourceCulture);
+            }
+        }
+        
+        public static string FormatDisplayName_BuildStartedWarning {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_BuildStartedWarning", resourceCulture);
+            }
+        }
+        
+        public static string FormatDisplayName_BuildStartedError {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_BuildStartedError", resourceCulture);
+            }
+        }
+        
         public static string FormatDisplayName_DebugException {
             get {
                 return ResourceManager.GetString("FormatDisplayName_DebugException", resourceCulture);

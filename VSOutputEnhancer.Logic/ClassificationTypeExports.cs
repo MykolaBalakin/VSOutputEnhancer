@@ -15,6 +15,18 @@ namespace Balakin.VSOutputEnhancer.Logic
         public static ClassificationTypeDefinition BuildResultFailed;
 
         [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BuildStartedSuccess)]
+        public static ClassificationTypeDefinition BuildStartedSuccess;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BuildStartedWarning)]
+        public static ClassificationTypeDefinition BuildStartedWarning;
+
+        [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BuildStartedError)]
+        public static ClassificationTypeDefinition BuildStartedError;
+
+        [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.BuildMessageError)]
         public static ClassificationTypeDefinition BuildMessageError;
 
