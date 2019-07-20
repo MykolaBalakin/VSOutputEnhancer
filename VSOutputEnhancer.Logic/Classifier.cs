@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Events;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
 namespace Balakin.VSOutputEnhancer.Logic
 {
-    public class Classifier : IClassifier
+    public class Classifier : IClassifier, IEventHandler<ClassificationChangedEvent>
     {
         private readonly IDispatcher dispatcher;
         private readonly IReadOnlyCollection<ISpanClassifier> spanClassifiers;
@@ -22,6 +24,8 @@ namespace Balakin.VSOutputEnhancer.Logic
             this.classificationTypeService = classificationTypeService;
         }
 
+        public IEnumerable<String> ContentTypes => throw new NotSupportedException();
+
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
             var result = new List<ClassificationSpan>();
@@ -35,17 +39,19 @@ namespace Balakin.VSOutputEnhancer.Logic
             return result;
         }
 
-        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged
-        {
-            add { }
-            remove { }
-        }
+        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
 
         private ClassificationSpan CreateClassificationSpan(SnapshotSpan originalSpan, ProcessedParsedData data)
         {
             var classificationType = classificationTypeService.GetClassificationType(data.ClassificationName);
             var span = new SnapshotSpan(originalSpan.Snapshot, data.Span);
             return new ClassificationSpan(span, classificationType);
+        }
+
+        public void Handle(IDispatcher dispatcher, ClassificationChangedEvent @event)
+        {
+            var eventArgs = new ClassificationChangedEventArgs(@event.Span);
+            ClassificationChanged?.Invoke(this, eventArgs);
         }
     }
 }

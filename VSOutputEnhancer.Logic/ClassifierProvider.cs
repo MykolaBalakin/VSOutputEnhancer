@@ -46,6 +46,7 @@ namespace Balakin.VSOutputEnhancer.Logic
 
             var dispatcher = CreateDispatcher(contentType);
             var classifier = new Classifier(dispatcher, classifiers, classificationTypeService);
+            dispatcher.AddHandler(classifier);
             return classifier;
         }
 
