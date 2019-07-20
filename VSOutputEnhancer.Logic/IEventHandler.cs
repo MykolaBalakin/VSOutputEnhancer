@@ -11,6 +11,6 @@ namespace Balakin.VSOutputEnhancer.Logic
     public interface IEventHandler<in TEvent> : IEventHandler
         where TEvent : IEvent
     {
-        void Handle(IDispatcher dispatcher, TEvent @event);
+        void Handle(IDispatcher dispatcher, DataContainer data, TEvent @event);
     }
 }

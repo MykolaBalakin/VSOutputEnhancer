@@ -22,7 +22,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             public IEnumerable<String> ContentTypes { get; }
             public Int32 InvocationCount { get; private set; }
 
-            public void Handle(IDispatcher dispatcher, TEvent @event)
+            public void Handle(IDispatcher dispatcher, DataContainer data, TEvent @event)
             {
                 InvocationCount++;
             }
@@ -44,7 +44,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             dispatcher.AddHandler(handler);
 
             var @event = new TestEvent();
-            dispatcher.Dispatch(@event);
+            var data = new DataContainer();
+            dispatcher.Dispatch(@event, data);
 
             handler.InvocationCount.Should().Be(1);
         }
@@ -60,7 +61,8 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             dispatcher.AddHandler(anotherHandler);
 
             var @event = new TestEvent();
-            dispatcher.Dispatch(@event);
+            var data = new DataContainer();
+            dispatcher.Dispatch(@event, data);
 
             handler.InvocationCount.Should().Be(1);
             anotherHandler.InvocationCount.Should().Be(0);

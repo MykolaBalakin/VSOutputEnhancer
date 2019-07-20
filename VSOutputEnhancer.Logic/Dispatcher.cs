@@ -7,7 +7,7 @@ namespace Balakin.VSOutputEnhancer.Logic
 {
     public class Dispatcher : IDispatcher
     {
-        private readonly IDictionary<Type, Action<Object>> eventHandlers = new Dictionary<Type, Action<Object>>();
+        private readonly IDictionary<Type, Action<Object, DataContainer>> eventHandlers = new Dictionary<Type, Action<Object, DataContainer>>();
 
         public void AddHandler(IEventHandler handler)
         {
@@ -17,12 +17,12 @@ namespace Balakin.VSOutputEnhancer.Logic
             }
         }
 
-        public void Dispatch(IEvent @event)
+        public void Dispatch(IEvent @event, DataContainer data)
         {
             var type = @event.GetType();
             while (type != null)
             {
-                InvokeHandlers(@event, type);
+                InvokeHandlers(@event, data, type);
                 type = type.BaseType;
             }
         }
@@ -50,7 +50,7 @@ namespace Balakin.VSOutputEnhancer.Logic
 
         private void AddEventHandler<TEvent>(IEventHandler<TEvent> handler) where TEvent : IEvent
         {
-            Action<Object> handlerDelegateToAdd = @event => handler.Handle(this, (TEvent)@event);
+            Action<Object, DataContainer> handlerDelegateToAdd = (@event, data) => handler.Handle(this, data, (TEvent)@event);
             if (eventHandlers.TryGetValue(typeof(TEvent), out var handlerDelegate))
             {
                 handlerDelegateToAdd = handlerDelegate + handlerDelegateToAdd;
@@ -59,11 +59,11 @@ namespace Balakin.VSOutputEnhancer.Logic
             eventHandlers[typeof(TEvent)] = handlerDelegateToAdd;
         }
 
-        private void InvokeHandlers(Object @event, Type eventType)
+        private void InvokeHandlers(Object @event, DataContainer data, Type eventType)
         {
             if (eventHandlers.TryGetValue(eventType, out var handler))
             {
-                handler(@event);
+                handler(@event, data);
             }
         }
     }

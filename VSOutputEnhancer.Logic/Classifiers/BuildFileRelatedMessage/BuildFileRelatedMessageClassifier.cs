@@ -19,7 +19,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Classifiers.BuildFileRelatedMessage
             ContentType.BuildOrderOutput
         };
 
-        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BuildFileRelatedMessageData parsedData)
+        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BuildFileRelatedMessageData parsedData, DataContainer data)
         {
             var messageSpan = parsedData.FullMessage.Span;
             if (parsedData.Type == MessageType.Warning)

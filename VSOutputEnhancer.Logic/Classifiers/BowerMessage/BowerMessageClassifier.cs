@@ -18,7 +18,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Classifiers.BowerMessage
             ContentType.Output
         };
 
-        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BowerMessageData parsedData)
+        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BowerMessageData parsedData, DataContainer data)
         {
             var classificationType = GetClassificationType(parsedData.Type);
             if (String.IsNullOrEmpty(classificationType))

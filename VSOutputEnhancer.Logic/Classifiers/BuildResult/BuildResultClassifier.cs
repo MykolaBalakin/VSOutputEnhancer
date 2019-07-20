@@ -19,7 +19,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Classifiers.BuildResult
             ContentType.BuildOrderOutput
         };
 
-        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BuildResultData parsedData)
+        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, BuildResultData parsedData, DataContainer data)
         {
             if (parsedData.Failed == 0)
             {

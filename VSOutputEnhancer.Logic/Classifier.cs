@@ -11,6 +11,7 @@ namespace Balakin.VSOutputEnhancer.Logic
     public class Classifier : IClassifier, IEventHandler<ClassificationChangedEvent>
     {
         private readonly IDispatcher dispatcher;
+        private readonly DataContainer dataContainer;
         private readonly IReadOnlyCollection<ISpanClassifier> spanClassifiers;
         private readonly IClassificationTypeService classificationTypeService;
 
@@ -22,6 +23,8 @@ namespace Balakin.VSOutputEnhancer.Logic
             this.dispatcher = dispatcher;
             this.spanClassifiers = spanClassifiers;
             this.classificationTypeService = classificationTypeService;
+
+            dataContainer = new DataContainer();
         }
 
         public IEnumerable<String> ContentTypes => throw new NotSupportedException();
@@ -31,7 +34,7 @@ namespace Balakin.VSOutputEnhancer.Logic
             var result = new List<ClassificationSpan>();
             foreach (var classifier in spanClassifiers)
             {
-                var classifierResult = classifier.Classify(span, dispatcher);
+                var classifierResult = classifier.Classify(span, dispatcher, dataContainer);
                 var classificationSpans = classifierResult.Select(r => CreateClassificationSpan(span, r));
                 result.AddRange(classificationSpans);
             }
@@ -48,7 +51,7 @@ namespace Balakin.VSOutputEnhancer.Logic
             return new ClassificationSpan(span, classificationType);
         }
 
-        public void Handle(IDispatcher dispatcher, ClassificationChangedEvent @event)
+        public void Handle(IDispatcher dispatcher, DataContainer data, ClassificationChangedEvent @event)
         {
             var eventArgs = new ClassificationChangedEventArgs(@event.Span);
             ClassificationChanged?.Invoke(this, eventArgs);
