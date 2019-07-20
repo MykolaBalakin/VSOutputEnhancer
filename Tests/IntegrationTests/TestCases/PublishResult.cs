@@ -30,8 +30,9 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
 
         public IReadOnlyList<ClassifiedText> ExpectedResult { get; } = new[]
         {
-            new ClassifiedText(ClassificationType.BuildStartedSuccess,"------ Build started: Project: WebDemo, Configuration: Release Any CPU ------"),
+            new ClassifiedText(ClassificationType.BuildActionStartedSuccess,"------ Build started: Project: WebDemo, Configuration: Release Any CPU ------"),
             new ClassifiedText(ClassificationType.BuildResultSucceeded, "========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========\r\n"),
+            new ClassifiedText(ClassificationType.BuildActionStartedSuccess,"------ Publish started: Project: WebDemo, Configuration: Release Any CPU ------"),
             new ClassifiedText(ClassificationType.PublishResultSucceeded, "========== Publish: 1 succeeded, 0 failed, 0 skipped ==========\r\n"),
         };
     }

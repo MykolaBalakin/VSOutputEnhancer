@@ -132,14 +132,14 @@
   <data name="FormatDisplayName_BuildResultSucceeded" xml:space="preserve">
     <value>Output enhancer: Build succeeded</value>
   </data>
-  <data name="FormatDisplayName_BuildStartedSuccess" xml:space="preserve">
-    <value>Output enhancer: Build started and succeeded</value>
+  <data name="FormatDisplayName_BuildActionStartedSuccess" xml:space="preserve">
+    <value>Output enhancer: Build action started and succeeded</value>
   </data>
-  <data name="FormatDisplayName_BuildStartedWarning" xml:space="preserve">
-    <value>Output enhancer: Build started and finished with warnings</value>
+  <data name="FormatDisplayName_BuildActionStartedWarning" xml:space="preserve">
+    <value>Output enhancer: Build action started and finished with warnings</value>
   </data>
-  <data name="FormatDisplayName_BuildStartedError" xml:space="preserve">
-    <value>Output enhancer: Build started and failed</value>
+  <data name="FormatDisplayName_BuildActionStartedError" xml:space="preserve">
+    <value>Output enhancer: Build action started and failed</value>
   </data>
   <data name="FormatDisplayName_DebugException" xml:space="preserve">
     <value>Output enhancer: Debug exception message</value>

@@ -33,11 +33,11 @@ namespace Balakin.VSOutputEnhancer.Classifiers.BuildActionStart
             switch (state)
             {
                 case BuildActionState.Success:
-                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildStartedSuccess) };
+                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildActionStartedSuccess) };
                 case BuildActionState.Warning:
-                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildStartedWarning) };
+                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildActionStartedWarning) };
                 case BuildActionState.Error:
-                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildStartedError) };
+                    return new[] { new ProcessedParsedData(parsedData.FullMessage.Span, ClassificationType.BuildActionStartedError) };
                 default:
                     return EmptyClassification;
             }

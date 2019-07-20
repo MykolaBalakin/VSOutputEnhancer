@@ -15,15 +15,15 @@
     "Bold": true
   },
 
-  "BuildStartedSuccess": {
+  "BuildActionStartedSuccess": {
     "ForegroundColor": "#409A3A",
     "Bold": true
   },
-  "BuildStartedWarning": {
+  "BuildActionStartedWarning": {
     "ForegroundColor": "#D0A825",
     "Bold": true
   },
-  "BuildStartedError": {
+  "BuildActionStartedError": {
     "ForegroundColor": "#BF0606",
     "Bold": true
   },

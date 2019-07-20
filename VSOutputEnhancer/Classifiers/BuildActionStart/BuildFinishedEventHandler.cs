@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Balakin.VSOutputEnhancer.Events;
 using Balakin.VSOutputEnhancer.Parsers.BuildResult;
+using Balakin.VSOutputEnhancer.Parsers.PublishResult;
 
 namespace Balakin.VSOutputEnhancer.Classifiers.BuildActionStart
 {
     [Export(typeof(IEventHandler))]
-    public class BuildFinishedEventHandler : IEventHandler<SpanParsedEvent<BuildResultData>>
+    public class BuildActionFinishedEventHandler : IEventHandler<SpanParsedEvent<BuildResultData>>, IEventHandler<SpanParsedEvent<PublishResultData>>
     {
         private const String BuildAction = "Build";
+        private const String PublishAction = "Publish";
 
         public IEnumerable<String> ContentTypes { get; } = new[]
         {
@@ -20,6 +22,11 @@ namespace Balakin.VSOutputEnhancer.Classifiers.BuildActionStart
         public void Handle(IDispatcher dispatcher, DataContainer data, SpanParsedEvent<BuildResultData> @event)
         {
             HandleActionFinished(BuildAction, dispatcher, data);
+        }
+
+        public void Handle(IDispatcher dispatcher, DataContainer data, SpanParsedEvent<PublishResultData> @event)
+        {
+            HandleActionFinished(PublishAction, dispatcher, data);
         }
 
         private void HandleActionFinished(String action, IDispatcher dispatcher, DataContainer data)

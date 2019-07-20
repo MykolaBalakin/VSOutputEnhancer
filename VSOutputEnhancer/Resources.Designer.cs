@@ -76,21 +76,21 @@ namespace Balakin.VSOutputEnhancer {
             }
         }
         
-        public static string FormatDisplayName_BuildStartedSuccess {
+        public static string FormatDisplayName_BuildActionStartedSuccess {
             get {
-                return ResourceManager.GetString("FormatDisplayName_BuildStartedSuccess", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildActionStartedSuccess", resourceCulture);
             }
         }
         
-        public static string FormatDisplayName_BuildStartedWarning {
+        public static string FormatDisplayName_BuildActionStartedWarning {
             get {
-                return ResourceManager.GetString("FormatDisplayName_BuildStartedWarning", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildActionStartedWarning", resourceCulture);
             }
         }
         
-        public static string FormatDisplayName_BuildStartedError {
+        public static string FormatDisplayName_BuildActionStartedError {
             get {
-                return ResourceManager.GetString("FormatDisplayName_BuildStartedError", resourceCulture);
+                return ResourceManager.GetString("FormatDisplayName_BuildActionStartedError", resourceCulture);
             }
         }
         
