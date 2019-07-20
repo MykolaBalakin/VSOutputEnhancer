@@ -22,8 +22,11 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
 
         public IReadOnlyList<ClassifiedText> ExpectedResult { get; } = new[]
         {
+            new ClassifiedText(ClassificationType.BuildStartedWarning,"------ Build started: Project: ConsoleDemo, Configuration: Debug Any CPU ------"),
             new ClassifiedText(ClassificationType.BuildMessageWarning, "warning CS0168: The variable 'ex' is declared but never used"),
+            new ClassifiedText(ClassificationType.BuildStartedError,"------ Build started: Project: ConsoleDemo, Configuration: Debug Any CPU ------"),
             new ClassifiedText(ClassificationType.BuildMessageError, "error CS1022: Type or namespace definition, or end-of-file expected"),
+            new ClassifiedText(ClassificationType.BuildStartedSuccess,"------ Build started: Project: WebDemo, Configuration: Debug Any CPU ------"),
             new ClassifiedText(ClassificationType.BuildResultFailed, "========== Build: 1 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========\r\n")
         };
     }
