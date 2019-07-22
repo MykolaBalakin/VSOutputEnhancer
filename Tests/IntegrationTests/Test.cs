@@ -28,12 +28,18 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
 
             var actualResult = new List<ClassifiedText>();
 
-            classifier.ClassificationChanged += (sender, args) => DoClassification(classifier, args.ChangeSpan, actualResult);
+            var spansToReclassify = new List<SnapshotSpan>();
+            classifier.ClassificationChanged += (sender, args) => spansToReclassify.Add(args.ChangeSpan);
 
             foreach (var line in testCase.SourceText)
             {
                 var span = Utils.CreateSpan(line);
                 DoClassification(classifier, span, actualResult);
+                foreach (var spanToReclassify in spansToReclassify)
+                {
+                    DoClassification(classifier, spanToReclassify, actualResult);
+                }
+                spansToReclassify.Clear();
             }
 
             actualResult.Should().BeEquivalentTo(testCase.ExpectedResult);
