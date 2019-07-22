@@ -27,6 +27,10 @@ namespace Balakin.VSOutputEnhancer.Classifiers.BuildActionStart
         {
             var value = GetOrAddValue(action, projectName);
             value.Span = span;
+            if (value.Span == null)
+            {
+                value.State = null;
+            }
 
             SetLatestProject(action, projectName, buildTaskId);
         }
@@ -84,7 +88,6 @@ namespace Balakin.VSOutputEnhancer.Classifiers.BuildActionStart
 
         public void DeleteAll(String action)
         {
-            data.Remove(action);
             latestProjects.Remove(action);
             latestParallelProjects.Remove(action);
         }
