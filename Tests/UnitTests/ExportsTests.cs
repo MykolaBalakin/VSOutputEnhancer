@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using Balakin.VSOutputEnhancer.Exports;
+using Balakin.VSOutputEnhancer.Logic;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
@@ -19,7 +20,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
         {
             var exportAttribute = typeof(ExportAttribute);
             var classificationTypeDefinition = typeof(ClassificationTypeDefinition);
-            var assembly = typeof(ClassificationType).Assembly;
+            var assembly = typeof(ClassificationTypeExports).Assembly;
             var types = assembly.GetTypes();
             var exportedDefinitions = types
                 .SelectMany(t => t.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public))

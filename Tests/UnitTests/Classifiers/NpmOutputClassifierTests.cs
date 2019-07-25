@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Balakin.VSOutputEnhancer.Logic;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;

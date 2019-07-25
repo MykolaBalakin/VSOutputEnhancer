@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using Balakin.VSOutputEnhancer.Parsers;
-using Balakin.VSOutputEnhancer.Parsers.DebugTraceMessage;
+using Balakin.VSOutputEnhancer.Logic.Classifiers;
+using Balakin.VSOutputEnhancer.Logic.Classifiers.DebugTraceMessage;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Xunit;

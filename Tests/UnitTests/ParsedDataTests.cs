@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Logic.Classifiers;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;

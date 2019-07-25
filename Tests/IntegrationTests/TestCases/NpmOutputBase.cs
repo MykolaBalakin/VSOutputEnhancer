@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Balakin.VSOutputEnhancer.Logic;
 
 namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
 {

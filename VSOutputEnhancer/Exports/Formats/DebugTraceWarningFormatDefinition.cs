@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using Balakin.VSOutputEnhancer.Logic;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 

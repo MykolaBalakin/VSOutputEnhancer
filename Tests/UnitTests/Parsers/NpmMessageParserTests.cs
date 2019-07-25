@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using Balakin.VSOutputEnhancer.Parsers;
-using Balakin.VSOutputEnhancer.Parsers.NpmMessage;
+using Balakin.VSOutputEnhancer.Logic.Classifiers;
+using Balakin.VSOutputEnhancer.Logic.Classifiers.NpmMessage;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Xunit;
