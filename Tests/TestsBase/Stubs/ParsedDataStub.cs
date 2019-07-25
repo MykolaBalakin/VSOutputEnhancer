@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Balakin.VSOutputEnhancer.Parsers;
+using Balakin.VSOutputEnhancer.Logic.Classifiers;
 
 namespace Balakin.VSOutputEnhancer.Tests.Stubs
 {

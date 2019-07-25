@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Exports;
+using Balakin.VSOutputEnhancer.Logic;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
 using Xunit;

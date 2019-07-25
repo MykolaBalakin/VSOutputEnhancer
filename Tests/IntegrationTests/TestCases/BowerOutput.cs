@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Balakin.VSOutputEnhancer.Logic;
 
 namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
 {
     [ExcludeFromCodeCoverage]
     public class BowerOutput : ITestCase
     {
-        public String ContentType { get; } = VSOutputEnhancer.ContentType.Output;
+        public String ContentType { get; } = Logic.ContentType.Output;
 
         public IReadOnlyList<String> SourceText { get; } = new[]
         {

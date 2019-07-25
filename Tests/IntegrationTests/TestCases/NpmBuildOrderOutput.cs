@@ -6,6 +6,6 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
     [ExcludeFromCodeCoverage]
     public class NpmBuildOrderOutput : NpmOutputBase
     {
-        public override String ContentType { get; } = VSOutputEnhancer.ContentType.BuildOrderOutput;
+        public override String ContentType { get; } = Logic.ContentType.BuildOrderOutput;
     }
 }

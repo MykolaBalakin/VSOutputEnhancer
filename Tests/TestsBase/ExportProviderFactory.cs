@@ -1,6 +1,7 @@
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Balakin.VSOutputEnhancer.Logic;
 
 namespace Balakin.VSOutputEnhancer.Tests
 {
