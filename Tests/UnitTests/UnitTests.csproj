@@ -21,5 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TestsBase\TestsBase.csproj" />
     <ProjectReference Include="..\..\VSOutputEnhancer\VSOutputEnhancer.csproj" />
+    <ProjectReference Include="..\VSOutputEnhancer.Tests.Base\VSOutputEnhancer.Tests.Base.csproj" />
   </ItemGroup>
 </Project>

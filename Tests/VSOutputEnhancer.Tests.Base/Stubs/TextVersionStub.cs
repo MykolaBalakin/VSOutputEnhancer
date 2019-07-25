@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Microsoft.VisualStudio.Text;
 
-namespace Balakin.VSOutputEnhancer.Tests.Stubs
+namespace Balakin.VSOutputEnhancer.Tests.Base.Stubs
 {
     [ExcludeFromCodeCoverage]
     public class TextVersionStub : ITextVersion

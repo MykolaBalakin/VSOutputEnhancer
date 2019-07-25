@@ -6,8 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Balakin.VSOutputEnhancer.Logic;
-using Balakin.VSOutputEnhancer.Tests.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using FluentAssertions;
+using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 
@@ -28,7 +29,9 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
             var actualResult = new List<ClassifiedText>();
             foreach (var line in testCase.SourceText)
             {
-                var classificationSpans = classifier.GetClassificationSpans(Utils.CreateSpan(line));
+                var snapshot = new TextSnapshotStub(line);
+                var span = new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
+                var classificationSpans = classifier.GetClassificationSpans(span);
                 foreach (var classificationSpan in classificationSpans)
                 {
                     var classifiedText = classificationSpan.Span.GetText();
@@ -52,6 +55,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
         {
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ClassificationType).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ClassificationTypeRegistryServiceStub).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
             var container = new CompositionContainer(catalog);

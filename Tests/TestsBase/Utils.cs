@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Media;
 using Balakin.VSOutputEnhancer.Logic;
+using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
