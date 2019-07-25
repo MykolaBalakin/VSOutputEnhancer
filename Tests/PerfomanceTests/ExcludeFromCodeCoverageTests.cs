@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+using Balakin.VSOutputEnhancer.Tests.Base;
 using Xunit;
 
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
@@ -11,11 +11,6 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
         public void AllTestsCodeExcludedFromCoverage()
         {
             CheckAllTestsCodeExcludedFromCoverage();
-        }
-
-        protected override Assembly GetAssembly()
-        {
-            return Assembly.GetExecutingAssembly();
         }
     }
 }

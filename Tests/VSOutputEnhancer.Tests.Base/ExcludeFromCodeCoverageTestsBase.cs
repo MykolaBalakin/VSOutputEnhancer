@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 
-namespace Balakin.VSOutputEnhancer.Tests
+namespace Balakin.VSOutputEnhancer.Tests.Base
 {
     [ExcludeFromCodeCoverage]
     public class ExcludeFromCodeCoverageTestsBase
@@ -22,7 +22,7 @@ namespace Balakin.VSOutputEnhancer.Tests
 
         protected virtual Assembly GetAssembly()
         {
-            return Assembly.GetExecutingAssembly();
+            return GetType().Assembly;
         }
 
         private Boolean IsExcludedFromCodeCoverage(Type t)

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Logic;
+using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;

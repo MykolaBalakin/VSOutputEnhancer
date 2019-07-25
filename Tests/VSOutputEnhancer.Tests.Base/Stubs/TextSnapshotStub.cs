@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace Balakin.VSOutputEnhancer.Tests.Stubs
+namespace Balakin.VSOutputEnhancer.Tests.Base.Stubs
 {
     [ExcludeFromCodeCoverage]
     public class TextSnapshotStub : ITextSnapshot

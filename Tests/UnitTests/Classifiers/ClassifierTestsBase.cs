@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;

@@ -2,6 +2,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Balakin.VSOutputEnhancer.Logic;
+using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 
 namespace Balakin.VSOutputEnhancer.Tests
 {
@@ -12,6 +13,7 @@ namespace Balakin.VSOutputEnhancer.Tests
         {
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ClassificationType).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(ClassificationTypeRegistryServiceStub).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
             var container = new CompositionContainer(catalog);
