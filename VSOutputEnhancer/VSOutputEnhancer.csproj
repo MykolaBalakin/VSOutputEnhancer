@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Title>Output enhancer</Title>
-    <Description>Extension to add colors to Visual Studio output window.</Description>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RootNamespace>Balakin.VSOutputEnhancer</RootNamespace>
-    <AssemblyName>Balakin.VSOutputEnhancer</AssemblyName>
     <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
