@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Company>Nikolay Balakin</Company>
+    <Product>Output enhancer</Product>
+    <Title>Output enhancer</Title>
+    <Description>Extension to add colors to Visual Studio output window.</Description>
+    <Copyright>Copyright © Nikolay Balakin 2015–2019. All rights reserved.</Copyright>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Balakin.$(MSBuildProjectName)</RootNamespace>
+    <AssemblyName>Balakin.$(MSBuildProjectName)</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyVersion>1.7</AssemblyVersion>
+    <FileVersion>1.7</FileVersion>
+  </PropertyGroup>
+</Project>
