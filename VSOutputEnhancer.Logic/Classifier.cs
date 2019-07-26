@@ -35,7 +35,11 @@ namespace Balakin.VSOutputEnhancer.Logic
             return result;
         }
 
-        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
+        public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged
+        {
+            add { }
+            remove { }
+        }
 
         private ClassificationSpan CreateClassificationSpan(SnapshotSpan originalSpan, ProcessedParsedData data)
         {
