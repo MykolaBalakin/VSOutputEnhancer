@@ -23,22 +23,6 @@ namespace Balakin.VSOutputEnhancer.Tests
             return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
         }
 
-        public static ITextBuffer CreateTextBuffer(String contentType)
-        {
-            return new TextBufferStub(contentType);
-        }
-
-        public static IClassificationTypeRegistryService CreateClassificationTypeRegistryService()
-        {
-            return new ClassificationTypeRegistryServiceStub();
-        }
-
-        public static IClassificationTypeService CreateClassificationTypeService()
-        {
-            var classificationTypeRegistryService = Utils.CreateClassificationTypeRegistryService();
-            return new ClassificationTypeService(classificationTypeRegistryService);
-        }
-
         public static IStyleManager CreateStyleManager()
         {
             var styleManager = new StyleManagerStub();
