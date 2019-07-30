@@ -4,23 +4,40 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Balakin.VSOutputEnhancer.Logic.Classifiers;
-using Balakin.VSOutputEnhancer.Tests.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Base;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.UnitTests
+namespace Balakin.VSOutputEnhancer.Logic.Tests
 {
     [ExcludeFromCodeCoverage]
     public class ParsedDataTests
     {
+        public class ParsedDataStub : ParsedData
+        {
+            // TODO: Refactor ParsedData builder to get rid of this constructor
+            public ParsedDataStub()
+            {
+            }
+
+            public ParsedDataStub(ParsedValue<String> message, ParsedValue<TraceEventType> type)
+            {
+                Message = message;
+                Type = type;
+            }
+
+            public ParsedValue<String> Message { get; private set; }
+            public ParsedValue<TraceEventType> Type { get; private set; }
+        }
+
         [Theory]
         [MemberData(nameof(CreateTestData))]
         public void Create(String message, String regex, ParsedDataStub expectedResult)
         {
-            var span = Utils.CreateSpan(message);
+            var span = message.ToSnapshotSpan();
 
-            var match = Regex.Match(span.GetText(), regex);
+            var match = Regex.Match(message, regex);
             var actualResult = ParsedData.Create<ParsedDataStub>(match, span.Span);
             actualResult.Should().BeEquivalentTo(expectedResult);
         }
@@ -46,30 +63,6 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                     new ParsedValue<TraceEventType>(TraceEventType.Error, new Span(5, 5))
                 )
             };
-        }
-
-        [Fact]
-        public void EmptyValueExceptionValueType()
-        {
-            var value = new ParsedValue<Int32>();
-            Action action = () =>
-            {
-                // ReSharper disable once UnusedVariable
-                var i = (Int32) value;
-            };
-            action.Should().Throw<InvalidOperationException>();
-        }
-
-        [Fact]
-        public void EmptyValueExceptionReferenceType()
-        {
-            var value = new ParsedValue<String>();
-            Action action = () =>
-            {
-                // ReSharper disable once UnusedVariable
-                var s = (String) value;
-            };
-            action.Should().Throw<InvalidOperationException>();
         }
     }
 }
