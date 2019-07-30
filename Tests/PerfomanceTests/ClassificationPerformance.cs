@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Logic;
+using Balakin.VSOutputEnhancer.Logic.Tests;
 using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
@@ -14,13 +15,15 @@ using Xunit.Abstractions;
 namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 {
     [ExcludeFromCodeCoverage]
-    public class ClassificationPerformance
+    public class ClassificationPerformance : IClassFixture<ServiceProviderFixture>
     {
         private readonly ITestOutputHelper testOutputHelper;
+        private readonly ServiceProviderFixture serviceProvider;
 
-        public ClassificationPerformance(ITestOutputHelper testOutputHelper)
+        public ClassificationPerformance(ITestOutputHelper testOutputHelper, ServiceProviderFixture serviceProvider)
         {
             this.testOutputHelper = testOutputHelper;
+            this.serviceProvider = serviceProvider;
         }
 
         [Fact]
@@ -64,8 +67,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
 
         private IClassifier CreateBuildOutputClassifier()
         {
-            var provider = ExportProviderFactory.Create();
-            var classifierProvider = provider.GetExport<IClassifierProvider>().Value;
+            var classifierProvider = serviceProvider.GetService<IClassifierProvider>();
             var classifier = classifierProvider.GetClassifier(new TextBufferStub(ContentType.BuildOutput));
             return classifier;
         }
