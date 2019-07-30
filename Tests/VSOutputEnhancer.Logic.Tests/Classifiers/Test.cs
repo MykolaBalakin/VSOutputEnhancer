@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
+using Balakin.VSOutputEnhancer.Tests.Base;
 using FluentAssertions;
-using Microsoft.VisualStudio.Text;
 using NSubstitute;
 using Xunit;
 
@@ -29,9 +28,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Tests.Classifiers
             var classifier = testCase.CreateClassifier();
             var dispatcher = Substitute.For<IDispatcher>();
 
-
-            var snapshot = new TextSnapshotStub(testCase.Input);
-            var span = new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
+            var span = testCase.Input.ToSnapshotSpan();
             var actualResult = classifier.Classify(span, dispatcher).ToList();
 
             if (testCase.ExpectedResult == null)
