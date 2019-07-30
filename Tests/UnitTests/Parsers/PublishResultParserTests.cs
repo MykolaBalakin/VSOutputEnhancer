@@ -45,7 +45,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out actualData);
 
             parsed.Should().BeTrue();
-            actualData.ShouldBeEquivalentTo(expectedResult);
+            actualData.Should().BeEquivalentTo(expectedResult);
         }
     }
 }

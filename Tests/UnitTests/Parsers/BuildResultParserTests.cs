@@ -44,7 +44,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out parsedData);
 
             parsed.Should().BeTrue();
-            parsedData.ShouldBeEquivalentTo(expectedResult);
+            parsedData.Should().BeEquivalentTo(expectedResult);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out parsedData);
 
             parsed.Should().BeTrue();
-            parsedData.ShouldBeEquivalentTo(expectedResult);
+            parsedData.Should().BeEquivalentTo(expectedResult);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out parsedData);
 
             parsed.Should().BeTrue();
-            parsedData.ShouldBeEquivalentTo(expectedResult);
+            parsedData.Should().BeEquivalentTo(expectedResult);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out parsedData);
 
             parsed.Should().BeTrue();
-            parsedData.ShouldBeEquivalentTo(expectedResult);
+            parsedData.Should().BeEquivalentTo(expectedResult);
         }
     }
 }

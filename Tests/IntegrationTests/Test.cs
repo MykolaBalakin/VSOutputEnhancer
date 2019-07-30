@@ -40,7 +40,7 @@ namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
                 }
             }
 
-            actualResult.ShouldAllBeEquivalentTo(testCase.ExpectedResult);
+            actualResult.Should().BeEquivalentTo(testCase.ExpectedResult);
         }
 
         public static IEnumerable<object[]> EnumerateTestCases()

@@ -38,7 +38,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests.Parsers
             var parsed = parser.TryParse(span, out actualResult);
 
             parsed.Should().BeTrue();
-            actualResult.ShouldBeEquivalentTo(expectedResult);
+            actualResult.Should().BeEquivalentTo(expectedResult);
         }
 
         public static IEnumerable<Object[]> CreateExitCodeTestData()

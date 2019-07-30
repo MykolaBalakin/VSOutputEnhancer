@@ -14,56 +14,12 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
     public class EnvironmentServiceTests
     {
         [Theory]
-        [MemberData(nameof(CreateColorsTestData))]
-        public void GetTheme(Color? foreground, Color? background, Theme? expectedTheme)
-        {
-            var textProperties = Utils.CreateTextFormattingRunProperties(foreground, background);
-            TestTheme(textProperties, expectedTheme);
-        }
-
-        [Theory]
-        [MemberData(nameof(CreateBrushesTestData))]
+        [MemberData(nameof(CreateTestData))]
         public void GetTheme(Brush foreground, Brush background, Theme? expectedTheme)
         {
             var textProperties = Utils.CreateTextFormattingRunProperties(foreground, background);
-            TestTheme(textProperties, expectedTheme);
-        }
-
-        public static IEnumerable<Object[]> CreateColorsTestData()
-        {
-            var defaultTheme = Theme.Light;
-
-            yield return new Object[] { null, null, defaultTheme };
-
-            yield return new Object[] { Colors.Black, null, Theme.Light };
-            yield return new Object[] { null, Colors.White, Theme.Light };
-            yield return new Object[] { Colors.Black, Colors.White, Theme.Light };
-
-            yield return new Object[] { Colors.White, null, Theme.Dark };
-            yield return new Object[] { null, Colors.Black, Theme.Dark };
-            yield return new Object[] { Colors.White, Colors.Black, Theme.Dark };
-        }
-
-        public static IEnumerable<Object[]> CreateBrushesTestData()
-        {
-            var defaultTheme = Theme.Light;
-
-            yield return new Object[] { null, new RadialGradientBrush(), defaultTheme };
-            yield return new Object[] { new RadialGradientBrush(), null, defaultTheme };
-            yield return new Object[] { new RadialGradientBrush(), new RadialGradientBrush(), defaultTheme };
-
-            yield return new Object[] { new SolidColorBrush(Colors.Black), new RadialGradientBrush(), Theme.Light };
-            yield return new Object[] { new RadialGradientBrush(), new SolidColorBrush(Colors.White), Theme.Light };
-
-            yield return new Object[] { new SolidColorBrush(Colors.White), new RadialGradientBrush(), Theme.Dark };
-            yield return new Object[] { new RadialGradientBrush(), new SolidColorBrush(Colors.Black), Theme.Dark };
-        }
-
-        private void TestTheme(TextFormattingRunProperties textProperties, Theme? expectedTheme)
-        {
             var classificationFormatMap = Substitute.For<IClassificationFormatMap>();
-            classificationFormatMap.DefaultTextProperties
-                .Returns(textProperties);
+            classificationFormatMap.DefaultTextProperties.Returns(textProperties);
 
             var classificationFormatMapService = Substitute.For<IClassificationFormatMapService>();
             classificationFormatMapService.GetClassificationFormatMap(Arg.Any<string>())
@@ -72,6 +28,30 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             var environmentService = Utils.CreateEnvironmentService(classificationFormatMapService);
             var actualTheme = environmentService.GetTheme();
             actualTheme.Should().Be(expectedTheme);
+        }
+
+        public static IEnumerable<Object[]> CreateTestData()
+        {
+            var defaultTheme = Theme.Light;
+
+            yield return new Object[] { null, null, defaultTheme };
+            yield return new Object[] { null, new RadialGradientBrush(), defaultTheme };
+            yield return new Object[] { new RadialGradientBrush(), null, defaultTheme };
+            yield return new Object[] { new RadialGradientBrush(), new RadialGradientBrush(), defaultTheme };
+
+            yield return new Object[] { new SolidColorBrush(Colors.Black), null, Theme.Light };
+            yield return new Object[] { null, new SolidColorBrush(Colors.White), Theme.Light };
+            yield return new Object[] { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.White), Theme.Light };
+
+            yield return new Object[] { new SolidColorBrush(Colors.White), null, Theme.Dark };
+            yield return new Object[] { null, new SolidColorBrush(Colors.Black), Theme.Dark };
+            yield return new Object[] { new SolidColorBrush(Colors.White), new SolidColorBrush(Colors.Black), Theme.Dark };
+
+            yield return new Object[] { new SolidColorBrush(Colors.Black), new RadialGradientBrush(), Theme.Light };
+            yield return new Object[] { new RadialGradientBrush(), new SolidColorBrush(Colors.White), Theme.Light };
+
+            yield return new Object[] { new SolidColorBrush(Colors.White), new RadialGradientBrush(), Theme.Dark };
+            yield return new Object[] { new RadialGradientBrush(), new SolidColorBrush(Colors.Black), Theme.Dark };
         }
     }
 }

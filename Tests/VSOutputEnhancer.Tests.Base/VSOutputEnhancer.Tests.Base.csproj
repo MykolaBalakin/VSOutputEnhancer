@@ -6,9 +6,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="xunit" Version="2.0.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.0.0" />
-    <PackageReference Include="FluentAssertions" Version="4.19.2" />
+    <PackageReference Include="xunit" Version="2.1.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.1.0" />
+    <PackageReference Include="FluentAssertions" Version="5.7.0" />
     <PackageReference Include="VSSDK.Text" Version="11.0.4" />
   </ItemGroup>
 </Project>
