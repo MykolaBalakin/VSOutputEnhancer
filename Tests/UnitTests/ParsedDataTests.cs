@@ -22,7 +22,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
             var match = Regex.Match(span.GetText(), regex);
             var actualResult = ParsedData.Create<ParsedDataStub>(match, span.Span);
-            actualResult.ShouldBeEquivalentTo(expectedResult);
+            actualResult.Should().BeEquivalentTo(expectedResult);
         }
 
         public static IEnumerable<Object[]> CreateTestData()
@@ -57,7 +57,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 // ReSharper disable once UnusedVariable
                 var i = (Int32) value;
             };
-            action.ShouldThrow<InvalidOperationException>();
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 // ReSharper disable once UnusedVariable
                 var s = (String) value;
             };
-            action.ShouldThrow<InvalidOperationException>();
+            action.Should().Throw<InvalidOperationException>();
         }
     }
 }

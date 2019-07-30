@@ -42,7 +42,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Tests.Classifiers
             {
                 actualResult.Should().HaveCount(1);
                 var actualProcessedData = actualResult.Single();
-                actualProcessedData.ShouldBeEquivalentTo(testCase.ExpectedResult);
+                actualProcessedData.Should().BeEquivalentTo(testCase.ExpectedResult);
             }
         }
     }

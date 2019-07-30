@@ -89,7 +89,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
 
             var styleManager = Utils.CreateStyleManager(Theme.Light);
             var style = styleManager.GetStyleForClassificationType("UnknownClassification");
-            style.ShouldBeEquivalentTo(expectedResult);
+            style.Should().BeEquivalentTo(expectedResult);
         }
     }
 }
