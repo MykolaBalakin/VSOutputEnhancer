@@ -15,12 +15,30 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
     [ExcludeFromCodeCoverage]
     public class ClassificationFormatTests
     {
+        private static readonly IReadOnlyDictionary<Type, String> ClassificationTypeExpectedNames = new Dictionary<Type, String>
+        {
+            { typeof(BuildMessageErrorFormatDefinition), "Output enhancer: Build error message" },
+            { typeof(BuildMessageWarningFormatDefinition), "Output enhancer: Build warning message" },
+            { typeof(BuildResultFailedFormatDefinition), "Output enhancer: Build failed" },
+            { typeof(BuildResultSucceededFormatDefinition), "Output enhancer: Build succeeded" },
+            { typeof(PublishResultSucceededFormatDefinition), "Output enhancer: Publish succeeded" },
+            { typeof(PublishResultFailedFormatDefinition), "Output enhancer: Publish failed" },
+            { typeof(DebugExceptionFormatDefinition), "Output enhancer: Debug exception message" },
+            { typeof(DebugTraceErrorFormatDefinition), "Output enhancer: Trace error message" },
+            { typeof(DebugTraceWarningFormatDefinition), "Output enhancer: Trace warning message" },
+            { typeof(NpmResultSucceededFormatDefinition), "Output enhancer: npm execution succeeded" },
+            { typeof(NpmResultFailedFormatDefinition), "Output enhancer: npm execution failed" },
+            { typeof(NpmMessageErrorFormatDefinition), "Output enhancer: npm error message" },
+            { typeof(NpmMessageWarningFormatDefinition), "Output enhancer: npm warning message" },
+            { typeof(BowerMessageErrorFormatDefinition), "Output enhancer: Bower error message" }
+        };
+
         [Theory]
         [MemberData(nameof(CreateTestData))]
         public void DisplayName(Type formatType)
         {
             var styleManager = Utils.CreateStyleManager();
-            var expectedDisplayName = GetCorrectName(formatType);
+            var expectedDisplayName = GetExpectedName(formatType);
 
             var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);
             format.DisplayName.Should().NotBeNullOrEmpty();
@@ -65,64 +83,11 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             return formatTypes;
         }
 
-        private String GetCorrectName(Type formatType)
+        private String GetExpectedName(Type formatType)
         {
-            if (formatType == typeof(BuildMessageErrorFormatDefinition))
+            if (ClassificationTypeExpectedNames.TryGetValue(formatType, out var name))
             {
-                return "Output enhancer: Build error message";
-            }
-            if (formatType == typeof(BuildMessageWarningFormatDefinition))
-            {
-                return "Output enhancer: Build warning message";
-            }
-            if (formatType == typeof(BuildResultFailedFormatDefinition))
-            {
-                return "Output enhancer: Build failed";
-            }
-            if (formatType == typeof(BuildResultSucceededFormatDefinition))
-            {
-                return "Output enhancer: Build succeeded";
-            }
-            if (formatType == typeof(PublishResultSucceededFormatDefinition))
-            {
-                return "Output enhancer: Publish succeeded";
-            }
-            if (formatType == typeof(PublishResultFailedFormatDefinition))
-            {
-                return "Output enhancer: Publish failed";
-            }
-            if (formatType == typeof(DebugExceptionFormatDefinition))
-            {
-                return "Output enhancer: Debug exception message";
-            }
-            if (formatType == typeof(DebugTraceErrorFormatDefinition))
-            {
-                return "Output enhancer: Trace error message";
-            }
-            if (formatType == typeof(DebugTraceWarningFormatDefinition))
-            {
-                return "Output enhancer: Trace warning message";
-            }
-
-            if (formatType == typeof(NpmResultSucceededFormatDefinition))
-            {
-                return "Output enhancer: npm execution succeeded";
-            }
-            if (formatType == typeof(NpmResultFailedFormatDefinition))
-            {
-                return "Output enhancer: npm execution failed";
-            }
-            if (formatType == typeof(NpmMessageErrorFormatDefinition))
-            {
-                return "Output enhancer: npm error message";
-            }
-            if (formatType == typeof(NpmMessageWarningFormatDefinition))
-            {
-                return "Output enhancer: npm warning message";
-            }
-            if (formatType == typeof(BowerMessageErrorFormatDefinition))
-            {
-                return "Output enhancer: Bower error message";
+                return name;
             }
 
             throw new ArgumentOutOfRangeException(nameof(formatType), formatType, "Unknown format type");

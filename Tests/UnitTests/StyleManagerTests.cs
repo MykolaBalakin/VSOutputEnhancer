@@ -15,7 +15,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
         [Theory]
         [InlineData(Theme.Light)]
         [InlineData(Theme.Dark)]
-        public void SuccessfullyLoadedFromJson(Theme theme)
+        public void StylesAreSuccessfullyLoadedFromJson(Theme theme)
         {
             var styleManager = Utils.CreateStyleManager(theme);
 
@@ -27,7 +27,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
         [Theory]
         [InlineData(Theme.Light)]
         [InlineData(Theme.Dark)]
-        public void SimilarClassificationTypesHasSimilarColors(Theme theme)
+        public void SimilarClassificationTypesHaveSimilarColors(Theme theme)
         {
             var styleManager = Utils.CreateStyleManager(theme);
 
@@ -67,15 +67,14 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
                 .Except(error)
                 .Except(warning)
                 .Except(success)
-                .Except(skip)
-                .ToList();
-            notChecked.Should().BeEmpty("Classification types did not checked: " + String.Join(", ", notChecked));
+                .Except(skip);
+            notChecked.Should().BeEmpty("All classification type styles should be checked");
         }
 
         private void TestSimilarColors(ICollection<FormatDefinitionStyle> styles, String groupName)
         {
-            var foregroundColors = styles.Select(s => s.ForegroundColor).Distinct().ToList();
-            foregroundColors.Should().HaveCount(1, $"Some {groupName} styles has different colors");
+            var foregroundColors = styles.Select(s => s.ForegroundColor).Distinct();
+            foregroundColors.Should().HaveCount(1, "All styles should have the same color");
         }
 
         [Fact]
