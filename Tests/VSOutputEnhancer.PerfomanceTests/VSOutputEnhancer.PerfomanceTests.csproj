@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Title>Perfomance tests</Title>
-    <Description>Perfomance tests for Output enhancer extension.</Description>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RootNamespace>Balakin.VSOutputEnhancer.Tests.PerfomanceTests</RootNamespace>
-    <AssemblyName>Balakin.VSOutputEnhancer.Tests.PerfomanceTests</AssemblyName>
     <TargetFramework>net45</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -24,6 +18,6 @@
     <ProjectReference Include="..\VSOutputEnhancer.Tests.Base\VSOutputEnhancer.Tests.Base.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\*.zip" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Resources\*.zip" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

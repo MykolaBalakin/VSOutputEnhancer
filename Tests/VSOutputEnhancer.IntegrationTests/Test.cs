@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
+namespace Balakin.VSOutputEnhancer.IntegrationTests
 {
     [ExcludeFromCodeCoverage]
     public class Test

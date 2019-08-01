@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
+namespace Balakin.VSOutputEnhancer.IntegrationTests
 {
     [ExcludeFromCodeCoverage]
     public struct ClassifiedText

@@ -1,8 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Balakin.VSOutputEnhancer.Tests.Base;
 using Xunit;
 
-namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
+namespace Balakin.VSOutputEnhancer.IntegrationTests
 {
     [ExcludeFromCodeCoverage]
     public class ExcludeFromCodeCoverageTests : ExcludeFromCodeCoverageTestsBase
