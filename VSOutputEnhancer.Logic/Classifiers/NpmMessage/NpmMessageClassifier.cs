@@ -20,7 +20,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Classifiers.NpmMessage
             ContentType.BuildOrderOutput
         };
 
-        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, NpmMessageData parsedData)
+        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, NpmMessageData parsedData, DataContainer data)
         {
             var classificationType = GetClassificationType(parsedData.Type);
             if (String.IsNullOrEmpty(classificationType))

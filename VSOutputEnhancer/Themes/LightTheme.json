@@ -15,6 +15,19 @@
     "Bold": true
   },
 
+  "BuildActionStartedSuccess": {
+    "ForegroundColor": "#409A3A",
+    "Bold": true
+  },
+  "BuildActionStartedWarning": {
+    "ForegroundColor": "#D0A825",
+    "Bold": true
+  },
+  "BuildActionStartedError": {
+    "ForegroundColor": "#BF0606",
+    "Bold": true
+  },
+
   "PublishResultFailed": {
     "ForegroundColor": "#BF0606",
     "Bold": true

@@ -18,7 +18,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Classifiers.DebugException
             ContentType.DebugOutput,
         };
 
-        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, DebugExceptionData parsedData)
+        protected override IEnumerable<ProcessedParsedData> Classify(SnapshotSpan span, DebugExceptionData parsedData, DataContainer data)
         {
             yield return new ProcessedParsedData(span, ClassificationType.DebugException);
         }
