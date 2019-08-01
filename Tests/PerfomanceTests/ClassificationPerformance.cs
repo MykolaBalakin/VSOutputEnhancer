@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using Balakin.VSOutputEnhancer.Logic;
 using Balakin.VSOutputEnhancer.Logic.Tests;
 using Balakin.VSOutputEnhancer.Tests.Base;
@@ -26,12 +30,12 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
         }
 
         [Fact]
-        public void EntityFramework()
+        public async Task EntityFramework()
         {
             // ~ 570 000 lines of log
-            // Small count of classified text
+            // Small amount of classified text
 
-            var content = Utils.ReadLogFile("Resources\\EntityFrameworkBuild.log");
+            var content = await ReadTestData("EntityFrameworkBuild");
             var spans = content.Select(StringExtensions.ToSnapshotSpan).ToList();
             var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
@@ -40,17 +44,18 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
+
             sw.Stop();
             WriteMessage("Elapsed: " + sw.Elapsed);
             sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
         }
 
         [Fact]
-        public void LotOfClassifiedMessages()
+        public async Task LotOfClassifiedMessages()
         {
             // 100 000 warning/error messages
 
-            var content = Utils.ReadLogFile("Resources\\RandomBuildOutput.log");
+            var content = await ReadTestData("RandomBuildOutput");
             var spans = content.Select(StringExtensions.ToSnapshotSpan).ToList();
             var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
@@ -59,6 +64,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             {
                 totalCount += classifier.GetClassificationSpans(span).Count;
             }
+
             sw.Stop();
             WriteMessage("Elapsed: " + sw.Elapsed);
             sw.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
@@ -75,6 +81,29 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
         {
             Console.WriteLine(message);
             testOutputHelper.WriteLine(message);
+        }
+
+        private async Task<IReadOnlyList<String>> ReadTestData(String name)
+        {
+            var result = new List<String>();
+
+            var zipFilePath = Path.Combine("Resources", name + ".zip");
+            using (var zipFile = ZipFile.OpenRead(zipFilePath))
+            {
+                var testData = zipFile.Entries.Single();
+
+                using (var stream = testData.Open())
+                using (var reader = new StreamReader(stream))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = await reader.ReadLineAsync();
+                        result.Add(line + "\r\n");
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
