@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests.TestCases
+namespace Balakin.VSOutputEnhancer.IntegrationTests.TestCases
 {
     [ExcludeFromCodeCoverage]
     public class NpmBuildOutput : NpmOutputBase

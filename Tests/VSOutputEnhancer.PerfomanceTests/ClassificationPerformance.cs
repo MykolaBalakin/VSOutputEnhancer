@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Text.Classification;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
+namespace Balakin.VSOutputEnhancer.PerfomanceTests
 {
     [ExcludeFromCodeCoverage]
     public class ClassificationPerformance : IClassFixture<ServiceProviderFixture>

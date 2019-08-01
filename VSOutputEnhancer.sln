@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{098FC160
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsixPackage", "VsixPackage\VsixPackage.csproj", "{EF89C340-CD9E-4DE7-902A-7361936F5BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfomanceTests", "Tests\PerfomanceTests\PerfomanceTests.csproj", "{73584EB2-2F41-4BD4-BC50-9456BFD5291F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.PerfomanceTests", "Tests\VSOutputEnhancer.PerfomanceTests\VSOutputEnhancer.PerfomanceTests.csproj", "{73584EB2-2F41-4BD4-BC50-9456BFD5291F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "Tests\IntegrationTests\IntegrationTests.csproj", "{981A525F-0B47-4B32-96D0-D2834D22E870}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.IntegrationTests", "Tests\VSOutputEnhancer.IntegrationTests\VSOutputEnhancer.IntegrationTests.csproj", "{981A525F-0B47-4B32-96D0-D2834D22E870}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.Logic", "VSOutputEnhancer.Logic\VSOutputEnhancer.Logic.csproj", "{CDD549A2-0E9A-4D4A-98AC-C0A9B3DAB464}"
 EndProject

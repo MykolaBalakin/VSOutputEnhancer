@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Title>Integration tests</Title>
-    <Description>Integration tests for Output enhancer extension.</Description>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RootNamespace>Balakin.VSOutputEnhancer.Tests.IntegrationTests</RootNamespace>
-    <AssemblyName>Balakin.VSOutputEnhancer.Tests.IntegrationTests</AssemblyName>
     <TargetFramework>net45</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>

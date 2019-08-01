@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Balakin.VSOutputEnhancer.Tests.IntegrationTests
+namespace Balakin.VSOutputEnhancer.IntegrationTests
 {
     public interface ITestCase
     {
