@@ -16,7 +16,8 @@
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
     </Dependencies>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VSOutputEnhancer" Path="|VSOutputEnhancer|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VSOutputEnhancer.Logic" Path="|VSOutputEnhancer.Logic|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VSOutputEnhancer.UI" Path="|VSOutputEnhancer.UI|" />
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0.25914.00,17.0)" DisplayName="Visual Studio core editor" />
