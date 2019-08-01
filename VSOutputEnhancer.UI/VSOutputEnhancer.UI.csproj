@@ -4,7 +4,11 @@
     <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="7.0.1" />
     <PackageReference Include="VSSDK.Text" Version="11.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VSOutputEnhancer.Logic\VSOutputEnhancer.Logic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Themes/*.json" CopyToOutputDirectory="PreserveNewest" />

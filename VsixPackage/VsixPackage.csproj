@@ -103,9 +103,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VSOutputEnhancer\VSOutputEnhancer.csproj">
-      <Project>{aef34482-9ed6-4dc1-ace4-59773a0c0635}</Project>
-      <Name>VSOutputEnhancer</Name>
+    <ProjectReference Include="..\VSOutputEnhancer.Logic\VSOutputEnhancer.Logic.csproj">
+      <Project>{cdd549a2-0e9a-4d4a-98ac-c0a9b3dab464}</Project>
+      <Name>VSOutputEnhancer.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VSOutputEnhancer.UI\VSOutputEnhancer.UI.csproj">
+      <Project>{207b20db-af97-4fc4-b381-a3825a3e28dd}</Project>
+      <Name>VSOutputEnhancer.UI</Name>
       <IncludeOutputGroupsInVSIX>ContentFilesProjectOutputGroup</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>ContentFilesProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
