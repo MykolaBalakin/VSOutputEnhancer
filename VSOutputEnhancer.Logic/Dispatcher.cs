@@ -61,11 +61,9 @@ namespace Balakin.VSOutputEnhancer.Logic
 
         private void InvokeHandlers(Object @event, Type eventType)
         {
+            if (eventHandlers.TryGetValue(eventType, out var handler))
             {
-                if (eventHandlers.TryGetValue(eventType, out var handler))
-                {
-                    handler(@event);
-                }
+                handler(@event);
             }
         }
     }

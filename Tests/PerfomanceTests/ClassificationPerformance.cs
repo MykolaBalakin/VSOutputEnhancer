@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Balakin.VSOutputEnhancer.Logic;
 using Balakin.VSOutputEnhancer.Logic.Tests;
+using Balakin.VSOutputEnhancer.Tests.Base;
 using Balakin.VSOutputEnhancer.Tests.Base.Stubs;
 using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
@@ -33,7 +34,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             // Small count of classified text
 
             var content = Utils.ReadLogFile("Resources\\EntityFrameworkBuild.log");
-            var spans = content.Select(Tests.Utils.CreateSpan).ToList();
+            var spans = content.Select(StringExtensions.ToSnapshotSpan).ToList();
             var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
@@ -52,7 +53,7 @@ namespace Balakin.VSOutputEnhancer.Tests.PerfomanceTests
             // 100 000 warning/error messages
 
             var content = Utils.ReadLogFile("Resources\\RandomBuildOutput.log");
-            var spans = content.Select(Tests.Utils.CreateSpan).ToList();
+            var spans = content.Select(StringExtensions.ToSnapshotSpan).ToList();
             var classifier = CreateBuildOutputClassifier();
             var totalCount = 0;
             var sw = Stopwatch.StartNew();
