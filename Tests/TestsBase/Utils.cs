@@ -17,29 +17,11 @@ namespace Balakin.VSOutputEnhancer.Tests
     [ExcludeFromCodeCoverage]
     public static class Utils
     {
-        public static SnapshotSpan CreateSpan(String text)
-        {
-            var snapshot = new TextSnapshotStub(text);
-            return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
-        }
-
-        public static IStyleManager CreateStyleManager()
-        {
-            var styleManager = new StyleManagerStub();
-            return styleManager;
-        }
-
         public static IStyleManager CreateStyleManager(Theme theme)
         {
             var environmentService = new EnvironmentServiceStub(theme);
             var styleManager = new StyleManager(environmentService);
             return styleManager;
-        }
-
-        public static IEnvironmentService CreateEnvironmentService(IClassificationFormatMapService classificationFormatMapService)
-        {
-            var environmentService = new EnvironmentService(classificationFormatMapService);
-            return environmentService;
         }
 
         private static Func<Brush, Brush, TextFormattingRunProperties> GetCreateTextFormattingRunProperties()

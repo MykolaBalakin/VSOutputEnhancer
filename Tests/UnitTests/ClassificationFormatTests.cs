@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Balakin.VSOutputEnhancer.Exports.Formats;
+using Balakin.VSOutputEnhancer.Tests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
@@ -37,7 +38,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
         [MemberData(nameof(CreateTestData))]
         public void DisplayName(Type formatType)
         {
-            var styleManager = Utils.CreateStyleManager();
+            var styleManager = new StyleManagerStub();
             var expectedDisplayName = GetExpectedName(formatType);
 
             var format = (ClassificationFormatDefinition) Activator.CreateInstance(formatType, styleManager);

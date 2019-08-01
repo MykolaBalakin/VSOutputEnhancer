@@ -25,7 +25,7 @@ namespace Balakin.VSOutputEnhancer.Tests.UnitTests
             classificationFormatMapService.GetClassificationFormatMap(Arg.Any<string>())
                 .Returns(classificationFormatMap);
 
-            var environmentService = Utils.CreateEnvironmentService(classificationFormatMapService);
+            var environmentService = new EnvironmentService(classificationFormatMapService);
             var actualTheme = environmentService.GetTheme();
             actualTheme.Should().Be(expectedTheme);
         }
