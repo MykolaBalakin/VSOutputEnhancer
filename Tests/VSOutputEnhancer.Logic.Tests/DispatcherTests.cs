@@ -65,5 +65,23 @@ namespace Balakin.VSOutputEnhancer.Logic.Tests
             handler.InvocationCount.Should().Be(1);
             anotherHandler.InvocationCount.Should().Be(0);
         }
+
+        [Fact]
+        public void DispatchInvokesMultipleHandlers()
+        {
+            var dispatcher = new Dispatcher();
+
+            var firstHandler = new TestEventHandler<TestEvent>();
+            dispatcher.AddHandler(firstHandler);
+
+            var secondHandler = new TestEventHandler<TestEvent>();
+            dispatcher.AddHandler(secondHandler);
+
+            var @event = new TestEvent();
+            dispatcher.Dispatch(@event);
+
+            firstHandler.InvocationCount.Should().Be(1);
+            secondHandler.InvocationCount.Should().Be(1);
+        }
     }
 }
