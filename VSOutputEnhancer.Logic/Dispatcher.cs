@@ -50,7 +50,7 @@ namespace Balakin.VSOutputEnhancer.Logic
 
         private void AddEventHandler<TEvent>(IEventHandler<TEvent> handler) where TEvent : IEvent
         {
-            Action<Object> handlerDelegateToAdd = (@event) => handler.Handle((TEvent)@event);
+            Action<Object> handlerDelegateToAdd = @event => handler.Handle(this, (TEvent)@event);
             if (eventHandlers.TryGetValue(typeof(TEvent), out var handlerDelegate))
             {
                 handlerDelegateToAdd = handlerDelegate + handlerDelegateToAdd;

@@ -22,7 +22,7 @@ namespace Balakin.VSOutputEnhancer.Logic.Tests
             public IEnumerable<String> ContentTypes { get; }
             public Int32 InvocationCount { get; private set; }
 
-            public void Handle(TEvent @event)
+            public void Handle(IDispatcher dispatcher, TEvent @event)
             {
                 InvocationCount++;
             }
