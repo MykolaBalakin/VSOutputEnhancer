@@ -10,6 +10,7 @@ namespace Balakin.VSOutputEnhancer.Logic
             BuildMessageWarning,
             BuildResultFailed,
             BuildResultSucceeded,
+            BuildActionStarted,
             PublishResultFailed,
             PublishResultSucceeded,
             DebugTraceError,
@@ -28,6 +29,8 @@ namespace Balakin.VSOutputEnhancer.Logic
 
         public const String BuildResultFailed = "BuildResultFailed";
         public const String BuildResultSucceeded = "BuildResultSucceeded";
+
+        public const String BuildActionStarted = "BuildActionStarted";
 
         public const String PublishResultFailed = "PublishResultFailed";
         public const String PublishResultSucceeded = "PublishResultSucceeded";

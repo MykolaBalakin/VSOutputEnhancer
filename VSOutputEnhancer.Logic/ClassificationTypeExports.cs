@@ -23,6 +23,10 @@ namespace Balakin.VSOutputEnhancer.Logic
         public static ClassificationTypeDefinition BuildMessageWarning;
 
         [Export(typeof(ClassificationTypeDefinition))]
+        [Name(ClassificationType.BuildActionStarted)]
+        public static ClassificationTypeDefinition BuildActionStarted;
+
+        [Export(typeof(ClassificationTypeDefinition))]
         [Name(ClassificationType.PublishResultFailed)]
         public static ClassificationTypeDefinition PublishResultFailed;
 
