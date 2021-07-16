@@ -1,10 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26020.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31512.422
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D2183F6C-418A-45D5-840D-5BFDC7A832E8}"
 	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
 		Build\GlobalAssemblyInfo.cs = Build\GlobalAssemblyInfo.cs
 	EndProjectSection
 EndProject
@@ -12,19 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{098FC160
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VsixPackage", "VsixPackage\VsixPackage.csproj", "{EF89C340-CD9E-4DE7-902A-7361936F5BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.PerfomanceTests", "Tests\VSOutputEnhancer.PerfomanceTests\VSOutputEnhancer.PerfomanceTests.csproj", "{73584EB2-2F41-4BD4-BC50-9456BFD5291F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.PerfomanceTests", "Tests\VSOutputEnhancer.PerfomanceTests\VSOutputEnhancer.PerfomanceTests.csproj", "{73584EB2-2F41-4BD4-BC50-9456BFD5291F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.IntegrationTests", "Tests\VSOutputEnhancer.IntegrationTests\VSOutputEnhancer.IntegrationTests.csproj", "{981A525F-0B47-4B32-96D0-D2834D22E870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.IntegrationTests", "Tests\VSOutputEnhancer.IntegrationTests\VSOutputEnhancer.IntegrationTests.csproj", "{981A525F-0B47-4B32-96D0-D2834D22E870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.Logic", "VSOutputEnhancer.Logic\VSOutputEnhancer.Logic.csproj", "{CDD549A2-0E9A-4D4A-98AC-C0A9B3DAB464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.Logic", "VSOutputEnhancer.Logic\VSOutputEnhancer.Logic.csproj", "{CDD549A2-0E9A-4D4A-98AC-C0A9B3DAB464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.Tests.Base", "Tests\VSOutputEnhancer.Tests.Base\VSOutputEnhancer.Tests.Base.csproj", "{955DEC8D-FBFC-4644-81FB-6D83AE505D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.Tests.Base", "Tests\VSOutputEnhancer.Tests.Base\VSOutputEnhancer.Tests.Base.csproj", "{955DEC8D-FBFC-4644-81FB-6D83AE505D22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.Logic.Tests", "Tests\VSOutputEnhancer.Logic.Tests\VSOutputEnhancer.Logic.Tests.csproj", "{2EF96336-8289-4E8D-B56C-BC178D978F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.Logic.Tests", "Tests\VSOutputEnhancer.Logic.Tests\VSOutputEnhancer.Logic.Tests.csproj", "{2EF96336-8289-4E8D-B56C-BC178D978F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.UI", "VSOutputEnhancer.UI\VSOutputEnhancer.UI.csproj", "{207B20DB-AF97-4FC4-B381-A3825A3E28DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.UI", "VSOutputEnhancer.UI\VSOutputEnhancer.UI.csproj", "{207B20DB-AF97-4FC4-B381-A3825A3E28DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSOutputEnhancer.UI.Tests", "Tests\VSOutputEnhancer.UI.Tests\VSOutputEnhancer.UI.Tests.csproj", "{7BBB3F62-E5AC-45C2-808D-9F800B2A3468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSOutputEnhancer.UI.Tests", "Tests\VSOutputEnhancer.UI.Tests\VSOutputEnhancer.UI.Tests.csproj", "{7BBB3F62-E5AC-45C2-808D-9F800B2A3468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -176,5 +177,8 @@ Global
 		{955DEC8D-FBFC-4644-81FB-6D83AE505D22} = {098FC160-EF72-40C1-933A-CAFF5D4B6EAE}
 		{2EF96336-8289-4E8D-B56C-BC178D978F8A} = {098FC160-EF72-40C1-933A-CAFF5D4B6EAE}
 		{7BBB3F62-E5AC-45C2-808D-9F800B2A3468} = {098FC160-EF72-40C1-933A-CAFF5D4B6EAE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {456B7E27-02FB-427F-81AD-B8878C54BF18}
 	EndGlobalSection
 EndGlobal
