@@ -93,6 +93,11 @@ namespace Balakin.VSOutputEnhancer {
                 return ResourceManager.GetString("FormatDisplayName_DebugTraceWarning", resourceCulture);
             }
         }
+        public static string FormatDisplayName_DebugTraceInformation {
+            get {
+                return ResourceManager.GetString("FormatDisplayName_DebugTraceInformation", resourceCulture);
+            }
+        }
         
         public static string FormatDisplayName_NpmMessageError {
             get {

@@ -27,6 +27,7 @@ namespace Balakin.VSOutputEnhancer.UI.Tests
             { typeof(DebugExceptionFormatDefinition), "Output enhancer: Debug exception message" },
             { typeof(DebugTraceErrorFormatDefinition), "Output enhancer: Trace error message" },
             { typeof(DebugTraceWarningFormatDefinition), "Output enhancer: Trace warning message" },
+            { typeof(DebugTraceInformationFormatDefinition), "Output enhancer: Trace information message" },
             { typeof(NpmResultSucceededFormatDefinition), "Output enhancer: npm execution succeeded" },
             { typeof(NpmResultFailedFormatDefinition), "Output enhancer: npm execution failed" },
             { typeof(NpmMessageErrorFormatDefinition), "Output enhancer: npm error message" },
