@@ -141,6 +141,9 @@
   <data name="FormatDisplayName_DebugTraceWarning" xml:space="preserve">
     <value>Output enhancer: Trace warning message</value>
   </data>
+  <data name="FormatDisplayName_DebugTraceInformation" xml:space="preserve">
+    <value>Output enhancer: Trace information message</value>
+  </data>
   <data name="FormatDisplayName_NpmMessageError" xml:space="preserve">
     <value>Output enhancer: npm error message</value>
   </data>

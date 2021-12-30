@@ -33,6 +33,9 @@
   "DebugTraceWarning": {
     "ForegroundColor": "#D0A825"
   },
+  "DebugTraceInformation": {
+    "ForegroundColor": "#272E4E"
+  },
 
   "NpmMessageError": {
     "ForegroundColor": "#BF0606"
